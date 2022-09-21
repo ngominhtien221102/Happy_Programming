@@ -3,7 +3,6 @@
     Created on : Sep 21, 2022, 3:02:29 PM
     Author     : Lenovo
 --%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
@@ -43,7 +42,7 @@
 <body>
   
 
-<!-- header -->
+<!-- Toi ten la tien -->
 <header class="fixed-top header">
   <!-- top header -->
   <div class="top-header py-2 bg-white">
