@@ -42,7 +42,7 @@
 <body>
   
 
-<!-- Toi ten la Tran Ngoc Cuong -->
+<!-- Toi ten la Cuong -->
 <header class="fixed-top header">
   <!-- top header -->
   <div class="top-header py-2 bg-white">
