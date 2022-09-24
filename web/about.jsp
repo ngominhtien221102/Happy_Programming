@@ -42,8 +42,10 @@
 <body>
   
 
+
 <!-- Toi ten la Tran Ngoc Cuong -->
 <%@include file="views/user/header.jsp" %>
+
 <!-- /header -->
 <!-- Modal -->
 <div class="modal fade" id="signupModal" tabindex="-1" role="dialog" aria-hidden="true">
