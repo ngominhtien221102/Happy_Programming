@@ -7,6 +7,8 @@ package service;
 import java.util.List;
 import model.User;
 
+import model.*;
+
 
 /**
  *
