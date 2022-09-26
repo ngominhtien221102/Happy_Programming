@@ -8,18 +8,15 @@ package model;
  *
  * @author Lenovo
  */
-public class User {
     private int userID;
     private int roleID;
     private String accountName;
     private String passWord;
     private boolean status;
 
-    public User() {
     }
     //Toi ten tien
 
-    public User(int userID, int roleID, String accountName, String passWord, boolean status) {
         this.userID = userID;
         this.roleID = roleID;
         this.accountName = accountName;

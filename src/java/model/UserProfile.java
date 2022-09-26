@@ -14,7 +14,6 @@ import java.time.LocalDate;
  *
  * @author Lenovo
  */
-public class UserProfile {
     private int userID;
     private String firstName;
     private String lastName;
@@ -25,10 +24,8 @@ public class UserProfile {
     private boolean Gender;
     private LocalDate createAt;
 
-    public UserProfile() {
     }
     //Tieu tien ty
-    public UserProfile(int userID, String firstName, String lastName, String Avatar, String Email, LocalDate Dob, int addressID, boolean Gender, LocalDate createAt) {
         this.userID = userID;
         this.firstName = firstName;
         this.lastName = lastName;
