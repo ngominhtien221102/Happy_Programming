@@ -17,10 +17,18 @@ import model.*;
  */
 public class MentorCVDAO extends DBContext {
 
-    public ArrayList<MentorCV> mentorCVList;
+    private ArrayList<MentorCV> mentorCVList;
+
+    public ArrayList<MentorCV> getMentorCVList() {
+        return mentorCVList;
+    }
+
+    public void setMentorCVList(ArrayList<MentorCV> mentorCVList) {
+        this.mentorCVList = mentorCVList;
+    }
 
     // Load Mentor CV 
-    public void loadMentorCV() {
+    public void load() {
         mentorCVList = new ArrayList<>();
         ArrayList<Skill> skillList = new ArrayList<>();
         String sql = "select * from Mentor_CV";
@@ -50,7 +58,7 @@ public class MentorCVDAO extends DBContext {
     }
 
     // Insert MentorCV, insert Mentor_Skills
-    public void insertMentorCV(int id, String profession, String introduction, String serviceDescription, String achivements, List<Skill> skillList) {
+    public void insert(int id, String profession, String introduction, String serviceDescription, String achivements, List<Skill> skillList) {
         String sql = "insert into Mentor_CV values(?,?,?,?)",
                 sql1 = "insert into Mentor_Skill values(?,?)";
         try {
@@ -73,7 +81,7 @@ public class MentorCVDAO extends DBContext {
     }
     // update Mentor_CV
 
-    public void updateMentorCV(int id, String profession, String introduction, String serviceDescription, String achivements,List<Skill> skillList) {
+    public void update(int id, String profession, String introduction, String serviceDescription, String achivements,List<Skill> skillList) {
         String sql = "Update Mentor_CV set Profession=?, Introduction=?,Service_Description=?,Achivements=? where Mentor_ID=?",
         sql1 = "delete from Mentor_Skills where Mentor_ID = ?",
         sql2 = "insert into Mentor_Skill values(?,?)";
@@ -100,7 +108,7 @@ public class MentorCVDAO extends DBContext {
     }
 
     // delete Mentor_CV -> Delete Mentor_Skills
-    public void deleteMentorCV(int id) {
+    public void delete(int id) {
         String sql = "delete from Mentor_CV where Mentor_ID = ?",
                 sql1 = "delete from Mentor_Skills where Mentor_ID = ?";
         try {

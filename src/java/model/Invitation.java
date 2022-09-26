@@ -11,7 +11,7 @@ package model;
  * @author ASUS
  */
 public class Invitation {
-    private int id;
+    private int ID;
     private int mentorId;
     private int menteeId;
     private int skillId;
@@ -24,7 +24,7 @@ public class Invitation {
     }
 
     public Invitation(int id, int mentorId, int menteeId, int skillId, int status, String title, String deadlineDate, String content) {
-        this.id = id;
+        this.ID = id;
         this.mentorId = mentorId;
         this.menteeId = menteeId;
         this.skillId = skillId;
@@ -34,12 +34,12 @@ public class Invitation {
         this.content = content;
     }
 
-    public int getId() {
-        return id;
+    public int getID() {
+        return ID;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setID(int ID) {
+        this.ID = ID;
     }
 
     public int getMentorId() {
@@ -100,7 +100,7 @@ public class Invitation {
 
     @Override
     public String toString() {
-        return "Invitation{" + "id=" + id + ", mentorId=" + mentorId + ", menteeId=" + menteeId + ", skillId=" + skillId + ", status=" + status + ", title=" + title + ", deadlineDate=" + deadlineDate + ", content=" + content + '}';
+        return "Invitation{" + "id=" + ID + ", mentorId=" + mentorId + ", menteeId=" + menteeId + ", skillId=" + skillId + ", status=" + status + ", title=" + title + ", deadlineDate=" + deadlineDate + ", content=" + content + '}';
     }
 
     

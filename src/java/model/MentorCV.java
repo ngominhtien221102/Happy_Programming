@@ -12,7 +12,7 @@ import java.util.List;
  * @author ASUS
  */
 public class MentorCV {
-    private int id;
+    private int ID;
     private String profession;
     private String introduction;
     private String serviceDescription;
@@ -23,7 +23,7 @@ public class MentorCV {
     }
 
     public MentorCV(int id, String profession, String introduction, String serviceDescription, String achivements, List<Skill> skillList) {
-        this.id = id;
+        this.ID = id;
         this.profession = profession;
         this.introduction = introduction;
         this.serviceDescription = serviceDescription;
@@ -31,12 +31,12 @@ public class MentorCV {
         this.skillList = skillList;
     }
 
-    public int getId() {
-        return id;
+    public int getID() {
+        return ID;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setID(int ID) {
+        this.ID = ID;
     }
 
     public String getProfession() {
@@ -81,7 +81,7 @@ public class MentorCV {
 
     @Override
     public String toString() {
-        return "MentorCV{" + "id=" + id + ", profession=" + profession + ", introduction=" + introduction + ", serviceDescription=" + serviceDescription + ", achivements=" + achivements + ", skillList=" + skillList + '}';
+        return "MentorCV{" + "id=" + ID + ", profession=" + profession + ", introduction=" + introduction + ", serviceDescription=" + serviceDescription + ", achivements=" + achivements + ", skillList=" + skillList + '}';
     }
 
     
