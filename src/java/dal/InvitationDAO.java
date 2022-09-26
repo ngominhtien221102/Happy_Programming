@@ -18,10 +18,18 @@ import model.Skill;
  */
 public class InvitationDAO extends DBContext {
 
-    public ArrayList<Invitation> Invitation;
+    private ArrayList<Invitation> Invitation;
+
+    public ArrayList<Invitation> getInvitation() {
+        return Invitation;
+    }
+
+    public void setInvitation(ArrayList<Invitation> Invitation) {
+        this.Invitation = Invitation;
+    }
 
     // Load Invitation
-    public void loadInvitation() {
+    public void load() {
         Invitation = new ArrayList<>();
         String sql = "select * from Invitation";
         try {
@@ -46,7 +54,7 @@ public class InvitationDAO extends DBContext {
     }
 
     // Insert Invitation
-    public void insertInvitation(int mentorId, int menteeId, int skillId, boolean status, String title, String deadlineDate, String content) {
+    public void insert(int mentorId, int menteeId, int skillId, boolean status, String title, String deadlineDate, String content) {
         String sql = "insert into Mentor_CV values(?,?,?,?,?,?,?)";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -64,7 +72,7 @@ public class InvitationDAO extends DBContext {
     }
     // update Invitation
 
-    public void updateInvitation(int id, int skillId, String title, String deadlineDate, String content) {
+    public void update(int id, int skillId, String title, String deadlineDate, String content) {
         String sql = "Update Invitation set Skill_ID=?,Title=?,Deadline_date=?,[Content]=? where Invitation_ID=?";
 
         try {
@@ -81,7 +89,7 @@ public class InvitationDAO extends DBContext {
     }
 
     // delete Mentor_CV -> Delete Mentor_Skills
-    public void deleteInvitation(int id) {
+    public void delete(int id) {
         String sql = "delete from Invitation where Invitation_ID = ?";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
