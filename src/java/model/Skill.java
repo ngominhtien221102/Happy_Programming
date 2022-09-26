@@ -6,7 +6,7 @@ package model;
 
 /**
  *
- * @author ASUS
+ * @author minhd
  */
 public class Skill {
     private int id;
@@ -20,25 +20,20 @@ public class Skill {
         this.name = name;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
         return name;
     }
 
-    @Override
-    public String toString() {
-        return "Skill{" + "id=" + id + ", name=" + name + '}';
+    public void setName(String name) {
+        this.name = name;
     }
     
 }
