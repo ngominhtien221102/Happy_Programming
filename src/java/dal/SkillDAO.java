@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package dao;
+package dal;
 
 import dal.DBContext;
 import java.sql.Connection;
@@ -10,25 +10,26 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import model.Status;
+import model.Skill;
 
 /**
  *
  * @author minhd
  */
-public class StatusDAO extends DBContext{
-    private String status = "ok";
-    private ArrayList<Status> statuslst;
+public class SkillDAO extends DBContext{
 
-    public StatusDAO() {
+    private String status = "ok";
+    private ArrayList<Skill> skilllst;
+
+    public SkillDAO() {
     }
 
     public String getStatus() {
         return status;
-    }  
+    }
 
-    public ArrayList<Status> getStatuslst() {
-        return statuslst;
+    public ArrayList<Skill> getSkilllst() {
+        return skilllst;
     }
 
     public Connection getConnection() {
@@ -38,63 +39,62 @@ public class StatusDAO extends DBContext{
     public void setConnection(Connection connection) {
         this.connection = connection;
     }
-     public void Insert(int id, String name) {
-        String sql = "INSERT INTO [dbo].[Status]\n"
-                + "           ([Status_ID]\n"
-                + "           ,[Status_Name])\n"
+    public void Insert(String name) {
+        String sql =  "INSERT INTO [dbo].[Skill]\n"
+                + "           ([Name])\n"
                 + "     VALUES\n"
-                + "           (?, ?)\n";
+                + "           (?)\n";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setInt(1, id);
-            ps.setString(2, name);
+            ps.setString(1, name);
             ps.execute();
         } catch (SQLException e) {
-            status = "error at insert Status " + e.getMessage();
+            status = "error at insert Skill " + e.getMessage();
         }
     }
 
     public void Update(int id, String name) {
-        String sql = "UPDATE [dbo].[Status]\n"
-                + "   SET [Status_Name] = ?\n"
-                + " WHERE Status_ID=?";
+        String sql = "UPDATE [dbo].[Skill]\n"
+                + "   SET [Name] = ?\n"
+                + " WHERE Skill_ID=?";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(2, id);
             ps.setString(1, name);
             ps.execute();
         } catch (SQLException e) {
-            status = "error at update Status " + e.getMessage();
+            status = "error at update Skill " + e.getMessage();
         }
     }
 
     public void Load() {
-        statuslst = new ArrayList<>();
-        String sql = "SELECT * FROM Status";
+        skilllst = new ArrayList<>();
+        String sql = "SELECT * FROM Skill";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                Status status = new Status();
-                status.setId(rs.getInt(1));
-                status.setName(rs.getString(2));
-                statuslst.add(status);
+                Skill skill = new Skill();
+                skill.setId(rs.getInt(1));
+                skill.setName(rs.getString(2));
+                skilllst.add(skill);
             }
         } catch (SQLException e) {
-            status = "error at load Status " + e.getMessage();
+            status = "error at load Skill " + e.getMessage();
         }
 
     }
 
     public void Delete(int id) {
-        String sql = "DELETE FROM [dbo].[Status]\n"
-                + "      WHERE Status_ID=?";
+        String sql = "DELETE FROM [dbo].[Skill]\n"
+                + "      WHERE Skill_ID=?";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, id);
             ps.execute();
         } catch (SQLException e) {
-            status = "error at delete Status " + e.getMessage();
+            status = "error at delete Skill " + e.getMessage();
         }
     }
+    
 }

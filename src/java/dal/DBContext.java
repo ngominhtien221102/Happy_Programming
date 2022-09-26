@@ -1,4 +1,4 @@
-/*
+ /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -23,8 +23,8 @@ public class DBContext {
     {
         try {
             String user = "sa";
-            String pass = "ngoc1280";
-            String url = "jdbc:sqlserver://localhost:1280;databaseName=PRJ301_SE1625";
+            String pass = "123";
+            String url = "jdbc:sqlserver://localhost:1143;databaseName=PRJ301_SE1625";
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             connection = DriverManager.getConnection(url, user, pass);
         } catch (ClassNotFoundException ex) {
