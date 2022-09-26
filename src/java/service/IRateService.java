@@ -14,9 +14,9 @@ import model.Rate;
 public interface IRateService {
     Rate geRateById(int id, List<Rate> list);
 
-    boolean insert(Rate u);
+    String insert(Rate u);
 
-    void update(Rate u);
+    String update(Rate u);
 
-    boolean delete(Rate u);
+    String delete(Rate u);
 }

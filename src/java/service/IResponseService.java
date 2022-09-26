@@ -15,9 +15,9 @@ public interface IResponseService {
 
     Response getResponseById(int id, List<Response> list);
 
-    boolean insert(Response u);
+    String insert(Response u);
 
-    void update(Response u);
+    String update(Response u);
 
-    boolean delete(Response u);
+    String delete(Response u);
 }

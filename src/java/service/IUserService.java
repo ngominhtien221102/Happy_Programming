@@ -13,7 +13,7 @@ import java.util.List;
  */
 public interface IUserService {
     User getUserById(int id, List<User> list);
-    boolean insert(User u);
-    void update(User u);
-    boolean delete(User u);
+    String insert(User u);
+    String update(User u);
+    String delete(User u);
 }

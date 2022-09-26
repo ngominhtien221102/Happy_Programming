@@ -15,9 +15,9 @@ public interface IMentorService {
 
     MentorCV geCVById(int id, List<MentorCV> list);
 
-    boolean insert(MentorCV u);
+    String insert(MentorCV u);
 
-    void update(MentorCV u);
+    String update(MentorCV u);
 
-    boolean delete(MentorCV u);
+    String delete(MentorCV u);
 }
