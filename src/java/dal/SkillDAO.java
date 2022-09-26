@@ -4,8 +4,6 @@
  */
 package dal;
 
-import dal.DBContext;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -17,27 +15,17 @@ import model.Skill;
  * @author minhd
  */
 public class SkillDAO extends DBContext{
-
-    private String status = "ok";
     private ArrayList<Skill> skilllst;
 
     public SkillDAO() {
     }
 
-    public String getStatus() {
-        return status;
+    public void setSkilllst(ArrayList<Skill> skilllst) {
+        this.skilllst = skilllst;
     }
 
     public ArrayList<Skill> getSkilllst() {
         return skilllst;
-    }
-
-    public Connection getConnection() {
-        return connection;
-    }
-
-    public void setConnection(Connection connection) {
-        this.connection = connection;
     }
     public void Insert(String name) {
         String sql =  "INSERT INTO [dbo].[Skill]\n"
@@ -49,7 +37,6 @@ public class SkillDAO extends DBContext{
             ps.setString(1, name);
             ps.execute();
         } catch (SQLException e) {
-            status = "error at insert Skill " + e.getMessage();
         }
     }
 
@@ -63,7 +50,6 @@ public class SkillDAO extends DBContext{
             ps.setString(1, name);
             ps.execute();
         } catch (SQLException e) {
-            status = "error at update Skill " + e.getMessage();
         }
     }
 
@@ -80,7 +66,7 @@ public class SkillDAO extends DBContext{
                 skilllst.add(skill);
             }
         } catch (SQLException e) {
-            status = "error at load Skill " + e.getMessage();
+
         }
 
     }
@@ -93,7 +79,6 @@ public class SkillDAO extends DBContext{
             ps.setInt(1, id);
             ps.execute();
         } catch (SQLException e) {
-            status = "error at delete Skill " + e.getMessage();
         }
     }
     
