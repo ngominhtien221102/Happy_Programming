@@ -5,25 +5,25 @@ package model;
  * @author Lenovo
  */
 public class User {
-    private int userID;
+    private int ID;
     private int roleID;
     private String accountName;
-    private String passWord;
+    private String password;
     private boolean status;
 
     public User() {
     }
 
     public User(int userID, int roleID, String accountName, String passWord, boolean status) {
-        this.userID = userID;
+        this.ID = userID;
         this.roleID = roleID;
         this.accountName = accountName;
-        this.passWord = passWord;
+        this.password = passWord;
         this.status = status;
     }
 
     public void setUserID(int userID) {
-        this.userID = userID;
+        this.ID = userID;
     }
 
     public void setRoleID(int roleID) {
@@ -35,7 +35,7 @@ public class User {
     }
 
     public void setPassWord(String passWord) {
-        this.passWord = passWord;
+        this.password = passWord;
     }
 
     public void setStatus(boolean status) {
@@ -43,7 +43,7 @@ public class User {
     }
 
     public int getUserID() {
-        return userID;
+        return ID;
     }
 
     public int getRoleID() {
@@ -55,7 +55,7 @@ public class User {
     }
 
     public String getPassWord() {
-        return passWord;
+        return password;
     }
 
     public boolean isStatus() {
@@ -66,7 +66,7 @@ public class User {
 
     @Override
     public String toString() {
-        return "user{" + "userID=" + userID + ", roleID=" + roleID + ", accountName=" + accountName + ", passWord=" + passWord + ", status=" + status + '}';
+        return "user{" + "userID=" + ID + ", roleID=" + roleID + ", accountName=" + accountName + ", passWord=" + password + ", status=" + status + '}';
     }
     
     
