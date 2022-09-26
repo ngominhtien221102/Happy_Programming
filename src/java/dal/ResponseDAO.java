@@ -21,26 +21,18 @@ import model.Response;
  */
 public class ResponseDAO extends DBContext {
 
-    private String status = "ok";
     private ArrayList<Response> responselst;
 
     public ResponseDAO() {
     }
 
-    public String getStatus() {
-        return status;
+    public void setResponselst(ArrayList<Response> responselst) {
+        this.responselst = responselst;
     }
+
 
     public ArrayList<Response> getResponselst() {
         return responselst;
-    }
-
-    public Connection getConnection() {
-        return connection;
-    }
-
-    public void setConnection(Connection connection) {
-        this.connection = connection;
     }
 
     public void Insert(int request_id, String content) {
@@ -58,7 +50,7 @@ public class ResponseDAO extends DBContext {
             ps.setDate(3, date);
             ps.execute();
         } catch (SQLException e) {
-            status = "error at insert Response " + e.getMessage();
+
         }
     }
 
@@ -75,7 +67,7 @@ public class ResponseDAO extends DBContext {
             ps.setDate(2, date);
             ps.execute();
         } catch (SQLException e) {
-            status = "error at update Address " + e.getMessage();
+
         }
     }
 
@@ -94,7 +86,7 @@ public class ResponseDAO extends DBContext {
                 responselst.add(response);
             }
         } catch (SQLException e) {
-            status = "error at load Response " + e.getMessage();
+
         }
 
     }
@@ -107,7 +99,7 @@ public class ResponseDAO extends DBContext {
             ps.setInt(1, id);
             ps.execute();
         } catch (SQLException e) {
-            status = "error at delete Response " + e.getMessage();
+
         }
     }
 }
