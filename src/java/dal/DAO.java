@@ -18,38 +18,38 @@ import model.*;
  */
 public class DAO {
 
-    private ArrayList<user> usList;
-    private ArrayList<userProfile> usProList;
+    private ArrayList<User> usList;
+    private ArrayList<Userprofile> usProList;
     private String status;
     private Connection con;
 
     public DAO() {
     }
 
-    public ArrayList<user> getUsList() {
+    public ArrayList<User> getUsList() {
         return usList;
     }
 
-    public ArrayList<userProfile> getUsProList() {
+    public ArrayList<Userprofile> getUsProList() {
         return usProList;
     }
 
-    public void setUsList(ArrayList<user> usList) {
+    public void setUsList(ArrayList<User> usList) {
         this.usList = usList;
     }
 
-    public void setUsProList(ArrayList<userProfile> usProList) {
+    public void setUsProList(ArrayList<Userprofile> usProList) {
         this.usProList = usProList;
     }
 
-    public ArrayList<user> getUserList() {
-        ArrayList<user> uList = new ArrayList<>();
+    public ArrayList<User> getUserList() {
+        ArrayList<User> uList = new ArrayList<>();
         String sql = "Select * from User";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                uList.add(new user(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getBoolean(5)));
+                uList.add(new User(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getBoolean(5)));
             }
         } catch (SQLException e) {
             status = "Error at read User" + e.getMessage();
@@ -57,14 +57,14 @@ public class DAO {
         return uList;
     }
 
-    public ArrayList<userProfile> getUserProList() {
-        ArrayList<userProfile> uProList = new ArrayList<>();
+    public ArrayList<Userprofile> getUserProList() {
+        ArrayList<Userprofile> uProList = new ArrayList<>();
         String sql = "Select * from User";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                uProList.add(new userProfile(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getDate(6).toLocalDate(), rs.getInt(7), rs.getBoolean(8), rs.getDate(9).toLocalDate()));
+                uProList.add(new Userprofile(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getDate(6).toLocalDate(), rs.getInt(7), rs.getBoolean(8), rs.getDate(9).toLocalDate()));
             }
         } catch (SQLException e) {
             status = "Error at read User_Profile" + e.getMessage();
