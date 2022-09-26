@@ -8,16 +8,16 @@ package model;
  *
  * @author minhd
  */
-public class Skill {
+public class Status {
     private int id;
     private String name;
 
-    public Skill() {
-    }
-
-    public Skill(int id, String name) {
+    public Status(int id, String name) {
         this.id = id;
         this.name = name;
+    }
+
+    public Status() {
     }
 
     public int getId() {
