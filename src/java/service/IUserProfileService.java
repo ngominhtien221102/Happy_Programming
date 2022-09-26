@@ -5,7 +5,9 @@
 package service;
 
 import java.util.List;
-import model.UserProfile;
+
+import model.*;
+
 
 /**
  *

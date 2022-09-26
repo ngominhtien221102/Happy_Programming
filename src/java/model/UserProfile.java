@@ -4,13 +4,17 @@
  */
 package model;
 
+/**
+ *
+ * @author Lenovo
+ */
 import java.time.LocalDate;
 
 /**
  *
  * @author Lenovo
  */
-public class userProfile {
+public class UserProfile {
     private int userID;
     private String firstName;
     private String lastName;
@@ -21,10 +25,10 @@ public class userProfile {
     private boolean Gender;
     private LocalDate createAt;
 
-    public userProfile() {
+    public UserProfile() {
     }
 
-    public userProfile(int userID, String firstName, String lastName, String Avatar, String Email, LocalDate Dob, int addressID, boolean Gender, LocalDate createAt) {
+    public UserProfile(int userID, String firstName, String lastName, String Avatar, String Email, LocalDate Dob, int addressID, boolean Gender, LocalDate createAt) {
         this.userID = userID;
         this.firstName = firstName;
         this.lastName = lastName;

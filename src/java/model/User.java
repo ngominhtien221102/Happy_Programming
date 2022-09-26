@@ -1,24 +1,20 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package model;
 
 /**
  *
  * @author Lenovo
  */
-public class user {
+public class User {
     private int userID;
     private int roleID;
     private String accountName;
     private String passWord;
     private boolean status;
 
-    public user() {
+    public User() {
     }
 
-    public user(int userID, int roleID, String accountName, String passWord, boolean status) {
+    public User(int userID, int roleID, String accountName, String passWord, boolean status) {
         this.userID = userID;
         this.roleID = roleID;
         this.accountName = accountName;
