@@ -19,7 +19,7 @@ import model.*;
 public class DAO {
 
     private ArrayList<User> usList;
-    private ArrayList<Userprofile> usProList;
+    private ArrayList<UserProfile> usProList;
     private String status;
     private Connection con;
 
@@ -30,7 +30,7 @@ public class DAO {
         return usList;
     }
 
-    public ArrayList<Userprofile> getUsProList() {
+    public ArrayList<UserProfile> getUsProList() {
         return usProList;
     }
 
@@ -38,7 +38,7 @@ public class DAO {
         this.usList = usList;
     }
 
-    public void setUsProList(ArrayList<Userprofile> usProList) {
+    public void setUsProList(ArrayList<UserProfile> usProList) {
         this.usProList = usProList;
     }
 
@@ -57,14 +57,14 @@ public class DAO {
         return uList;
     }
 
-    public ArrayList<Userprofile> getUserProList() {
-        ArrayList<Userprofile> uProList = new ArrayList<>();
+    public ArrayList<UserProfile> getUserProList() {
+        ArrayList<UserProfile> uProList = new ArrayList<>();
         String sql = "Select * from User";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                uProList.add(new Userprofile(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getDate(6).toLocalDate(), rs.getInt(7), rs.getBoolean(8), rs.getDate(9).toLocalDate()));
+                uProList.add(new UserProfile(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getDate(6).toLocalDate(), rs.getInt(7), rs.getBoolean(8), rs.getDate(9).toLocalDate()));
             }
         } catch (SQLException e) {
             status = "Error at read User_Profile" + e.getMessage();
