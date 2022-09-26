@@ -10,7 +10,7 @@ import java.util.Date;
  *
  * @author ADMIN
  */
-public class Comments {
+public class Comment {
     private int id;
     private int mentorId;
     private int menteeId;
@@ -18,10 +18,10 @@ public class Comments {
     private Date createdAt;
     private String content;
 
-    public Comments() {
+    public Comment() {
     }
 
-    public Comments(int id, int mentorId, int menteeId, int skillId, Date createdAt, String content) {
+    public Comment(int id, int mentorId, int menteeId, int skillId, Date createdAt, String content) {
         this.id = id;
         this.mentorId = mentorId;
         this.menteeId = menteeId;
