@@ -16,12 +16,12 @@ import model.Comment;
  *
  * @author ADMIN
  */
-public class CommentDAO extends DBContext{
-    public String status = "ok";
+public class CommentDAO extends DBContext {
+
     private ArrayList<Comment> cmList;
 
     public CommentDAO() {
-    }   
+    }
 
     public ArrayList<Comment> getCmList() {
         return cmList;
@@ -30,8 +30,8 @@ public class CommentDAO extends DBContext{
     public void setCmList(ArrayList<Comment> cmList) {
         this.cmList = cmList;
     }
-    
-    public void loadCommentList() {
+
+    public void load() {
         cmList = new ArrayList<>();
         String sql = "select * from [dbo].[Comment]";
         try {
@@ -44,25 +44,26 @@ public class CommentDAO extends DBContext{
                 int Skill_ID = rs.getInt(4);
                 Date Date = rs.getDate(5);
                 String Content = rs.getString(6);
-       
+
                 cmList.add(new Comment(Comment_ID, Mentor_ID, Mentee_ID, Skill_ID, Date, Content));
             }
         } catch (Exception e) {
-            status = "Error Comment" + e.getMessage();
+            System.out.println("Error Comment" + e.getMessage());
+
         }
-    }   
+    }
 
     public void Insert(int Mentor_ID, int Mentee_ID, int Skill_ID, String Content) {
         LocalDate curDate = LocalDate.now();
         String date = curDate.toString();
-        
-        String sql = "INSERT INTO [dbo].[Comment]\n" +
-"           ([Mentor_ID]\n" +
-"           ,[Mentee_ID]\n" +
-"           ,[Skill_ID]\n" +
-"           ,[Created_at]\n" +
-"           ,[Content])\n" +
-"     VALUES(?,?,?,?,?)";
+
+        String sql = "INSERT INTO [dbo].[Comment]\n"
+                + "           ([Mentor_ID]\n"
+                + "           ,[Mentee_ID]\n"
+                + "           ,[Skill_ID]\n"
+                + "           ,[Created_at]\n"
+                + "           ,[Content])\n"
+                + "     VALUES(?,?,?,?,?)";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, Mentor_ID);
@@ -72,7 +73,7 @@ public class CommentDAO extends DBContext{
             ps.setString(5, Content);
             ps.execute();
         } catch (Exception e) {
-            status = "Error " + e.getMessage();
+            System.out.println("Error Comment" + e.getMessage());
         }
     }
 
@@ -83,11 +84,12 @@ public class CommentDAO extends DBContext{
             ps.setInt(1, Comment_ID);
             ps.execute();
         } catch (Exception e) {
-            status = "Error at delete comment" + e.getMessage();
+            System.out.println("Error Comment" + e.getMessage());
+
         }
     }
 
-    public void Update(int Comment_ID,String Content) {
+    public void Update(int Comment_ID, String Content) {
         String sql = "UPDATE [dbo].[Comment] set Content = ? where Comment_ID = ?";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -96,8 +98,9 @@ public class CommentDAO extends DBContext{
             ps.execute();
 
         } catch (Exception e) {
-            status = "Error at Update comment " + e.getMessage();
+            System.out.println("Error Comment" + e.getMessage());
+
         }
     }
-    
+
 }
