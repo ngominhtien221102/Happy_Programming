@@ -4,8 +4,6 @@
  */
 package dal;
 
-import dal.DBContext;
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -17,33 +15,19 @@ import model.Address;
  * @author minhd
  */
 public class AddressDAO extends DBContext {
-
-    private String status = "ok";
     private ArrayList<Address> addresslst;
 
     public AddressDAO() {
 
     }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
+    public void setAddresslst(ArrayList<Address> addresslst) {
+        this.addresslst = addresslst;
     }
 
     public ArrayList<Address> getAddresslst() {
         return addresslst;
     }
 
-    public Connection getConnection() {
-        return connection;
-    }
-
-    public void setConnection(Connection connection) {
-        this.connection = connection;
-    }
 
     public void Insert(String tinh, String huyen, String xa) {
         String sql
@@ -60,7 +44,7 @@ public class AddressDAO extends DBContext {
             ps.setString(3, xa);
             ps.execute();
         } catch (SQLException e) {
-            status = "error at insert Address " + e.getMessage();
+           
         }
     }
 
@@ -78,7 +62,7 @@ public class AddressDAO extends DBContext {
             ps.setString(3, xa);
             ps.execute();
         } catch (SQLException e) {
-            status = "error at update Address " + e.getMessage();
+            
         }
     }
 
@@ -97,7 +81,7 @@ public class AddressDAO extends DBContext {
                 addresslst.add(address);
             }
         } catch (SQLException e) {
-            status = "error at load Address " + e.getMessage();
+            
         }
 
     }
@@ -110,7 +94,7 @@ public class AddressDAO extends DBContext {
             ps.setInt(1, id);
             ps.execute();
         } catch (SQLException e) {
-            status = "error at delete Address " + e.getMessage();
+            
         }
     }
 }

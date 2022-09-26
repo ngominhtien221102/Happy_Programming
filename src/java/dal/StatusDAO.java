@@ -17,27 +17,19 @@ import model.Status;
  * @author minhd
  */
 public class StatusDAO extends DBContext{
-    private String status = "ok";
     private ArrayList<Status> statuslst;
 
     public StatusDAO() {
     }
 
-    public String getStatus() {
-        return status;
-    }  
+    public void setStatuslst(ArrayList<Status> statuslst) {
+        this.statuslst = statuslst;
+    }
 
     public ArrayList<Status> getStatuslst() {
         return statuslst;
     }
 
-    public Connection getConnection() {
-        return connection;
-    }
-
-    public void setConnection(Connection connection) {
-        this.connection = connection;
-    }
      public void Insert(int id, String name) {
         String sql = "INSERT INTO [dbo].[Status]\n"
                 + "           ([Status_ID]\n"
@@ -50,7 +42,7 @@ public class StatusDAO extends DBContext{
             ps.setString(2, name);
             ps.execute();
         } catch (SQLException e) {
-            status = "error at insert Status " + e.getMessage();
+
         }
     }
 
@@ -64,7 +56,7 @@ public class StatusDAO extends DBContext{
             ps.setString(1, name);
             ps.execute();
         } catch (SQLException e) {
-            status = "error at update Status " + e.getMessage();
+
         }
     }
 
@@ -81,7 +73,7 @@ public class StatusDAO extends DBContext{
                 statuslst.add(status);
             }
         } catch (SQLException e) {
-            status = "error at load Status " + e.getMessage();
+
         }
 
     }
@@ -94,7 +86,7 @@ public class StatusDAO extends DBContext{
             ps.setInt(1, id);
             ps.execute();
         } catch (SQLException e) {
-            status = "error at delete Status " + e.getMessage();
+
         }
     }
 }
