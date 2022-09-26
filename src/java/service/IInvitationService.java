@@ -15,9 +15,9 @@ public interface IInvitationService {
 
     Invitation getInvitationById(int id, List<Invitation> list);
 
-    boolean insert(Invitation u);
+    String insert(Invitation u);
 
-    void update(Invitation u);
+    String update(Invitation u);
 
-    boolean delete(Invitation u);
+    String delete(Invitation u);
 }

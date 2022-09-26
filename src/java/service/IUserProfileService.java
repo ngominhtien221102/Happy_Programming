@@ -13,7 +13,7 @@ import model.userProfile;
  */
 public interface IUserProfileService {
     UserProfile getUserProfileById(int id, List<UserProfile> list);
-    boolean insert(UserProfile u);
-    void update(UserProfile u);
-    boolean delete(UserProfile u);
+    String insert(UserProfile u);
+    String update(UserProfile u);
+    String delete(UserProfile u);
 }
