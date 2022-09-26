@@ -18,12 +18,21 @@ import model.Comment;
  */
 public class CommentDAO extends DBContext{
     public String status = "ok";
+    private ArrayList<Comment> cmList;
 
     public CommentDAO() {
     }   
 
-    public ArrayList<Comment> loadCommentList() {
-        ArrayList<Comment> cmList = new ArrayList<Comment>();
+    public ArrayList<Comment> getCmList() {
+        return cmList;
+    }
+
+    public void setCmList(ArrayList<Comment> cmList) {
+        this.cmList = cmList;
+    }
+    
+    public void loadCommentList() {
+        cmList = new ArrayList<>();
         String sql = "select * from [dbo].[Comment]";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -41,7 +50,6 @@ public class CommentDAO extends DBContext{
         } catch (Exception e) {
             status = "Error Comment" + e.getMessage();
         }
-        return cmList;
     }   
 
     public void Insert(int Mentor_ID, int Mentee_ID, int Skill_ID, String Content) {

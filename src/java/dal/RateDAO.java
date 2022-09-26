@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import model.Rate;
 
 
+
 /**
  *
  * @author ADMIN
@@ -17,12 +18,22 @@ import model.Rate;
 public class RateDAO extends DBContext{
     public String status = "ok";
 
+    private ArrayList<Rate> rateList;
+    
     public RateDAO() {
         
-    }   
+    }  
 
-    public ArrayList<Rate> loadRateList() {
-        ArrayList<Rate> rateList = new ArrayList<Rate>();
+    public ArrayList<Rate> getRateList() {
+        return rateList;
+    }
+
+    public void setRateList(ArrayList<Rate> rateList) {
+        this.rateList = rateList;
+    }
+
+    public void loadRateList() {
+        rateList = new ArrayList<>();
         String sql = "select * from [dbo].[Rate]";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -39,7 +50,6 @@ public class RateDAO extends DBContext{
         } catch (Exception e) {
             status = "Error Rate" + e.getMessage();
         }
-        return rateList;
     }   
 
     public void Insert(int Mentor_ID, int Mentee_ID, int Skill_ID, String Content) {        

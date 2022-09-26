@@ -11,72 +11,73 @@ import java.util.Date;
  * @author ADMIN
  */
 public class Comment {
-    private int Comment_ID;
-    private int Mentor_ID;
-    private int Mentee_ID;
-    private int Skill_ID;
-    private Date Created_at;
-    private String Content;
+    private int id;
+    private int mentorId;
+    private int menteeId;
+    private int skillId;
+    private Date createdAt;
+    private String content;
 
     public Comment() {
     }
 
-    public Comment(int Comment_ID, int Mentor_ID, int Mentee_ID, int Skill_ID, Date Created_at, String Content) {
-        this.Comment_ID = Comment_ID;
-        this.Mentor_ID = Mentor_ID;
-        this.Mentee_ID = Mentee_ID;
-        this.Skill_ID = Skill_ID;
-        this.Created_at = Created_at;
-        this.Content = Content;
+    public Comment(int id, int mentorId, int menteeId, int skillId, Date createdAt, String content) {
+        this.id = id;
+        this.mentorId = mentorId;
+        this.menteeId = menteeId;
+        this.skillId = skillId;
+        this.createdAt = createdAt;
+        this.content = content;
     }
 
-    public int getComment_ID() {
-        return Comment_ID;
+    public int getId() {
+        return id;
     }
 
-    public void setComment_ID(int Comment_ID) {
-        this.Comment_ID = Comment_ID;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public int getMentor_ID() {
-        return Mentor_ID;
+    public int getMentorId() {
+        return mentorId;
     }
 
-    public void setMentor_ID(int Mentor_ID) {
-        this.Mentor_ID = Mentor_ID;
+    public void setMentorId(int mentorId) {
+        this.mentorId = mentorId;
     }
 
-    public int getMentee_ID() {
-        return Mentee_ID;
+    public int getMenteeId() {
+        return menteeId;
     }
 
-    public void setMentee_ID(int Mentee_ID) {
-        this.Mentee_ID = Mentee_ID;
+    public void setMenteeId(int menteeId) {
+        this.menteeId = menteeId;
     }
 
-    public int getSkill_ID() {
-        return Skill_ID;
+    public int getSkillId() {
+        return skillId;
     }
 
-    public void setSkill_ID(int Skill_ID) {
-        this.Skill_ID = Skill_ID;
+    public void setSkillId(int skillId) {
+        this.skillId = skillId;
     }
 
-    public Date getCreated_at() {
-        return Created_at;
+    public Date getCreatedAt() {
+        return createdAt;
     }
 
-    public void setCreated_at(Date Created_at) {
-        this.Created_at = Created_at;
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 
     public String getContent() {
-        return Content;
+        return content;
     }
 
-    public void setContent(String Content) {
-        this.Content = Content;
+    public void setContent(String content) {
+        this.content = content;
     }
+
     
     
 }

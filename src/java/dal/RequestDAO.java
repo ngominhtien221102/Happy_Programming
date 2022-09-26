@@ -18,11 +18,22 @@ import model.Request;
 public class RequestDAO extends DBContext{
     public String status = "ok";
 
+    private ArrayList<Request> reqList;
+    
     public RequestDAO() {
     }   
 
-    public ArrayList<Request> loadRequestList() {
-        ArrayList<Request> reqList = new ArrayList<Request>();
+    public ArrayList<Request> getReqList() {
+        return reqList;
+    }
+
+    public void setReqList(ArrayList<Request> reqList) {
+        this.reqList = reqList;
+    }
+     
+
+    public void loadRequestList() {
+        reqList = new ArrayList<>();
         String sql = "select * from [dbo].[Request]";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -39,7 +50,6 @@ public class RequestDAO extends DBContext{
         } catch (Exception e) {
             status = "Error Request" + e.getMessage();
         }
-        return reqList;
     }   
 
     public void Insert(int Mentor_ID, int Mentee_ID, int Skill_ID, String Content) {
