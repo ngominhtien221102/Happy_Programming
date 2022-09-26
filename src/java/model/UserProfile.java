@@ -15,33 +15,33 @@ import java.time.LocalDate;
  * @author Lenovo
  */
 public class UserProfile {
-    private int userID;
+    private int ID;
     private String firstName;
     private String lastName;
-    private String Avatar;
-    private String Email;
-    private LocalDate Dob;
+    private String avatar;
+    private String email;
+    private LocalDate dob;
     private int addressID;
-    private boolean Gender;
+    private boolean gender;
     private LocalDate createAt;
 
     public UserProfile() {
     }
 
     public UserProfile(int userID, String firstName, String lastName, String Avatar, String Email, LocalDate Dob, int addressID, boolean Gender, LocalDate createAt) {
-        this.userID = userID;
+        this.ID = userID;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.Avatar = Avatar;
-        this.Email = Email;
-        this.Dob = Dob;
+        this.avatar = Avatar;
+        this.email = Email;
+        this.dob = Dob;
         this.addressID = addressID;
-        this.Gender = Gender;
+        this.gender = Gender;
         this.createAt = createAt;
     }
 
     public int getUserID() {
-        return userID;
+        return ID;
     }
 
     public String getFirstName() {
@@ -53,15 +53,15 @@ public class UserProfile {
     }
 
     public String getAvatar() {
-        return Avatar;
+        return avatar;
     }
 
     public String getEmail() {
-        return Email;
+        return email;
     }
 
     public LocalDate getDob() {
-        return Dob;
+        return dob;
     }
 
     public int getAddressID() {
@@ -69,7 +69,7 @@ public class UserProfile {
     }
 
     public boolean isGender() {
-        return Gender;
+        return gender;
     }
 
     public LocalDate getCreateAt() {
@@ -77,7 +77,7 @@ public class UserProfile {
     }
 
     public void setUserID(int userID) {
-        this.userID = userID;
+        this.ID = userID;
     }
 
     public void setFirstName(String firstName) {
@@ -89,15 +89,15 @@ public class UserProfile {
     }
 
     public void setAvatar(String Avatar) {
-        this.Avatar = Avatar;
+        this.avatar = Avatar;
     }
 
     public void setEmail(String Email) {
-        this.Email = Email;
+        this.email = Email;
     }
 
     public void setDob(LocalDate Dob) {
-        this.Dob = Dob;
+        this.dob = Dob;
     }
 
     public void setAddressID(int addressID) {
@@ -105,7 +105,7 @@ public class UserProfile {
     }
 
     public void setGender(boolean Gender) {
-        this.Gender = Gender;
+        this.gender = Gender;
     }
 
     public void setCreateAt(LocalDate createAt) {
@@ -116,14 +116,14 @@ public class UserProfile {
 
     @Override
     public String toString() {
-        return "userProfile{" + "userID=" + userID
+        return "userProfile{" + "userID=" + ID
                 + ", firstName=" + firstName
                 + ", lastName=" + lastName
-                + ", Avatar=" + Avatar
-                + ", Email=" + Email
-                + ", Dob=" + Dob.toString()
+                + ", Avatar=" + avatar
+                + ", Email=" + email
+                + ", Dob=" + dob.toString()
                 + ", addressID=" + addressID
-                + ", Gender=" + Gender
+                + ", Gender=" + gender
                 + ", createAt=" + createAt.toString() + '}';
     }
     
