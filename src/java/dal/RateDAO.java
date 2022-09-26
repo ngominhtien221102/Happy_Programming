@@ -9,20 +9,17 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import model.Rate;
 
-
-
 /**
  *
  * @author ADMIN
  */
-public class RateDAO extends DBContext{
-    public String status = "ok";
+public class RateDAO extends DBContext {
 
     private ArrayList<Rate> rateList;
-    
+
     public RateDAO() {
-        
-    }  
+
+    }
 
     public ArrayList<Rate> getRateList() {
         return rateList;
@@ -32,7 +29,7 @@ public class RateDAO extends DBContext{
         this.rateList = rateList;
     }
 
-    public void loadRateList() {
+    public void load() {
         rateList = new ArrayList<>();
         String sql = "select * from [dbo].[Rate]";
         try {
@@ -44,20 +41,21 @@ public class RateDAO extends DBContext{
                 int Mentor_ID = rs.getInt(3);
                 int Skill_ID = rs.getInt(4);
                 int Rate = rs.getInt(5);
-       
+
                 rateList.add(new Rate(Rate_ID, Mentor_ID, Mentee_ID, Skill_ID, Rate));
             }
         } catch (Exception e) {
-            status = "Error Rate" + e.getMessage();
-        }
-    }   
+            System.out.println("Error Rate" + e.getMessage());
 
-    public void Insert(int Mentor_ID, int Mentee_ID, int Skill_ID, String Content) {        
-        String sql = "INSERT INTO [dbo].[Rate]\n" +
-"           ([Mentor_ID]\n" +
-"           ,[Skill_ID]\n" +
-"           ,[Rate])\n" +
-"     VALUES(?,?,?,?)";
+        }
+    }
+
+    public void Insert(int Mentor_ID, int Mentee_ID, int Skill_ID, String Content) {
+        String sql = "INSERT INTO [dbo].[Rate]\n"
+                + "           ([Mentor_ID]\n"
+                + "           ,[Skill_ID]\n"
+                + "           ,[Rate])\n"
+                + "     VALUES(?,?,?,?)";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, Mentor_ID);
@@ -66,7 +64,8 @@ public class RateDAO extends DBContext{
             ps.setString(4, Content);
             ps.execute();
         } catch (Exception e) {
-            status = "Error " + e.getMessage();
+            System.out.println("Error Rate" + e.getMessage());
+
         }
     }
 
@@ -77,11 +76,12 @@ public class RateDAO extends DBContext{
             ps.setInt(1, Rate_ID);
             ps.execute();
         } catch (Exception e) {
-            status = "Error at delete rate" + e.getMessage();
+            System.out.println("Error Rate" + e.getMessage());
+
         }
     }
 
-    public void Update(int Rate_ID,int Rate) {
+    public void Update(int Rate_ID, int Rate) {
         String sql = "UPDATE [dbo].[Rate] set Rate = ? where Rate_ID = ?";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -90,7 +90,8 @@ public class RateDAO extends DBContext{
             ps.execute();
 
         } catch (Exception e) {
-            status = "Error at Update rate " + e.getMessage();
+            System.out.println("Error Rate" + e.getMessage());
+
         }
     }
 }
