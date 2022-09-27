@@ -15,9 +15,9 @@ public interface IResponseService {
 
     Response getResponseById(int id, List<Response> list);
 
-    String insert(Response u);
+    String insert(Response u, List<Response> list);
 
-    String update(Response u);
+    String update(Response u, List<Response> list);
 
-    String delete(Response u);
+    String delete(Response u, List<Response> list);
 }

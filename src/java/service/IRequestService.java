@@ -15,9 +15,9 @@ public interface IRequestService {
 
     Request getRequestById(int id, List<Request> list);
 
-    String insert(Request u);
+    String insert(Request u, List<Request> list);
 
-    String update(Request u);
+    String update(Request u, List<Request> list);
 
-    String delete(Request u);
+    String delete(Request u, List<Request> list);
 }

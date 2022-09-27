@@ -13,11 +13,11 @@ import model.MentorCV;
  */
 public interface IMentorService {
 
-    MentorCV geCVById(int id, List<MentorCV> list);
+    MentorCV getCVById(int id, List<MentorCV> list);
 
-    String insert(MentorCV u);
+    String insert(MentorCV u, List<MentorCV> list);
 
-    String update(MentorCV u);
+    String update(MentorCV u, List<MentorCV> list);
 
-    String delete(MentorCV u);
+    String delete(MentorCV u, List<MentorCV> list);
 }
