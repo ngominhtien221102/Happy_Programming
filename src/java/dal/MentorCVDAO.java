@@ -20,6 +20,7 @@ public class MentorCVDAO extends DBContext {
     private ArrayList<MentorCV> mentorCVList;
 
     public ArrayList<MentorCV> getMentorCVList() {
+        load();
         return mentorCVList;
     }
 

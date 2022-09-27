@@ -53,6 +53,11 @@ public class MentorService implements IMentorService {
        return "OK";
     }
 
+    @Override
+    public List<MentorCV> getListCV() {
+        return mentorCVDAO.getMentorCVList();
+    }
     
-
+    
+    
 }
