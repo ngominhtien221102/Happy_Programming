@@ -9,53 +9,53 @@ package model;
  * @author ADMIN
  */
 public class Rate {
-    private int id;
-    private int mentorId;
-    private int menteeId;
-    private int skillId;
+    private int ID;
+    private int mentorID;
+    private int menteeID;
+    private int skillID;
     private int rate;
 
     public Rate() {
     }
 
     public Rate(int id, int mentorId, int menteeId, int skillId, int rate) {
-        this.id = id;
-        this.mentorId = mentorId;
-        this.menteeId = menteeId;
-        this.skillId = skillId;
+        this.ID = id;
+        this.mentorID = mentorId;
+        this.menteeID = menteeId;
+        this.skillID = skillId;
         this.rate = rate;
     }
 
-    public int getId() {
-        return id;
+    public int getID() {
+        return ID;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setID(int ID) {
+        this.ID = ID;
     }
 
-    public int getMentorId() {
-        return mentorId;
+    public int getMentorID() {
+        return mentorID;
     }
 
-    public void setMentorId(int mentorId) {
-        this.mentorId = mentorId;
+    public void setMentorID(int mentorID) {
+        this.mentorID = mentorID;
     }
 
-    public int getMenteeId() {
-        return menteeId;
+    public int getMenteeID() {
+        return menteeID;
     }
 
-    public void setMenteeId(int menteeId) {
-        this.menteeId = menteeId;
+    public void setMenteeID(int menteeID) {
+        this.menteeID = menteeID;
     }
 
-    public int getSkillId() {
-        return skillId;
+    public int getSkillID() {
+        return skillID;
     }
 
-    public void setSkillId(int skillId) {
-        this.skillId = skillId;
+    public void setSkillID(int skillID) {
+        this.skillID = skillID;
     }
 
     public int getRate() {
