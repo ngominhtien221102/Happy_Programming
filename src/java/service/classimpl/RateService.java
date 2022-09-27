@@ -4,6 +4,7 @@
  */
 package service.classimpl;
 
+import dal.RateDAO;
 import java.util.List;
 import model.Rate;
 import service.IRateService;
@@ -14,24 +15,44 @@ import service.IRateService;
  */
 public class RateService implements IRateService{
 
+    RateDAO rateDAO = new RateDAO();
+    
     @Override
-    public Rate geRateById(int id, List<Rate> list) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Rate getRateById(int id, List<Rate> list) {
+        for (Rate rate : list) {
+            if (rate.getID() == id) {
+                return rate;
+            }
+        }
+        return null;
     }
 
     @Override
-    public String insert(Rate u) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public String insert(Rate u, List<Rate> list) {
+        Rate rate = rateDAO.insert(u);
+        list.add(rate);
+        return "OK";
     }
 
     @Override
-    public String update(Rate u) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public String update(Rate u, List<Rate> list) {
+        rateDAO.update(u);
+        Rate rate = getRateById(u.getID(), list);
+        rate.setMenteeID(u.getMenteeID());
+        rate.setMentorID(u.getMentorID());
+        rate.setSkillID(u.getSkillID());
+        rate.setRate(u.getRate());
+        return "OK";
     }
 
     @Override
-    public String delete(Rate u) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public String delete(Rate u, List<Rate> list) {
+        rateDAO.del(u.getID());
+        Rate rate = getRateById(u.getID(), list);
+        list.remove(rate);
+        return "OK";
     }
+
+    
     
 }

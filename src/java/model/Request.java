@@ -11,52 +11,52 @@ import java.util.Date;
  * @author ADMIN
  */
 public class Request {
-    private int id;
-    private int mentorId;
-    private int menteeId;
-    private Date createdAt;
+    private int ID;
+    private int mentorID;
+    private int menteeID;
+    private String createdAt;
     private String content;
 
     public Request() {
     }
 
-    public Request(int id, int mentorId, int menteeId, Date createdAt, String content) {
-        this.id = id;
-        this.mentorId = mentorId;
-        this.menteeId = menteeId;
+    public Request(int ID, int mentorID, int menteeID, String createdAt, String content) {
+        this.ID = ID;
+        this.mentorID = mentorID;
+        this.menteeID = menteeID;
         this.createdAt = createdAt;
         this.content = content;
     }
 
-    public int getId() {
-        return id;
+    public int getID() {
+        return ID;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setID(int ID) {
+        this.ID = ID;
     }
 
-    public int getMentorId() {
-        return mentorId;
+    public int getMentorID() {
+        return mentorID;
     }
 
-    public void setMentorId(int mentorId) {
-        this.mentorId = mentorId;
+    public void setMentorID(int mentorID) {
+        this.mentorID = mentorID;
     }
 
-    public int getMenteeId() {
-        return menteeId;
+    public int getMenteeID() {
+        return menteeID;
     }
 
-    public void setMenteeId(int menteeId) {
-        this.menteeId = menteeId;
+    public void setMenteeID(int menteeID) {
+        this.menteeID = menteeID;
     }
 
-    public Date getCreatedAt() {
+    public String getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
+    public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
     }
 
@@ -68,6 +68,5 @@ public class Request {
         this.content = content;
     }
 
-    
     
 }
