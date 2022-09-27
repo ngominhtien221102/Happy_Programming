@@ -13,6 +13,7 @@ import model.Skill;
  * @author Admin
  */
 public interface ISkillService {
+    List<Skill> getList();
         Skill getSkillById(int id, List<Skill> list);
 
     boolean insert(Skill u, List<Skill> list);

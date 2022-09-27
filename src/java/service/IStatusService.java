@@ -12,6 +12,7 @@ import model.Status;
  * @author minhd
  */
 public interface IStatusService {
+    List<Status> getList();
     Status getAddressById(int id, List<Status> list);
     String insert(Status u,List<Status> list);
 

@@ -12,7 +12,7 @@ import model.Comment;
  * @author Admin
  */
 public interface ICommentService {
-
+    List<Comment> getList();
     Comment getCommentById(int id, List<Comment> list);
 
     String insert(Comment u, List<Comment> list);

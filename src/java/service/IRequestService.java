@@ -12,7 +12,7 @@ import model.Request;
  * @author Admin
  */
 public interface IRequestService {
-
+List<Request> getList();
     Request getRequestById(int id, List<Request> list);
 
     String insert(Request u, List<Request> list);

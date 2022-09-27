@@ -12,6 +12,7 @@ import model.Address;
  * @author minhd
  */
 public interface IAddressService {
+    List<Address> getList();
     Address getAddressById(int id, List<Address> list);
     String insert(Address u,List<Address> list);
 
