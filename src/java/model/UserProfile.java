@@ -40,7 +40,7 @@ public class UserProfile {
         this.createAt = createAt;
     }
 
-    public int getUserID() {
+    public int getID() {
         return ID;
     }
 
@@ -76,7 +76,7 @@ public class UserProfile {
         return createAt;
     }
 
-    public void setUserID(int userID) {
+    public void setID(int userID) {
         this.ID = userID;
     }
 

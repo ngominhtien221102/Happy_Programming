@@ -58,20 +58,20 @@ public class MentorCVDAO extends DBContext {
     }
 
     // Insert MentorCV, insert Mentor_Skills
-    public void insert(int id, String profession, String introduction, String serviceDescription, String achivements, List<Skill> skillList) {
+    public void insert(MentorCV m) {
         String sql = "insert into Mentor_CV values(?,?,?,?)",
                 sql1 = "insert into Mentor_Skill values(?,?)";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setInt(1, id);
-            ps.setString(2, profession);
-            ps.setString(3, introduction);
-            ps.setString(4, serviceDescription);
-            ps.setString(5, achivements);
+            ps.setInt(1, m.getID());
+            ps.setString(2, m.getProfession());
+            ps.setString(3, m.getIntroduction());
+            ps.setString(4, m.getProfession());
+            ps.setString(5, m.getAchivements());
             ps.executeUpdate();
             PreparedStatement ps1 = connection.prepareStatement(sql1);
-            for (Skill skill : skillList) {
-                ps1.setInt(1, id);
+            for (Skill skill : m.getSkillList()) {
+                ps1.setInt(1, m.getID());
                 ps1.setInt(2, skill.getId());
                 ps1.executeUpdate();
             }
@@ -81,24 +81,24 @@ public class MentorCVDAO extends DBContext {
     }
     // update Mentor_CV
 
-    public void update(int id, String profession, String introduction, String serviceDescription, String achivements,List<Skill> skillList) {
+    public void update(MentorCV m) {
         String sql = "Update Mentor_CV set Profession=?, Introduction=?,Service_Description=?,Achivements=? where Mentor_ID=?",
         sql1 = "delete from Mentor_Skills where Mentor_ID = ?",
         sql2 = "insert into Mentor_Skill values(?,?)";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setInt(1, id);
-            ps.setString(2, profession);
-            ps.setString(3, introduction);
-            ps.setString(4, serviceDescription);
-            ps.setString(5, achivements);
+            ps.setInt(1, m.getID());
+            ps.setString(2, m.getProfession());
+            ps.setString(3, m.getIntroduction());
+            ps.setString(4, m.getServiceDescription());
+            ps.setString(5, m.getAchivements());
             ps.executeUpdate();
             PreparedStatement ps1 = connection.prepareStatement(sql1);
-            ps1.setInt(1, id);
+            ps1.setInt(1, m.getID());
             ps1.executeUpdate();
             PreparedStatement ps2 = connection.prepareStatement(sql2);
-            for (Skill skill : skillList) {
-                ps2.setInt(1, id);
+            for (Skill skill : m.getSkillList()) {
+                ps2.setInt(1, m.getID());
                 ps2.setInt(2, skill.getId());
                 ps2.executeUpdate();
             }

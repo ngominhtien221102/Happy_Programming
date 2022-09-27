@@ -29,13 +29,16 @@ public class CommentService implements ICommentService {
 
     @Override
     public String insert(Comment u, List<Comment> list) {
+
         Comment cmt = cmtDAO.insert(u);
         list.add(cmt);
         return "OK";
+
     }
 
     @Override
     public String update(Comment u, List<Comment> list) {
+
         cmtDAO.update(u);
         Comment cmt = getCommentById(u.getID(), list);
         cmt.setMentorID(u.getMentorID());
@@ -45,15 +48,18 @@ public class CommentService implements ICommentService {
         cmt.setContent(u.getContent());
         return "OK";
 
+
     }
 
     @Override
     public String delete(Comment u, List<Comment> list) {
+
         cmtDAO.del(u.getID());
         Comment cmt = getCommentById(u.getID(), list);
         list.remove(cmt);
         return "OK";
 
     }
+
 
 }

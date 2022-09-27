@@ -11,6 +11,12 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import java.util.List;
+import model.User;
+import service.IUserProfileService;
+import service.IUserService;
+import service.classimpl.UserService;
 
 /**
  *
@@ -41,7 +47,7 @@ public class AddUserController extends HttpServlet {
             out.println("</html>");
         }
     } 
-
+    
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /** 
      * Handles the HTTP <code>GET</code> method.
@@ -53,7 +59,30 @@ public class AddUserController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        List<User> listUser = new ArrayList<User>();
+        listUser.add(new User(1, 1, "ngoc", "ngoc", true));
+        listUser.add(new User(2, 1, "tien", "tien", true));
+        IUserService userService = new UserService();
+        System.out.println(userService.insert(new User(1, 1, "cuong", "cuong", true), listUser));
+        
+        
+        try (PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet AddUserController</title>");  
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet AddUserController at " + request.getContextPath () + "</h1>");
+            for (User user : listUser) {
+            out.println("Account name: " + user.getAccountName());
+        }
+            out.println("</body>");
+            out.println("</html>");
+        }
+        
+        
     } 
 
     /** 

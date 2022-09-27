@@ -29,13 +29,16 @@ public class RequestService implements IRequestService {
 
     @Override
     public String insert(Request u, List<Request> list) {
+
         Request req = reqDAO.insert(u);
         list.add(req);
         return "OK";
+
     }
 
     @Override
     public String update(Request u, List<Request> list) {
+
         reqDAO.update(u);
         Request req = getRequestById(u.getID(), list);
         req.setMentorID(u.getMentorID());
@@ -47,6 +50,7 @@ public class RequestService implements IRequestService {
 
     @Override
     public String delete(Request u, List<Request> list) {
+
         reqDAO.del(u.getID());
         Request req = getRequestById(u.getID(), list);
         list.remove(req);

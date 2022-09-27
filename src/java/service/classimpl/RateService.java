@@ -29,13 +29,16 @@ public class RateService implements IRateService{
 
     @Override
     public String insert(Rate u, List<Rate> list) {
+
         Rate rate = rateDAO.insert(u);
         list.add(rate);
         return "OK";
+
     }
 
     @Override
     public String update(Rate u, List<Rate> list) {
+
         rateDAO.update(u);
         Rate rate = getRateById(u.getID(), list);
         rate.setMenteeID(u.getMenteeID());
@@ -43,16 +46,16 @@ public class RateService implements IRateService{
         rate.setSkillID(u.getSkillID());
         rate.setRate(u.getRate());
         return "OK";
+
     }
 
     @Override
     public String delete(Rate u, List<Rate> list) {
+
         rateDAO.del(u.getID());
         Rate rate = getRateById(u.getID(), list);
         list.remove(rate);
         return "OK";
     }
 
-    
-    
 }
