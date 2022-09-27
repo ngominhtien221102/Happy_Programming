@@ -14,23 +14,23 @@
 
         <!-- ** Plugins Needed for the Project ** -->
         <!-- Bootstrap -->
-        <link rel="stylesheet" href="<%=request.getContextPath()%>/plugins/bootstrap/bootstrap.min.css">
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/template1/plugins/bootstrap/bootstrap.min.css">
         <!-- slick slider -->
-        <link rel="stylesheet" href="<%=request.getContextPath()%>/plugins/slick/slick.css">
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/template1/plugins/slick/slick.css">
         <!-- themefy-icon -->
-        <link rel="stylesheet" href="<%=request.getContextPath()%>/plugins/themify-icons/themify-icons.css">
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/template1/plugins/themify-icons/themify-icons.css">
         <!-- animation css -->
-        <link rel="stylesheet" href="<%=request.getContextPath()%>/plugins/animate/animate.css">
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/template1/plugins/animate/animate.css">
         <!-- aos -->
-        <link rel="stylesheet" href="<%=request.getContextPath()%>/plugins/aos/aos.css">
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/template1/plugins/aos/aos.css">
         <!-- venobox popup -->
-        <link rel="stylesheet" href="<%=request.getContextPath()%>/plugins/venobox/venobox.css">
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/template1/plugins/venobox/venobox.css">
 
         <!-- Main Stylesheet -->
-        <link href="<%=request.getContextPath()%>/css/style.css" rel="stylesheet">
+        <link href="<%=request.getContextPath()%>/template1/css/style.css" rel="stylesheet">
 
         <!--Favicon-->
-        <link rel="shortcut icon" href="<%=request.getContextPath()%>/images/favicon.ico" type="image/x-icon">
-        <link rel="icon" href="<%=request.getContextPath()%>/images/favicon.ico" type="image/x-icon">
+        <link rel="shortcut icon" href="<%=request.getContextPath()%>/template1/images/favicon.ico" type="image/x-icon">
+        <link rel="icon" href="<%=request.getContextPath()%>/template1/images/favicon.ico" type="image/x-icon">
 
     </head>
