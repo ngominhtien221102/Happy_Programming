@@ -18,7 +18,7 @@ import model.UserProfile;
  */
 public interface IUserProfileService {
     UserProfile getUserProfileById(int id, List<UserProfile> list);
-    String insert(UserProfile u);
-    String update(UserProfile u);
-    String delete(UserProfile u);
+    String insert(UserProfile u, List<UserProfile> list);
+    String update(UserProfile u, List<UserProfile> list);
+    String delete(UserProfile u, List<UserProfile> list);
 }

@@ -15,9 +15,9 @@ public interface ICommentService {
 
     Comment getCommentById(int id, List<Comment> list);
 
-    String insert(Comment u);
+    String insert(Comment u, List<Comment> list);
 
-    String update(Comment u);
+    String update(Comment u, List<Comment> list);
 
-    String delete(Comment u);
+    String delete(Comment u, List<Comment> list);
 }

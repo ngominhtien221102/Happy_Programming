@@ -15,9 +15,9 @@ import model.Skill;
 public interface ISkillService {
         Skill getSkillById(int id, List<Skill> list);
 
-    boolean insert(Skill u);
+    boolean insert(Skill u, List<Skill> list);
 
-    void update(Skill u);
+    void update(Skill u, List<Skill> list);
 
-    boolean delete(Skill u);
+    boolean delete(Skill u, List<Skill> list);
 }
