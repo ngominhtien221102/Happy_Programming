@@ -3,7 +3,6 @@ package dal;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import model.UserProfile;
 
@@ -21,7 +20,6 @@ public class UserProfileDAO extends DBContext {
     public ArrayList<UserProfile> getUsProList() {
         return usProList;
     }
-
 
     public void setUsProList(ArrayList<UserProfile> usProList) {
         this.usProList = usProList;
@@ -42,42 +40,38 @@ public class UserProfileDAO extends DBContext {
         return usProList;
     }
 
-    public void insert(int userID, String firstName, String lastName, String Avatar, String Email, String Dob, int addressID, boolean Gender) {
-        LocalDate curDate = LocalDate.now();
-        String createAt = curDate.toString();
-
+    public void insert(UserProfile u) {
         String sql = "Insert into User_Profile values(?,?,?,?,?,?,?,?,?)";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setInt(1, userID);
-            ps.setString(2, firstName);
-            ps.setString(3, lastName);
-            ps.setString(4, Avatar);
-            ps.setString(5, Email);
-            ps.setString(6, Dob);
-            ps.setInt(7, addressID);
-            ps.setBoolean(8, Gender);
-            ps.setString(9, createAt);
+            ps.setInt(1, u.getID());
+            ps.setString(2, u.getFirstName());
+            ps.setString(3, u.getLastName());
+            ps.setString(4, u.getAvatar());
+            ps.setString(5, u.getEmail());
+            ps.setString(6, u.getDob().toString());
+            ps.setInt(7, u.getAddressID());
+            ps.setBoolean(8, u.isGender());
+            ps.setString(9, u.getCreateAt().toString());
             ps.execute();
         } catch (Exception e) {
             System.out.println("Error");
         }
     }
 
-    public void update(int userID, String firstName, String lastName,
-            String Avatar, String Email, String Dob, int addressID, boolean Gender) {
+    public void update(UserProfile u) {
         String sql = "Update [User_Profile] set Firstname=?, Lastname=?, Avatar=?, Email=?,Dob=?,"
                 + "Address_ID=?, Gender=? where User_ID=?";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setInt(8, userID);
-            ps.setString(1, firstName);
-            ps.setString(2, lastName);
-            ps.setString(3, Avatar);
-            ps.setString(4, Email);
-            ps.setString(5, Dob);
-            ps.setInt(6, addressID);
-            ps.setBoolean(7, Gender);
+            ps.setInt(8, u.getID());
+            ps.setString(1, u.getFirstName());
+            ps.setString(2, u.getLastName());
+            ps.setString(3, u.getAvatar());
+            ps.setString(4, u.getEmail());
+            ps.setString(5, u.getDob().toString());
+            ps.setInt(6, u.getAddressID());
+            ps.setBoolean(7, u.isGender());
             ps.execute();
         } catch (Exception e) {
             System.out.println("Error");

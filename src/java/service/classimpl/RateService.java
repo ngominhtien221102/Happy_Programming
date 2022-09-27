@@ -20,18 +20,19 @@ public class RateService implements IRateService{
     }
 
     @Override
-    public String insert(Rate u) {
+    public String insert(Rate u, List<Rate> list) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public String update(Rate u) {
+    public String update(Rate u, List<Rate> list) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public String delete(Rate u) {
+    public String delete(Rate u, List<Rate> list) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
+
 }

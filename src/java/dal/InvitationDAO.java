@@ -98,6 +98,7 @@ public class InvitationDAO extends DBContext {
 
         }
     }
+    
 
     // delete Mentor_CV -> Delete Mentor_Skills
     public void delete(int id) {

@@ -41,30 +41,40 @@ public class UserDAO extends DBContext {
 
     
 
-    public void insert(int roleID, String accountName, String passWord) {
+    public User insert(User u) {
         boolean Status = false;
         String sql = "Insert into [User] values (?,?,?,?)";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setInt(1, roleID);
-            ps.setString(2, accountName);
-            ps.setString(3, passWord);
-            ps.setBoolean(4, Status);
-            ps.execute();
+            ps.setInt(1, u.getRoleID());
+            ps.setString(2, u.getAccountName());
+            ps.setString(3, u.getAccountName());
+            ps.setBoolean(4, u.isStatus());
+            ps.executeUpdate();
+            sql = "SELECT top(1) [User_ID]\n"
+                    + "  FROM [dbo].[User]\n"
+                    + "  order by User_ID desc";
+            ps = connection.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                u.setID(rs.getInt(1));
+            }
         } catch (Exception e) {
             System.out.println("Error");
         }
+        return u;
     }
     
-    public void update(int userID,int roleID, String passWord, boolean Status)
+    
+    public void update(User u)
     {
          String sql = "Update [User] set Role_ID=?, Password=?, Status=?  where User_ID =?";
          try {
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setInt(4, userID);
-            ps.setInt(1, roleID);
-            ps.setString(2, passWord);
-            ps.setBoolean(3, Status);
+            ps.setInt(4, u.getID());
+            ps.setInt(1, u.getRoleID());
+            ps.setString(2, u.getPassWord());
+            ps.setBoolean(3, u.isStatus());
             ps.execute();
         } catch (Exception e) {
              System.out.println("Error");
