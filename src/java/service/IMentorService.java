@@ -12,7 +12,7 @@ import model.MentorCV;
  * @author Admin
  */
 public interface IMentorService {
-
+    List<MentorCV> getListCV();
     MentorCV getCVById(int id, List<MentorCV> list);
 
     String insert(MentorCV u, List<MentorCV> list);

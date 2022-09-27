@@ -15,6 +15,7 @@ import model.*;
  * @author Admin
  */
 public interface IUserService {
+    List<User> getList();
     User getUserById(int id, List<User> list);
     String insert(User u, List<User> list);
     String update(User u, List<User> list);

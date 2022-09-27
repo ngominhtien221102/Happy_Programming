@@ -17,6 +17,7 @@ import model.UserProfile;
  * @author Admin
  */
 public interface IUserProfileService {
+    List<UserProfile> getList();
     UserProfile getUserProfileById(int id, List<UserProfile> list);
     String insert(UserProfile u, List<UserProfile> list);
     String update(UserProfile u, List<UserProfile> list);
