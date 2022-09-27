@@ -39,7 +39,10 @@
             <div class="container">
                 <!-- course list -->
                 <c:forEach items="${sessionScope.listAllSkill}" var="lst"> 
-                    <div class="row justify-content-center">
+                    
+                </c:forEach>
+                
+                <div class="row justify-content-center">
                     <!-- course item -->
                     <div class="col-lg-4 col-sm-6 mb-5">
                         <div class="card p-0 border-primary rounded-0 hover-shadow">
@@ -59,7 +62,6 @@
                         </div>
                     </div>                                  
                 </div>
-                </c:forEach>
                 
                 <!-- /course list -->
                 

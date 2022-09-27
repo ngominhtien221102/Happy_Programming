@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import model.Rate;
+import model.Request;
 
 /**
  *
@@ -50,7 +51,7 @@ public class RateDAO extends DBContext {
         }
     }
 
-    public void Insert(int Mentor_ID, int Mentee_ID, int Skill_ID, String Content) {
+    public Rate insert(Rate rate) {
         String sql = "INSERT INTO [dbo].[Rate]\n"
                 + "           ([Mentor_ID]\n"
                 + "           ,[Skill_ID]\n"
@@ -58,18 +59,30 @@ public class RateDAO extends DBContext {
                 + "     VALUES(?,?,?,?)";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setInt(1, Mentor_ID);
-            ps.setInt(2, Mentee_ID);
-            ps.setInt(3, Skill_ID);
-            ps.setString(4, Content);
+            ps.setInt(1, rate.getMentorID());
+            ps.setInt(2, rate.getMenteeID());
+            ps.setInt(3, rate.getSkillID());
+            ps.setInt(4, rate.getRate());
             ps.execute();
+
+            String sql1 = "SELECT top(1) [Rate_ID]\n"
+                    + "  FROM [dbo].[Rate]\n"
+                    + "  order by Rate_ID desc";
+
+            ps = connection.prepareStatement(sql1);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                rate.setID(rs.getInt(1));
+            }
+
         } catch (Exception e) {
             System.out.println("Error Rate" + e.getMessage());
 
         }
+        return rate;
     }
 
-    public void Del(int Rate_ID) {
+    public void del(int Rate_ID) {
         String sql = "delete from [dbo].[Rate] where Rate_ID = ?";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -81,12 +94,20 @@ public class RateDAO extends DBContext {
         }
     }
 
-    public void Update(int Rate_ID, int Rate) {
-        String sql = "UPDATE [dbo].[Rate] set Rate = ? where Rate_ID = ?";
+    public void update(Rate rate) {
+        String sql = "UPDATE [dbo].[Rate]\n"
+                + "   SET [Mentee_ID] = ?\n"
+                + "      ,[Mentor_ID] = ?\n"
+                + "      ,[Skill_ID] = ?\n"
+                + "      ,[Rate] = ?\n"
+                + " WHERE Rate_ID = ?";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setInt(1, Rate);
-            ps.setInt(2, Rate_ID);
+            ps.setInt(1, rate.getMenteeID());
+            ps.setInt(2, rate.getMentorID());
+            ps.setInt(3, rate.getSkillID());
+            ps.setInt(4, rate.getRate());
+            ps.setInt(5, rate.getID());
             ps.execute();
 
         } catch (Exception e) {

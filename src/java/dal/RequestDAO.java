@@ -40,17 +40,17 @@ public class RequestDAO extends DBContext {
                 int Request_ID = rs.getInt(1);
                 int Mentor_ID = rs.getInt(2);
                 int Mentee_ID = rs.getInt(3);
-                Date email = rs.getDate(4);
+                String Date = rs.getString(4);
                 String Content = rs.getString(5);
 
-                reqList.add(new Request(Request_ID, Mentor_ID, Mentee_ID, email, Content));
+                reqList.add(new Request(Mentee_ID, Mentor_ID, Mentee_ID, Date, Content));
             }
         } catch (Exception e) {
             System.out.println("Error Request" + e.getMessage());
         }
     }
 
-    public void Insert(int Mentor_ID, int Mentee_ID, int Skill_ID, String Content) {
+    public Request insert(Request req) {
         LocalDate curDate = LocalDate.now();
         String date = curDate.toString();
 
@@ -62,17 +62,29 @@ public class RequestDAO extends DBContext {
                 + "     VALUES(?,?,?,?)";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setInt(1, Mentor_ID);
-            ps.setInt(2, Mentee_ID);
-            ps.setString(3, date);
-            ps.setString(4, Content);
+            ps.setInt(1, req.getMentorID());
+            ps.setInt(2, req.getMenteeID());
+            ps.setString(3, req.getContent());
+            ps.setString(4, req.getCreatedAt());
             ps.execute();
+
+            String sql1 = "SELECT top(1) [Request_ID]\n"
+                    + "  FROM [dbo].[Request]\n"
+                    + "  order by Request_ID desc";
+
+            ps = connection.prepareStatement(sql1);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                req.setID(rs.getInt(1));
+            }
+
         } catch (Exception e) {
             System.out.println("Error Request" + e.getMessage());
         }
+        return req;
     }
 
-    public void Del(int Request_ID) {
+    public void del(int Request_ID) {
         String sql = "delete from [dbo].[Request] where Request_ID = ?";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -83,12 +95,20 @@ public class RequestDAO extends DBContext {
         }
     }
 
-    public void Update(int Request_ID, String Content) {
-        String sql = "UPDATE [dbo].[Request] set Content = ? where Request_ID = ?";
+    public void update(Request req) {
+        String sql = "UPDATE [dbo].[Request]\n"
+                + "   SET [Mentor_ID] = ?\n"
+                + "      ,[Mentee_ID] = ?\n"
+                + "      ,[Content] = ?\n"
+                + "      ,[Created_at] = ?\n"
+                + " WHERE Rate_ID = ?";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setString(1, Content);
-            ps.setInt(2, Request_ID);
+            ps.setInt(1, req.getMentorID());
+            ps.setInt(2, req.getMenteeID());
+            ps.setString(3, req.getContent());
+            ps.setString(4, req.getCreatedAt());
+            ps.setInt(5, req.getID());
             ps.execute();
 
         } catch (Exception e) {

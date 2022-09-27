@@ -42,7 +42,7 @@ public class CommentDAO extends DBContext {
                 int Mentor_ID = rs.getInt(2);
                 int Mentee_ID = rs.getInt(3);
                 int Skill_ID = rs.getInt(4);
-                Date Date = rs.getDate(5);
+                String Date = rs.getString(5);
                 String Content = rs.getString(6);
 
                 cmList.add(new Comment(Comment_ID, Mentor_ID, Mentee_ID, Skill_ID, Date, Content));
@@ -53,7 +53,7 @@ public class CommentDAO extends DBContext {
         }
     }
 
-    public void Insert(int Mentor_ID, int Mentee_ID, int Skill_ID, String Content) {
+    public Comment insert(Comment cmt) {
         LocalDate curDate = LocalDate.now();
         String date = curDate.toString();
 
@@ -66,18 +66,30 @@ public class CommentDAO extends DBContext {
                 + "     VALUES(?,?,?,?,?)";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setInt(1, Mentor_ID);
-            ps.setInt(2, Mentee_ID);
-            ps.setInt(3, Skill_ID);
-            ps.setString(4, date);
-            ps.setString(5, Content);
+            ps.setInt(1, cmt.getMentorID());
+            ps.setInt(2, cmt.getMenteeID());
+            ps.setInt(3, cmt.getSkillID());
+            ps.setString(4, cmt.getCreatedAt());
+            ps.setString(5, date);
             ps.execute();
+
+            String sql1 = "SELECT top(1) [Comment_ID]\n"
+                    + "  FROM [dbo].[Comment]\n"
+                    + "  order by Comment_ID desc";
+
+            ps = connection.prepareStatement(sql1);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                cmt.setID(rs.getInt(1));
+            }
+
         } catch (Exception e) {
             System.out.println("Error Comment" + e.getMessage());
         }
+        return cmt;
     }
 
-    public void Del(int Comment_ID) {
+    public void del(int Comment_ID) {
         String sql = "delete from [dbo].[Comment] where Comment_ID = ?";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -89,12 +101,22 @@ public class CommentDAO extends DBContext {
         }
     }
 
-    public void Update(int Comment_ID, String Content) {
-        String sql = "UPDATE [dbo].[Comment] set Content = ? where Comment_ID = ?";
+    public void update(Comment cmt) {
+        String sql = "UPDATE [dbo].[Comment]\n"
+                + "   SET [Mentor_ID] = ?\n"
+                + "      ,[Mentee_ID] = ?\n"
+                + "      ,[Skill_ID] = ?\n"
+                + "      ,[Created_at] = ?\n"
+                + "      ,[Content] = ?\n"
+                + " WHERE Comment_ID = ?";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setString(1, Content);
-            ps.setInt(2, Comment_ID);
+            ps.setInt(1, cmt.getMentorID());
+            ps.setInt(2, cmt.getMenteeID());
+            ps.setInt(3, cmt.getSkillID());
+            ps.setString(4, cmt.getCreatedAt());
+            ps.setString(5, cmt.getContent());
+            ps.setInt(6, cmt.getID());
             ps.execute();
 
         } catch (Exception e) {
