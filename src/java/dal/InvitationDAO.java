@@ -21,6 +21,7 @@ public class InvitationDAO extends DBContext {
     private ArrayList<Invitation> Invitation;
 
     public ArrayList<Invitation> getInvitation() {
+        load();
         return Invitation;
     }
 

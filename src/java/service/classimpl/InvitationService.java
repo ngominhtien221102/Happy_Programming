@@ -53,6 +53,11 @@ public class InvitationService implements IInvitationService {
        return "OK";
     }
 
+    @Override
+    public List<Invitation> getList() {
+        return InvitationDAO.getInvitation();
+    }
+
     
     
 }
