@@ -22,7 +22,7 @@ public class User {
         this.status = status;
     }
 
-    public void setUserID(int userID) {
+    public void setID(int userID) {
         this.ID = userID;
     }
 
@@ -42,7 +42,7 @@ public class User {
         this.status = status;
     }
 
-    public int getUserID() {
+    public int getID() {
         return ID;
     }
 

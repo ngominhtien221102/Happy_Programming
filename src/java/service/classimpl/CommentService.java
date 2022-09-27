@@ -20,19 +20,21 @@ public class CommentService implements ICommentService{
     }
 
     @Override
-    public String insert(Comment u) {
+    public String insert(Comment u, List<Comment> list) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public String update(Comment u) {
+    public String update(Comment u, List<Comment> list) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public String delete(Comment u) {
+    public String delete(Comment u, List<Comment> list) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
+
 
     
 }

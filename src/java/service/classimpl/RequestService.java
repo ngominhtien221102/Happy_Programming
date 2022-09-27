@@ -20,18 +20,20 @@ public class RequestService implements IRequestService{
     }
 
     @Override
-    public String insert(Request u) {
+    public String insert(Request u, List<Request> list) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public String update(Request u) {
+    public String update(Request u, List<Request> list) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
-    public String delete(Request u) {
+    public String delete(Request u, List<Request> list) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
+   
     
 }
