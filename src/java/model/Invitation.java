@@ -12,10 +12,10 @@ package model;
  */
 public class Invitation {
     private int ID;
-    private int mentorId;
-    private int menteeId;
-    private int skillId;
-    private int status;
+    private int mentorID;
+    private int menteeID;
+    private int skillID;
+    private int statusID;
     private String title;
     private String deadlineDate;
     private String content;
@@ -25,10 +25,10 @@ public class Invitation {
 
     public Invitation(int id, int mentorId, int menteeId, int skillId, int status, String title, String deadlineDate, String content) {
         this.ID = id;
-        this.mentorId = mentorId;
-        this.menteeId = menteeId;
-        this.skillId = skillId;
-        this.status = status;
+        this.mentorID = mentorId;
+        this.menteeID = menteeId;
+        this.skillID = skillId;
+        this.statusID = status;
         this.title = title;
         this.deadlineDate = deadlineDate;
         this.content = content;
@@ -42,36 +42,36 @@ public class Invitation {
         this.ID = ID;
     }
 
-    public int getMentorId() {
-        return mentorId;
+    public int getMentorID() {
+        return mentorID;
     }
 
-    public void setMentorId(int mentorId) {
-        this.mentorId = mentorId;
+    public void setMentorID(int mentorID) {
+        this.mentorID = mentorID;
     }
 
-    public int getMenteeId() {
-        return menteeId;
+    public int getMenteeID() {
+        return menteeID;
     }
 
-    public void setMenteeId(int menteeId) {
-        this.menteeId = menteeId;
+    public void setMenteeID(int menteeID) {
+        this.menteeID = menteeID;
     }
 
-    public int getSkillId() {
-        return skillId;
+    public int getSkillID() {
+        return skillID;
     }
 
-    public void setSkillId(int skillId) {
-        this.skillId = skillId;
+    public void setSkillID(int skillID) {
+        this.skillID = skillID;
     }
 
-    public int getStatus() {
-        return status;
+    public int getStatusID() {
+        return statusID;
     }
 
-    public void setStatus(int status) {
-        this.status = status;
+    public void setStatusID(int statusID) {
+        this.statusID = statusID;
     }
 
     public String getTitle() {
@@ -100,7 +100,7 @@ public class Invitation {
 
     @Override
     public String toString() {
-        return "Invitation{" + "id=" + ID + ", mentorId=" + mentorId + ", menteeId=" + menteeId + ", skillId=" + skillId + ", status=" + status + ", title=" + title + ", deadlineDate=" + deadlineDate + ", content=" + content + '}';
+        return "Invitation{" + "id=" + ID + ", mentorId=" + mentorID + ", menteeId=" + menteeID + ", skillId=" + skillID + ", status=" + statusID + ", title=" + title + ", deadlineDate=" + deadlineDate + ", content=" + content + '}';
     }
 
     

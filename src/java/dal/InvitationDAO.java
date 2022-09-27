@@ -54,34 +54,45 @@ public class InvitationDAO extends DBContext {
     }
 
     // Insert Invitation
-    public void insert(int mentorId, int menteeId, int skillId, boolean status, String title, String deadlineDate, String content) {
+    public Invitation insert(Invitation i) {
         String sql = "insert into Mentor_CV values(?,?,?,?,?,?,?)";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setInt(1, mentorId);
-            ps.setInt(2, menteeId);
-            ps.setInt(3, skillId);
-            ps.setBoolean(4, status);
-            ps.setString(5, title);
-            ps.setString(6, deadlineDate);
-            ps.setString(7, content);
+            ps.setInt(1, i.getMentorID());
+            ps.setInt(2, i.getMenteeID());
+            ps.setInt(3, i.getSkillID());
+            ps.setInt(4, i.getStatusID());
+            ps.setString(5, i.getTitle());
+            ps.setString(6, i.getDeadlineDate());
+            ps.setString(7, i.getContent());
             ps.executeUpdate();
+
+            sql = "SELECT top(1) [Invitation_ID]\n"
+                    + "  FROM [dbo].[Invitation]\n"
+                    + "  order by Invitation_ID desc";
+            ps = connection.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                i.setID(rs.getInt(1));
+            }
+            
         } catch (Exception e) {
 
         }
+        return i;
     }
     // update Invitation
 
-    public void update(int id, int skillId, String title, String deadlineDate, String content) {
+    public void update(Invitation i) {
         String sql = "Update Invitation set Skill_ID=?,Title=?,Deadline_date=?,[Content]=? where Invitation_ID=?";
 
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setInt(1, skillId);
-            ps.setString(2, title);
-            ps.setString(3, deadlineDate);
-            ps.setString(4, content);
-            ps.setInt(5, id);
+            ps.setInt(1, i.getSkillID());
+            ps.setString(2, i.getTitle());
+            ps.setString(3, i.getDeadlineDate());
+            ps.setString(4, i.getContent());
+            ps.setInt(5, i.getID());
             ps.executeUpdate();
         } catch (Exception e) {
 
