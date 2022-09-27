@@ -12,15 +12,15 @@ import java.sql.Date;
  */
 public class Response {
     private int id;
-    private int request_id;
+    private int requestId;
     private String content;
-    private Date create_at;
+    private Date createAt;
 
     public Response(int id, int request_id, String content, Date create_at) {
         this.id = id;
-        this.request_id = request_id;
+        this.requestId = request_id;
         this.content = content;
-        this.create_at = create_at;
+        this.createAt = create_at;
     }
 
     public Response() {
@@ -35,11 +35,11 @@ public class Response {
     }
 
     public int getRequest_id() {
-        return request_id;
+        return requestId;
     }
 
     public void setRequest_id(int request_id) {
-        this.request_id = request_id;
+        this.requestId = request_id;
     }
 
     public String getContent() {
@@ -51,11 +51,11 @@ public class Response {
     }
 
     public Date getCreate_at() {
-        return create_at;
+        return createAt;
     }
 
     public void setCreate_at(Date create_at) {
-        this.create_at = create_at;
+        this.createAt = create_at;
     }
     
 }
