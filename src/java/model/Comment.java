@@ -11,62 +11,62 @@ import java.util.Date;
  * @author ADMIN
  */
 public class Comment {
-    private int id;
-    private int mentorId;
-    private int menteeId;
-    private int skillId;
-    private Date createdAt;
+    private int ID;
+    private int mentorID;
+    private int menteeID;
+    private int skillID;
+    private String createdAt;
     private String content;
 
     public Comment() {
     }
 
-    public Comment(int id, int mentorId, int menteeId, int skillId, Date createdAt, String content) {
-        this.id = id;
-        this.mentorId = mentorId;
-        this.menteeId = menteeId;
-        this.skillId = skillId;
+    public Comment(int ID, int mentorID, int menteeID, int skillID, String createdAt, String content) {
+        this.ID = ID;
+        this.mentorID = mentorID;
+        this.menteeID = menteeID;
+        this.skillID = skillID;
         this.createdAt = createdAt;
         this.content = content;
     }
 
-    public int getId() {
-        return id;
+    public int getID() {
+        return ID;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setID(int ID) {
+        this.ID = ID;
     }
 
-    public int getMentorId() {
-        return mentorId;
+    public int getMentorID() {
+        return mentorID;
     }
 
-    public void setMentorId(int mentorId) {
-        this.mentorId = mentorId;
+    public void setMentorID(int mentorID) {
+        this.mentorID = mentorID;
     }
 
-    public int getMenteeId() {
-        return menteeId;
+    public int getMenteeID() {
+        return menteeID;
     }
 
-    public void setMenteeId(int menteeId) {
-        this.menteeId = menteeId;
+    public void setMenteeID(int menteeID) {
+        this.menteeID = menteeID;
     }
 
-    public int getSkillId() {
-        return skillId;
+    public int getSkillID() {
+        return skillID;
     }
 
-    public void setSkillId(int skillId) {
-        this.skillId = skillId;
+    public void setSkillID(int skillID) {
+        this.skillID = skillID;
     }
 
-    public Date getCreatedAt() {
+    public String getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
+    public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
     }
 
@@ -77,7 +77,7 @@ public class Comment {
     public void setContent(String content) {
         this.content = content;
     }
+ 
+    
 
-    
-    
 }
