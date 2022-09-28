@@ -14,16 +14,15 @@ import service.IRateService;
  *
  * @author ADMIN
  */
-public class RateService implements IRateService{
+public class RateService implements IRateService {
 
     RateDAO rateDAO = new RateDAO();
-    
-    
+
     @Override
     public List<Rate> getList() {
         return rateDAO.getRateList();
     }
-    
+
     @Override
     public Rate getRateById(int id, List<Rate> list) {
         for (Rate rate : list) {
@@ -57,13 +56,12 @@ public class RateService implements IRateService{
     }
 
     @Override
-    public String delete(Rate u, List<Rate> list) {
+    public String delete(int id, List<Rate> list) {
 
-        rateDAO.del(u.getID());
-        list.remove(u);
+        rateDAO.del(id);
+        list.remove(getRateById(id, list));
+
         return "OK";
     }
-
-    
 
 }

@@ -18,5 +18,5 @@ public interface IStatusService {
 
     String update(Status u,List<Status> list);
 
-    String delete(Status u,List<Status> list);
+    String delete(int id,List<Status> list);
 }

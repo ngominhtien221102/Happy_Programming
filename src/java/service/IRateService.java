@@ -19,5 +19,5 @@ public interface IRateService {
 
     String update(Rate u, List<Rate> list);
 
-    String delete(Rate u, List<Rate> list);
+    String delete(int id, List<Rate> list);
 }

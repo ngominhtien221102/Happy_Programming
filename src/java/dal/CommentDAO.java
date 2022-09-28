@@ -90,7 +90,7 @@ public class CommentDAO extends DBContext {
         
     }
 
-    public void del(int Comment_ID) {
+    public void delete(int Comment_ID) {
         String sql = "delete from [dbo].[Comment] where Comment_ID = ?";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);

@@ -49,9 +49,10 @@ public class SkillService implements ISkillService {
     }
 
     @Override
-    public String delete(Skill u, List<Skill> list) {
-        skillDAO.delete(u.getID());
-        list.remove(u);
+    public String delete(int id, List<Skill> list) {
+        skillDAO.delete(id);
+               list.remove(getSkillById(id, list));
+
         return "OK";
 
     }

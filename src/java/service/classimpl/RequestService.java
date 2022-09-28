@@ -54,10 +54,10 @@ public class RequestService implements IRequestService {
     }
 
     @Override
-    public String delete(Request u, List<Request> list) {
+    public String delete(int id, List<Request> list) {
 
-        reqDAO.del(u.getID());
-        list.remove(u);
+        reqDAO.del(id);
+        list.remove(getRequestById(id, list));
         return "OK";
 
     }

@@ -5,6 +5,7 @@
 package service.classimpl;
 
 import dal.CommentDAO;
+import jakarta.servlet.jsp.jstl.core.Config;
 import java.util.List;
 import model.Comment;
 import service.ICommentService;
@@ -57,10 +58,10 @@ public class CommentService implements ICommentService {
     }
 
     @Override
-    public String delete(Comment u, List<Comment> list) {
+    public String delete(int id, List<Comment> list) {
 
-        cmtDAO.del(u.getID());
-        list.remove(u);
+        cmtDAO.delete(id);
+        list.remove(getCommentById(id, list));
         return "OK";
 
     }
