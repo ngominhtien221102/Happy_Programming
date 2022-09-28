@@ -9,23 +9,23 @@ package model;
  * @author minhd
  */
 public class Status {
-    private int id;
+    private int ID;
     private String name;
 
     public Status(int id, String name) {
-        this.id = id;
+        this.ID = id;
         this.name = name;
     }
 
     public Status() {
     }
 
-    public int getId() {
-        return id;
+    public int getID() {
+        return ID;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setID(int ID) {
+        this.ID = ID;
     }
 
     public String getName() {

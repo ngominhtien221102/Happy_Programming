@@ -13,7 +13,7 @@ import model.Status;
  */
 public interface IStatusService {
     List<Status> getList();
-    Status getAddressById(int id, List<Status> list);
+    Status getStatusById(int id, List<Status> list);
     String insert(Status u,List<Status> list);
 
     String update(Status u,List<Status> list);
