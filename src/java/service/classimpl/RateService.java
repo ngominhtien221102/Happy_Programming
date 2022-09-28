@@ -37,8 +37,8 @@ public class RateService implements IRateService{
     @Override
     public String insert(Rate u, List<Rate> list) {
 
-        rateDAO.insert(u);
-        list.add(u);
+        Rate rate = rateDAO.insert(u);
+        list.add(rate);
         return "OK";
 
     }
@@ -59,8 +59,10 @@ public class RateService implements IRateService{
     @Override
     public String delete(Rate u, List<Rate> list) {
 
+
         rateDAO.del(u.getID());
         list.remove(u);
+
         return "OK";
     }
 
