@@ -23,6 +23,7 @@ public class RequestDAO extends DBContext {
     }
 
     public ArrayList<Request> getReqList() {
+        load();
         return reqList;
     }
 
@@ -50,7 +51,7 @@ public class RequestDAO extends DBContext {
         }
     }
 
-    public Request insert(Request req) {
+    public void insert(Request req) {
         LocalDate curDate = LocalDate.now();
         String date = curDate.toString();
 
@@ -81,7 +82,7 @@ public class RequestDAO extends DBContext {
         } catch (Exception e) {
             System.out.println("Error Request" + e.getMessage());
         }
-        return req;
+        
     }
 
     public void del(int Request_ID) {

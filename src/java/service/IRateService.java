@@ -13,8 +13,7 @@ import model.Rate;
  */
 public interface IRateService {
     List<Rate> getList();
-    Rate geRateById(int id, List<Rate> list);
-
+    Rate getRateById(int id, List<Rate> list);
 
     String insert(Rate u, List<Rate> list);
 

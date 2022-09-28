@@ -73,7 +73,7 @@ public class MentorCVDAO extends DBContext {
             PreparedStatement ps1 = connection.prepareStatement(sql1);
             for (Skill skill : m.getSkillList()) {
                 ps1.setInt(1, m.getID());
-                ps1.setInt(2, skill.getId());
+                ps1.setInt(2, skill.getID());
                 ps1.executeUpdate();
             }
         } catch (Exception e) {
@@ -100,7 +100,7 @@ public class MentorCVDAO extends DBContext {
             PreparedStatement ps2 = connection.prepareStatement(sql2);
             for (Skill skill : m.getSkillList()) {
                 ps2.setInt(1, m.getID());
-                ps2.setInt(2, skill.getId());
+                ps2.setInt(2, skill.getID());
                 ps2.executeUpdate();
             }
         } catch (Exception e) {
