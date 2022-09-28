@@ -65,29 +65,29 @@ public class SignUpController extends HttpServlet {
         String password = request.getParameter("password").trim();
         String repassword = request.getParameter("repassword").trim();
         UserService service = new UserService();
-        boolean isSignUpAble = true;
+        boolean isSignUpAble = true;// add account if true
         UserDAO userDao = new UserDAO();
         userDao.load();
-        for (User user : userDao.getUsList()) {
+        for (User user : userDao.getUsList()) {// check username in database
             if(user.getAccountName().equalsIgnoreCase(username)){
                 request.setAttribute("username_alert", "User name already exist. Try again.");
                 isSignUpAble = false;
                 break;
             }
         }
-        if(password.length()<8){
+        if(password.length()<8){// password must have more than 8 character
             request.setAttribute("Password_alert", "Use 8 characters or more for your password");
             isSignUpAble = false;
         }
-        else if(!password.equalsIgnoreCase(repassword)){
+        else if(!password.equalsIgnoreCase(repassword)){// comfirm password must match with password
             request.setAttribute("Password_alert", "Those passwords didn’t match. Try again.");
             isSignUpAble = false;
         }
-        if(isSignUpAble){
+        if(isSignUpAble){// if true add account
             User u = new User(0, 0, username, password, true);
             service.insert(u, userDao.getUsList());
             response.sendRedirect("views/user/index.jsp");
-        }else{
+        }else{// return back to signup jsp
             request.setAttribute("username", username);
             request.setAttribute("password", password);
             request.getRequestDispatcher("views/admin/register.jsp").forward(request, response);
