@@ -24,11 +24,12 @@ public class AddressDAO extends DBContext {
     }
 
     public ArrayList<Address> getAddresslst() {
+        load();
         return addresslst;
     }
 
 
-    public void Insert(String tinh, String huyen, String xa) {
+    public Address insert(Address  a) {
         String sql
                 = "INSERT INTO [Happy_Programming].[dbo].[Address]\n"
                 + "           ([Tinh]\n"
@@ -38,16 +39,26 @@ public class AddressDAO extends DBContext {
 
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setString(1, tinh);
-            ps.setString(2, huyen);
-            ps.setString(3, xa);
-            ps.execute();
+            ps.setString(1, a.getTinh());
+            ps.setString(2, a.getHuyen());
+            ps.setString(3, a.getXa());
+            ps.executeUpdate();
+            
+            sql = "SELECT top(1) [Address_ID]\n"
+                    + "  FROM [dbo].[Address]\n"
+                    + "  order by Address_ID desc";
+            ps = connection.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                a.setID(rs.getInt(1));
+            }
         } catch (SQLException e) {
            
         }
+        return a;
     }
 
-    public void Update(int id, String tinh, String huyen, String xa) {
+    public void update(Address a) {
         String sql = "UPDATE [dbo].[Address]\n"
                 + "   SET [Tinh] = ?\n"
                 + "      ,[Huyen] = ?\n"
@@ -55,17 +66,17 @@ public class AddressDAO extends DBContext {
                 + " WHERE Address_ID=?";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setInt(4, id);
-            ps.setString(1, tinh);
-            ps.setString(2, huyen);
-            ps.setString(3, xa);
+            ps.setInt(4, a.getID());
+            ps.setString(1, a.getTinh());
+            ps.setString(2, a.getHuyen());
+            ps.setString(3, a.getXa());
             ps.execute();
         } catch (SQLException e) {
             
         }
     }
 
-    public void Load() {
+    public void load() {
         addresslst = new ArrayList<>();
         String sql = "SELECT * FROM Address";
         try {
@@ -73,7 +84,7 @@ public class AddressDAO extends DBContext {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Address address = new Address();
-                address.setId(rs.getInt(1));
+                address.setID(rs.getInt(1));
                 address.setTinh(rs.getString(2));
                 address.setHuyen(rs.getString(3));
                 address.setXa(rs.getString(4));
@@ -85,7 +96,7 @@ public class AddressDAO extends DBContext {
 
     }
 
-    public void Delete(int id) {
+    public void delete(int id) {
         String sql = "DELETE FROM [dbo].[Address]\n"
                 + "      WHERE Address_ID=?";
         try {

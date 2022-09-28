@@ -9,13 +9,13 @@ package model;
  * @author minhd
  */
 public class Address {
-    private int id;
+    private int ID;
     private String tinh;
     private String huyen;
     private String xa;
 
     public Address(int id, String tinh, String huyen, String xa) {
-        this.id = id;
+        this.ID = id;
         this.tinh = tinh;
         this.huyen = huyen;
         this.xa = xa;
@@ -24,12 +24,12 @@ public class Address {
     public Address() {
     }
 
-    public int getId() {
-        return id;
+    public int getID() {
+        return ID;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setID(int ID) {
+        this.ID = ID;
     }
 
     public String getTinh() {

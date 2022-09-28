@@ -25,10 +25,11 @@ public class StatusDAO extends DBContext{
     }
 
     public ArrayList<Status> getStatuslst() {
+        load();
         return statuslst;
     }
 
-     public void Insert(int id, String name) {
+     public Status insert(Status s) {
         String sql = "INSERT INTO [dbo].[Status]\n"
                 + "           ([Status_ID]\n"
                 + "           ,[Status_Name])\n"
@@ -36,29 +37,38 @@ public class StatusDAO extends DBContext{
                 + "           (?, ?)\n";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setInt(1, id);
-            ps.setString(2, name);
-            ps.execute();
+            ps.setInt(1, s.getID());
+            ps.setString(2, s.getName());
+            ps.executeUpdate();
+            sql = "SELECT top(1) [Status_ID]\n"
+                    + "  FROM [dbo].[Status]\n"
+                    + "  order by Status_ID desc";
+            ps = connection.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            if(rs.next()){
+                s.setID(rs.getInt(1));
+            }
         } catch (SQLException e) {
 
         }
+        return s;
     }
 
-    public void Update(int id, String name) {
+    public void update(Status s) {
         String sql = "UPDATE [dbo].[Status]\n"
                 + "   SET [Status_Name] = ?\n"
                 + " WHERE Status_ID=?";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setInt(2, id);
-            ps.setString(1, name);
+            ps.setInt(2, s.getID());
+            ps.setString(1, s.getName());
             ps.execute();
         } catch (SQLException e) {
 
         }
     }
 
-    public void Load() {
+    public void load() {
         statuslst = new ArrayList<>();
         String sql = "SELECT * FROM Status";
         try {
@@ -66,7 +76,7 @@ public class StatusDAO extends DBContext{
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Status status = new Status();
-                status.setId(rs.getInt(1));
+                status.setID(rs.getInt(1));
                 status.setName(rs.getString(2));
                 statuslst.add(status);
             }
@@ -76,7 +86,7 @@ public class StatusDAO extends DBContext{
 
     }
 
-    public void Delete(int id) {
+    public void delete(int id) {
         String sql = "DELETE FROM [dbo].[Status]\n"
                 + "      WHERE Status_ID=?";
         try {
