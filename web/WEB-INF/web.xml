@@ -39,11 +39,11 @@
 </servlet-mapping>
     <servlet-mapping>
         <servlet-name>CreateSkillController</servlet-name>
-        <url-pattern>/createSkillController</url-pattern>
+        <url-pattern>/createSkill</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>UpdateSkillController</servlet-name>
-        <url-pattern>/updateSkillController</url-pattern>
+        <url-pattern>/updateSkill</url-pattern>
 
     </servlet-mapping>
     <session-config>

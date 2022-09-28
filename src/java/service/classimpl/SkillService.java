@@ -34,8 +34,10 @@ public class SkillService implements ISkillService {
 
     @Override
     public String insert(Skill u, List<Skill> list) {
+
         Skill skill = skillDAO.insert(u);
         list.add(skill);
+
         return "OK";
     }
 
