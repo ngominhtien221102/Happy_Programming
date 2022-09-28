@@ -34,8 +34,8 @@ public class SkillService implements ISkillService {
 
     @Override
     public String insert(Skill u, List<Skill> list) {
-        skillDAO.insert(u);
-        list.add(u);
+        Skill skill = skillDAO.insert(u);
+        list.add(skill);
         return "OK";
     }
 
@@ -52,7 +52,7 @@ public class SkillService implements ISkillService {
     public String delete(Skill u, List<Skill> list) {
         skillDAO.delete(u.getID());
         Skill skill = getSkillById(u.getID(), list);
-        list.remove(u);
+        list.remove(skill);
         return "OK";
 
     }

@@ -52,7 +52,7 @@ public class RateDAO extends DBContext {
         }
     }
 
-    public void insert(Rate rate) {
+    public Rate insert(Rate rate) {
         String sql = "INSERT INTO [dbo].[Rate]\n"
                 + "           ([Mentor_ID]\n"
                 + "           ,[Skill_ID]\n"
@@ -80,10 +80,10 @@ public class RateDAO extends DBContext {
             System.out.println("Error Rate" + e.getMessage());
 
         }
-
+        return rate;
     }
 
-    public void del(int Rate_ID) {
+    public void delete(int Rate_ID) {
         String sql = "delete from [dbo].[Rate] where Rate_ID = ?";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);

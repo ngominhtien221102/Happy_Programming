@@ -12,23 +12,9 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import service.ICommentService;
-import service.IInvitationService;
-import service.IMentorService;
-import service.IRateService;
-import service.IRequestService;
-import service.IResponseService;
-import service.ISkillService;
-import service.IStatusService;
-import service.IUserProfileService;
-import service.IUserService;
-import service.classimpl.CommentService;
-import service.classimpl.InvitationService;
-import service.classimpl.MentorService;
-import service.classimpl.RateService;
-import service.classimpl.RequestService;
-import service.classimpl.UserProfileService;
-import service.classimpl.UserService;
+import service.*;
+
+import service.classimpl.*;
 
 /**
  *

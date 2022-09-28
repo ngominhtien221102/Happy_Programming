@@ -50,7 +50,7 @@
                             <a class="nav-link" href="<%=request.getContextPath()%>/views/user/about.jsp">About</a>
                         </li>
                         <li class="nav-item ">
-                            <a class="nav-link" href="<%=request.getContextPath()%>/views/user/skills.jsp">COURSES</a>
+                            <a class="nav-link" href="<%=request.getContextPath()%>/views/user/skills.jsp">SKILLS</a>
                         </li>
                         <li class="nav-item ">
                             <a class="nav-link" href="<%=request.getContextPath()%>/views/user/events.jsp">EVENTS</a>

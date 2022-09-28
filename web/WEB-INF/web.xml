@@ -8,10 +8,7 @@
         <servlet-name>ChangePasswordController</servlet-name>
         <servlet-class>controllers.common.ChangePasswordController</servlet-class>
     </servlet>
-    <servlet>
-        <servlet-name>ViewAllSkillController</servlet-name>
-        <servlet-class>controllers.common.ViewAllSkillController</servlet-class>
-    </servlet>
+
     <servlet>
 
         <servlet-name>LoadHomeController</servlet-name>
@@ -34,10 +31,7 @@
         <servlet-name>ChangePasswordController</servlet-name>
         <url-pattern>/changepass</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ViewAllSkillController</servlet-name>
-        <url-pattern>/viewAllSkill</url-pattern>
-    </servlet-mapping>
+  
     <servlet-mapping>
 
         <servlet-name>LoadHomeController</servlet-name>
