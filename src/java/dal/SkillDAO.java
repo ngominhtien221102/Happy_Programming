@@ -33,7 +33,7 @@ public class SkillDAO extends DBContext{
         return skilllst;
     }
     
-    public void insert(Skill skill) {
+    public Skill insert(Skill skill) {
         String sql =  "INSERT INTO [dbo].[Skill]\n"
                 + "           ([Name])\n"
                 + "     VALUES\n"
@@ -55,7 +55,7 @@ public class SkillDAO extends DBContext{
             
         } catch (SQLException e) {
         }
-     
+        return skill;
     }
 
     public void update(Skill skill) {
