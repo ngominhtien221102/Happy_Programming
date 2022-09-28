@@ -19,5 +19,5 @@ List<Response> getList();
 
     String update(Response u, List<Response> list);
 
-    String delete(Response u, List<Response> list);
+    String delete(int id, List<Response> list);
 }

@@ -19,5 +19,5 @@ public interface ICommentService {
 
     String update(Comment u, List<Comment> list);
 
-    String delete(Comment u, List<Comment> list);
+    String delete(int id, List<Comment> list);
 }

@@ -50,11 +50,5 @@ public class AddressService implements IAddressService {
         return "OK";
     }
 
-    @Override
-    public String delete(Address u, List<Address> list) {
-        AddressDAO.delete(u.getID());
-        list.remove(u);
-        return "OK";
-    }
 
 }

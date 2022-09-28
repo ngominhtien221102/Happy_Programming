@@ -18,5 +18,4 @@ public interface IAddressService {
 
     String update(Address u,List<Address> list);
 
-    String delete(Address u,List<Address> list);
 }

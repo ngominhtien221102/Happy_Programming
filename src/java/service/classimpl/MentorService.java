@@ -46,17 +46,15 @@ public class MentorService implements IMentorService {
     }
 
     @Override
-    public String delete(MentorCV u, List<MentorCV> list) {
-       mentorCVDAO.delete(u.getID());
-       list.remove(u);
-       return "OK";
+    public String delete(int id, List<MentorCV> list) {
+        mentorCVDAO.delete(id);
+        list.remove(getCVById(id, list));
+        return "OK";
     }
 
     @Override
     public List<MentorCV> getListCV() {
         return mentorCVDAO.getMentorCVList();
     }
-    
-    
-    
+
 }

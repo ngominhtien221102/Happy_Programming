@@ -19,5 +19,5 @@ List<Request> getList();
 
     String update(Request u, List<Request> list);
 
-    String delete(Request u, List<Request> list);
+    String delete(int id, List<Request> list);
 }

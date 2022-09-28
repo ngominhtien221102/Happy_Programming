@@ -19,5 +19,5 @@ public interface IMentorService {
 
     String update(MentorCV u, List<MentorCV> list);
 
-    String delete(MentorCV u, List<MentorCV> list);
+    String delete(int id, List<MentorCV> list);
 }
