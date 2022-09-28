@@ -12,7 +12,7 @@ import model.Response;
  * @author Admin
  */
 public interface IResponseService {
-List<Response> getList();
+    List<Response> getList();
     Response getResponseById(int id, List<Response> list);
 
     String insert(Response u, List<Response> list);

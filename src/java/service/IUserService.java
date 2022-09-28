@@ -16,8 +16,9 @@ import model.*;
  */
 public interface IUserService {
     List<User> getList();
+    User getUserByAccount(String accountName, String PassWord);
     User getUserById(int id, List<User> list);
     String insert(User u, List<User> list);
     String update(User u, List<User> list);
-    String delete(User u, List<User> list);
+    String delete(User u, List<User> list, List<UserProfile> list1, List<MentorCV> list2);
 }

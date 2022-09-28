@@ -3,6 +3,7 @@ package dal;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import model.UserProfile;
 
@@ -18,6 +19,7 @@ public class UserProfileDAO extends DBContext {
     }
 
     public ArrayList<UserProfile> getUsProList() {
+        load();
         return usProList;
     }
 
@@ -25,19 +27,19 @@ public class UserProfileDAO extends DBContext {
         this.usProList = usProList;
     }
 
-    public ArrayList<UserProfile> load() {
+    public void load() {
         usProList = new ArrayList<>();
         String sql = "Select * from User";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                usProList.add(new UserProfile(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getDate(6).toLocalDate(), rs.getInt(7), rs.getBoolean(8), rs.getDate(9).toLocalDate()));
+                usProList.add(new UserProfile(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getInt(7), rs.getBoolean(8), rs.getString(9)));
             }
         } catch (SQLException e) {
             System.out.println("Error");
         }
-        return usProList;
+        
     }
 
     public void insert(UserProfile u) {
@@ -49,10 +51,10 @@ public class UserProfileDAO extends DBContext {
             ps.setString(3, u.getLastName());
             ps.setString(4, u.getAvatar());
             ps.setString(5, u.getEmail());
-            ps.setString(6, u.getDob().toString());
+            ps.setString(6, u.getDob());
             ps.setInt(7, u.getAddressID());
             ps.setBoolean(8, u.isGender());
-            ps.setString(9, u.getCreateAt().toString());
+            ps.setString(9, u.getCreateAt());
             ps.execute();
         } catch (Exception e) {
             System.out.println("Error");
@@ -69,7 +71,7 @@ public class UserProfileDAO extends DBContext {
             ps.setString(2, u.getLastName());
             ps.setString(3, u.getAvatar());
             ps.setString(4, u.getEmail());
-            ps.setString(5, u.getDob().toString());
+            ps.setString(5, u.getDob());
             ps.setInt(6, u.getAddressID());
             ps.setBoolean(7, u.isGender());
             ps.execute();

@@ -14,9 +14,9 @@ public class Response {
     private int id;
     private int requestId;
     private String content;
-    private Date createAt;
+    private String createAt;
 
-    public Response(int id, int request_id, String content, Date create_at) {
+    public Response(int id, int request_id, String content, String create_at) {
         this.id = id;
         this.requestId = request_id;
         this.content = content;
@@ -50,11 +50,11 @@ public class Response {
         this.content = content;
     }
 
-    public Date getCreate_at() {
+    public String getCreate_at() {
         return createAt;
     }
 
-    public void setCreate_at(Date create_at) {
+    public void setCreate_at(String create_at) {
         this.createAt = create_at;
     }
     
