@@ -4,9 +4,13 @@
  */
 package service.classimpl;
 
+import dal.MentorCVDAO;
 import dal.UserDAO;
+import dal.UserProfileDAO;
 import java.util.List;
+import model.MentorCV;
 import model.User;
+import model.UserProfile;
 import service.IUserService;
 
 /**
@@ -16,6 +20,11 @@ import service.IUserService;
 public class UserService implements IUserService {
 
     UserDAO userDAO = new UserDAO();
+    UserProfileDAO userProDAO = new UserProfileDAO();
+    UserProfileService userProService = new UserProfileService();
+    MentorCVDAO mentorCVDAO = new MentorCVDAO();
+    MentorService mentorService = new MentorService();    
+
 
     @Override
     public User getUserById(int id, List<User> list) {
@@ -29,6 +38,10 @@ public class UserService implements IUserService {
 
     @Override
     public String insert(User u, List<User> list) {
+        if(getUserById(u.getID(), list) != null)
+        {
+            return "Insert not successful!";
+        }
         User i = userDAO.insert(u);
             list.add(i);
             return "Insert successful!";
@@ -46,11 +59,36 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public String delete(User u, List<User> list) {
+    public String delete(User u, List<User> list, List<UserProfile> userProList, List<MentorCV> mentorList) {
+        if(u.getRoleID() == 2)
+        {
+            UserProfile us = userProService.getUserProfileById(u.getID(), userProList);
+            userProService.delete(us, userProList);
+        }
+        if(u.getRoleID() == 3)
+        {
+            MentorCV mentorCV = mentorService.getCVById(u.getID(), mentorList);
+            mentorService.delete(mentorCV, mentorList);       
+        }
         userDAO.delete(u.getID());
-        User us = getUserById(u.getID(), list);
-        list.remove(us);
+        list.remove(u);
         return "Delete successful!";
     }
 
+    @Override
+    public User getUserByAccount(String accountName, String Password) {
+        
+        for (User user : userDAO.getUsList()) {
+            if(user.getAccountName().equals(accountName) && user.getPassWord().equals(Password))
+            {
+                return user;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public List<User> getList() {
+        return userDAO.getUsList();
+    }
 }

@@ -20,15 +20,15 @@ public class UserProfile {
     private String lastName;
     private String avatar;
     private String email;
-    private LocalDate dob;
+    private String dob;
     private int addressID;
     private boolean gender;
-    private LocalDate createAt;
+    private String createAt;
 
     public UserProfile() {
     }
 
-    public UserProfile(int userID, String firstName, String lastName, String Avatar, String Email, LocalDate Dob, int addressID, boolean Gender, LocalDate createAt) {
+    public UserProfile(int userID, String firstName, String lastName, String Avatar, String Email, String Dob, int addressID, boolean Gender, String createAt) {
         this.ID = userID;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -60,7 +60,7 @@ public class UserProfile {
         return email;
     }
 
-    public LocalDate getDob() {
+    public String getDob() {
         return dob;
     }
 
@@ -72,7 +72,7 @@ public class UserProfile {
         return gender;
     }
 
-    public LocalDate getCreateAt() {
+    public String getCreateAt() {
         return createAt;
     }
 
@@ -96,7 +96,7 @@ public class UserProfile {
         this.email = Email;
     }
 
-    public void setDob(LocalDate Dob) {
+    public void setDob(String Dob) {
         this.dob = Dob;
     }
 
@@ -108,8 +108,30 @@ public class UserProfile {
         this.gender = Gender;
     }
 
-    public void setCreateAt(LocalDate createAt) {
+    public void setCreateAt(String createAt) {
         this.createAt = createAt;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 89 * hash + this.ID;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final UserProfile other = (UserProfile) obj;
+        return this.ID == other.ID;
     }
     
     
@@ -121,10 +143,10 @@ public class UserProfile {
                 + ", lastName=" + lastName
                 + ", Avatar=" + avatar
                 + ", Email=" + email
-                + ", Dob=" + dob.toString()
+                + ", Dob=" + dob
                 + ", addressID=" + addressID
                 + ", Gender=" + gender
-                + ", createAt=" + createAt.toString() + '}';
+                + ", createAt=" + createAt + '}';
     }
     
     

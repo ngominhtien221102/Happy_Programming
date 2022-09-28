@@ -16,7 +16,7 @@
         <%@include file="header.jsp" %>
         <!-- /header -->
         <!-- Modal -->
-        <%@include file="modal.jsp" %>
+
 
         <!-- hero slider -->
         <section class="hero-section overlay bg-cover" data-background="">

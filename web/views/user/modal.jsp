@@ -56,18 +56,24 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <form action="#" class="row">
+                        <p style="Color:red">${Alert}</p>
+                        <form action="LoginController" method="POST" class="row">
                             <div class="col-12">
-                                <input type="text" class="form-control mb-3" id="loginPhone" name="loginPhone" placeholder="Phone">
+                                <input type="text" class="form-control mb-3" id="loginName" name="Username" placeholder="Account Name">
                             </div>
                             <div class="col-12">
-                                <input type="text" class="form-control mb-3" id="loginName" name="loginName" placeholder="Name">
+                                <input type="password" class="form-control mb-3" id="loginPassword" name="Password" placeholder="Password">
                             </div>
                             <div class="col-12">
-                                <input type="password" class="form-control mb-3" id="loginPassword" name="loginPassword" placeholder="Password">
+                                <div class="w-50 text-left">
+			            	<label class="Remeber_Button"><input type="checkbox" name="rem" ${(cookie.rem.value eq 'ON')?"checked":""} value="ON">
+									  <span class="checkmark"></span>Remember Me
+									  
+										</label>
+                                                                          </div>
                             </div>
                             <div class="col-12">
-                                <button type="submit" class="btn btn-primary">LOGIN</button>
+                                <button type="submit"  class="btn btn-primary">Sign In</button>
                             </div>
                         </form>
                     </div>

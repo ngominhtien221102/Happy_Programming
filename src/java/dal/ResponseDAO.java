@@ -8,6 +8,7 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import model.Response;
 
@@ -28,11 +29,12 @@ public class ResponseDAO extends DBContext {
 
 
     public ArrayList<Response> getResponselst() {
+        load();
         return responselst;
     }
 
-    public void Insert(int request_id, String content) {
-        Date date = new Date(System.currentTimeMillis());
+    public void insert(Response response) {
+
         String sql = "INSERT INTO [dbo].[Response]\n"
                 + "           ([Request_ID]\n"
                 + "           ,[Content]\n"
@@ -41,33 +43,31 @@ public class ResponseDAO extends DBContext {
                 + "           (?,?,?)\n";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setInt(1, request_id);
-            ps.setString(2, content);
-            ps.setDate(3, date);
+            ps.setInt(1, response.getId());
+            ps.setString(2, response.getContent());
+            ps.setString(3, response.getCreate_at());
             ps.execute();
         } catch (SQLException e) {
 
         }
     }
 
-    public void Update(int id, String content) {
+    public void update(Response response) {
         Date date = new Date(System.currentTimeMillis());
         String sql = "UPDATE [dbo].[Response]\n"
                 + "   SET [Content] = ?\n"
-                + "      ,[Created_at] = ?\n"
                 + " WHERE Response_ID=?";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setInt(3, id);
-            ps.setString(1, content);
-            ps.setDate(2, date);
+            ps.setInt(2, response.getId());
+            ps.setString(1, response.getContent());
             ps.execute();
         } catch (SQLException e) {
 
         }
     }
 
-    public void Load() {
+    public void load() {
         responselst = new ArrayList<>();
         String sql = "SELECT * FROM Response";
         try {
@@ -78,7 +78,7 @@ public class ResponseDAO extends DBContext {
                 response.setId(rs.getInt(1));
                 response.setRequest_id(rs.getInt(2));
                 response.setContent(rs.getString(3));
-                response.setCreate_at(rs.getDate(4));
+                response.setCreate_at(rs.getString(4));
                 responselst.add(response);
             }
         } catch (SQLException e) {
@@ -87,7 +87,7 @@ public class ResponseDAO extends DBContext {
 
     }
 
-    public void Delete(int id) {
+    public void delete(int id) {
         String sql = "DELETE FROM [dbo].[Response]\n"
                 + "      WHERE Response_ID=?";
         try {

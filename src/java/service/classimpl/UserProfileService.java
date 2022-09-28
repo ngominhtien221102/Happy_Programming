@@ -51,9 +51,15 @@ public class UserProfileService implements IUserProfileService {
     @Override
     public String delete(UserProfile u, List<UserProfile> list) {
         userProfileDAO.delete(u.getID());
-        UserProfile us = getUserProfileById(u.getID(), list);
-        list.remove(us);
+        list.remove(u);
         return "Delete successful!";
+        
+        
+    }
+
+    @Override
+    public List<UserProfile> getList() {
+        return userProfileDAO.getUsProList();
     }
 
 }
