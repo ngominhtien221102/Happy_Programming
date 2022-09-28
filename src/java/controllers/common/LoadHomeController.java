@@ -12,15 +12,29 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.util.List;
-import model.Skill;
-
+import service.ICommentService;
+import service.IInvitationService;
+import service.IMentorService;
+import service.IRateService;
+import service.IRequestService;
+import service.IResponseService;
+import service.ISkillService;
+import service.IStatusService;
+import service.IUserProfileService;
+import service.IUserService;
+import service.classimpl.CommentService;
+import service.classimpl.InvitationService;
+import service.classimpl.MentorService;
+import service.classimpl.RateService;
+import service.classimpl.RequestService;
+import service.classimpl.UserProfileService;
+import service.classimpl.UserService;
 
 /**
  *
  * @author Admin
  */
-public class ChangePasswordController extends HttpServlet {
+public class LoadHomeController extends HttpServlet {
    
     /** 
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
@@ -37,10 +51,10 @@ public class ChangePasswordController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ChangePasswordController</title>");  
+            out.println("<title>Servlet LoadHomeController</title>");  
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ChangePasswordController at " + request.getContextPath () + "</h1>");
+            out.println("<h1>Servlet LoadHomeController at " + request.getContextPath () + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -57,8 +71,31 @@ public class ChangePasswordController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        processRequest(request, response);
+        HttpSession ses = request.getSession();
+        IUserService uS = new UserService();
+        IUserProfileService upS = new UserProfileService();
+        ISkillService sS = new SkillService();
+        IRequestService reqS = new RequestService();
+        IResponseService resS = new ResponseService();
+        IStatusService staS = new StatusService();
+        IRateService rS = new RateService();
+        IMentorService mS = new MentorService();
+        IInvitationService iS = new InvitationService();
+        ICommentService cS = new CommentService();
         
+        ses.setAttribute("listSkill", uS.getList());
+        ses.setAttribute("listUser", uS.getList());
+        ses.setAttribute("listUserProfile", upS.getList());
+        ses.setAttribute("listRequest", reqS.getList());
+        ses.setAttribute("listResponse", resS.getList());
+        ses.setAttribute("listStatus", staS.getList());
+        ses.setAttribute("listRate", rS.getList());
+        ses.setAttribute("listMentorCV", mS.getListCV());
+        ses.setAttribute("listInv", iS.getList());
+        ses.setAttribute("listComment", cS.getList());
+        
+        
+        response.sendRedirect("views/user/index.jsp");
     } 
 
     /** 
@@ -71,10 +108,7 @@ public class ChangePasswordController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        //processRequest(request, response);
-        HttpSession ses = request.getSession();
-    
-        
+        processRequest(request, response);
     }
 
     /** 

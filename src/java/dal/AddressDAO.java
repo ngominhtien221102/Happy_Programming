@@ -19,6 +19,9 @@ public class AddressDAO extends DBContext {
     public AddressDAO() {
 
     }
+    
+    
+    
     public void setAddresslst(ArrayList<Address> addresslst) {
         this.addresslst = addresslst;
     }

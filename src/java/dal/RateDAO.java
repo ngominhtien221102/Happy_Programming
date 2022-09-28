@@ -23,6 +23,7 @@ public class RateDAO extends DBContext {
     }
 
     public ArrayList<Rate> getRateList() {
+        load();
         return rateList;
     }
 
@@ -51,7 +52,7 @@ public class RateDAO extends DBContext {
         }
     }
 
-    public Rate insert(Rate rate) {
+    public void insert(Rate rate) {
         String sql = "INSERT INTO [dbo].[Rate]\n"
                 + "           ([Mentor_ID]\n"
                 + "           ,[Skill_ID]\n"
@@ -79,7 +80,7 @@ public class RateDAO extends DBContext {
             System.out.println("Error Rate" + e.getMessage());
 
         }
-        return rate;
+
     }
 
     public void del(int Rate_ID) {

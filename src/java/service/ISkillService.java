@@ -7,18 +7,19 @@ package service;
 import java.util.List;
 import model.Skill;
 
-
 /**
  *
  * @author Admin
  */
 public interface ISkillService {
+
     List<Skill> getList();
-        Skill getSkillById(int id, List<Skill> list);
 
-    boolean insert(Skill u, List<Skill> list);
+    Skill getSkillById(int id, List<Skill> list);
 
-    void update(Skill u, List<Skill> list);
+    String insert(Skill u, List<Skill> list);
 
-    boolean delete(Skill u, List<Skill> list);
+    String update(Skill u, List<Skill> list);
+
+    String delete(Skill u, List<Skill> list);
 }

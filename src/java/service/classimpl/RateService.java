@@ -5,6 +5,7 @@
 package service.classimpl;
 
 import dal.RateDAO;
+import java.util.ArrayList;
 import java.util.List;
 import model.Rate;
 import service.IRateService;
@@ -16,6 +17,12 @@ import service.IRateService;
 public class RateService implements IRateService{
 
     RateDAO rateDAO = new RateDAO();
+    
+    
+    @Override
+    public List<Rate> getList() {
+        return rateDAO.getRateList();
+    }
     
     @Override
     public Rate getRateById(int id, List<Rate> list) {
@@ -30,8 +37,8 @@ public class RateService implements IRateService{
     @Override
     public String insert(Rate u, List<Rate> list) {
 
-        Rate rate = rateDAO.insert(u);
-        list.add(rate);
+        rateDAO.insert(u);
+        list.add(u);
         return "OK";
 
     }
@@ -57,5 +64,7 @@ public class RateService implements IRateService{
         list.remove(rate);
         return "OK";
     }
+
+    
 
 }

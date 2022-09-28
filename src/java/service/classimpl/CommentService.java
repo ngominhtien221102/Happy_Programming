@@ -16,6 +16,11 @@ import service.ICommentService;
 public class CommentService implements ICommentService {
 
     CommentDAO cmtDAO = new CommentDAO();
+    
+    @Override
+    public List<Comment> getList() {
+        return cmtDAO.getCmList();
+    }
 
     @Override
     public Comment getCommentById(int id, List<Comment> list) {
@@ -30,8 +35,8 @@ public class CommentService implements ICommentService {
     @Override
     public String insert(Comment u, List<Comment> list) {
 
-        Comment cmt = cmtDAO.insert(u);
-        list.add(cmt);
+        cmtDAO.insert(u);
+        list.add(u);
         return "OK";
 
     }
@@ -60,6 +65,8 @@ public class CommentService implements ICommentService {
         return "OK";
 
     }
+
+    
 
 
 }
