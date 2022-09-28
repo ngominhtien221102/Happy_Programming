@@ -60,8 +60,7 @@ public class CommentService implements ICommentService {
     public String delete(Comment u, List<Comment> list) {
 
         cmtDAO.del(u.getID());
-        Comment cmt = getCommentById(u.getID(), list);
-        list.remove(cmt);
+        list.remove(u);
         return "OK";
 
     }

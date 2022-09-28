@@ -51,8 +51,7 @@ public class StatusService implements IStatusService {
     @Override
     public String delete(Status u, List<Status> list) {
         StatusDAO.delete(u.getID());
-       Status status = getStatusById(u.getID(), list);
-       list.remove(status);
+       list.remove(u);
        return "OK";
     }
 

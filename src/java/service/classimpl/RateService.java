@@ -60,8 +60,7 @@ public class RateService implements IRateService{
     public String delete(Rate u, List<Rate> list) {
 
         rateDAO.del(u.getID());
-        Rate rate = getRateById(u.getID(), list);
-        list.remove(rate);
+        list.remove(u);
         return "OK";
     }
 

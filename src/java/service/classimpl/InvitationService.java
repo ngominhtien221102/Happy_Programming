@@ -48,8 +48,7 @@ public class InvitationService implements IInvitationService {
 @Override
     public String delete(Invitation u, List<Invitation> list) {
        InvitationDAO.delete(u.getID());
-       Invitation invitation = getInvitationById(u.getID(), list);
-       list.remove(invitation);
+       list.remove(u);
        return "OK";
     }
 
