@@ -3,7 +3,7 @@
     Created on : Sep 27, 2022, 12:32:40 AM
     Author     : ASUS
 --%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!doctype html>
 <html class="no-js" lang="en">
@@ -27,19 +27,21 @@
                             <div class="logo-centered">
                                 <a href="../index.jsp"><img src="../src/img/brand.svg" alt=""></a>
                             </div>
-                            <h3>New to ThemeKit</h3>
+                            <h3>Happy Programming</h3>
                             <p>Join us today! It takes only few steps</p>
-                            <form action="../index.jsp">
+                            <form action="signup" method="POST">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Email" required="">
+                                    <input type="text" class="form-control" placeholder="User Name" name ="username" required="" value="${username==null?"":username}">
                                     <i class="ik ik-user"></i>
+                                    <p>${username_alert}</p>
                                 </div>
                                 <div class="form-group">
-                                    <input type="password" class="form-control" placeholder="Password" required="">
+                                    <input type="password" class="form-control" placeholder="Password" name="password" required="" value="${password==null?"":password}">
                                     <i class="ik ik-lock"></i>
+                                    <p>${Password_alert}</p>
                                 </div>
                                 <div class="form-group">
-                                    <input type="password" class="form-control" placeholder="Confirm Password" required="">
+                                    <input type="password" class="form-control" placeholder="Confirm Password" name ="repassword" required="">
                                     <i class="ik ik-eye-off"></i>
                                 </div>
                                 <div class="row">
