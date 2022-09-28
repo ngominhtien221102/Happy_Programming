@@ -24,6 +24,7 @@ public class CommentDAO extends DBContext {
     }
 
     public ArrayList<Comment> getCmList() {
+        load();
         return cmList;
     }
 

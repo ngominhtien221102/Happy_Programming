@@ -18,6 +18,11 @@ public class RequestService implements IRequestService {
     RequestDAO reqDAO = new RequestDAO();
 
     @Override
+    public List<Request> getList() {
+        return reqDAO.getReqList();
+    }
+    
+    @Override
     public Request getRequestById(int id, List<Request> list) {
         for (Request req : list) {
             if (req.getID() == id) {
@@ -57,5 +62,7 @@ public class RequestService implements IRequestService {
         return "OK";
 
     }
+
+    
 
 }

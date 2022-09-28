@@ -23,6 +23,7 @@ public class RequestDAO extends DBContext {
     }
 
     public ArrayList<Request> getReqList() {
+        load();
         return reqList;
     }
 

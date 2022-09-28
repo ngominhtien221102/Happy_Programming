@@ -23,6 +23,7 @@ public class RateDAO extends DBContext {
     }
 
     public ArrayList<Rate> getRateList() {
+        load();
         return rateList;
     }
 
