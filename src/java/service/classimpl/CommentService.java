@@ -35,8 +35,8 @@ public class CommentService implements ICommentService {
     @Override
     public String insert(Comment u, List<Comment> list) {
 
-        Comment cmt = cmtDAO.insert(u);
-        list.add(cmt);
+        cmtDAO.insert(u);
+        list.add(u);
         return "OK";
 
     }

@@ -37,8 +37,8 @@ public class RateService implements IRateService{
     @Override
     public String insert(Rate u, List<Rate> list) {
 
-        Rate rate = rateDAO.insert(u);
-        list.add(rate);
+        rateDAO.insert(u);
+        list.add(u);
         return "OK";
 
     }

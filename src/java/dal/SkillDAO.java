@@ -20,6 +20,11 @@ public class SkillDAO extends DBContext{
     public SkillDAO() {
     }
 
+    public ArrayList<Skill> getRateList() {
+        load();
+        return skilllst;
+    }
+    
     public void setSkilllst(ArrayList<Skill> skilllst) {
         this.skilllst = skilllst;
     }
@@ -27,33 +32,46 @@ public class SkillDAO extends DBContext{
     public ArrayList<Skill> getSkilllst() {
         return skilllst;
     }
-    public void Insert(String name) {
+    
+    public void insert(Skill skill) {
         String sql =  "INSERT INTO [dbo].[Skill]\n"
                 + "           ([Name])\n"
                 + "     VALUES\n"
                 + "           (?)\n";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setString(1, name);
+            ps.setString(1, skill.getName());
             ps.execute();
+            
+            String sql1 = "SELECT top(1) [Skill_ID]\n"
+                    + "  FROM [dbo].[Skill]\n"
+                    + "  order by Skill_ID desc";
+
+            ps = connection.prepareStatement(sql1);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                skill.setID(rs.getInt(1));
+            }
+            
         } catch (SQLException e) {
         }
+     
     }
 
-    public void Update(int id, String name) {
+    public void update(Skill skill) {
         String sql = "UPDATE [dbo].[Skill]\n"
                 + "   SET [Name] = ?\n"
                 + " WHERE Skill_ID=?";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setInt(2, id);
-            ps.setString(1, name);
+            ps.setInt(2, skill.getID());
+            ps.setString(1, skill.getName());
             ps.execute();
         } catch (SQLException e) {
         }
     }
 
-    public void Load() {
+    public void load() {
         skilllst = new ArrayList<>();
         String sql = "SELECT * FROM Skill";
         try {
@@ -61,7 +79,7 @@ public class SkillDAO extends DBContext{
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Skill skill = new Skill();
-                skill.setId(rs.getInt(1));
+                skill.setID(rs.getInt(1));
                 skill.setName(rs.getString(2));
                 skilllst.add(skill);
             }
@@ -71,7 +89,7 @@ public class SkillDAO extends DBContext{
 
     }
 
-    public void Delete(int id) {
+    public void delete(int id) {
         String sql = "DELETE FROM [dbo].[Skill]\n"
                 + "      WHERE Skill_ID=?";
         try {
