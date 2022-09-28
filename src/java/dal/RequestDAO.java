@@ -51,7 +51,7 @@ public class RequestDAO extends DBContext {
         }
     }
 
-    public void insert(Request req) {
+    public Request insert(Request req) {
         LocalDate curDate = LocalDate.now();
         String date = curDate.toString();
 
@@ -82,10 +82,10 @@ public class RequestDAO extends DBContext {
         } catch (Exception e) {
             System.out.println("Error Request" + e.getMessage());
         }
-        
+        return req;
     }
 
-    public void del(int Request_ID) {
+    public void delete(int Request_ID) {
         String sql = "delete from [dbo].[Request] where Request_ID = ?";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);

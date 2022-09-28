@@ -34,9 +34,8 @@ public class RequestService implements IRequestService {
 
     @Override
     public String insert(Request u, List<Request> list) {
-
-        reqDAO.insert(u);
-        list.add(u);
+        Request req = reqDAO.insert(u);
+        list.add(req);
         return "OK";
 
     }
@@ -55,8 +54,7 @@ public class RequestService implements IRequestService {
 
     @Override
     public String delete(int id, List<Request> list) {
-
-        reqDAO.del(id);
+        reqDAO.delete(id);
         list.remove(getRequestById(id, list));
         return "OK";
 

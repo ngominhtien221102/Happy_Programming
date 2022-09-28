@@ -36,8 +36,8 @@ public class CommentService implements ICommentService {
     @Override
     public String insert(Comment u, List<Comment> list) {
 
-        cmtDAO.insert(u);
-        list.add(u);
+        Comment cmt = cmtDAO.insert(u);
+        list.add(cmt);
         return "OK";
 
     }
@@ -59,11 +59,9 @@ public class CommentService implements ICommentService {
 
     @Override
     public String delete(int id, List<Comment> list) {
-
         cmtDAO.delete(id);
         list.remove(getCommentById(id, list));
         return "OK";
-
     }
 
     

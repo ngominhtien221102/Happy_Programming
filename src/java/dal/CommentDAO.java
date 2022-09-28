@@ -54,7 +54,7 @@ public class CommentDAO extends DBContext {
         }
     }
 
-    public void insert(Comment cmt) {
+    public Comment insert(Comment cmt) {
         LocalDate curDate = LocalDate.now();
         String date = curDate.toString();
 
@@ -87,7 +87,7 @@ public class CommentDAO extends DBContext {
         } catch (Exception e) {
             System.out.println("Error Comment" + e.getMessage());
         }
-        
+        return cmt;
     }
 
     public void delete(int Comment_ID) {
