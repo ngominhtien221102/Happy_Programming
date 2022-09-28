@@ -59,9 +59,10 @@ public class CommentService implements ICommentService {
     @Override
     public String delete(Comment u, List<Comment> list) {
 
-        cmtDAO.delete(u.getID());
-        Comment cmt = getCommentById(u.getID(), list);
-        list.remove(cmt);
+
+        cmtDAO.del(u.getID());
+        list.remove(u);
+
         return "OK";
 
     }

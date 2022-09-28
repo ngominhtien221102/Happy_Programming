@@ -59,9 +59,10 @@ public class RateService implements IRateService{
     @Override
     public String delete(Rate u, List<Rate> list) {
 
-        rateDAO.delete(u.getID());
-        Rate rate = getRateById(u.getID(), list);
-        list.remove(rate);
+
+        rateDAO.del(u.getID());
+        list.remove(u);
+
         return "OK";
     }
 

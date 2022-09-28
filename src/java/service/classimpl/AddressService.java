@@ -53,8 +53,7 @@ public class AddressService implements IAddressService {
     @Override
     public String delete(Address u, List<Address> list) {
         AddressDAO.delete(u.getID());
-        Address address = getAddressById(u.getID(), list);
-        list.remove(address);
+        list.remove(u);
         return "OK";
     }
 
