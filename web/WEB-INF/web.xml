@@ -12,6 +12,14 @@
         <servlet-name>ViewAllSkillController</servlet-name>
         <servlet-class>controllers.common.ViewAllSkillController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CreateSkillController</servlet-name>
+        <servlet-class>controllers.admin.CreateSkillController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateSkillController</servlet-name>
+        <servlet-class>controllers.admin.UpdateSkillController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AddUserController</servlet-name>
         <url-pattern>/addUser</url-pattern>
@@ -23,6 +31,14 @@
     <servlet-mapping>
         <servlet-name>ViewAllSkillController</servlet-name>
         <url-pattern>/viewAllSkill</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateSkillController</servlet-name>
+        <url-pattern>/createSkillController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateSkillController</servlet-name>
+        <url-pattern>/updateSkillController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
