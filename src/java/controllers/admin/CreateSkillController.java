@@ -10,6 +10,11 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import jakarta.websocket.Session;
+import java.util.List;
+import model.Skill;
+import service.classimpl.SkillService;
 
 /**
  *
@@ -34,7 +39,7 @@ public class CreateSkillController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet CreateSkillController</title>");            
+            out.println("<title>Servlet CreateSkillController</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet CreateSkillController at " + request.getContextPath() + "</h1>");
@@ -55,7 +60,7 @@ public class CreateSkillController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("/views/admin/createSkill.jsp").forward(request, response);
+        response.sendRedirect("views/admin/createSkill.jsp");
     }
 
     /**
@@ -66,12 +71,22 @@ public class CreateSkillController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    SkillService s = new SkillService();
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       String skillName = request.getParameter("name");
-        
-       request.getRequestDispatcher("views/admin/createSkill.jsp").forward(request, response);
+        String skillName = request.getParameter("name");
+        HttpSession session = request.getSession();
+        Skill skill = new Skill(0, skillName);
+        List<Skill> list = (List<Skill>) session.getAttribute("listSkill");
+        if (s.insert(skill, list).equals("OK")) {
+            request.setAttribute("success", "Create skill success");
+        } else {
+            request.setAttribute("failed", "Create skill failed");
+        }
+        session.setAttribute("listSkill", list);
+        request.getRequestDispatcher("views/admin/createSkill.jsp").forward(request, response);
     }
 
     /**
