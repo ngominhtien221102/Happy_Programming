@@ -10,7 +10,11 @@
 <html lang="zxx">
 
     <%@include file="headCSS.jsp" %>
-
+    <style>
+        .forgot:hover{
+            color: orange;
+        }
+    </style>
     <body>
         <!-- header -->
         <%@include file="header.jsp" %>
@@ -42,11 +46,11 @@
                                 <input type="password" class="form-control mb-3" id="loginPassword" name="Password" placeholder="Password">
                             </div>
                             <div class="col-12">
-                                <div class="w-50 text-left">
+                                <div >
                                     <label class="Remeber_Button"><input type="checkbox" name="rem" ${(cookie.rem.value eq 'ON')?"checked":""} value="ON">
                                         <span class="checkmark"></span>Remember Me
-
-                                    </label>
+                                    </label> 
+                                        <a class="forgot"><a href="#" style="float: right; color: #5c5c77">Forgot pass?</a>
                                 </div>
                             </div>
                             <div class="col-12">
