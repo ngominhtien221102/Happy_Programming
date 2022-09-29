@@ -68,7 +68,7 @@ public class UserService implements IUserService {
         if(u.getRoleID() == 3)
         {
             MentorCV mentorCV = mentorService.getCVById(u.getID(), mentorList);
-            mentorService.delete(mentorCV, mentorList);       
+            mentorService.delete(mentorCV.getID(), mentorList);       
         }
         userDAO.delete(u.getID());
         list.remove(u);

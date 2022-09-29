@@ -15,22 +15,18 @@ import model.Skill;
  * @author minhd
  */
 public class SkillDAO extends DBContext{
-    private ArrayList<Skill> skilllst;
+    private ArrayList<Skill> skillList;
 
     public SkillDAO() {
     }
 
-    public ArrayList<Skill> getRateList() {
+    public ArrayList<Skill> getSkillList() {
         load();
-        return skilllst;
+        return skillList;
     }
     
-    public void setSkilllst(ArrayList<Skill> skilllst) {
-        this.skilllst = skilllst;
-    }
-
-    public ArrayList<Skill> getSkilllst() {
-        return skilllst;
+    public void setSkilllst(ArrayList<Skill> skillList) {
+        this.skillList = skillList;
     }
     
     public Skill insert(Skill skill) {
@@ -72,7 +68,7 @@ public class SkillDAO extends DBContext{
     }
 
     public void load() {
-        skilllst = new ArrayList<>();
+        skillList = new ArrayList<>();
         String sql = "SELECT * FROM Skill";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -81,7 +77,7 @@ public class SkillDAO extends DBContext{
                 Skill skill = new Skill();
                 skill.setID(rs.getInt(1));
                 skill.setName(rs.getString(2));
-                skilllst.add(skill);
+                skillList.add(skill);
             }
         } catch (SQLException e) {
 
