@@ -81,10 +81,11 @@ public class CreateSkillController extends HttpServlet {
         HttpSession session = request.getSession();
         Skill skill = new Skill(0, skillName);
         List<Skill> list = (List<Skill>) session.getAttribute("listSkill");
-        if (s.insert(skill, list).equals("OK")) {
+        String message = s.insert(skill, list);
+        if (message.equals("OK")) {
             request.setAttribute("success", "Create skill success");
         } else {
-            request.setAttribute("failed", "Create skill failed");
+            request.setAttribute("failed", message);
         }
         session.setAttribute("listSkill", list);
         request.getRequestDispatcher("views/admin/createSkill.jsp").forward(request, response);

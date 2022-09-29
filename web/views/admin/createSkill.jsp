@@ -58,10 +58,10 @@
                                             <button type="submit" class="btn btn-primary mr-2" >Create</button>
                                             <button class="btn btn-light"><a href="views/admin/index.jsp">Cancel</a></button>
                                             <c:if test="${requestScope.success!=null}">
-                                                <p style="color: green">${success}</p>
+                                                <br><p style="color: green">${success}</p>
                                             </c:if>
                                             <c:if test="${requestScope.failed!=null}">
-                                                <p style="color: red">${failed}</p>
+                                                <br><p style="color: red">${failed}</p>
                                             </c:if>
                                           </form>
                                     </div>
