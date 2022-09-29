@@ -38,15 +38,15 @@ public class LoginController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
             HttpSession ses = request.getSession();
-//
-//            ArrayList<User> userList;
-//        userList = (ArrayList<User>) ses.getAttribute("Account");
+
+            List<User> userList;
+        userList = (List<User>) ses.getAttribute("listUser");
             
             String User = request.getParameter("Username");
             String Password = request.getParameter("Password");
             String remember = request.getParameter("rem");
             UserService uS = new UserService();
-            User user = uS.getUserByAccount(User, Password);
+            User user = uS.getUserByAccount(User, Password, userList);
             if (user == null) {
                 request.setAttribute("Alert", "Account is not exist please retype!");
                 request.getRequestDispatcher("views/user/login.jsp").forward(request, response);

@@ -49,11 +49,13 @@ public class ResponseService implements IResponseService {
         return "Update successful!";
     }
 
+
     @Override
-    public String delete(Response u, List<Response> list) {
-        responseDAO.delete(u.getId());
-        list.remove(u);
+    public String delete(int id, List<Response> list) {
+        responseDAO.delete(id);
+        list.remove(getResponseById(id, list));
         return "Delete successful!";
     }
+
     
 }

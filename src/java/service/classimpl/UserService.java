@@ -59,16 +59,22 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public String delete(User u, List<User> list, List<UserProfile> userProList, List<MentorCV> mentorList) {
+    public String delete(int ID, List<User> list, List<UserProfile> userProList, List<MentorCV> mentorList) {
+        User u = getUserById(ID, list);
         if(u.getRoleID() == 2)
         {
             UserProfile us = userProService.getUserProfileById(u.getID(), userProList);
             userProService.delete(us, userProList);
         }
         if(u.getRoleID() == 3)
-        {
+        {   
+
             MentorCV mentorCV = mentorService.getCVById(u.getID(), mentorList);
-            mentorService.delete(mentorCV, mentorList);       
+            mentorService.delete(mentorCV.getID(), mentorList);       
+
+            UserProfile us = userProService.getUserProfileById(u.getID(), userProList);
+            userProService.delete(us, userProList);
+
         }
         userDAO.delete(u.getID());
         list.remove(u);
@@ -76,9 +82,9 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public User getUserByAccount(String accountName, String Password) {
+    public User getUserByAccount(String accountName, String Password, List<User> list) {
         
-        for (User user : userDAO.getUsList()) {
+        for (User user : list) {
             if(user.getAccountName().equals(accountName) && user.getPassWord().equals(Password))
             {
                 return user;

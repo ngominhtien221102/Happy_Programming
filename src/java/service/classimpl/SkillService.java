@@ -19,7 +19,7 @@ public class SkillService implements ISkillService {
 
     @Override
     public List<Skill> getList() {
-        return skillDAO.getRateList();
+        return skillDAO.getSkillList();
     }
 
     @Override
@@ -34,10 +34,13 @@ public class SkillService implements ISkillService {
 
     @Override
     public String insert(Skill u, List<Skill> list) {
-
+        for (Skill skill : list) {
+            if (skill.getName().toLowerCase().equals(u.getName().toLowerCase())) {
+                return "Skill Existed";
+            }
+        }
         Skill skill = skillDAO.insert(u);
         list.add(skill);
-
         return "OK";
     }
 
@@ -53,7 +56,7 @@ public class SkillService implements ISkillService {
     @Override
     public String delete(int id, List<Skill> list) {
         skillDAO.delete(id);
-               list.remove(getSkillById(id, list));
+        list.remove(getSkillById(id, list));
 
         return "OK";
 
