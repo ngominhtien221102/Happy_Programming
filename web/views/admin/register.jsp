@@ -46,10 +46,6 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-12 text-left">
-                                        <label class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="item_checkbox" name="item_checkbox" value="option1">
-                                            <span class="custom-control-label">&nbsp;I Accept <a href="#">Terms and Conditions</a></span>
-                                        </label>
                                     </div>
                                 </div>
                                 <div class="sign-btn text-center">

@@ -12,6 +12,7 @@ import model.User;
  * @author Lenovo
  */
 public class UserDAO extends DBContext {
+
     private ArrayList<User> usList;
 
     public ArrayList<User> getUsList() {
@@ -19,14 +20,12 @@ public class UserDAO extends DBContext {
         return usList;
     }
 
-
     public void setUsList(ArrayList<User> usList) {
         this.usList = usList;
     }
 
-    
-      public void load() {
-         usList = new ArrayList<>();
+    public void load() {
+        usList = new ArrayList<>();
         String sql = "Select * from [User]";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -35,12 +34,10 @@ public class UserDAO extends DBContext {
                 usList.add(new User(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getBoolean(5)));
             }
         } catch (SQLException e) {
-            
-        }
-        
-    }
 
-    
+        }
+
+    }
 
     public User insert(User u) {
         boolean Status = false;
@@ -49,7 +46,7 @@ public class UserDAO extends DBContext {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, u.getRoleID());
             ps.setString(2, u.getAccountName());
-            ps.setString(3, u.getAccountName());
+            ps.setString(3, u.getPassWord());
             ps.setBoolean(4, u.isStatus());
             ps.executeUpdate();
             sql = "SELECT top(1) [User_ID]\n"
@@ -57,7 +54,7 @@ public class UserDAO extends DBContext {
                     + "  order by User_ID desc";
             ps = connection.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
-            if(rs.next()){
+            if (rs.next()) {
                 u.setID(rs.getInt(1));
             }
         } catch (Exception e) {
@@ -65,12 +62,10 @@ public class UserDAO extends DBContext {
         }
         return u;
     }
-    
-    
-    public void update(User u)
-    {
-         String sql = "Update [User] set Role_ID=?, Password=?, Status=?  where User_ID =?";
-         try {
+
+    public void update(User u) {
+        String sql = "Update [User] set Role_ID=?, Password=?, Status=?  where User_ID =?";
+        try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(4, u.getID());
             ps.setInt(1, u.getRoleID());
@@ -78,11 +73,11 @@ public class UserDAO extends DBContext {
             ps.setBoolean(3, u.isStatus());
             ps.execute();
         } catch (Exception e) {
-             System.out.println("Error");
+            System.out.println("Error");
         }
     }
-    
-     public void delete(int id) {
+
+    public void delete(int id) {
         String sql = "delete from [User] where User_ID=?";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -91,12 +86,5 @@ public class UserDAO extends DBContext {
         } catch (Exception e) {
             System.out.println("Error");
         }
-    }
-     public static void main(String[] args) {
-         UserDAO u = new UserDAO();
-        ArrayList<User> us = u.getUsList();
-         for (User uu : us) {
-             System.out.println(uu);
-         }
     }
 }
