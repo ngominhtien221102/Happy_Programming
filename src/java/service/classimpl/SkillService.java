@@ -46,6 +46,11 @@ public class SkillService implements ISkillService {
 
     @Override
     public String update(Skill u, List<Skill> list) {
+        for (Skill skill : list) {
+            if (skill.getName().toLowerCase().equals(u.getName().toLowerCase())) {
+                return "Skill Existed";
+            }
+        }
         skillDAO.update(u);
         Skill skill = getSkillById(u.getID(), list);
         skill.setName(u.getName());
