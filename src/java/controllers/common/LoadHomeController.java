@@ -60,11 +60,11 @@ public class LoadHomeController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
         HttpSession ses = request.getSession();
-//        IUserService uS = new UserService();
-//        IUserProfileService upS = new UserProfileService();
+        IUserService uS = new UserService();
+        IUserProfileService upS = new UserProfileService();
         ISkillService sS = new SkillService();
         IRequestService reqS = new RequestService();
-//        IResponseService resS = new ResponseService();
+        IResponseService resS = new ResponseService();
         IStatusService staS = new StatusService();
         IRateService rS = new RateService();
         IMentorService mS = new MentorService();
@@ -72,10 +72,10 @@ public class LoadHomeController extends HttpServlet {
         ICommentService cS = new CommentService();
         
         ses.setAttribute("listSkill", sS.getList());
-//        ses.setAttribute("listUser", uS.getList());
-//        ses.setAttribute("listUserProfile", upS.getList());
+        ses.setAttribute("listUser", uS.getList());
+        ses.setAttribute("listUserProfile", upS.getList());
         ses.setAttribute("listRequest", reqS.getList());
-//        ses.setAttribute("listResponse", resS.getList());
+        ses.setAttribute("listResponse", resS.getList());
         ses.setAttribute("listStatus", staS.getList());
         ses.setAttribute("listRate", rS.getList());
         ses.setAttribute("listMentorCV", mS.getListCV());
