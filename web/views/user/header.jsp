@@ -25,7 +25,7 @@
                         <li class="list-inline-item"><a class="text-uppercase text-color p-sm-2 py-2 px-0 d-inline-block" href="<%=request.getContextPath()%>/views/user/research.jsp">research</a></li>
                         <li class="list-inline-item"><a class="text-uppercase text-color p-sm-2 py-2 px-0 d-inline-block" href="<%=request.getContextPath()%>/views/user/scholarship.jsp">SCHOLARSHIP</a></li>
                         <li class="list-inline-item"><a class="text-uppercase text-color p-sm-2 py-2 px-0 d-inline-block" href="<%=request.getContextPath()%>/views/user/login.jsp">login</a></li>
-                        <li class="list-inline-item"><a class="text-uppercase text-color p-sm-2 py-2 px-0 d-inline-block" href="#" data-toggle="modal" data-target="#signupModal">register</a></li>
+                        <li class="list-inline-item"><a class="text-uppercase text-color p-sm-2 py-2 px-0 d-inline-block" href="<%=request.getContextPath()%>/signup">register</a></li>
                     </ul>
                 </div>
             </div>
