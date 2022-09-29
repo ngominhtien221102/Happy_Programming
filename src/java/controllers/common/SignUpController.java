@@ -61,7 +61,7 @@ public class SignUpController extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
-
+     */
     IUserService service = new UserService();
 
     @Override
@@ -70,7 +70,6 @@ public class SignUpController extends HttpServlet {
         String username = request.getParameter("username").trim();
         String password = request.getParameter("password").trim();
         String repassword = request.getParameter("repassword").trim();
-
         HttpSession ses = request.getSession();
         List<User> userlst = (List<User>) ses.getAttribute("listUser");
         boolean isSignUpAble = true;// add account if true
@@ -93,9 +92,8 @@ public class SignUpController extends HttpServlet {
         }
         if(isSignUpAble){// if true add account
 
-            User u = new User(0, 6, username, password, true);
+            User u = new User(0, 1, username, password, true);
             service.insert(u, userlst);
-
             response.sendRedirect("views/user/index.jsp");
         }else{// return back to signup jsp
             request.setAttribute("username", username);
