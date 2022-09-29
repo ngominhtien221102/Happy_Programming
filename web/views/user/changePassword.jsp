@@ -1,16 +1,9 @@
-<%-- 
-    Document   : changePassword
-    Created on : Sep 26, 2022, 11:07:20 PM
-    Author     : Lenovo
---%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="zxx">
-
     <%@include file="headCSS.jsp" %>
-
     <body>
         <!-- header -->
         <%@include file="header.jsp" %>
@@ -60,3 +53,4 @@
         <!-- jQuery -->
         <%@include file="scriptJS.jsp" %>                                                                 
 </html>
+

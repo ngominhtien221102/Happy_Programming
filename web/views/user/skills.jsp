@@ -30,40 +30,49 @@
                         <p class="text-lighten">Our skills offer a good compromise between the continuous assessment favoured by some universities and the emphasis placed on final exams by others.</p>
                     </div>
                 </div>
+
+
             </div>
+
         </section>
         <!-- /page title -->
-
-        <!-- skills -->
         <section class="section">
             <div class="container">
-                <!-- course list -->
-                <c:forEach items="${sessionScope.listSkill}" var="lst"> 
-                    <table border="2">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Name</th>
-                            <th>Test</th> 
-                            <th>Test</th>                  
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>${lst.getID()}</td>
-                            <td>${lst.getName}</td>
-                            <td><a href="<%=request.getContextPath()%>/viewMentor?id=${lst.getID()}">Mentor</a></td>
-                            <td></td>
-                        </tr>
+                <div class="row">
 
-                    </tbody>
-                </table>
+                    <div class="col-md-12 table">
+                        <!-- skills -->
+                        <table border="2" style="width: 100%">
+                            <thead>
+                                <tr>
+                                    <th>STT</th>
+                                    <th>Name</th>
+                                    <th>Test</th> 
+                                    <th>Test</th>                  
+                                </tr>
+                            </thead>
+                            <c:forEach items="${sessionScope.listSkill}" var="lst"> 
+                                <tbody>
+                                    <tr>
+                                        <td>${lst.ID}</td>
+                                        <td>${lst.name}</td>
+                                        <td><a href="<%=request.getContextPath()%>/viewMentor?id=${lst.ID}">Mentor</a></td>
+                                        <td></td>
+                                    </tr>
 
-                </c:forEach>
-                
+                                </tbody>
+                            </c:forEach>
+
+                        </table>
+                        <!-- /skills -->
+                    </div>
+                </div>
+
+
             </div>
         </section>
-        <!-- /skills -->
+
+
 
         <!-- footer -->
         <%@include file="footer.jsp" %>

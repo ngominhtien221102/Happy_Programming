@@ -33,10 +33,10 @@
                                 <div class="form-group">
                                     <input type="text" class="form-control" placeholder="User Name" name ="username" required="" value="${username==null?"":username}">
                                     <i class="ik ik-user"></i>
-                                    <p>${username_alert}</p>
+                                    <p>${username_alert} ${c}</p>
                                 </div>
                                 <div class="form-group">
-                                    <input type="password" class="form-control" placeholder="Password" name="password" required="" value="${password==null?"":password}">
+                                    <input type="password" class="form-control" placeholder="Password" name="password" required="">
                                     <i class="ik ik-lock"></i>
                                     <p>${Password_alert}</p>
                                 </div>
@@ -46,10 +46,6 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-12 text-left">
-                                        <label class="custom-control custom-checkbox">
-                                            <input type="checkbox" class="custom-control-input" id="item_checkbox" name="item_checkbox" value="option1">
-                                            <span class="custom-control-label">&nbsp;I Accept <a href="#">Terms and Conditions</a></span>
-                                        </label>
                                     </div>
                                 </div>
                                 <div class="sign-btn text-center">
