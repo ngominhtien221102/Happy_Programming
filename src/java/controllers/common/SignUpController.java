@@ -75,7 +75,6 @@ public class SignUpController extends HttpServlet {
         boolean isSignUpAble = true;// add account if true
         
         for (User user : userlst) {// check username in database
-
             if(user.getAccountName().equalsIgnoreCase(username)){
                 request.setAttribute("username_alert", "User name already exist. Try again.");
                 isSignUpAble = false;
