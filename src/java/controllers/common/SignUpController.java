@@ -17,6 +17,7 @@ import model.User;
 import service.IUserService;
 
 import service.classimpl.UserService;
+import util.Utility;
 
 /**
  *
@@ -71,9 +72,9 @@ public class SignUpController extends HttpServlet {
         String password = request.getParameter("password").trim();
         String repassword = request.getParameter("repassword").trim();
         HttpSession ses = request.getSession();
+        Utility utility = new Utility();
         List<User> userlst = (List<User>) ses.getAttribute("listUser");
         boolean isSignUpAble = true;// add account if true
-        
         for (User user : userlst) {// check username in database
             if(user.getAccountName().equalsIgnoreCase(username)){
                 request.setAttribute("username_alert", "User name already exist. Try again.");
@@ -81,8 +82,8 @@ public class SignUpController extends HttpServlet {
                 break;
             }
         }
-        if(password.length()<8){// password must have more than 8 character
-            request.setAttribute("Password_alert", "Use 8 characters or more for your password");
+        if(!utility.checkPassword(password)){// password must have more than 8 character
+            request.setAttribute("Password_alert", "Minimum eight characters, at least one uppercase letter, one lowercase letter and one number");
             isSignUpAble = false;
         }
         else if(!password.equalsIgnoreCase(repassword)){// comfirm password must match with password
