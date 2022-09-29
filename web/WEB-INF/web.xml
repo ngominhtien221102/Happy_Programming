@@ -19,11 +19,14 @@
     <servlet>
         <servlet-name>UpdateSkillController</servlet-name>
         <servlet-class>controllers.admin.UpdateSkillController</servlet-class>
-
     </servlet>
     <servlet>
         <servlet-name>SignUpController</servlet-name>
         <servlet-class>controllers.common.SignUpController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ForgotPassController</servlet-name>
+        <servlet-class>controllers.user.ForgotPassController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ChangePasswordController</servlet-name>
@@ -41,16 +44,17 @@
         <servlet-name>UpdateSkillController</servlet-name>
         <url-pattern>/updateSkill</url-pattern>
     </servlet-mapping>
-
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/login</url-pattern>
-
     </servlet-mapping>
-    
     <servlet-mapping>
         <servlet-name>SignUpController</servlet-name>
         <url-pattern>/signup</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ForgotPassController</servlet-name>
+        <url-pattern>/forgotPass</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
