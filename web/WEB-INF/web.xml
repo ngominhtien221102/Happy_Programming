@@ -8,9 +8,7 @@
         <servlet-name>ChangePasswordController</servlet-name>
         <servlet-class>controllers.common.ChangePasswordController</servlet-class>
     </servlet>
-
     <servlet>
-
         <servlet-name>LoadHomeController</servlet-name>
         <servlet-class>controllers.common.LoadHomeController</servlet-class>
     </servlet>
@@ -21,7 +19,10 @@
     <servlet>
         <servlet-name>UpdateSkillController</servlet-name>
         <servlet-class>controllers.admin.UpdateSkillController</servlet-class>
-
+    </servlet>
+    <servlet>
+        <servlet-name>SignUpController</servlet-name>
+        <servlet-class>controllers.common.SignUpController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>AddUserController</servlet-name>
@@ -31,12 +32,10 @@
         <servlet-name>ChangePasswordController</servlet-name>
         <url-pattern>/changepass</url-pattern>
     </servlet-mapping>
-  
     <servlet-mapping>
-
         <servlet-name>LoadHomeController</servlet-name>
         <url-pattern>/home</url-pattern>
-</servlet-mapping>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>CreateSkillController</servlet-name>
         <url-pattern>/createSkill</url-pattern>
@@ -44,7 +43,10 @@
     <servlet-mapping>
         <servlet-name>UpdateSkillController</servlet-name>
         <url-pattern>/updateSkill</url-pattern>
-
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SignUpController</servlet-name>
+        <url-pattern>/signup</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
