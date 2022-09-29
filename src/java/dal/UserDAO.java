@@ -27,7 +27,7 @@ public class UserDAO extends DBContext {
     
       public void load() {
          usList = new ArrayList<>();
-        String sql = "Select * from User";
+        String sql = "Select * from [User]";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
@@ -91,5 +91,12 @@ public class UserDAO extends DBContext {
         } catch (Exception e) {
             System.out.println("Error");
         }
+    }
+     public static void main(String[] args) {
+         UserDAO u = new UserDAO();
+        ArrayList<User> us = u.getUsList();
+         for (User uu : us) {
+             System.out.println(uu);
+         }
     }
 }
