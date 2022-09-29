@@ -27,7 +27,7 @@ public class UserDAO extends DBContext {
     
       public void load() {
          usList = new ArrayList<>();
-        String sql = "Select * from User";
+        String sql = "Select * from [User]";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
