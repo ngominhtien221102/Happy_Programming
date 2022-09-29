@@ -35,7 +35,9 @@
             </div>
 
         </section>
+        
         <!-- /page title -->
+         
         <section class="section">
             <div class="container">
                 <div class="row">
@@ -67,8 +69,6 @@
                         <!-- /skills -->
                     </div>
                 </div>
-
-
             </div>
         </section>
 

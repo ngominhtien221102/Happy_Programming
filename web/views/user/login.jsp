@@ -15,7 +15,7 @@
         <!-- header -->
         <%@include file="header.jsp" %>
         <!-- /header -->
-         <section class="page-title-section overlay" data-background="images/backgrounds/page-title.jpg">
+        <section class="page-title-section overlay" data-background="images/backgrounds/page-title.jpg">
             <div class="container">
                 <div class="row">
                     <div class="col-md-8">
@@ -31,7 +31,7 @@
         <div  id="loginModal" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content rounded-0 border-0 p-4">
-                    
+
                     <div class="modal-body">
                         <p style="Color:red">${Alert}</p>
                         <form action="<%=request.getContextPath()%>/login" method="POST" class="row">
@@ -42,14 +42,14 @@
                                 <input type="password" class="form-control mb-3" id="loginPassword" name="Password" placeholder="Password">
                             </div>
                             <div class="col-12">
-                                <div class="w-50 text-left">
-                                    <label class="Remeber_Button"><input type="checkbox" name="rem" ${(cookie.rem.value eq 'ON')?"checked":""} value="ON">
-                                        <span class="checkmark"></span>Remember Me
+                                <label class="Remeber_Button"><input type="checkbox" name="rem" ${(cookie.rem.value eq 'ON')?"checked":""} value="ON">
+                                    <span class="checkmark"></span>Remember Me
+                                </label>
 
-                                    </label>
-                                </div>
+                                <a style="position: absolute;
+                                   right: 0px" href="<%=request.getContextPath()%>/views/user/forgotpass.jsp">Forgot Pass?</a>
                             </div>
-                            <div class="col-12">
+                            <div class="col-12" style="margin-left: 40%;">
                                 <button type="submit"  class="btn btn-primary">Sign In</button>
                             </div>
                         </form>

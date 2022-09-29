@@ -6,10 +6,12 @@ package controllers.user;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import service.IUserService;
+import service.classimpl.UserService;
 
 /**
  *
@@ -55,7 +57,7 @@ public class ForgotPassController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        response.sendRedirect("/views/user/forgotpass.");
     }
 
     /**
@@ -66,10 +68,15 @@ public class ForgotPassController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    
+    IUserService user = new UserService() ;
+            
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String accName = request.getParameter("accountName");
+        String email = request.getParameter("email");
+        
     }
 
     /**
