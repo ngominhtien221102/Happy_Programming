@@ -11,6 +11,10 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+import service.IUserService;
+import service.classimpl.UserService;
+
+
 /**
  *
  * @author ADMIN
@@ -55,7 +59,7 @@ public class ForgotPassController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        response.sendRedirect("/views/user/forgotpass.");
     }
 
     /**
@@ -66,10 +70,15 @@ public class ForgotPassController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    
+    IUserService user = new UserService() ;
+            
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String accName = request.getParameter("accountName");
+        String email = request.getParameter("email");
+        
     }
 
     /**

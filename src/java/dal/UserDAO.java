@@ -24,6 +24,10 @@ public class UserDAO extends DBContext {
         this.usList = usList;
     }
 
+
+    
+
+
     public void load() {
         usList = new ArrayList<>();
         String sql = "Select * from [User]";
