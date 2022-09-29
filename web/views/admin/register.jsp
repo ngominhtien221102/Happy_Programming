@@ -33,10 +33,10 @@
                                 <div class="form-group">
                                     <input type="text" class="form-control" placeholder="User Name" name ="username" required="" value="${username==null?"":username}">
                                     <i class="ik ik-user"></i>
-                                    <p>${username_alert}</p>
+                                    <p>${username_alert} ${c}</p>
                                 </div>
                                 <div class="form-group">
-                                    <input type="password" class="form-control" placeholder="Password" name="password" required="" value="${password==null?"":password}">
+                                    <input type="password" class="form-control" placeholder="Password" name="password" required="">
                                     <i class="ik ik-lock"></i>
                                     <p>${Password_alert}</p>
                                 </div>
