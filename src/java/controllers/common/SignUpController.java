@@ -10,10 +10,12 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+
 import jakarta.servlet.http.HttpSession;
 import java.util.List;
 import model.User;
 import service.IUserService;
+
 import service.classimpl.UserService;
 
 /**
@@ -59,19 +61,22 @@ public class SignUpController extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
-     */
+
     IUserService service = new UserService();
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String username = request.getParameter("username").trim();
         String password = request.getParameter("password").trim();
         String repassword = request.getParameter("repassword").trim();
+
         HttpSession ses = request.getSession();
         List<User> userlst = (List<User>) ses.getAttribute("listUser");
         boolean isSignUpAble = true;// add account if true
         
         for (User user : userlst) {// check username in database
+
             if(user.getAccountName().equalsIgnoreCase(username)){
                 request.setAttribute("username_alert", "User name already exist. Try again.");
                 isSignUpAble = false;
@@ -87,8 +92,10 @@ public class SignUpController extends HttpServlet {
             isSignUpAble = false;
         }
         if(isSignUpAble){// if true add account
+
             User u = new User(0, 6, username, password, true);
             service.insert(u, userlst);
+
             response.sendRedirect("views/user/index.jsp");
         }else{// return back to signup jsp
             request.setAttribute("username", username);

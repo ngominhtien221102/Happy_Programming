@@ -16,6 +16,7 @@ import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 import model.User;
+import service.IUserService;
 import service.classimpl.UserService;
 
 /**
@@ -45,7 +46,7 @@ public class LoginController extends HttpServlet {
             String User = request.getParameter("Username");
             String Password = request.getParameter("Password");
             String remember = request.getParameter("rem");
-            UserService uS = new UserService();
+            IUserService uS = new UserService();
             User user = uS.getUserByAccount(User, Password, userList);
             if (user == null) {
                 request.setAttribute("Alert", "Account is not exist please retype!");
