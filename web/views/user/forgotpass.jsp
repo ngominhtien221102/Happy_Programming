@@ -11,29 +11,34 @@
     <%@include file="headCSS.jsp" %>
 
     <body>
-
-
         <!-- header -->
         <%@include file="header.jsp" %>
         <!-- /header -->
         <section class="hero-section overlay bg-cover" data-background="">
-            <div class="container">
-                <div class="login">
-                    <form action="#" class="row">
-                        <div class="col-12">
-                            <input type="text" class="form-control mb-3" id="signupName" name="accountName" placeholder="Account Name">
+            <div  id="loginModal" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content rounded-0 border-0 p-4">
+
+                        <div class="modal-body">
+<!--                                <p style="Color:red">${Alert}</p>-->
+                            <form action="<%=request.getContextPath()%>/forgotPass" method="POST" class="row">
+                                <div class="col-12">
+                                    <input type="text" class="form-control mb-3" id="loginName" name="accountName" placeholder="Account Name">
+                                </div>
+                                <div class="col-12">
+                                    <input type="password" class="form-control mb-3" id="signupEmail" name="email" placeholder="Email">
+                                </div>
+
+                                <div class="col-12" style="margin-left: 40%;">
+                                    <button type="submit"  class="btn btn-primary">SEND</button>
+                                </div>
+                            </form>
                         </div>
-                        <div class="col-12">
-                            <input type="email" class="form-control mb-3" id="signupEmail" name="signupEmail" placeholder="Email">
-                        </div>
-                        <div class="col-12">
-                            <button type="submit" class="btn btn-primary">SEND</button>
-                        </div>
-                    </form>
+                    </div>
                 </div>
             </div>
-            <section>
-                <!-- footer -->
-                <!-- /footer -->
-                </body>
-                </html>
+        </section>
+
+
+    </body>
+</html>

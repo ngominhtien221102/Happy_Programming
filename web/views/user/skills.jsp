@@ -35,7 +35,9 @@
             </div>
 
         </section>
+        
         <!-- /page title -->
+         
         <section class="section">
             <div class="container">
                 <div class="row">
@@ -48,7 +50,7 @@
                                     <th>STT</th>
                                     <th>Name</th>
                                     <th>Test</th> 
-                                    <th>Test</th>                  
+                                    <th colspan="2" style="text-align: center   ">Option</th>                  
                                 </tr>
                             </thead>
                             <c:forEach items="${sessionScope.listSkill}" var="lst"> 
@@ -57,7 +59,9 @@
                                         <td>${lst.ID}</td>
                                         <td>${lst.name}</td>
                                         <td><a href="<%=request.getContextPath()%>/viewMentor?id=${lst.ID}">Mentor</a></td>
-                                        <td></td>
+                                        <td><a href="<%=request.getContextPath()%>/updateSkill?id=${lst.ID}&type=1">Update</a></td>
+                                        <td><a href="<%=request.getContextPath()%>/updateSkill?id=${lst.ID}&type=0">Delete</a></td>
+                                        
                                     </tr>
 
                                 </tbody>
@@ -67,8 +71,6 @@
                         <!-- /skills -->
                     </div>
                 </div>
-
-
             </div>
         </section>
 
