@@ -35,7 +35,7 @@ public class SkillService implements ISkillService {
     @Override
     public String insert(Skill u, List<Skill> list) {
         for (Skill skill : list) {
-            if (skill.getName().equals(u.getName())) {
+            if (skill.getName().toLowerCase().equals(u.getName().toLowerCase())) {
                 return "Skill Existed";
             }
         }
