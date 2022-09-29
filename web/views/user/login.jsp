@@ -34,7 +34,7 @@
                     
                     <div class="modal-body">
                         <p style="Color:red">${Alert}</p>
-                        <form action="<%=request.getContextPath()%>/LoginController" method="POST" class="row">
+                        <form action="<%=request.getContextPath()%>/loginController" method="POST" class="row">
                             <div class="col-12">
                                 <input type="text" class="form-control mb-3" id="loginName" name="Username" placeholder="Account Name">
                             </div>
