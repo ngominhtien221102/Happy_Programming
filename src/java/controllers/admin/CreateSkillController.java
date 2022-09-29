@@ -14,6 +14,7 @@ import jakarta.servlet.http.HttpSession;
 import jakarta.websocket.Session;
 import java.util.List;
 import model.Skill;
+import service.ISkillService;
 import service.classimpl.SkillService;
 
 /**
@@ -71,7 +72,7 @@ public class CreateSkillController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    SkillService s = new SkillService();
+    ISkillService s = new SkillService();
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
