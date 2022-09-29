@@ -8,6 +8,7 @@
 <header class="fixed-top header">
 
     <div class="navigation w-100" style="margin-top: 0px;">
+
         <div class="container">
             <nav class="navbar navbar-expand-lg navbar-light p-0">
                 <a class="navbar-brand" href="<%=request.getContextPath()%>/views/user/index.jsp"><img src="<%=request.getContextPath()%>/template1/images/logo.png" alt="logo"></a>
