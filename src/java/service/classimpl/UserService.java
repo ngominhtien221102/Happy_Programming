@@ -71,8 +71,10 @@ public class UserService implements IUserService {
 
             MentorCV mentorCV = mentorService.getCVById(u.getID(), mentorList);
             mentorService.delete(mentorCV.getID(), mentorList);       
+
             UserProfile us = userProService.getUserProfileById(u.getID(), userProList);
             userProService.delete(us, userProList);
+
         }
         userDAO.delete(u.getID());
         list.remove(u);
