@@ -90,7 +90,6 @@ public class SignUpController extends HttpServlet {
             isSignUpAble = false;
         }
         if(isSignUpAble){// if true add account
-
             User u = new User(0, 4, username, password, true);
             service.insert(u, userlst);
             response.sendRedirect("views/user/index.jsp");
