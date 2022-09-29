@@ -91,7 +91,7 @@ public class SignUpController extends HttpServlet {
         }
         if(isSignUpAble){// if true add account
 
-            User u = new User(0, 1, username, password, true);
+            User u = new User(0, 4, username, password, true);
             service.insert(u, userlst);
             response.sendRedirect("views/user/index.jsp");
         }else{// return back to signup jsp
@@ -99,7 +99,6 @@ public class SignUpController extends HttpServlet {
             request.setAttribute("password", password);
             request.getRequestDispatcher("views/admin/register.jsp").forward(request, response);
         }
-        //request.getRequestDispatcher("views/admin/register.jsp").forward(request, response);
     }
 
     /**
