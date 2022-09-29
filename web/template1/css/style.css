@@ -515,7 +515,7 @@ textarea.form-control {
   transition: transform .2s ease, -webkit-transform .2s ease;
   -webkit-transform-origin: top;
           transform-origin: top;
-  font-weight: 600;
+  font-weight: 400;
 }
 
 .top-header.hide {
@@ -571,7 +571,7 @@ textarea.form-control {
 
 .nav-item::before {
   position: absolute;
-  left: 0;
+  right: 0;
   bottom: 0;
   height: 6px;
   width: 100%;
@@ -638,15 +638,16 @@ link:focus,
 .navbar .dropdown-menu {
   box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.12);
   border-bottom: 5px solid #ffbc3b;
-  padding: 15px;
+  padding: 10px 0px;
   top: 96px;
+  left: -100px;
   border-radius: 0;
   display: block;
   visibility: hidden;
   transition: .3s ease;
   opacity: 0;
-  -webkit-transform: translateY(20px);
-          transform: translateY(20px);
+  -webkit-transform: translateY(50px);
+          transform: translateY(50px);
   background: #fff;
 }
 
@@ -1013,3 +1014,15 @@ link:focus,
 }
 
 /*# sourceMappingURL=maps/style.css.map */
+.badge {
+    display: inline-block;
+    padding: 0.25em 0.4em;
+    font-size: 60%;
+    font-weight: 500;
+    line-height: 1;
+    text-align: center;
+    /* margin-top: -50px; */
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: 0.5rem;
+}
