@@ -57,9 +57,5 @@ public class ResponseService implements IResponseService {
         return "Delete successful!";
     }
 
-    @Override
-    public String delete(int id, List<Response> list) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
     
 }
