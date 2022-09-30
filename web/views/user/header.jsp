@@ -76,7 +76,7 @@
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="left:-50px">
                                 <a class="dropdown-item" href="<%=request.getContextPath()%>/views/user/profile.jsp">Profile</a>
                                 <a class="dropdown-item" href="<%=request.getContextPath()%>/views/user/changePassword.jsp">Change password</a>
-                                <a class="dropdown-item" href="<%=request.getContextPath()%>/views/user/notice.jsp">Register</a>
+                                <a class="dropdown-item" href="<%=request.getContextPath()%>/signup">Register</a>
                                 <a class="dropdown-item" href="<%=request.getContextPath()%>/views/user/login.jsp">Login</a>
                                 <a class="dropdown-item" href="<%=request.getContextPath()%>/views/user/notice-single.jsp">Logout</a>
 
