@@ -6,7 +6,7 @@
     </servlet>
     <servlet>
         <servlet-name>ChangePasswordController</servlet-name>
-        <servlet-class>controllers.common.ChangePasswordController</servlet-class>
+        <servlet-class>controllers.user.ChangePasswordController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>LoadHomeController</servlet-name>
