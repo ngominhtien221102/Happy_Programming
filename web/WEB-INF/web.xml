@@ -6,7 +6,7 @@
     </servlet>
     <servlet>
         <servlet-name>ChangePasswordController</servlet-name>
-        <servlet-class>controllers.common.ChangePasswordController</servlet-class>
+        <servlet-class>controllers.user.ChangePasswordController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>LoadHomeController</servlet-name>
@@ -28,6 +28,10 @@
         <servlet-name>ForgotPassController</servlet-name>
         <servlet-class>controllers.user.ForgotPassController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ResetPasswordController</servlet-name>
+        <servlet-class>controllers.common.ResetPasswordController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ChangePasswordController</servlet-name>
         <url-pattern>/changepass</url-pattern>
@@ -44,21 +48,21 @@
         <servlet-name>UpdateSkillController</servlet-name>
         <url-pattern>/updateSkill</url-pattern>
     </servlet-mapping>
-
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
-    
     <servlet-mapping>
         <servlet-name>SignUpController</servlet-name>
         <url-pattern>/signup</url-pattern>
     </servlet-mapping>
-    
     <servlet-mapping>
         <servlet-name>ForgotPassController</servlet-name>
         <url-pattern>/forgotPass</url-pattern>
-        
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ResetPasswordController</servlet-name>
+        <url-pattern>/resetPassword</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
