@@ -1,151 +1,117 @@
-                <div class="app-sidebar colored">
-                    <div class="sidebar-header">
-                        <a class="header-brand" href="index.jsp">
-                            <div class="logo-img">
-                               <img src="src/img/brand-white.svg" class="header-brand-img"> 
-                            </div>
-                            <!--<span class="text">ThemeKit</span>-->
+<%-- 
+    Document   : sidebar
+    Created on : Sep 29, 2022, 6:02:01 PM
+    Author     : Admin
+--%>
+
+
+            <div class=" col-lg-2" style="padding-top: 0px; background-color: #1a1a37">
+                <!-- Sidebar -->
+                <ul class="navbar-nav"  style="background-color: #1a1a37; margin-top: 0px; padding: 20px 10px 0px 30px">
+                    <!-- Nav Item - Dashboard -->
+                    <!-- Divider -->
+
+                    <hr class="sidebar-divider">
+
+                    <!-- Heading -->
+                    <div class="sidebar-heading">
+                        My Account
+                    </div>
+
+                    <!-- Nav Item - Add product -->
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="<%=request.getContextPath()%>/addproduct" >
+                            <span>Profile</span>
                         </a>
-                        <button type="button" class="nav-toggle"><i data-toggle="expanded" class="ik ik-toggle-right toggle-icon"></i></button>
-                        <button id="sidebarClose" class="nav-close"><i class="ik ik-x"></i></button>
-                    </div>
+                    </li>
+
+                    <!-- Nav Item - Update product -->
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="<%=request.getContextPath()%>/updateproduct" >
+                            <span>Change password</span>
+                        </a>
+                    </li>
                     
-                    <div class="sidebar-content">
-                        <div class="nav-container">
-                            <nav id="main-menu-navigation" class="navigation-main">
-                                <div class="nav-lavel">Navigation</div>
-                                <div class="nav-item active">
-                                    <a href="index.jsp"><i class="ik ik-bar-chart-2"></i><span>Dashboard</span></a>
-                                </div>
-                                <div class="nav-item">
-                                    <a href="<%=request.getContextPath()%>/views/admin/navbar.jsp"><i class="ik ik-menu"></i><span>Navigation</span> <span class="badge badge-success">New</span></a>
-                                </div>
-                                <div class="nav-item has-sub">
-                                    <a href="javascript:void(0)"><i class="ik ik-layers"></i><span>Widgets</span> <span class="badge badge-danger">150+</span></a>
-                                    <div class="submenu-content dropdown">
-                                        <a href="<%=request.getContextPath()%>/views/admin/widgets.jsp" class="menu-item">Basic</a>
-                                        <a href="<%=request.getContextPath()%>/views/admin/widget-statistic.jsp" class="menu-item">Statistic</a>
-                                        <a href="<%=request.getContextPath()%>/views/admin/widget-data.jsp" class="menu-item">Data</a>
-                                        <a href="<%=request.getContextPath()%>/views/admin/widget-chart.jsp" class="menu-item">Chart Widget</a>
-                                    </div>
-                                </div>
-                                <div class="nav-lavel">UI Element</div>
-                                <div class="nav-item has-sub">
-                                    <a href="#"><i class="ik ik-box"></i><span>Basic</span></a>
-                                    <div class="submenu-content">
-                                        <a href="<%=request.getContextPath()%>/views/admin/ui/alerts.jsp" class="menu-item">Alerts</a>
-                                        <a href="<%=request.getContextPath()%>/views/admin/ui/badges.jsp" class="menu-item">Badges</a>
-                                        <a href="<%=request.getContextPath()%>/views/admin/ui/buttons.jsp" class="menu-item">Buttons</a>
-                                        <a href="<%=request.getContextPath()%>/views/admin/ui/navigation.jsp" class="menu-item">Navigation</a>
-                                    </div>
-                                </div>
-                                <div class="nav-item has-sub">
-                                    <a href="#"><i class="ik ik-gitlab"></i><span>Advance</span> <span class="badge badge-success">New</span></a>
-                                    <div class="submenu-content">
-                                        <a href="<%=request.getContextPath()%>/views/admin/ui/modals.jsp" class="menu-item">Modals</a>
-                                        <a href="<%=request.getContextPath()%>/views/admin/ui/notifications.jsp" class="menu-item">Notifications</a>
-                                        <a href="<%=request.getContextPath()%>/views/admin/ui/carousel.jsp" class="menu-item">Slider</a>
-                                        <a href="<%=request.getContextPath()%>/views/admin/ui/range-slider.jsp" class="menu-item">Range Slider</a>
-                                        <a href="<%=request.getContextPath()%>/views/admin/ui/rating.jsp" class="menu-item">Rating</a>
-                                    </div>
-                                </div>
-                                <div class="nav-item has-sub">
-                                    <a href="#"><i class="ik ik-package"></i><span>Extra</span></a>
-                                    <div class="submenu-content">
-                                        <a href="<%=request.getContextPath()%>/views/admin/ui/session-timeout.jsp" class="menu-item">Session Timeout</a>
-                                    </div>
-                                </div>
-                                <div class="nav-item">
-                                    <a href="<%=request.getContextPath()%>/views/admin/ui/icons.jsp"><i class="ik ik-command"></i><span>Icons</span></a>
-                                </div>
-                                <div class="nav-lavel">Forms</div>
-                                <div class="nav-item has-sub">
-                                    <a href="#"><i class="ik ik-edit"></i><span>Forms</span></a>
-                                    <div class="submenu-content">
-                                        <a href="<%=request.getContextPath()%>/views/admin/form-components.jsp" class="menu-item">Components</a>
-                                        <a href="<%=request.getContextPath()%>/views/admin/form-addon.jsp" class="menu-item">Add-On</a>
-                                        <a href="<%=request.getContextPath()%>/views/admin/form-advance.jsp" class="menu-item">Advance</a>
-                                    </div>
-                                </div>
-                                <div class="nav-item">
-                                    <a href="<%=request.getContextPath()%>/views/admin/form-picker.jsp"><i class="ik ik-terminal"></i><span>Form Picker</span> <span class="badge badge-success">New</span></a>
-                                </div>
+                    <hr class="sidebar-divider">
 
-                                <div class="nav-lavel">Tables</div>
-                                <div class="nav-item">
-                                    <a href="<%=request.getContextPath()%>/views/admin/table-bootstrap.jsp"><i class="ik ik-credit-card"></i><span>Bootstrap Table</span></a>
-                                </div>
-                                <div class="nav-item">
-                                    <a href="<%=request.getContextPath()%>/views/admin/table-datatable.jsp"><i class="ik ik-inbox"></i><span>Data Table</span></a>
-                                </div>
-
-                                <div class="nav-lavel">Charts</div>
-                                <div class="nav-item has-sub">
-                                    <a href="#"><i class="ik ik-pie-chart"></i><span>Charts</span> <span class="badge badge-success">New</span></a>
-                                    <div class="submenu-content">
-                                        <a href="<%=request.getContextPath()%>/views/admin/charts-chartist.jsp" class="menu-item active">Chartist</a>
-                                        <a href="<%=request.getContextPath()%>/views/admin/charts-flot.jsp" class="menu-item">Flot</a>
-                                        <a href="<%=request.getContextPath()%>/views/admin/charts-knob.jsp" class="menu-item">Knob</a>
-                                        <a href="<%=request.getContextPath()%>/views/admin/charts-amcharts.jsp" class="menu-item">Amcharts</a>
-                                    </div>
-                                </div>
-
-                                <div class="nav-lavel">Apps</div>
-                                <div class="nav-item">
-                                    <a href="<%=request.getContextPath()%>/views/admin/calendar.jsp"><i class="ik ik-calendar"></i><span>Calendar</span></a>
-                                </div>
-                                <div class="nav-item">
-                                    <a href="<%=request.getContextPath()%>/views/admin/taskboard.jsp"><i class="ik ik-server"></i><span>Taskboard</span></a>
-                                </div>
-
-                                <div class="nav-lavel">Pages</div>
-
-                                <div class="nav-item has-sub">
-                                    <a href="#"><i class="ik ik-lock"></i><span>Authentication</span></a>
-                                    <div class="submenu-content">
-                                        <a href="<%=request.getContextPath()%>/views/admin/login.jsp" class="menu-item">Login</a>
-                                        <a href="<%=request.getContextPath()%>/views/admin/register.jsp" class="menu-item">Register</a>
-                                        <a href="<%=request.getContextPath()%>/views/admin/forgot-password.jsp" class="menu-item">Forgot Password</a>
-                                    </div>
-                                </div>
-                                <div class="nav-item has-sub">
-                                    <a href="#"><i class="ik ik-file-text"></i><span>Other</span></a>
-                                    <div class="submenu-content">
-                                        <a href="<%=request.getContextPath()%>/views/admin/profile.jsp" class="menu-item">Profile</a>
-                                        <a href="<%=request.getContextPath()%>/views/admin/invoice.jsp" class="menu-item">Invoice</a>
-                                    </div>
-                                </div>
-                                <div class="nav-item">
-                                    <a href="<%=request.getContextPath()%>/views/admin/layouts.jsp"><i class="ik ik-layout"></i><span>Layouts</span><span class="badge badge-success">New</span></a>
-                                </div>
-                                <div class="nav-lavel">Other</div>
-                                <div class="nav-item has-sub">
-                                    <a href="javascript:void(0)"><i class="ik ik-list"></i><span>Menu Levels</span></a>
-                                    <div class="submenu-content">
-                                        <a href="javascript:void(0)" class="menu-item">Menu Level 2.1</a>
-                                        <div class="nav-item has-sub">
-                                            <a href="javascript:void(0)" class="menu-item">Menu Level 2.2</a>
-                                            <div class="submenu-content">
-                                                <a href="javascript:void(0)" class="menu-item">Menu Level 3.1</a>
-                                            </div>
-                                        </div>
-                                        <a href="javascript:void(0)" class="menu-item">Menu Level 2.3</a>
-                                    </div>
-                                </div>
-                                <div class="nav-item">
-                                    <a href="javascript:void(0)" class="disabled"><i class="ik ik-slash"></i><span>Disabled Menu</span></a>
-                                </div>
-                                <div class="nav-item">
-                                    <a href="javascript:void(0)"><i class="ik ik-award"></i><span>Sample Page</span></a>
-                                </div>
-                                <div class="nav-lavel">Support</div>
-                                <div class="nav-item">
-                                    <a href="javascript:void(0)"><i class="ik ik-monitor"></i><span>Documentation</span></a>
-                                </div>
-                                <div class="nav-item">
-                                    <a href="javascript:void(0)"><i class="ik ik-help-circle"></i><span>Submit Issue</span></a>
-                                </div>
-                            </nav>
-                        </div>
+                    <!-- Heading -->
+                    <div class="sidebar-heading">
+                        Notification
                     </div>
-                </div>
+
+                    <!-- Nav Item - Add product -->
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="<%=request.getContextPath()%>/addproduct" >
+                            <span>All Notification</span>
+                        </a>
+                    </li>
+
+                    <!-- Divider -->
+                    <hr class="sidebar-divider">
+
+                    <!-- Heading -->
+                    <div class="sidebar-heading">
+                        Request
+                    </div>
+
+                    <!-- Nav Item - All transaction -->
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="<%=request.getContextPath()%>/order" >
+                            <span>Create Request</span>
+                        </a>
+                    </li>   
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="<%=request.getContextPath()%>/order" >
+                            <span>Sent Request</span>
+                        </a>
+                    </li>  
+
+                    <!-- Divider -->
+                    <hr class="sidebar-divider">
+
+                    <!-- Heading -->
+                    <div class="sidebar-heading">
+                        Invitation
+                    </div>
+
+                    <!-- Nav Item - All Admin -->
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="<%=request.getContextPath()%>/views/viewAdmin.jsp" >
+                            <span>Create Invitation</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="<%=request.getContextPath()%>/views/addAdmin.jsp" >
+                            <span>Sent invitation</span>
+                        </a>
+                    </li>
+
+                    <!-- Divider -->
+                    <hr class="sidebar-divider">
+
+                    <!-- Heading -->
+                    <div class="sidebar-heading">
+                        Mentor
+                    </div>
+
+                    <!-- Nav Item - All user -->
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="<%=request.getContextPath()%>/views/viewUser.jsp" >
+                            <span>Rate mentor</span>
+                        </a>
+                    </li>
+
+                    <!-- Divider -->
+                    <hr class="sidebar-divider">
+
+                    <li class="nav-item">
+                        <a class="nav-link collapsed" href="<%=request.getContextPath()%>/logout" >
+                            <span>Log Out</span>
+                        </a>
+                    </li>
+
+
+                </ul>
+                <button class="left" onclick="display1()"><i class="fa fa-solid fa-angle-left"></i></button>
+                <button class="right" onclick="display2()" id="right" style="display: none"><i class="fa fa-solid fa-angle-right"></i></button>
+            </div>
