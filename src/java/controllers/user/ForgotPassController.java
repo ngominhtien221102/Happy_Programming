@@ -93,7 +93,7 @@ public class ForgotPassController extends HttpServlet {
 
         //Lay cac list ve tu session
         HttpSession ses = request.getSession();
-        List<User> ulist = user.getList();
+        List<User> ulist = (List<User>) ses.getAttribute("listUser");
 
         //random pass moi de gui mail
         String newPass = m.RandomPass();
@@ -108,6 +108,7 @@ public class ForgotPassController extends HttpServlet {
             request.setAttribute("Error", "This AccountName does not exist");
             request.getRequestDispatcher("/views/user/forgotPass.jsp").forward(request, response);
         } else {
+            ses.setAttribute("User", u);
             try {
                 //gui mail
                 m.sendEmail(userName, password, email, "New Password for your Account", newPass);

@@ -26,9 +26,9 @@
                 <div class="modal-content rounded-0 border-0 p-4">
                     <div class="modal-body">
                         <p style="color : green">${message}</p>
-                        <p style="Color:red">${error1}</p>
-                        <p style="Color:red">${error2}</p>
-                        <p style="Color:red">${error3}</p>
+                        <p style="color:red">${error1}</p>
+                        <p style="color:red">${error2}</p>
+                        <p style="color:red">${error3}</p>
                         <form action="<%=request.getContextPath()%>/resetPassword" method="POST" class="row">
                             <div class="col-12">
                                 <input type="password" class="form-control mb-3" name="oldPass" placeholder="Old Password" required="" value="${oldPass}">
@@ -43,8 +43,7 @@
                             </div>
                             
                             <div class="col-12">
-                                <button type="submit"  class="btn btn-primary">Save</button>
-                                <a class="btn btn-primary" style="float: right" href="<%=request.getContextPath()%>/home">Cancel</a>
+                                <button type="submit"  class="btn btn-primary" right" href="<%=request.getContextPath()%>/login">Save</button>
                             </div>
                         </form>
                     </div>

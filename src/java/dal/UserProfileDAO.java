@@ -94,12 +94,4 @@ public class UserProfileDAO extends DBContext {
 
 }
 
-class Main{
-    public static void main(String[] args) {
-        UserProfileDAO dao = new UserProfileDAO();
-        ArrayList<UserProfile> u = dao.getUsProList();
-        for (UserProfile userProfile : u) {
-            System.out.println(userProfile.getEmail());
-        }
-    }
-}
+

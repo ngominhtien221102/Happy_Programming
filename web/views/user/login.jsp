@@ -52,7 +52,7 @@
                                 </label>
 
                                 <a style="position: absolute;
-                                   right: 0px" href="<%=request.getContextPath()%>/views/user/forgotpass.jsp">Forgot Pass?</a>
+                                   right: 0px" href="<%=request.getContextPath()%>/views/user/forgotPass.jsp">Forgot Pass?</a>
 
                             </div>
                             <div class="col-12" style="margin-left: 40%;">

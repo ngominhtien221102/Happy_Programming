@@ -79,9 +79,8 @@ public class ResetPasswordController extends HttpServlet {
         String newPass = request.getParameter("newPass");
         String confirmPass = request.getParameter("confirmPass");
         HttpSession ses = request.getSession();
-        User user = (User) ses.getAttribute("Account");
-        List<User> userList;
-        userList = (List<User>) ses.getAttribute("listUser");
+        User user = (User) ses.getAttribute("User");
+        List<User> userList = (List<User>) ses.getAttribute("listUser");
         Utility u = new Utility();
         boolean check1 = user.getPassWord().equals(oldPass);
         boolean check2 = u.checkPassword(newPass);
@@ -108,7 +107,7 @@ public class ResetPasswordController extends HttpServlet {
             IUserService uS = new UserService();
             uS.update(new User(user.getID(), user.getRoleID(), user.getAccountName(), newPass, user.isStatus()), userList);
             request.setAttribute("message", "Change password successful!");
-            request.getRequestDispatcher("views/user/resetPassword.jsp").forward(request, response);
+            request.getRequestDispatcher("views/user/login.jsp").forward(request, response);
         }
         
     }

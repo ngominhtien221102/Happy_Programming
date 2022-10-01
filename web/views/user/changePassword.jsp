@@ -26,11 +26,11 @@
                 <div class="modal-content rounded-0 border-0 p-4">
 
                     <div class="modal-body">
-                        <p style="color : green">${message}</p>
-                        <p style="Color:red">${error1}</p>
-                        <p style="Color:red">${error2}</p>
-                         <p style="Color:red">${error3}</p>
-                        <form action="<%=request.getContextPath()%>/changepass" method="POST" class="row">
+                        <p style="color: green">${message}</p>
+                        <p style="color: red">${error1}</p>
+                        <p style="color: red">${error2}</p>
+                        <p style="color: red">${error3}</p>
+                        <form action="<%=request.getContextPath()%>/changePass" method="POST" class="row">
 
                             <div class="col-12">
                                 <input type="password" class="form-control mb-3" name="oldPass" placeholder="Old Password" required="" value="${oldPass}">
