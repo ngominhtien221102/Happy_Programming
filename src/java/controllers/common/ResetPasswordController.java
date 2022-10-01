@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controllers.user;
+package controllers.common;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,24 +12,16 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.mail.MessagingException;
 import model.User;
-import model.UserProfile;
-import service.IUserProfileService;
 import service.IUserService;
-import service.classimpl.UserProfileService;
 import service.classimpl.UserService;
-import util.Mail;
-
-
+import util.Utility;
 
 /**
  *
  * @author ADMIN
  */
-public class ForgotPassController extends HttpServlet {
+public class ResetPasswordController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -48,10 +40,10 @@ public class ForgotPassController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ForgotPassController</title>");
+            out.println("<title>Servlet ResetPasswordController</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ForgotPassController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ResetPasswordController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -69,7 +61,7 @@ public class ForgotPassController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.sendRedirect(request.getContextPath() + "/views/user/forgotPass.jsp");
+        processRequest(request, response);
     }
 
     /**
@@ -80,45 +72,45 @@ public class ForgotPassController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    IUserService user = new UserService();
-
-    Mail m = new Mail();
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //lay inf tu jsp
-        String accName = request.getParameter("accountName");
-        String email = request.getParameter("email");
-
-        //Lay cac list ve tu session
+        String oldPass = request.getParameter("oldPass");
+        String newPass = request.getParameter("newPass");
+        String confirmPass = request.getParameter("confirmPass");
         HttpSession ses = request.getSession();
-        List<User> ulist = user.getList();
+        User user = (User) ses.getAttribute("Account");
+        List<User> userList;
+        userList = (List<User>) ses.getAttribute("listUser");
+        Utility u = new Utility();
+        boolean check1 = user.getPassWord().equals(oldPass);
+        boolean check2 = u.checkPassword(newPass);
+        boolean check3 = newPass.equals(confirmPass);
+        if (!check1) {
+            request.setAttribute("error1", "Incorrect old password! Please re-input correct!");
+            request.getRequestDispatcher("views/user/resetPassword.jsp").forward(request, response);
 
-        //random pass moi de gui mail
-        String newPass = m.RandomPass();
-        //tk mail dung de gui      
-        String userName = "hungnxhe160592@fpt.edu.vn";
-        String password = "hungnguyen2002";
-
-        //check user co ton tai kh
-        User u = user.getUserByAccountName(accName, ulist);
-
-        if (u == null) {
-            request.setAttribute("Error", "This AccountName does not exist");
-            request.getRequestDispatcher("/views/user/forgotPass.jsp").forward(request, response);
-        } else {
-            try {
-                //gui mail
-                m.sendEmail(userName, password, email, "New Password for your Account", newPass);
-                u.setPassWord(newPass);
-                response.sendRedirect(request.getContextPath() + "/views/user/resetPassword.jsp");
-            } catch (MessagingException ex) {
-                Logger.getLogger(ForgotPassController.class.getName()).log(Level.SEVERE, null, ex);
-                response.sendRedirect(request.getContextPath() + "/views/user/forgotPass.jsp");
-            }
         }
+        if (!check2) {
+            request.setAttribute("error2", "Wrong format password! Please re-input new pass");
+            request.setAttribute("oldPass", oldPass);
+            request.getRequestDispatcher("views/user/resetPassword.jsp").forward(request, response);
 
+        }
+        if (!check3) {
+            request.setAttribute("oldPass", oldPass);
+            request.setAttribute("newPass", newPass);
+            request.setAttribute("error3", "Confirm password not match!");
+            request.getRequestDispatcher("views/user/resetPassword.jsp").forward(request, response);
+
+        }
+        if (check1 && check2 && check3) {
+            IUserService uS = new UserService();
+            uS.update(new User(user.getID(), user.getRoleID(), user.getAccountName(), newPass, user.isStatus()), userList);
+            request.setAttribute("message", "Change password successful!");
+            request.getRequestDispatcher("views/user/resetPassword.jsp").forward(request, response);
+        }
+        
     }
 
     /**

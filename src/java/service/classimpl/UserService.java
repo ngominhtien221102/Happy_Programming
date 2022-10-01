@@ -97,4 +97,25 @@ public class UserService implements IUserService {
     public List<User> getList() {
         return userDAO.getUsList();
     }
+
+    @Override
+    public User getUserByAccountName(String accountName, List<User> list) {
+        for (User user : list) {
+            if (user.getAccountName().toLowerCase().equals(accountName.toLowerCase())) {
+                return user;
+            }
+        }
+        return null ;
+    }
+
+    @Override
+    public UserProfile getUserProfile(String accountName, List<User> userlist, List<UserProfile> profilelist) {
+        User u = getUserByAccountName(accountName, userlist);
+        for (UserProfile userProfile : profilelist) {
+            if (u.getID() == userProfile.getID()) {
+                return userProfile;
+            }
+        }
+        return null;
+    }
 }
