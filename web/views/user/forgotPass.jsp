@@ -20,7 +20,7 @@
                     <div class="modal-content rounded-0 border-0 p-4">
 
                         <div class="modal-body">
-<!--                                <p style="Color:red">${Alert}</p>-->
+                            <p style="color: red">${Error}</p>
                             <form action="<%=request.getContextPath()%>/forgotPass" method="POST" class="row">
                                 <div class="col-12">
                                     <input type="text" class="form-control mb-3" id="loginName" name="accountName" placeholder="Account Name">
