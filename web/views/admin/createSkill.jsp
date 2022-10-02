@@ -12,7 +12,7 @@
 
     <body>
         <div class="wrapper">
-            <%@include file="headtop.jsp" %>
+            <%--<%@include file="headtop.jsp" %>--%>
 
             <div class="page-wrap">
                 <%@include file="sidebar.jsp" %>

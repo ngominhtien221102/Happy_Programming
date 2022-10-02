@@ -5,7 +5,7 @@
 --%>
 
 
-<header class="fixed-top header">
+<header class=" header">
 
     <div class="navigation w-100" style="margin-top: 0px;">
 

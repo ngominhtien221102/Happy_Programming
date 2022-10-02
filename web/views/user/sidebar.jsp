@@ -4,8 +4,8 @@
     Author     : Admin
 --%>
 
-        <div class="row">
-            <div class=" col-lg-2" style="padding-top: 100px; background-color: #1a1a37">
+
+            <div  style="padding-top: 0px; background-color: #1a1a37">
                 <!-- Sidebar -->
                 <ul class="navbar-nav"  style="background-color: #1a1a37; margin-top: 0px; padding: 20px 10px 0px 30px">
                     <!-- Nav Item - Dashboard -->
