@@ -91,7 +91,7 @@ public class ResetPasswordController extends HttpServlet {
 
         }
         if (!check2) {
-            request.setAttribute("error2", "Wrong format password! Please re-input new pass");
+            request.setAttribute("error2", "The password must have Minimum eight characters, at least one uppercase letter, one lowercase letter and one number");
             request.setAttribute("oldPass", oldPass);
             request.getRequestDispatcher("views/user/resetPassword.jsp").forward(request, response);
 
