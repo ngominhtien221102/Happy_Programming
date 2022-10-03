@@ -15,7 +15,7 @@ import model.Skill;
 public interface ISkillService {
 
     List<Skill> getList();
-    HashMap<Integer,String> getHash();
+    HashMap<Integer,String> getHm();
 
     Skill getSkillById(int id, List<Skill> list);
 
