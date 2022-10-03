@@ -18,15 +18,21 @@ import model.Skill;
 public class SkillDAO extends DBContext {
 
     private ArrayList<Skill> skillList;
-    private HashMap<Integer,String> skillHash;
+    private HashMap<Integer, String> skillHash;
+
     public SkillDAO() {
     }
 
     public HashMap<Integer, String> getSkillHash() {
-        for (Skill skill : skillList) {
-            skillHash.put(skill.getID(), skill.getName());
+        if (!skillList.isEmpty()) {
+            for (Skill skill : skillList) {
+                skillHash.put(skill.getID(), skill.getName());
+            }
+            return skillHash;
+        } else {
+            return null;
         }
-        return skillHash;
+
     }
 
     public ArrayList<Skill> getSkillList() {
@@ -92,7 +98,6 @@ public class SkillDAO extends DBContext {
 
         }
     }
-
 
     public void delete(int id) {
         String sql = "DELETE FROM [dbo].[Skill]\n"
