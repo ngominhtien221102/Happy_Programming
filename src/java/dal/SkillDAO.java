@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import model.Skill;
 
 /**
@@ -17,12 +18,12 @@ import model.Skill;
 public class SkillDAO extends DBContext {
 
     private ArrayList<Skill> skillList;
-
+    private HashMap<Integer,String> skillHash;
     public SkillDAO() {
     }
 
     public ArrayList<Skill> getSkillList() {
-        load();
+        loadlst();
         return skillList;
     }
 
@@ -68,7 +69,7 @@ public class SkillDAO extends DBContext {
         }
     }
 
-    public void load() {
+    public void loadlst() {
         skillList = new ArrayList<>();
         String sql = "SELECT * FROM Skill";
         try {
@@ -83,7 +84,23 @@ public class SkillDAO extends DBContext {
         } catch (SQLException e) {
 
         }
+    }
 
+    public void loadHash() {
+        skillList = new ArrayList<>();
+        String sql = "SELECT * FROM Skill";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Skill skill = new Skill();
+                skill.setID(rs.getInt(1));
+                skill.setName(rs.getString(2));
+                skillHash.put(skill.getID(), skill.getName());
+            }
+        } catch (SQLException e) {
+
+        }
     }
 
     public void delete(int id) {
