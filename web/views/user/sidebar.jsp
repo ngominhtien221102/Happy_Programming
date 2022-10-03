@@ -7,7 +7,7 @@
 
 <div class="col-2"  style="padding-top: 30px; background-color: #1a1a37">
     <!-- Sidebar -->
-    <ul class="navbar-nav"  style="background-color: #1a1a37; margin-top: 0px; padding: 20px 10px 0px 30px">
+    <ul class="navbar-nav"  style="background-color: #1a1a37; margin-top: 10px; padding: 20px 10px 0px 30px">
         <!-- Nav Item - Dashboard -->
         <!-- Divider -->
 
@@ -20,14 +20,14 @@
 
         <!-- Nav Item - Add product -->
         <li class="nav-item">
-            <a class="nav-link collapsed" href="<%=request.getContextPath()%>/addproduct" >
+            <a class="nav-link collapsed" href="<%=request.getContextPath()%>/views/user/viewMenteeProfile.jsp" >
                 <span>Profile</span>
             </a>
         </li>
 
         <!-- Nav Item - Update product -->
         <li class="nav-item">
-            <a class="nav-link collapsed" href="<%=request.getContextPath()%>/updateproduct" >
+            <a class="nav-link collapsed" href="<%=request.getContextPath()%>/views/user/changePassword.jsp" >
                 <span>Change password</span>
             </a>
         </li>

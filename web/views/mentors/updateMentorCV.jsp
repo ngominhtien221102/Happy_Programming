@@ -9,7 +9,8 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <%@include file="headCSS2.jsp" %>
+
+        <%@include file="../user/headCSS2.jsp" %>
 
     </head>
     <body>
@@ -17,6 +18,7 @@
         <%@include file="header.jsp" %>
 
         <!-- Main Content -->
+
         <div id="content" class="row" style="padding-top: 50px">
             
                 <%@include file="mentorSidebar.jsp" %>
@@ -24,9 +26,11 @@
 
             <div class="col-10">
                 <div class="container">
+
                     <div style="padding:5rem">
-                        <div class="text-center"><p style="font-size: 20px;">
-                                Update CV</p>
+                        <div class="text-center">
+                            <h3>
+                                Update CV</h3>
                         </div>
                         <form class="user" action="<%=request.getContextPath()%>/updateCV" method="post">      
 
@@ -48,6 +52,7 @@
                             </div>
 
 
+
                             <div class=" row checkbox-group required" style="padding-bottom: 20px;" >
 
                                 <c:forEach items="${sessionScope.listSkill}" var="s">
@@ -59,6 +64,7 @@
                                            onclick="deRequireCb('skill')"
                                            name="skill${s.ID}" style="height: 20px; width: 10%">${s.name}
                                 </c:forEach>
+
                             </div>
 
                             <!--introduction-->

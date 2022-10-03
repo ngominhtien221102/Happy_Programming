@@ -18,27 +18,26 @@
         <!-- Main Content -->
         <div id="content" class="row">
             <!-- Begin Page Content -->
-            <div class="col-sm-2">
-                <%@include file="../admin/sidebar.jsp" %>
-            </div>
 
-            <div class="col-sm-10">
-                <div class="container">
+            <%@include file="../user/sidebar.jsp" %>
+            <div class="col-10">
+                <div class="container" style="padding: 5% ;">
                     <div style="padding:5rem">
-                        <div class="text-center"><p style="font-size: 20px;">
-                                Complete Profile to experience more features</p>
+                        <div class="text-center" >
+                            <h3>
+                                Create Profile
+                            </h3>
                         </div>
                         <form class="user" action="" method="">      
                             <!-- Full Name -->
                             <div class="form-group row" style="padding-bottom: 20px;" >
-                                <div class="col-sm-6">
-                                    <input type="text" class="form-control form-control-user"
-                                           placeholder="FirstName" name="firstName" required>
-                                </div>
-                                <div class="col-sm-6">
-                                    <input type="text" class="form-control form-control-user"
-                                           placeholder="LastName" name="lastName" required>
-                                </div>
+                                <input type="text" class="form-control form-control-user"
+                                       placeholder="LastName" name="lastName" required>
+                            </div>
+
+                            <div class="form-group row" style="padding-bottom: 20px;" >
+                                <input type="text" class="form-control form-control-user"
+                                       placeholder="FirstName" name="firstName" required>
                             </div>
 
                             <!-- DOB -->
@@ -55,14 +54,15 @@
 
                             <!-- Gender -->
                             <div class="form-group row" style="padding-bottom: 20px;" >
-                                <div class="col-sm-6">
-                                    <input type="radio" class="form-control form-control-user"
-                                           name="male" value="male" required style="height: 20px; width: 10%">Male
-                                </div>
-                                <div class="col-sm-6">
-                                    <input type="radio" class="form-control form-control-user"
-                                           name="female" value="female" required style="height: 20px;width: 10%">Female
-                                </div>
+                                <h5>Gender:</h5>
+                                <input type="radio" class="form-control form-control-user" id="male"
+                                       name="gender" value="male" required style="height: 20px; width: 10%">
+                                <label for="male">Male</label>
+
+                                <input type="radio" class="form-control form-control-user" id="female"
+                                       name="gender" value="female" required style="height: 20px;width: 10%">
+                                <label for="female">Female</label>
+
 
                             </div>
 
@@ -93,16 +93,11 @@
 
                             <!--upload img-->
                             <div class="form-group row" style="padding-bottom: 20px;">
-
+                                <h5 style="padding-right: 5%">Avarta:</h5>
                                 <input type="file" id="img" name="img" accept="image/*" multiple="" style="height: 60px">
                             </div>
 
-                            <!--                        <div class="form-group row flex-column" style="padding-bottom: 20px;">
-                                                        <textarea class=""  name="des" id="editor" cols="75" rows="10" placeholder="Description" required>
-                                                        </textarea>
-                                                    </div>-->
-
-                            <input type="submit" value="Create" class="btn btn-primary btn-user btn-block" />
+                            <input type="submit" value="Save Change" class="btn btn-primary btn-user btn-block" />
                         </form>
                     </div>
                     <!-- /.container-fluid -->
