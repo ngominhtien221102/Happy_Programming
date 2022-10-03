@@ -4,7 +4,7 @@
  */
 package service;
 
-import java.util.List;
+import java.util.HashMap;
 import model.Status;
 
 /**
@@ -12,11 +12,11 @@ import model.Status;
  * @author minhd
  */
 public interface IStatusService {
-    List<Status> getList();
-    Status getStatusById(int id, List<Status> list);
-    String insert(Status u,List<Status> list);
+    HashMap<Integer,String> getHash();
+    Status getStatusById(int id, HashMap<Integer,String> Hash);
+    String insert(Status u,HashMap<Integer,String> Hash);
 
-    String update(Status u,List<Status> list);
+    String update(Status u,HashMap<Integer,String> Hash);
 
-    String delete(int id,List<Status> list);
+    String delete(int id,HashMap<Integer,String> Hash);
 }
