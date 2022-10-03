@@ -16,7 +16,8 @@
         <%@include file="header.jsp" %>
         <!-- /header -->
         <!-- Modal -->
-        <%@include file="sidebar.jsp" %>
+        <div class="row">
+            <%@include file="sidebar.jsp" %>
         <div class="col-10">
             <!-- teachers -->
             <section class="section" style="padding-top: 160px;">
@@ -128,7 +129,9 @@
             </section>
             <!-- /teachers -->
         </div>
-    </div>
+        </div>
+        
+    
 
 
 

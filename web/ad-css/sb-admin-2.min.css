@@ -6169,7 +6169,7 @@ a.bg-dark:focus,a.bg-dark:hover,button.bg-dark:focus,button.bg-dark:hover{
     position:sticky!important
 }
 .fixed-top{
-/*    position:fixed;*/
+    position:fixed;
     top:0;
     right:0;
     left:0;

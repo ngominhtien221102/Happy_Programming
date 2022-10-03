@@ -5,7 +5,7 @@
 --%>
 
 
-<div style="padding-top: 0px; background-color: #1a1a37">
+<div class="col-2" style="padding-top: 30px; background-color: #1a1a37">
     <!-- Sidebar -->
     <ul class="navbar-nav"  style="background-color: #1a1a37; margin-top: 0px; padding: 20px 10px 0px 30px">
         <!-- Nav Item - Dashboard -->
@@ -15,7 +15,7 @@
 
         <!-- Heading -->
         <div class="sidebar-heading">
-            My Account
+            Account
         </div>
 
         <!-- Nav Item - Add product -->
