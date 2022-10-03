@@ -76,7 +76,7 @@ public class LoadHomeController extends HttpServlet {
         ses.setAttribute("listUserProfile", upS.getList());
         ses.setAttribute("listRequest", reqS.getList());
         ses.setAttribute("listResponse", resS.getList());
-        ses.setAttribute("listStatus", staS.getHash());
+        ses.setAttribute("listStatus", staS.getHm());
         ses.setAttribute("listRate", rS.getList());
         ses.setAttribute("listMentorCV", mS.getListCV());
         ses.setAttribute("listInv", iS.getList());
