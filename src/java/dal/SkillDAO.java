@@ -22,6 +22,13 @@ public class SkillDAO extends DBContext {
     public SkillDAO() {
     }
 
+    public HashMap<Integer, String> getSkillHash() {
+        for (Skill skill : skillList) {
+            skillHash.put(skill.getID(), skill.getName());
+        }
+        return skillHash;
+    }
+
     public ArrayList<Skill> getSkillList() {
         loadlst();
         return skillList;
@@ -86,22 +93,6 @@ public class SkillDAO extends DBContext {
         }
     }
 
-    public void loadHash() {
-        skillList = new ArrayList<>();
-        String sql = "SELECT * FROM Skill";
-        try {
-            PreparedStatement ps = connection.prepareStatement(sql);
-            ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                Skill skill = new Skill();
-                skill.setID(rs.getInt(1));
-                skill.setName(rs.getString(2));
-                skillHash.put(skill.getID(), skill.getName());
-            }
-        } catch (SQLException e) {
-
-        }
-    }
 
     public void delete(int id) {
         String sql = "DELETE FROM [dbo].[Skill]\n"
