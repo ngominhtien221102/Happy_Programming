@@ -18,25 +18,23 @@ import model.Skill;
 public class SkillDAO extends DBContext {
 
     private ArrayList<Skill> skillList;
-    private HashMap<Integer, String> skillHash;
+    private HashMap<Integer, String> skillHm;
 
     public SkillDAO() {
     }
 
-    public HashMap<Integer, String> getSkillHash() {
-        if (!skillList.isEmpty()) {
-            for (Skill skill : skillList) {
-                skillHash.put(skill.getID(), skill.getName());
-            }
-            return skillHash;
-        } else {
-            return null;
+    public HashMap<Integer, String> getSkillHm() {
+        if (skillList.isEmpty()) {
+            load();
         }
-
+        for (Skill skill : skillList) {
+            skillHm.put(skill.getID(), skill.getName());
+        }
+        return skillHm;
     }
 
     public ArrayList<Skill> getSkillList() {
-        loadlst();
+        load();
         return skillList;
     }
 
@@ -82,7 +80,7 @@ public class SkillDAO extends DBContext {
         }
     }
 
-    public void loadlst() {
+    public void load() {
         skillList = new ArrayList<>();
         String sql = "SELECT * FROM Skill";
         try {
