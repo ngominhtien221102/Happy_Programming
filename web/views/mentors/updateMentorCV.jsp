@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <%@include file="headCSS.jsp" %>
+        <%@include file="../user/headCSS2.jsp" %>
 
     </head>
     <body>
@@ -18,15 +18,14 @@
         <!-- Main Content -->
         <div id="content" class="row">
             <!-- Begin Page Content -->
-            <div class="col-sm-2">
-                <%@include file="mentorSidebar.jsp" %>
-            </div>
+            <%@include file="mentorSidebar.jsp" %>
 
             <div class="col-sm-10">
-                <div class="container">
+                <div class="container" style="padding: 5%">
                     <div style="padding:5rem">
-                        <div class="text-center"><p style="font-size: 20px;">
-                                Update CV</p>
+                        <div class="text-center">
+                            <h3>
+                                Update CV</h3>
                         </div>
                         <form class="user" action="" method="">      
 
@@ -52,7 +51,7 @@
                             <div class="form-group row" style="padding-bottom: 20px;" >
 
                                 <input type="checkbox" class="form-control form-control-user"
-                                       name="skill" required style="height: 20px; width: 10%">Java
+                                           name="skill" required style="height: 20px; width: 10%">Java
                             </div>
 
                             <!--introduction-->

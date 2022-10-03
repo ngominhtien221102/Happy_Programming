@@ -12,7 +12,7 @@
         <!-- /header -->
         <div class="row">
             <div class="col-sm-2">
-                <%@include file="mentorSidebar.jsp" %>
+                <%@include file="../mentors/mentorSidebar.jsp" %>
             </div>
             <div class="col-sm-10">
                 <!-- teachers -->
