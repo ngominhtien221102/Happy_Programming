@@ -7,7 +7,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="zxx">
-    <%@include file="headCSS.jsp" %>
     <%@include file="headCSS2.jsp" %>
 
     <style>
@@ -28,17 +27,17 @@
         table{
             margin-top: 30px;
         }
-        .col-9{
-            margin: 0 auto;
-        }
     </style>
     <body>
         <%@include file= "header.jsp" %>
-        <%@include file="sidebar.jsp" %>
-        
-        <div class="col-9">
-            <section class="section" style="margin-top: 50px">
-                <h2 style="margin-bottom:30px">Edit invitation</h2>
+
+        <div id="content" class="row" style="padding-top: 50px">
+            <%@include file="sidebar.jsp" %>
+
+            <div class="col-10">
+                <section class="section" >
+                    <div class="container">
+                        <h2 style="margin-bottom:30px">Edit invitation</h2>
                         <form action="" method="" class="">
                             Mentor's name:
                             <input type="text" class="form-control" id="" name="" readonly="">
@@ -55,34 +54,38 @@
                             <label style="margin-bottom: 16px" for="">Content:</label><textarea id="editor" class="form-control" name="editor" rows="4" cols="50"></textarea>
                             <button type="submit" style="float:right; margin-top: 16px;" class="btn btn-primary">UPDATE</button>
                         </form>
-                    
-                    
-                </div>
-            </section>
+                    </div>
+
+                </section>
+
+            </div>
         </div>
-    </div>
-    <!-- footer -->
-    <%@include file="footer.jsp" %>
-    <!-- /footer -->
 
-    <!-- jQuery -->
-    <%@include file="scriptJS.jsp" %>
-    <script src="https://cdn.ckeditor.com/ckeditor5/34.1.0/classic/ckeditor.js"></script>
-    <script>
-                var value;
-                ClassicEditor
-                        .create(document.querySelector('#editor'))
-                        .then(editor => {
-                            value = editor;
-                        })
-                        .catch(error => {
-                            console.error(error);
-                        });
 
-                const handleSubmit = () => {
-                    document.getElementById('a').innerHTML = value.getData()
-                }
-            </script>
-</body>
+
+
+        <!-- footer -->
+        <%@include file="footer.jsp" %>
+        <!-- /footer -->
+
+        <!-- jQuery -->
+        <%@include file="scriptJS.jsp" %>
+        <script src="https://cdn.ckeditor.com/ckeditor5/34.1.0/classic/ckeditor.js"></script>
+        <script>
+            var value;
+            ClassicEditor
+                    .create(document.querySelector('#editor'))
+                    .then(editor => {
+                        value = editor;
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    });
+
+            const handleSubmit = () => {
+                document.getElementById('a').innerHTML = value.getData()
+            }
+        </script>
+    </body>
 
 </html>

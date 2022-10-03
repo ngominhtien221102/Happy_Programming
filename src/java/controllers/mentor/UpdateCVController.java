@@ -2,28 +2,31 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controllers.common;
+package controllers.mentor;
 
-import dal.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.http.Cookie;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.util.ArrayList;
 import java.util.List;
+import model.MentorCV;
+import model.Skill;
 import model.User;
-import service.IUserService;
-import service.classimpl.UserService;
+import service.IMentorService;
+import service.ISkillService;
+import service.classimpl.MentorService;
+import service.classimpl.SkillService;
 
 /**
  *
- * @author Lenovo
+ * @author Admin
  */
-public class LoginController extends HttpServlet {
+@WebServlet(name = "UpdateCVController", urlPatterns = {"/updateCV"})
+public class UpdateCVController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,44 +41,17 @@ public class LoginController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
-            HttpSession ses = request.getSession();
-
-            List<User> userList;
-        userList = (List<User>) ses.getAttribute("listUser");
-            
-            String User = request.getParameter("Username");
-            String Password = request.getParameter("Password");
-            String remember = request.getParameter("rem");
-            IUserService uS = new UserService();
-            User user = uS.getUserByAccount(User, Password, userList);
-            if (user == null) {
-                request.setAttribute("Alert", "Account is not exist please retype!");
-                request.getRequestDispatcher("views/user/login.jsp").forward(request, response);
-            } else {
-           
-                ses.setAttribute("Account", user);
-                ses.setMaxInactiveInterval(60000);
-                
-                Cookie cu = new Cookie("user", user.getAccountName());
-                Cookie cp = new Cookie("pass", user.getPassWord());
-                Cookie cr = new Cookie("remember", remember);
-                
-                if (remember == null) {
-                    cu.setMaxAge(0);    // set thoi gian hoat dong cho cookie = 0
-                    cp.setMaxAge(0);
-                    cr.setMaxAge(0);
-                } else {
-                    cu.setMaxAge(60 * 60 * 24); // set thoi gian hoat dong cho cookie = 1 ngay
-                    cp.setMaxAge(60 * 60 * 24);
-                    cr.setMaxAge(60 * 60 * 24);
-                }
-                response.addCookie(cu); //add cookie
-                response.addCookie(cp);
-                response.addCookie(cr);
-                response.sendRedirect("views/user/index.jsp");
-            
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet UpdateCVController</title>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet UpdateCVController at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
-    }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -90,7 +66,19 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+//        processRequest(request, response);
+        HttpSession ses = request.getSession();
+        List<MentorCV> listCV = (List<MentorCV>) ses.getAttribute("listMentorCV");
+        IMentorService mentorSer = new MentorService();
+        User u = (User) ses.getAttribute("Account");
+
+        MentorCV mCV = mentorSer.getCVById(u.getID(), listCV);
+        if (mCV == null) { //nếu chưa có CV thì chuyển về trang tạo CV
+            response.sendRedirect("views/mentors/createMentorCV.jsp");
+        } else {//đã có CV
+            request.setAttribute("CV", mCV);
+            request.getRequestDispatcher("views/mentors/updateMentorCV.jsp").forward(request, response);
+        }
     }
 
     /**
@@ -104,7 +92,14 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        HttpSession ses = request.getSession();
+        List<Skill> listSkill = (List<Skill>) ses.getAttribute("listSkill");
+        ISkillService skillSer = new SkillService();
+        List<MentorCV> listCV = (List<MentorCV>) ses.getAttribute("listMentorCV");
+        IMentorService mentorSer = new MentorService();
+        User u = (User) ses.getAttribute("Account");
+        
+        
     }
 
     /**
