@@ -4,6 +4,7 @@
  */
 package service;
 
+import java.util.HashMap;
 import java.util.List;
 import model.Skill;
 
@@ -14,6 +15,7 @@ import model.Skill;
 public interface ISkillService {
 
     List<Skill> getList();
+    HashMap<Integer,String> getHash();
 
     Skill getSkillById(int id, List<Skill> list);
 
