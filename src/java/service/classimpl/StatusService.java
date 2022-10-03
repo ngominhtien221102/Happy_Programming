@@ -19,13 +19,13 @@ public class StatusService implements IStatusService {
     StatusDAO StatusDAO = new StatusDAO();
 
     @Override
-    public HashMap<Integer, String> getHash() {
-        return StatusDAO.getStatusHash();
+    public HashMap<Integer, String> getHm() {
+        return StatusDAO.getStatusHm();
     }
 
     @Override
-    public Status getStatusById(int id, HashMap<Integer, String> Hash) {
-        for (Map.Entry<Integer, String> entry : Hash.entrySet()) {
+    public Status getStatusById(int id, HashMap<Integer, String> Hm) {
+        for (Map.Entry<Integer, String> entry : Hm.entrySet()) {
             if (id == entry.getKey()) {
                 Status status = new Status(entry.getKey(), entry.getValue());
                 return status;
@@ -35,25 +35,25 @@ public class StatusService implements IStatusService {
     }
 
     @Override
-    public String insert(Status u, HashMap<Integer, String> Hash) {
+    public String insert(Status u, HashMap<Integer, String> Hm) {
         Status s = StatusDAO.insert(u);
-        Hash.put(s.getID(), s.getName());
+        Hm.put(s.getID(), s.getName());
         return "OK";
     }
 
     @Override
-    public String update(Status u, HashMap<Integer, String> Hash) {
+    public String update(Status u, HashMap<Integer, String> Hm) {
         StatusDAO.update(u);
-        Status status = getStatusById(u.getID(), Hash);
+        Status status = getStatusById(u.getID(), Hm);
         status.setID(u.getID());
         status.setName(u.getName());
         return "OK";
     }
 
     @Override
-    public String delete(int id, HashMap<Integer, String> Hash) {
+    public String delete(int id, HashMap<Integer, String> Hm) {
         StatusDAO.delete(id);
-        Hash.remove(id);
+        Hm.remove(id);
 
         return "OK";
     }
