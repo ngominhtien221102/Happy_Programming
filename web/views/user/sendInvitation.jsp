@@ -68,6 +68,7 @@
         .col-9{
             margin: 0 auto;
         }
+        
     </style>
     <body>
         <%@include file= "header.jsp" %>
@@ -83,18 +84,17 @@
                             <button type="submit"><i class="ti ti-search" aria-hidden="true"></i></button>
                         </form>
                     </div>
-                    <br><h3>Mentor</h3>
+                    <br><h3>Mentors</h3>
                     <div class="row">  
                         <div class="col-md-12 table">
 
                             <table border="2" style="width: 100%">
                                 <thead>
                                     <tr>
-                                        <th></th>
-                                        <th></th>
-                                        <th></th> 
-                                        <th></th>         
-                                        <th></th>
+                                        <th>STT</th> 
+                                        <th>Name</th>
+                                        <th>Skills</th>
+                                        <th>Option</th>         
                                     </tr>
                                 </thead>
                                 <c:forEach items="" var="lst"> 
@@ -103,9 +103,8 @@
                                             <td></td>
                                             <td></td>
                                             <td></td>
-                                            <td></td>
-                                            <td></td>
-
+                                            <td><a class="text-color" href="">invite</a></td>
+                                            
                                         </tr>
                                     </tbody>
                                 </c:forEach>
@@ -125,7 +124,7 @@
                                 <option value="mercedes">Mercedes</option>
                                 <option value="audi">Audi</option>
                             </select>
-                            Deadline date:<input style="margin-left:10px" type="date" name="name"><br>
+                            Deadline date:<input style="margin-left:10px;" type="date" name="name"><br>
                             Title:<input type="text" class="form-control" id="" name="" placeholder="">
                             <label style="margin-bottom: 16px" for="">Content:</label><textarea id="editor" class="form-control" name="editor" rows="4" cols="50"></textarea>
                             <button type="submit" style="float:right; margin-top: 16px;" class="btn btn-primary">SEND</button>
