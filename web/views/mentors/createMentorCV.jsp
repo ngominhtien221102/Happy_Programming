@@ -23,14 +23,14 @@
             <div class="col-10">
                 <div class="container">
                     <div style="padding:5rem">
-                        <div class="text-center"><p style="font-size: 20px;">
-                                Complete CV to experience more features</p>
+                        <div class="text-center">
+                            <h3>
+                                Create CV</h3>
                         </div>
                         <c:if test="${requestScope.createSuccess!=null}" >
                             <h4 style="color: green">${requestScope.createSuccess}</h4>
                         </c:if>
                         <form class="user" action="<%=request.getContextPath()%>/createCV" method="post">      
-
 
                             <div class="form-group row" style="padding-bottom: 20px;" >
                                 <input type="text" class="form-control form-control-user"
@@ -49,15 +49,12 @@
                                        placeholder="Achivements" name="achivements" required>
                             </div>
 
-
                             <div class=" row checkbox-group required" style="padding-bottom: 20px;" >
 
                                 <c:forEach items="${sessionScope.listSkill}" var="s">
                                     <input type="checkbox" class="skill" required=""  onclick="deRequireCb('skill')"
                                            name="skill${s.ID}" style="height: 20px; width: 10%">${s.name}
                                 </c:forEach>
-
-
 
                             </div>
 
