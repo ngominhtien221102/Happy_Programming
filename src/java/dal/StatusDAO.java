@@ -7,7 +7,6 @@ package dal;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import model.Status;
 
@@ -16,18 +15,18 @@ import model.Status;
  * @author minhd
  */
 public class StatusDAO extends DBContext{
-    private HashMap<Integer,String> statusHash;
+    private HashMap<Integer,String> statusHm;
 
     public StatusDAO() {
     }
 
-    public void setStatusHash(HashMap<Integer,String> statusHash) {
-        this.statusHash = statusHash;
+    public void setStatusHm(HashMap<Integer,String> statusHm) {
+        this.statusHm = statusHm;
     }
 
-    public HashMap<Integer,String> getStatusHash() {
+    public HashMap<Integer,String> getStatusHm() {
         load();
-        return statusHash;
+        return statusHm;
     }
 
      public Status insert(Status s) {
@@ -70,13 +69,13 @@ public class StatusDAO extends DBContext{
     }
 
     public void load() {
-        statusHash = new HashMap<>();
+        statusHm = new HashMap<>();
         String sql = "SELECT * FROM Status";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                statusHash.put(rs.getInt(1), rs.getString(2));
+                statusHm.put(rs.getInt(1), rs.getString(2));
             }
         } catch (SQLException e) {
 
