@@ -24,7 +24,8 @@ public class SkillDAO extends DBContext {
     }
 
     public HashMap<Integer, String> getSkillHm() {
-        if (skillList.isEmpty()) {
+        skillHm = new HashMap<>();
+        if (skillList == null) {
             load();
         }
         for (Skill skill : skillList) {
