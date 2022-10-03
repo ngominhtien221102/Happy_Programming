@@ -24,10 +24,6 @@ public class UserDAO extends DBContext {
         this.usList = usList;
     }
 
-
-    
-
-
     public void load() {
         usList = new ArrayList<>();
         String sql = "Select * from [User]";
@@ -91,4 +87,16 @@ public class UserDAO extends DBContext {
             System.out.println("Error");
         }
     }
+}
+
+class Main {
+
+    public static void main(String[] args) {
+        UserDAO dao = new UserDAO();
+        ArrayList<User> ulist = dao.getUsList();
+        for (User user : ulist) {
+            System.out.println(user.getAccountName());
+        }
+    }
+
 }

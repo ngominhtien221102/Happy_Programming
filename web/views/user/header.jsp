@@ -43,7 +43,7 @@
                                 <a class="dropdown-item" href="<%=request.getContextPath()%>/views/user/notice-single.jsp">Notice Details</a>
                                 <a class="dropdown-item" href="<%=request.getContextPath()%>/views/user/research.jsp">Research</a>
                                 <a class="dropdown-item" href="<%=request.getContextPath()%>/views/user/scholarship.jsp">Scholarship</a>
-                                <a class="dropdown-item" href="<%=request.getContextPath()%>/views/user/course-single.jsp">Course Details</a>
+<a class="dropdown-item" href="<%=request.getContextPath()%>/views/user/course-single.jsp">Course Details</a>
                                 <a class="dropdown-item" href="<%=request.getContextPath()%>/views/user/event-single.jsp">Event Details</a>
                                 <a class="dropdown-item" href="<%=request.getContextPath()%>/views/user/blog-single.jsp">Blog Details</a>
                             </div>
@@ -73,10 +73,15 @@
                                aria-haspopup="true" aria-expanded="false">
                                 <i class="ti ti-user" aria-hidden="true"></i>
                             </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="left:-50px">
+<div class="dropdown-menu" aria-labelledby="navbarDropdown" style="left:-50px">
                                 <a class="dropdown-item" href="<%=request.getContextPath()%>/views/user/profile.jsp">Profile</a>
-                                <a class="dropdown-item" href="<%=request.getContextPath()%>/views/user/changePassword.jsp">Change password</a>
+
+                                <c:if test="${sessionScope.Account != null}">
+                                 <a class="dropdown-item" href="<%=request.getContextPath()%>/views/user/changePassword.jsp">Change password</a>
+                                </c:if>  
                                 <a class="dropdown-item" href="<%=request.getContextPath()%>/views/user/notice.jsp">Register</a>
+
+                                
                                 <a class="dropdown-item" href="<%=request.getContextPath()%>/views/user/login.jsp">Login</a>
                                 <a class="dropdown-item" href="<%=request.getContextPath()%>/views/user/notice-single.jsp">Logout</a>
 

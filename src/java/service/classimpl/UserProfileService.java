@@ -6,6 +6,7 @@ package service.classimpl;
 
 import dal.UserProfileDAO;
 import java.util.List;
+import model.User;
 import model.UserProfile;
 import service.IUserProfileService;
 
@@ -53,8 +54,7 @@ public class UserProfileService implements IUserProfileService {
         userProfileDAO.delete(u.getID());
         list.remove(u);
         return "Delete successful!";
-        
-        
+
     }
 
     @Override
@@ -62,4 +62,6 @@ public class UserProfileService implements IUserProfileService {
         return userProfileDAO.getUsProList();
     }
 
+
+ 
 }

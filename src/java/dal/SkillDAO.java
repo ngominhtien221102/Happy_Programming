@@ -8,29 +8,42 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import model.Skill;
 
 /**
  *
  * @author minhd
  */
-public class SkillDAO extends DBContext{
+public class SkillDAO extends DBContext {
+
     private ArrayList<Skill> skillList;
+    private HashMap<Integer, String> skillHm;
 
     public SkillDAO() {
+    }
+
+    public HashMap<Integer, String> getSkillHm() {
+        if (skillList.isEmpty()) {
+            load();
+        }
+        for (Skill skill : skillList) {
+            skillHm.put(skill.getID(), skill.getName());
+        }
+        return skillHm;
     }
 
     public ArrayList<Skill> getSkillList() {
         load();
         return skillList;
     }
-    
+
     public void setSkilllst(ArrayList<Skill> skillList) {
         this.skillList = skillList;
     }
-    
+
     public Skill insert(Skill skill) {
-        String sql =  "INSERT INTO [dbo].[Skill]\n"
+        String sql = "INSERT INTO [dbo].[Skill]\n"
                 + "           ([Name])\n"
                 + "     VALUES\n"
                 + "           (?)\n";
@@ -38,7 +51,7 @@ public class SkillDAO extends DBContext{
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, skill.getName());
             ps.execute();
-            
+
             String sql1 = "SELECT top(1) [Skill_ID]\n"
                     + "  FROM [dbo].[Skill]\n"
                     + "  order by Skill_ID desc";
@@ -48,7 +61,7 @@ public class SkillDAO extends DBContext{
             if (rs.next()) {
                 skill.setID(rs.getInt(1));
             }
-            
+
         } catch (SQLException e) {
         }
         return skill;
@@ -82,7 +95,6 @@ public class SkillDAO extends DBContext{
         } catch (SQLException e) {
 
         }
-
     }
 
     public void delete(int id) {
@@ -95,5 +107,5 @@ public class SkillDAO extends DBContext{
         } catch (SQLException e) {
         }
     }
-    
+
 }
