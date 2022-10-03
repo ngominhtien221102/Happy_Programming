@@ -28,8 +28,8 @@ public class SkillService implements ISkillService {
     }
 
     @Override
-    public HashMap<Integer, String> getHash() {
-        return skillDAO.getSkillHash();
+    public HashMap<Integer, String> getHm() {
+        return skillDAO.getSkillHm();
     }
 
     @Override
