@@ -15,8 +15,6 @@
         <!-- header -->
         <%@include file="header.jsp" %>
         <!-- /header -->
-        <!-- Modal -->
-        <%@include file="modal.jsp" %>
 
         <!-- page title -->
         <section class="page-title-section overlay" data-background="images/backgrounds/page-title.jpg">
