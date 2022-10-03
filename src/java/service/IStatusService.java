@@ -12,11 +12,11 @@ import model.Status;
  * @author minhd
  */
 public interface IStatusService {
-    HashMap<Integer,String> getHash();
-    Status getStatusById(int id, HashMap<Integer,String> Hash);
-    String insert(Status u,HashMap<Integer,String> Hash);
+    HashMap<Integer,String> getHm();
+    Status getStatusById(int id, HashMap<Integer,String> Hm);
+    String insert(Status u,HashMap<Integer,String> Hm);
 
-    String update(Status u,HashMap<Integer,String> Hash);
+    String update(Status u,HashMap<Integer,String> Hm);
 
-    String delete(int id,HashMap<Integer,String> Hash);
+    String delete(int id,HashMap<Integer,String> Hm);
 }
