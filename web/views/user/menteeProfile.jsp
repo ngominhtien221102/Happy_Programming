@@ -1,3 +1,4 @@
+Cường Trần
 <%-- 
     Document   : teacher
     Created on : Sep 21, 2022, 3:38:12 PM
@@ -29,6 +30,7 @@
         <%@include file="header.jsp" %>
         <!-- /header -->
         <!-- Modal -->
+        <div id="content" class="row" style="padding-top: 50px">
         <%@include file="sidebar.jsp" %>
         <div class="col-10">
             <!-- teachers -->
@@ -36,10 +38,10 @@
                 <div class="container">
                     <div class="row" >
                         <div class="col-md-5 mb-5">
-                            <img class="img-fluid w-100" src="<%=request.getContextPath()%>/template1/images/teachers/teacher-1.jpg" alt="teacher">
+                            <img class="img-fluid w-100" src="<%=request.getContextPath()%>/img/avatar/${us.getAvatar()}.png" alt="Mentee">
                         </div>
                         <div class="col-md-6 mb-5">
-                            <h3>Name: Tran Ngoc Cuong</h3>
+                            <h3>Name:  ${us.getLastName()}  ${us.getFirstName()} </h3>
 
 
                             <div class="row" style="margin-top:20px">
@@ -47,13 +49,11 @@
                                     <h4 class="mb-4">CONTACT INFO:</h4>
                                     <ul class="list-unstyled">
 
-                                        <li class="mb-3"><a class="text-color" href="mailto:johndoe@email.com"><i class="ti-email mr-2"></i>Email: johndoe@email.com</a></li>
-                                        <li class="mb-3"><a class="text-color" href="callto:+120345876"><i class="ti-mobile mr-2"></i>Phone: 0973245766</a></li>
-                                        <li class="mb-3"><a class="text-color" href="#"><i class="ti-user mr-2"></i>Gender: Male</a></li>
-                                        <li class="mb-3"><a class="text-color" href="#"><i class="ti-calendar mr-2"></i>Birthday: 25/10/2002</a></li>
-                                        <li class="mb-3"><a class="text-color" href="#"><i class="ti-alarm-clock mr-2"></i>Created at: 25/9/2022</a></li>
-                                        <li class="mb-3"><a class="text-color" href="#"><i class="ti-location-pin mr-2"></i>Address: 1313 Boulevard
-                                                Cremazie,Quebec</a></li>
+                                        <li class="mb-3"><a class="text-color" href="#"><i class="ti-email mr-2"></i>Email: ${us.getEmail()}</a></li>
+                                        <li class="mb-3"><a class="text-color" href="#"><i class="ti-user mr-2"></i>Gender: ${us.getGender()}</a></li>
+                                        <li class="mb-3"><a class="text-color" href="#"><i class="ti-calendar mr-2"></i>Birthday: ${us.getDob()}</a></li>
+                                        <li class="mb-3"><a class="text-color" href="#"><i class="ti-alarm-clock mr-2"></i>Created at: ${us.getCreateAt()}</a></li>
+                                        <li class="mb-3"><a class="text-color" href="#"><i class="ti-location-pin mr-2"></i>Address: ${xa} , ${huyen} , ${tinh} </a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -71,9 +71,10 @@
                     </div>
                 </div>
             </section>
+        </div>
             <!-- /teachers -->
         </div>
-    </div>
+    
 
 
 

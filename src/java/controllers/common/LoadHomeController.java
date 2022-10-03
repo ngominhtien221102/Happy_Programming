@@ -70,6 +70,7 @@ public class LoadHomeController extends HttpServlet {
         IMentorService mS = new MentorService();
         IInvitationService iS = new InvitationService();
         ICommentService cS = new CommentService();
+        IAddressService aS = new AddressService();
         
         ses.setAttribute("HmSkill", sS.getHm());
         ses.setAttribute("listSkill", sS.getList());
@@ -81,6 +82,7 @@ public class LoadHomeController extends HttpServlet {
         ses.setAttribute("listRate", rS.getList());
         ses.setAttribute("listMentorCV", mS.getListCV());
         ses.setAttribute("listInv", iS.getList());
+        ses.setAttribute("listAddress", aS.getList());
         
         response.sendRedirect("views/user/index.jsp");
     } 
