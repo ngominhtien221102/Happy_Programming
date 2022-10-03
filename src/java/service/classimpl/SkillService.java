@@ -5,6 +5,7 @@
 package service.classimpl;
 
 import dal.SkillDAO;
+import java.util.HashMap;
 import java.util.List;
 import model.Skill;
 import service.ISkillService;
@@ -16,12 +17,14 @@ import service.ISkillService;
 public class SkillService implements ISkillService {
 
     SkillDAO skillDAO = new SkillDAO();
-
     @Override
     public List<Skill> getList() {
         return skillDAO.getSkillList();
     }
-
+    @Override
+    public HashMap<Integer, String> getHash() {
+        return skillDAO.getSkillHash();
+    }
     @Override
     public Skill getSkillById(int id, List<Skill> list) {
         for (Skill skill : list) {
@@ -67,4 +70,5 @@ public class SkillService implements ISkillService {
 
     }
 
+    
 }
