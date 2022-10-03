@@ -51,10 +51,9 @@ public class LoginController extends HttpServlet {
             if (user == null) {
                 request.setAttribute("Alert", "Account is not exist please retype!");
                 request.getRequestDispatcher("views/user/login.jsp").forward(request, response);
-            } else {
-           
+            } else {        
                 ses.setAttribute("Account", user);
-                ses.setMaxInactiveInterval(60*10);
+                ses.setMaxInactiveInterval(60000);
                 
                 Cookie cu = new Cookie("user", user.getAccountName());
                 Cookie cp = new Cookie("pass", user.getPassWord());

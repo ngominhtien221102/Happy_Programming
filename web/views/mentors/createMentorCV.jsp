@@ -52,7 +52,7 @@
                             <div class=" row checkbox-group required" style="padding-bottom: 20px;" >
 
                                 <c:forEach items="${sessionScope.listSkill}" var="s">
-                                    <input type="checkbox" class="skill" required="" value="${s.ID}" onclick="deRequireCb('skill')"
+                                    <input type="checkbox" class="skill" required=""  onclick="deRequireCb('skill')"
                                            name="skill${s.ID}" style="height: 20px; width: 10%">${s.name}
                                 </c:forEach>
 

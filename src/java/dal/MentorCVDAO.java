@@ -60,8 +60,15 @@ public class MentorCVDAO extends DBContext {
 
     // Insert MentorCV, insert Mentor_Skills
     public void insert(MentorCV m) {
-        String sql = "insert into Mentor_CV values(?,?,?,?)",
-                sql1 = "insert into Mentor_Skill values(?,?)";
+        String sql = "INSERT INTO [Mentor_CV]\n"
+                + "           ([Mentor_ID]\n"
+                + "           ,[Profession]\n"
+                + "           ,[Introduction]\n"
+                + "           ,[Service_Description]\n"
+                + "           ,[Achivements])\n"
+                + "     VALUES\n"
+                + "           (?,?,?,?,?)";
+
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, m.getID());
@@ -69,23 +76,34 @@ public class MentorCVDAO extends DBContext {
             ps.setString(3, m.getIntroduction());
             ps.setString(4, m.getProfession());
             ps.setString(5, m.getAchivements());
-            ps.executeUpdate();
+            ps.execute();
+
+        } catch (Exception e) {
+
+        }
+
+        try {
+            String sql1 = "INSERT INTO [Mentor_Skills]\n"
+                    + "           ([Mentor_ID]\n"
+                    + "           ,[Skill_ID])\n"
+                    + "     VALUES\n"
+                    + "           (?,?)";
             PreparedStatement ps1 = connection.prepareStatement(sql1);
             for (Skill skill : m.getSkillList()) {
                 ps1.setInt(1, m.getID());
                 ps1.setInt(2, skill.getID());
-                ps1.executeUpdate();
+                ps1.execute();
             }
         } catch (Exception e) {
-
         }
+
     }
     // update Mentor_CV
 
     public void update(MentorCV m) {
         String sql = "Update Mentor_CV set Profession=?, Introduction=?,Service_Description=?,Achivements=? where Mentor_ID=?",
-        sql1 = "delete from Mentor_Skills where Mentor_ID = ?",
-        sql2 = "insert into Mentor_Skill values(?,?)";
+                sql1 = "delete from Mentor_Skills where Mentor_ID = ?",
+                sql2 = "insert into Mentor_Skill values(?,?)";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, m.getID());

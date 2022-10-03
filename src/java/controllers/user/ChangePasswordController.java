@@ -80,7 +80,7 @@ public class ChangePasswordController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //processRequest(request, response);
+
         String oldPass = request.getParameter("oldPass");
         String newPass = request.getParameter("newPass");
         String confirmPass = request.getParameter("confirmPass");
@@ -98,7 +98,10 @@ public class ChangePasswordController extends HttpServlet {
 
         }
         if (!check2) {
-            request.setAttribute("error2", "Wrong format password! Please re-input new pass");
+
+            request.setAttribute("error2", "The password must have Minimum eight characters, at least one uppercase letter, one lowercase letter and one number"
+                    + " Ex: Password1");
+
             request.setAttribute("oldPass", oldPass);
             request.getRequestDispatcher("views/user/changePassword.jsp").forward(request, response);
 

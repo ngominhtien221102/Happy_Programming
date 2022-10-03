@@ -29,7 +29,7 @@ public class UserProfileDAO extends DBContext {
 
     public void load() {
         usProList = new ArrayList<>();
-        String sql = "Select * from User";
+        String sql = "Select * from User_Profile";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
@@ -90,4 +90,8 @@ public class UserProfileDAO extends DBContext {
             System.out.println("Error");
         }
     }
+    
+
 }
+
+

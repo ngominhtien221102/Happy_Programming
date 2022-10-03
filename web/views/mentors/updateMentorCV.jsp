@@ -4,10 +4,12 @@
     Author     : ADMIN
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
+
         <%@include file="../user/headCSS2.jsp" %>
 
     </head>
@@ -16,49 +18,60 @@
         <%@include file="header.jsp" %>
 
         <!-- Main Content -->
-        <div id="content" class="row">
-            <!-- Begin Page Content -->
-            <%@include file="mentorSidebar.jsp" %>
 
-            <div class="col-sm-10">
-                <div class="container" style="padding: 5%">
+        <div id="content" class="row" style="padding-top: 50px">
+            
+                <%@include file="mentorSidebar.jsp" %>
+            
+
+            <div class="col-10">
+                <div class="container">
+
                     <div style="padding:5rem">
                         <div class="text-center">
                             <h3>
                                 Update CV</h3>
                         </div>
-                        <form class="user" action="" method="">      
+                        <form class="user" action="<%=request.getContextPath()%>/updateCV" method="post">      
 
-                            <!-- Full Name -->
                             <div class="form-group row" style="padding-bottom: 20px;" >
-                                <input type="text" class="form-control form-control-user"
+                                <input type="text" class="form-control form-control-user" value="${mCV.profession}"
                                        placeholder="Profession" name="profession" required>
                             </div>
 
-                            <!-- DOB -->
+
                             <div class="form-group row" style="padding-bottom: 20px;" >
-                                <input type="text" class="form-control form-control-user"
-                                       placeholder="ServiceDescription" name="serviceDescription" required>
+                                <input type="text" class="form-control form-control-user" value="${mCV.serviceDescription}"
+                                       placeholder="Service Description" name="serviceDes" required>
                             </div>
 
-                            <!-- Email -->
+
                             <div class="form-group row" style="padding-bottom: 20px;" >
-                                <input type="text" class="form-control form-control-user"
+                                <input type="text" class="form-control form-control-user" value="${mCV.achivements}"
                                        placeholder="Achivements" name="achivements" required>
                             </div>
 
-                            <!--list -->
-                            <div class="form-group row" style="padding-bottom: 20px;" >
 
-                                <input type="checkbox" class="form-control form-control-user"
-                                           name="skill" required style="height: 20px; width: 10%">Java
+
+                            <div class=" row checkbox-group required" style="padding-bottom: 20px;" >
+
+                                <c:forEach items="${sessionScope.listSkill}" var="s">
+                                    <input type="checkbox" class="skill" required="" 
+                                           <c:if>
+                                               
+                                           </c:if>
+                                           
+                                           onclick="deRequireCb('skill')"
+                                           name="skill${s.ID}" style="height: 20px; width: 10%">${s.name}
+                                </c:forEach>
+
                             </div>
 
                             <!--introduction-->
                             <div class="form-group row flex-column" style="padding-bottom: 20px;">
                                 <div>Introduction</div>
                                 </br>
-                                <textarea class=""  name="introduction" id="editor" cols="75" rows="10" placeholder="introduction" required>
+                                <textarea value="${mCV.introduction}" name="introduction" id="editor" cols="75" rows="10" placeholder="introduction" required>
                                 </textarea>
                             </div>
 
@@ -73,5 +86,44 @@
 
             <!-- End of Main Content -->
         </div>
+                <%@include file="footer.jsp" %>
+        <script src="https://cdn.ckeditor.com/ckeditor5/34.1.0/classic/ckeditor.js"></script>
+        <script>
+                                        var value;
+                                        ClassicEditor
+                                                .create(document.querySelector('#editor'))
+                                                .then(editor => {
+                                                    value = editor;
+                                                })
+                                                .catch(error => {
+                                                    console.error(error);
+                                                });
+
+                                        const handleSubmit = () => {
+                                            document.getElementById('a').innerHTML = value.getData()
+                                        }
+        </script>
+        <script>
+            function deRequireCb(elClass) {
+                el = document.getElementsByClassName(elClass);
+
+                var atLeastOneChecked = false; //at least one cb is checked
+                for (i = 0; i < el.length; i++) {
+                    if (el[i].checked === true) {
+                        atLeastOneChecked = true;
+                    }
+                }
+
+                if (atLeastOneChecked === true) {
+                    for (i = 0; i < el.length; i++) {
+                        el[i].required = false;
+                    }
+                } else {
+                    for (i = 0; i < el.length; i++) {
+                        el[i].required = true;
+                    }
+                }
+            }
+        </script>
     </body>
 </html>

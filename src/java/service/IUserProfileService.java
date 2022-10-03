@@ -5,6 +5,7 @@
 package service;
 
 import java.util.List;
+import model.User;
 
 import model.UserProfile;
 
@@ -22,4 +23,5 @@ public interface IUserProfileService {
     String insert(UserProfile u, List<UserProfile> list);
     String update(UserProfile u, List<UserProfile> list);
     String delete(UserProfile u, List<UserProfile> list);
+   
 }

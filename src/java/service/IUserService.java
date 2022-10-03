@@ -5,8 +5,6 @@
 package service;
 
 import java.util.List;
-import model.User;
-
 import model.*;
 
 
@@ -21,4 +19,7 @@ public interface IUserService {
     String insert(User u, List<User> list);
     String update(User u, List<User> list);
     String delete(int ID, List<User> list, List<UserProfile> list1, List<MentorCV> list2);
+    User getUserByAccountName(String accountName, List<User> list );
+    UserProfile getUserProfile(String accountName, List<User> userlist, List<UserProfile> profilelist);
+    
 }

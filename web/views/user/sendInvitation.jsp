@@ -7,7 +7,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="zxx">
-    <%@include file="headCSS.jsp" %>
     <%@include file="headCSS2.jsp" %>
 
     <style>
@@ -68,51 +67,53 @@
         .col-9{
             margin: 0 auto;
         }
-        
+
     </style>
     <body>
         <%@include file= "header.jsp" %>
-        <%@include file="sidebar.jsp" %>
-        
-        <div class="col-9">
-            <section class="section" style="margin-top: 50px">
-                <h2 style="margin-left:15px">Send invitation</h2>
-                <div class="container">
-                    <div class="search" style="margin-left:15px" > 
-                        <form action="action" class="row">
-                            <input  type="text" name="name" placeholder="Search Your Mentor">
-                            <button type="submit"><i class="ti ti-search" aria-hidden="true"></i></button>
-                        </form>
-                    </div>
-                    <br><h3>Mentors</h3>
-                    <div class="row">  
-                        <div class="col-md-12 table">
 
-                            <table border="2" style="width: 100%">
-                                <thead>
-                                    <tr>
-                                        <th>STT</th> 
-                                        <th>Name</th>
-                                        <th>Skills</th>
-                                        <th>Option</th>         
-                                    </tr>
-                                </thead>
-                                <c:forEach items="" var="lst"> 
-                                    <tbody>
-                                        <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td><a class="text-color" href="">invite</a></td>
-                                            
-                                        </tr>
-                                    </tbody>
-                                </c:forEach>
-                            </table>
+        <div id="content" class="row" style="padding-top: 50px">
+            <%@include file="sidebar.jsp" %>
+
+            <div class="col-10">
+                <section class="section" ">
+                    <h2 style="margin-left:15px">Send invitation</h2>
+                    <div class="container">
+                        <div class="search" style="margin-left:15px" > 
+                            <form action="action" class="row">
+                                <input  type="text" name="name" placeholder="Search Your Mentor">
+                                <button type="submit"><i class="ti ti-search" aria-hidden="true"></i></button>
+                            </form>
                         </div>
-                    </div>
-                    <!--form-->
-                    
+                        <br><h3>Mentors</h3>
+                        <div class="row">  
+                            <div class="col-md-12 table">
+
+                                <table border="2" style="width: 100%">
+                                    <thead>
+                                        <tr>
+                                            <th>STT</th> 
+                                            <th>Name</th>
+                                            <th>Skills</th>
+                                            <th>Option</th>         
+                                        </tr>
+                                    </thead>
+                                    <c:forEach items="" var="lst"> 
+                                        <tbody>
+                                            <tr>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                <td><a class="text-color" href="">invite</a></td>
+
+                                            </tr>
+                                        </tbody>
+                                    </c:forEach>
+                                </table>
+                            </div>
+                        </div>
+                        <!--form-->
+
                         <form action="" method="" class="">
                             Mentor's name:
                             <input type="text" class="form-control" id="" name="" readonly="">
@@ -129,33 +130,34 @@
                             <label style="margin-bottom: 16px" for="">Content:</label><textarea id="editor" class="form-control" name="editor" rows="4" cols="50"></textarea>
                             <button type="submit" style="float:right; margin-top: 16px;" class="btn btn-primary">SEND</button>
                         </form>
-                    
-                </div>
-            </section>
-        </div>
-    </div>
-    <!-- footer -->
-    <%@include file="footer.jsp" %>
-    <!-- /footer -->
-    
-    <!-- jQuery -->
-    <%@include file="scriptJS.jsp" %>
-    <script src="https://cdn.ckeditor.com/ckeditor5/34.1.0/classic/ckeditor.js"></script>
-    <script>
-                var value;
-                ClassicEditor
-                        .create(document.querySelector('#editor'))
-                        .then(editor => {
-                            value = editor;
-                        })
-                        .catch(error => {
-                            console.error(error);
-                        });
 
-                const handleSubmit = () => {
-                    document.getElementById('a').innerHTML = value.getData()
-                }
-            </script>
-</body>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <!-- footer -->
+        <%@include file="footer.jsp" %>
+        <!-- /footer -->
+
+        <!-- jQuery -->
+        <%@include file="scriptJS.jsp" %>
+        <script src="https://cdn.ckeditor.com/ckeditor5/34.1.0/classic/ckeditor.js"></script>
+        <script>
+            var value;
+            ClassicEditor
+                    .create(document.querySelector('#editor'))
+                    .then(editor => {
+                        value = editor;
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    });
+
+            const handleSubmit = () => {
+                document.getElementById('a').innerHTML = value.getData()
+            }
+        </script>
+    </body>
 
 </html>

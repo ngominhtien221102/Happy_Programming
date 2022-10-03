@@ -1,20 +1,9 @@
-<%-- 
-    Document   : login
-    Created on : Sep 28, 2022, 12:06:20 AM
-    Author     : Lenovo
---%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="zxx">
-
     <%@include file="headCSS.jsp" %>
-    <style>
-        .forgot:hover{
-            color: orange;
-        }
-    </style>
     <body>
         <!-- header -->
         <%@include file="header.jsp" %>
@@ -24,10 +13,10 @@
                 <div class="row">
                     <div class="col-md-8">
                         <ul class="list-inline custom-breadcrumb">
-                            <li class="list-inline-item"><a class="h2 text-primary font-secondary" href=#k">Login</a></li>
+                            <li class="list-inline-item"><a class="h2 text-primary font-secondary" href=#k">Change Password</a></li>
                             <li class="list-inline-item text-white h3 font-secondary"></li>
                         </ul>
-                        <p class="text-lighten">Sign in to experience more features</p>
+                        <p class="text-lighten">Change your password to make your account more secure</p>
                     </div>
                 </div>
             </div>
@@ -35,28 +24,26 @@
         <div  id="loginModal" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content rounded-0 border-0 p-4">
-
                     <div class="modal-body">
-                        <p style="Color:red">${Alert}</p>
-                        <form action="<%=request.getContextPath()%>/login" method="POST" class="row">
+                        <p style="color : green">${message}</p>
+                        <p style="color:red">${error1}</p>
+                        <p style="color:red">${error2}</p>
+                        <p style="color:red">${error3}</p>
+                        <form action="<%=request.getContextPath()%>/resetPassword" method="POST" class="row">
                             <div class="col-12">
-                                <input type="text" class="form-control mb-3" id="loginName" name="Username" placeholder="Account Name">
+                                <input type="password" class="form-control mb-3" name="oldPass" placeholder="Old Password" required="" value="${oldPass}">
                             </div>
+                           
                             <div class="col-12">
-                                <input type="password" class="form-control mb-3" id="loginPassword" name="Password" placeholder="Password">
+                                <input type="password" class="form-control mb-3"  name="newPass" placeholder="New Password" required="" value="${newPass}">
                             </div>
+                           
                             <div class="col-12">
-
-                                <label class="Remeber_Button"><input type="checkbox" name="rem" ${(cookie.rem.value eq 'ON')?"checked":""} value="ON">
-                                    <span class="checkmark"></span>Remember Me
-                                </label>
-
-                                <a style="position: absolute;
-                                   right: 0px" href="<%=request.getContextPath()%>/views/user/forgotPass.jsp">Forgot Pass?</a>
-
+                                <input type="password" class="form-control mb-3"  name="confirmPass" placeholder="Confirm Password" required="">
                             </div>
-                            <div class="col-12" style="margin-left: 40%;">
-                                <button type="submit"  class="btn btn-primary">Sign In</button>
+                            
+                            <div class="col-12">
+                                <button type="submit"  class="btn btn-primary" right" href="<%=request.getContextPath()%>/login">Save</button>
                             </div>
                         </form>
                     </div>
@@ -69,3 +56,4 @@
         <!-- jQuery -->
         <%@include file="scriptJS.jsp" %>                                                                 
 </html>
+

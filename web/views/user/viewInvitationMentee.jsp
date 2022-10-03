@@ -7,7 +7,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="zxx">
-    <%@include file="headCSS.jsp" %>
     <%@include file="headCSS2.jsp" %>
 
     <style>
@@ -30,17 +29,15 @@
         table{
             margin-top: 30px;
         }
-        .col-9{
-            margin: 0 auto;
-        }
 
     </style>
     <body>
         <%@include file= "header.jsp" %>
-        <%@include file="sidebar.jsp" %>
+        <div id="content" class="row" style="padding-top: 50px">
+            <%@include file="sidebar.jsp" %>
 
-        <div class="col-9">
-            <section class="section" style="margin-top: 50px">
+        <div class="col-10">
+            <section class="section" >
                 <h2 style="margin-left:15px">All invitations</h2>
                 <div class="container">
 
@@ -86,7 +83,8 @@
                 </div>
             </section>
         </div>
-    </div>
+        </div>
+        
     <!-- footer -->
     <%@include file="footer.jsp" %>
     <!-- /footer -->

@@ -88,20 +88,20 @@ public class CreateCVController extends HttpServlet {
         IMentorService mentorSer = new MentorService();
         User u = (User) ses.getAttribute("Account");
         
-        String profession = (String) request.getAttribute("profession");
-        String serviceDes = (String) request.getAttribute("serviceDes");
-        String achivements = (String) request.getAttribute("achivements");
-        String introduction = (String) request.getAttribute("introduction");
+        String profession =  request.getParameter("profession");
+        String serviceDes =  request.getParameter("serviceDes");
+        String achivements =  request.getParameter("achivements");
+        String introduction = request.getParameter("introduction");
 
         List<Skill> mentorSkills = new ArrayList<>();
         for (Skill s : listSkill){
-            Integer skillID = (Integer) request.getAttribute("skill" + s.getID());
+            String skillID =  request.getParameter("skill" + s.getID());
             if (skillID!=null){
                 mentorSkills.add(s);
             }
         }
-        
-        MentorCV mCV = new MentorCV(u.getID(), profession, introduction, serviceDes, achivements, listSkill);
+
+        MentorCV mCV = new MentorCV(u.getID(), profession, introduction, serviceDes, achivements, mentorSkills);        
         mentorSer.insert(mCV, listCV);
         ses.setAttribute("listMentorCV", listCV);
         request.setAttribute("createSuccess", "Create CV Successfully!");
