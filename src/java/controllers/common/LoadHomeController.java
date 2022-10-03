@@ -71,16 +71,17 @@ public class LoadHomeController extends HttpServlet {
         IInvitationService iS = new InvitationService();
         ICommentService cS = new CommentService();
         
+        ses.setAttribute("HmSkill", sS.getHm());
         ses.setAttribute("listSkill", sS.getList());
         ses.setAttribute("listUser", uS.getList());
         ses.setAttribute("listUserProfile", upS.getList());
         ses.setAttribute("listRequest", reqS.getList());
         ses.setAttribute("listResponse", resS.getList());
-        ses.setAttribute("listStatus", staS.getList());
+        ses.setAttribute("listStatus", staS.getHm());
         ses.setAttribute("listRate", rS.getList());
         ses.setAttribute("listMentorCV", mS.getListCV());
         ses.setAttribute("listInv", iS.getList());
-
+        
         response.sendRedirect("views/user/index.jsp");
     } 
 

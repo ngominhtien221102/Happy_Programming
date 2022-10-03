@@ -5,9 +5,9 @@
 --%>
 
 
-<header class="fixed-top header">
+<header class=" header">
 
-    <div class="navigation w-100" style="margin-top: 0px;">
+    <div class="fixed-top navigation w-100" style="margin-top: 0px; background: #ffbc3b">
 
         <div class="container">
             <nav class="navbar navbar-expand-lg navbar-light p-0">
