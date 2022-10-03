@@ -5,7 +5,8 @@
 package service.classimpl;
 
 import dal.StatusDAO;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 import model.Status;
 import service.IStatusService;
 
@@ -18,14 +19,15 @@ public class StatusService implements IStatusService {
     StatusDAO StatusDAO = new StatusDAO();
 
     @Override
-    public List<Status> getList() {
-        return StatusDAO.getStatuslst();
+    public HashMap<Integer, String> getHash() {
+        return StatusDAO.getStatusHash();
     }
 
     @Override
-    public Status getStatusById(int id, List<Status> list) {
-        for (Status status : list) {
-            if (status.getID() == id) {
+    public Status getStatusById(int id, HashMap<Integer, String> Hash) {
+        for (Map.Entry<Integer, String> entry : Hash.entrySet()) {
+            if (id == entry.getKey()) {
+                Status status = new Status(entry.getKey(), entry.getValue());
                 return status;
             }
         }
@@ -33,27 +35,27 @@ public class StatusService implements IStatusService {
     }
 
     @Override
-    public String insert(Status u, List<Status> list) {
+    public String insert(Status u, HashMap<Integer, String> Hash) {
         Status s = StatusDAO.insert(u);
-        list.add(s);
+        Hash.put(s.getID(), s.getName());
         return "OK";
     }
 
     @Override
-    public String update(Status u, List<Status> list) {
+    public String update(Status u, HashMap<Integer, String> Hash) {
         StatusDAO.update(u);
-        Status status = getStatusById(u.getID(), list);
+        Status status = getStatusById(u.getID(), Hash);
         status.setID(u.getID());
         status.setName(u.getName());
         return "OK";
     }
 
     @Override
-    public String delete(int id, List<Status> list) {
+    public String delete(int id, HashMap<Integer, String> Hash) {
         StatusDAO.delete(id);
-              list.remove(getStatusById(id, list));
+        Hash.remove(id);
 
-       return "OK";
+        return "OK";
     }
 
 }
