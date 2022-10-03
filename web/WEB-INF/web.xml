@@ -33,8 +33,8 @@
         <servlet-class>controllers.common.ResetPasswordController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ViewInvitation</servlet-name>
-        <servlet-class>controllers.user.ViewInvitation</servlet-class>
+        <servlet-name>ViewInvitationController</servlet-name>
+        <servlet-class>controllers.user.ViewInvitationController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ChangePasswordController</servlet-name>
@@ -69,7 +69,7 @@
         <url-pattern>/resetPassword</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ViewInvitation</servlet-name>
+        <servlet-name>ViewInvitationController</servlet-name>
         <url-pattern>/view_invitation</url-pattern>
     </servlet-mapping>
     <session-config>

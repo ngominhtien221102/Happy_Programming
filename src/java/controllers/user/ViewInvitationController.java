@@ -15,7 +15,7 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author minhd
  */
-public class ViewInvitation extends HttpServlet {
+public class ViewInvitationController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
