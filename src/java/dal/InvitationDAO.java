@@ -85,7 +85,7 @@ public class InvitationDAO extends DBContext {
     // update Invitation
 
     public void update(Invitation i) {
-        String sql = "Update Invitation set Skill_ID=?,Title=?,Deadline_date=?,[Content]=? where Invitation_ID=?";
+        String sql = "Update Invitation set Skill_ID=?,Title=?,Deadline_date=?,[Content]=?,Status_ID=? where Invitation_ID=?";
 
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -93,7 +93,8 @@ public class InvitationDAO extends DBContext {
             ps.setString(2, i.getTitle());
             ps.setString(3, i.getDeadlineDate());
             ps.setString(4, i.getContent());
-            ps.setInt(5, i.getID());
+            ps.setInt(5, i.getStatusID());
+            ps.setInt(6, i.getID());
             ps.executeUpdate();
         } catch (Exception e) {
 

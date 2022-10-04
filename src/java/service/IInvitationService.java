@@ -20,4 +20,5 @@ List<Invitation> getList();
     String update(Invitation u, List<Invitation> list);
 
     String delete(int id, List<Invitation> list);
+    
 }
