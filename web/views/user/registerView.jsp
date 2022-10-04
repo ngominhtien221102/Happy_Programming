@@ -65,14 +65,16 @@
                 <div class="signup__overlay"></div>
             </div>
             <div class="signup_form">
-                <form action="#">
+                <form action="<%=request.getContextPath()%>/signup" method="POST">
                     <div class="form-group">
                         <label for="username">Account Name</label>
                         <input class="form-control" type="text" name="username" id="username" placeholder="" required />
+                        <p style="color: red">${username_alert}</p>
                     </div>
                     <div class="form-group">
                         <label for="password">Password</label>
                         <input class="form-control" type="password" name="password" id="password" placeholder="********" required />
+                        <p style="color: red">${Password_alert}</p>
                     </div>
                     <div class="form-group">
                         <label for="passwordRepeat">Repeat Password</label>
