@@ -44,6 +44,14 @@
         <servlet-name>LogoutController</servlet-name>
         <servlet-class>controllers.common.LogoutController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CreateProfileController</servlet-name>
+        <servlet-class>controllers.user.CreateProfileController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddressController</servlet-name>
+        <servlet-class>controllers.user.AddressController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ChangePasswordController</servlet-name>
         <url-pattern>/changepass</url-pattern>
@@ -87,6 +95,14 @@
     <servlet-mapping>
         <servlet-name>LogoutController</servlet-name>
         <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateProfileController</servlet-name>
+        <url-pattern>/createProfile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddressController</servlet-name>
+        <url-pattern>/addressControl</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

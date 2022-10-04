@@ -14,24 +14,17 @@
         .forgot:hover{
             color: orange;
         }
+        
     </style>
     <body>
         <!-- header -->
         <%@include file="header.jsp" %>
         <!-- /header -->
-        <section class="page-title-section overlay" data-background="images/backgrounds/page-title.jpg">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-8">
-                        <ul class="list-inline custom-breadcrumb">
-                            <li class="list-inline-item"><a class="h2 text-primary font-secondary" href=#k">Login</a></li>
-                            <li class="list-inline-item text-white h3 font-secondary"></li>
-                        </ul>
-                        <p class="text-lighten">Sign in to experience more features</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+       <div class="container" style="padding: 5% ;">
+                    <div style="padding:5rem">
+                        <div class="text-center" >
+                            <h2>Login</h2>
+                        </div>
         <div  id="loginModal" tabindex="-1" role="dialog" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content rounded-0 border-0 p-4">
@@ -63,6 +56,9 @@
                 </div>
             </div>
         </div>
+                    </div>
+                 </div>   
+                                  
         <%@include file="footer.jsp" %>
         <!-- /footer -->
 

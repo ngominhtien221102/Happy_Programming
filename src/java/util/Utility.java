@@ -5,8 +5,10 @@
 package util;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import model.UserProfile;
 
 /**
  *
@@ -32,6 +34,17 @@ public class Utility {
         Pattern p = Pattern.compile("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$");
         Matcher m = p.matcher(password);
         return m.matches();
+    }
+    
+    public boolean checkEmailDup(String Email, List<UserProfile> list)
+    {
+        for (UserProfile u : list) {
+            if(u.getEmail().equals(Email))
+            {
+                return true;
+            }
+        }
+        return false;
     }
     
 }

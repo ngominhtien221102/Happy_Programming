@@ -110,4 +110,63 @@ public class AddressDAO extends DBContext {
             
         }
     }
+    
+    public ArrayList<String> getProvinceList() {
+        ArrayList<String> pList = new ArrayList<>();
+        String sql = "SELECT distinct [Tinh]\n"
+                + "  FROM [dbo].[Address]\n"
+                + "  order by [Tinh]";
+        try {
+            PreparedStatement stm = connection.prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                pList.add(rs.getString(1));
+            }
+        } catch (SQLException ex) {
+
+        }
+        return pList;
+    }
+
+    public ArrayList<String> getDistrictList(String pname) {
+        ArrayList<String> dList = new ArrayList<>();
+        String sql = "SELECT distinct\n"
+                + "      [Huyen]\n"
+                + "  FROM [dbo].[Address]\n"
+                + "  where [Tinh] = ?";
+        try {
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, pname);
+            ResultSet rs = stm.executeQuery();
+
+            while (rs.next()) {
+                dList.add(rs.getString(1));
+            }
+        } catch (SQLException ex) {
+
+        }
+        return dList;
+    }
+
+    public ArrayList<String> getWardList(String pname, String dname) {
+        ArrayList<String> wList = new ArrayList<>();
+        String sql = "SELECT distinct\n"
+                + "      [Xa]\n"
+                + "  FROM [dbo].[Address]\n"
+                + "  where [Tinh] =? and [Huyen] = ?";
+        try {
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, pname);
+            stm.setString(2, dname);
+            ResultSet rs = stm.executeQuery();
+
+            while (rs.next()) {
+                wList.add(rs.getString(1));
+            }
+        } catch (SQLException ex) {
+
+        }
+        return wList;
+    }
+
 }

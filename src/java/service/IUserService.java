@@ -22,4 +22,5 @@ public interface IUserService {
     User getUserByAccountName(String accountName, List<User> list );
     UserProfile getUserProfile(String accountName, List<User> userlist, List<UserProfile> profilelist);
     
+    
 }
