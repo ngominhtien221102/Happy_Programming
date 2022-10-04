@@ -80,8 +80,8 @@
                     <h2 style="margin-left:15px">Send invitation</h2>
                     <div class="container">
                         <div class="search" style="margin-left:15px" > 
-                            <form action="action" class="row">
-                                <input  type="text" name="name" placeholder="Search Your Mentor">
+                            <form action="<%=request.getContextPath()%>/sendInvitation" class="row">
+                                <input  type="text" name="search" placeholder="Search Your Mentor">
                                 <button type="submit"><i class="ti ti-search" aria-hidden="true"></i></button>
                             </form>
                         </div>
