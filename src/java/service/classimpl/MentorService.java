@@ -38,10 +38,11 @@ public class MentorService implements IMentorService {
     public String update(MentorCV u, List<MentorCV> list) {
         mentorCVDAO.update(u);
         MentorCV m = getCVById(u.getID(), list);
-        m.setProfession(m.getProfession());
-        m.setIntroduction(m.getIntroduction());
-        m.setServiceDescription(m.getServiceDescription());
-        m.setAchivements(m.getAchivements());
+        m.setProfession(u.getProfession());
+        m.setIntroduction(u.getIntroduction());
+        m.setServiceDescription(u.getServiceDescription());
+        m.setAchivements(u.getAchivements());
+        m.setSkillList(u.getSkillList());
         return "OK";
     }
 

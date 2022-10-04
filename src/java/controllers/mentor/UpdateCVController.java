@@ -12,6 +12,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 import model.MentorCV;
 import model.Skill;
@@ -76,7 +77,7 @@ public class UpdateCVController extends HttpServlet {
         if (mCV == null) { //nếu chưa có CV thì chuyển về trang tạo CV
             response.sendRedirect("views/mentors/createMentorCV.jsp");
         } else {//đã có CV
-            request.setAttribute("CV", mCV);
+            ses.setAttribute("CV", mCV);
             request.getRequestDispatcher("views/mentors/updateMentorCV.jsp").forward(request, response);
         }
     }
@@ -99,6 +100,24 @@ public class UpdateCVController extends HttpServlet {
         IMentorService mentorSer = new MentorService();
         User u = (User) ses.getAttribute("Account");
         
+        String profession =  request.getParameter("profession");
+        String serviceDes =  request.getParameter("serviceDes");
+        String achivements =  request.getParameter("achivements");
+        String introduction = request.getParameter("introduction");
+
+        List<Skill> mentorSkills = new ArrayList<>();
+        for (Skill s : listSkill){
+            String skillID =  request.getParameter("skill" + s.getID());
+            if (skillID!=null){
+                mentorSkills.add(s);
+            }
+        }
+
+        MentorCV mCV = new MentorCV(u.getID(), profession, introduction, serviceDes, achivements, mentorSkills);        
+        mentorSer.update(mCV, listCV);
+        ses.setAttribute("listMentorCV", listCV);
+        request.setAttribute("updateSuccess", "Update CV Successfully!");
+        request.getRequestDispatcher("views/mentors/updateMentorCV.jsp").forward(request, response);
         
     }
 
