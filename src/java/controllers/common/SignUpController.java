@@ -52,7 +52,6 @@ public class SignUpController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("views/admin/register.jsp").forward(request, response);
     }
 
     /**
@@ -70,7 +69,7 @@ public class SignUpController extends HttpServlet {
             throws ServletException, IOException {
         String username = request.getParameter("username").trim();
         String password = request.getParameter("password").trim();
-        String repassword = request.getParameter("repassword").trim();
+        String repassword = request.getParameter("passwordRepeat").trim();
         HttpSession ses = request.getSession();
         Utility utility = new Utility();
         List<User> userlst = (List<User>) ses.getAttribute("listUser");
@@ -97,7 +96,7 @@ public class SignUpController extends HttpServlet {
         }else{// return back to signup jsp
             request.setAttribute("username", username);
             request.setAttribute("password", password);
-            request.getRequestDispatcher("views/admin/register.jsp").forward(request, response);
+            request.getRequestDispatcher("views/user/registerView.jsp").forward(request, response);
         }
     }
 
