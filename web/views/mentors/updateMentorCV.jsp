@@ -20,9 +20,9 @@
         <!-- Main Content -->
 
         <div id="content" class="row" style="padding-top: 50px">
-            
-                <%@include file="mentorSidebar.jsp" %>
-            
+
+            <%@include file="mentorSidebar.jsp" %>
+
 
             <div class="col-10">
                 <div class="container">
@@ -32,22 +32,25 @@
                             <h3>
                                 Update CV</h3>
                         </div>
+                        <c:if test="${requestScope.updateSuccess!=null}" >
+                            <h4 style="color: green">${requestScope.updateSuccess}</h4>
+                        </c:if>
                         <form class="user" action="<%=request.getContextPath()%>/updateCV" method="post">      
 
                             <div class="form-group row" style="padding-bottom: 20px;" >
-                                <input type="text" class="form-control form-control-user" value="${mCV.profession}"
+                                <input type="text" class="form-control form-control-user" value="${CV.profession}"
                                        placeholder="Profession" name="profession" required>
                             </div>
 
 
                             <div class="form-group row" style="padding-bottom: 20px;" >
-                                <input type="text" class="form-control form-control-user" value="${mCV.serviceDescription}"
+                                <input type="text" class="form-control form-control-user" value="${CV.serviceDescription}"
                                        placeholder="Service Description" name="serviceDes" required>
                             </div>
 
 
                             <div class="form-group row" style="padding-bottom: 20px;" >
-                                <input type="text" class="form-control form-control-user" value="${mCV.achivements}"
+                                <input type="text" class="form-control form-control-user" value="${CV.achivements}"
                                        placeholder="Achivements" name="achivements" required>
                             </div>
 
@@ -57,10 +60,13 @@
 
                                 <c:forEach items="${sessionScope.listSkill}" var="s">
                                     <input type="checkbox" class="skill" required="" 
-                                           <c:if>
-                                               
-                                           </c:if>
-                                           
+                                           <c:forEach items="${CV.skillList}" var="skillMentor">
+                                               <c:if test="${s.ID==skillMentor.ID}">
+                                                   checked=""
+                                               </c:if>
+                                           </c:forEach>
+
+
                                            onclick="deRequireCb('skill')"
                                            name="skill${s.ID}" style="height: 20px; width: 10%">${s.name}
                                 </c:forEach>
@@ -71,7 +77,8 @@
                             <div class="form-group row flex-column" style="padding-bottom: 20px;">
                                 <div>Introduction</div>
                                 </br>
-                                <textarea value="${mCV.introduction}" name="introduction" id="editor" cols="75" rows="10" placeholder="introduction" required>
+                                <textarea value="" name="introduction" id="editor" cols="75" rows="10" placeholder="Introduction" required>
+                                    ${CV.introduction}
                                 </textarea>
                             </div>
 
@@ -86,22 +93,22 @@
 
             <!-- End of Main Content -->
         </div>
-                <%@include file="footer.jsp" %>
+        <%@include file="footer.jsp" %>
         <script src="https://cdn.ckeditor.com/ckeditor5/34.1.0/classic/ckeditor.js"></script>
         <script>
-                                        var value;
-                                        ClassicEditor
-                                                .create(document.querySelector('#editor'))
-                                                .then(editor => {
-                                                    value = editor;
-                                                })
-                                                .catch(error => {
-                                                    console.error(error);
-                                                });
+                                               var value;
+                                               ClassicEditor
+                                                       .create(document.querySelector('#editor'))
+                                                       .then(editor => {
+                                                           value = editor;
+                                                       })
+                                                       .catch(error => {
+                                                           console.error(error);
+                                                       });
 
-                                        const handleSubmit = () => {
-                                            document.getElementById('a').innerHTML = value.getData()
-                                        }
+                                               const handleSubmit = () => {
+                                                   document.getElementById('a').innerHTML = value.getData()
+                                               }
         </script>
         <script>
             function deRequireCb(elClass) {
