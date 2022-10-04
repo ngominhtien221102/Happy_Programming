@@ -74,16 +74,29 @@
                                 <i class="ti ti-user" aria-hidden="true"></i>
                             </a>
 <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="left:-50px">
-                                <a class="dropdown-item" href="<%=request.getContextPath()%>/views/user/profile.jsp">Profile</a>
+                                
+                                <c:if test="${sessionScope.Account != null}">
+                                    <c:if test="${sessionScope.Account.getRoleID() == 2}">
+                                        <a class="dropdown-item" href="<%=request.getContextPath()%>/viewMenteeProfile">Profile</a>
+                                    </c:if>   
+                                    <c:if test="${sessionScope.Account.getRoleID() == 3}">
+                                        <a class="dropdown-item" href="<%=request.getContextPath()%>/views/user/profile.jsp">Profile</a>
+                                    </c:if>   
+                                </c:if>  
+                                
 
                                 <c:if test="${sessionScope.Account != null}">
                                  <a class="dropdown-item" href="<%=request.getContextPath()%>/views/user/changePassword.jsp">Change password</a>
                                 </c:if>  
                                 <a class="dropdown-item" href="<%=request.getContextPath()%>/views/user/notice.jsp">Register</a>
 
-                                
+                                <c:if test="${sessionScope.Account == null}">
                                 <a class="dropdown-item" href="<%=request.getContextPath()%>/views/user/login.jsp">Login</a>
-                                <a class="dropdown-item" href="<%=request.getContextPath()%>/views/user/notice-single.jsp">Logout</a>
+                                </c:if>
+                                <c:if test="${sessionScope.Account != null}">
+                                <a class="dropdown-item" href="<%=request.getContextPath()%>/logout">Logout</a>
+                                </c:if>
+                                
 
                             </div>
                         </li>

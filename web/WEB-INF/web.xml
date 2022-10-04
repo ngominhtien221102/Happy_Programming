@@ -32,6 +32,18 @@
         <servlet-name>ResetPasswordController</servlet-name>
         <servlet-class>controllers.common.ResetPasswordController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ViewInvitationController</servlet-name>
+        <servlet-class>controllers.user.ViewInvitationController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewMenteeProfileController</servlet-name>
+        <servlet-class>controllers.user.ViewMenteeProfileController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LogoutController</servlet-name>
+        <servlet-class>controllers.common.LogoutController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ChangePasswordController</servlet-name>
         <url-pattern>/changepass</url-pattern>
@@ -63,6 +75,18 @@
     <servlet-mapping>
         <servlet-name>ResetPasswordController</servlet-name>
         <url-pattern>/resetPassword</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewInvitationController</servlet-name>
+        <url-pattern>/view_invitation</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewMenteeProfileController</servlet-name>
+        <url-pattern>/viewMenteeProfile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LogoutController</servlet-name>
+        <url-pattern>/logout</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

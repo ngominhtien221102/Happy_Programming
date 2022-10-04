@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controllers.mentor;
+package controllers.common;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,22 +12,26 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.util.ArrayList;
 import java.util.List;
+import model.Address;
 import model.MentorCV;
 import model.Skill;
-import model.User;
+import model.UserProfile;
+import service.IAddressService;
 import service.IMentorService;
 import service.ISkillService;
+import service.IUserProfileService;
+import service.classimpl.AddressService;
 import service.classimpl.MentorService;
 import service.classimpl.SkillService;
+import service.classimpl.UserProfileService;
 
 /**
  *
  * @author Admin
  */
-@WebServlet(name = "UpdateCVController", urlPatterns = {"/updateCV"})
-public class UpdateCVController extends HttpServlet {
+@WebServlet(name = "ViewCVController", urlPatterns = {"/viewCV"})
+public class ViewCVController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -46,10 +50,10 @@ public class UpdateCVController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet UpdateCVController</title>");
+            out.println("<title>Servlet ViewCVController</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet UpdateCVController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ViewCVController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -67,19 +71,41 @@ public class UpdateCVController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        processRequest(request, response);
         HttpSession ses = request.getSession();
+        List<Skill> listSkill = (List<Skill>) ses.getAttribute("listSkill");
         List<MentorCV> listCV = (List<MentorCV>) ses.getAttribute("listMentorCV");
-        IMentorService mentorSer = new MentorService();
-        User u = (User) ses.getAttribute("Account");
+        List<UserProfile> profiles = (List<UserProfile>) ses.getAttribute("listUserProfile");
+        List<Address> addList = (List<Address>) ses.getAttribute("listAddress");
 
-        MentorCV mCV = mentorSer.getCVById(u.getID(), listCV);
-        if (mCV == null) { //nếu chưa có CV thì chuyển về trang tạo CV
-            response.sendRedirect("views/mentors/createMentorCV.jsp");
-        } else {//đã có CV
-            ses.setAttribute("CV", mCV);
-            request.getRequestDispatcher("views/mentors/updateMentorCV.jsp").forward(request, response);
+        ISkillService skillSer = new SkillService();
+        IMentorService mentorSer = new MentorService();
+        IUserProfileService pfSer = new UserProfileService();
+        IUserProfileService uSer = new UserProfileService();
+        IAddressService ia = new AddressService();
+
+        String id_raw = request.getParameter("mentorID");
+
+        try {
+            int id = Integer.parseInt(id_raw);
+            UserProfile mentorProfile = uSer.getUserProfileById(id, profiles);
+            MentorCV mentorCV = mentorSer.getCVById(id, listCV);
+            
+            Address a = ia.getAddressById(mentorProfile.getAddressID(), addList);
+            String tinh = a.getTinh();
+            String huyen = a.getHuyen();
+            String xa = a.getXa();
+            request.setAttribute("tinh", tinh);
+            request.setAttribute("huyen", huyen);
+            request.setAttribute("xa", xa);
+            
+            request.setAttribute("mentorCV", mentorCV);
+            request.setAttribute("mentorProfile", mentorProfile);
+            request.getRequestDispatcher("views/common/viewMentorCV.jsp").forward(request, response);
+            
+        } catch (Exception e) { //id mentor truyền vào không hợp lệ => home
+            response.sendRedirect("views/user/index.jsp");
         }
+
     }
 
     /**
@@ -93,32 +119,7 @@ public class UpdateCVController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession ses = request.getSession();
-        List<Skill> listSkill = (List<Skill>) ses.getAttribute("listSkill");
-        ISkillService skillSer = new SkillService();
-        List<MentorCV> listCV = (List<MentorCV>) ses.getAttribute("listMentorCV");
-        IMentorService mentorSer = new MentorService();
-        User u = (User) ses.getAttribute("Account");
-        
-        String profession =  request.getParameter("profession");
-        String serviceDes =  request.getParameter("serviceDes");
-        String achivements =  request.getParameter("achivements");
-        String introduction = request.getParameter("introduction");
-
-        List<Skill> mentorSkills = new ArrayList<>();
-        for (Skill s : listSkill){
-            String skillID =  request.getParameter("skill" + s.getID());
-            if (skillID!=null){
-                mentorSkills.add(s);
-            }
-        }
-
-        MentorCV mCV = new MentorCV(u.getID(), profession, introduction, serviceDes, achivements, mentorSkills);        
-        mentorSer.update(mCV, listCV);
-        ses.setAttribute("listMentorCV", listCV);
-        request.setAttribute("updateSuccess", "Update CV Successfully!");
-        request.getRequestDispatcher("views/mentors/updateMentorCV.jsp").forward(request, response);
-        
+        processRequest(request, response);
     }
 
     /**

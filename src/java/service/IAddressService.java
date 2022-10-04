@@ -15,7 +15,6 @@ public interface IAddressService {
     List<Address> getList();
     Address getAddressById(int id, List<Address> list);
     String insert(Address u,List<Address> list);
-
     String update(Address u,List<Address> list);
 
 }

@@ -75,6 +75,10 @@ public class UserProfile {
     public String getCreateAt() {
         return createAt;
     }
+    
+    public String getGender() {
+        return gender ? "Male" : "Female";
+    }
 
     public void setID(int userID) {
         this.ID = userID;
@@ -111,6 +115,8 @@ public class UserProfile {
     public void setCreateAt(String createAt) {
         this.createAt = createAt;
     }
+    
+   
 
     @Override
     public int hashCode() {
