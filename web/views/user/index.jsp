@@ -10,7 +10,6 @@
 <html lang="zxx">
 
     <%@include file="headCSS.jsp" %>
-
     <body>
         <!-- header -->
         <%@include file="header.jsp" %>

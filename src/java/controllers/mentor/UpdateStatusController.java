@@ -12,22 +12,21 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import model.MentorCV;
-import model.Skill;
-import model.User;
-import service.IMentorService;
-import service.ISkillService;
-import service.classimpl.MentorService;
-import service.classimpl.SkillService;
+import model.Invitation;
+import model.Status;
+import service.IInvitationService;
+import service.IStatusService;
+import service.classimpl.InvitationService;
+import service.classimpl.StatusService;
 
 /**
  *
- * @author Admin
+ * @author ADMIN
  */
-@WebServlet(name = "UpdateCVController", urlPatterns = {"/updateCV"})
-public class UpdateCVController extends HttpServlet {
+@WebServlet(name = "UpdateStatusController", urlPatterns = {"/updateStatus"})
+public class UpdateStatusController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -46,10 +45,10 @@ public class UpdateCVController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet UpdateCVController</title>");
+            out.println("<title>Servlet UpdateStatusController</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet UpdateCVController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet UpdateStatusController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -64,21 +63,41 @@ public class UpdateCVController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    IInvitationService in = new InvitationService();
+    int invID;
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        processRequest(request, response);
-        HttpSession ses = request.getSession();
-        List<MentorCV> listCV = (List<MentorCV>) ses.getAttribute("listMentorCV");
-        IMentorService mentorSer = new MentorService();
-        User u = (User) ses.getAttribute("Account");
+        HttpSession session = request.getSession();
+        //lay hashmap,list tu loadhome
+        List<Invitation> inlist = (List<Invitation>) session.getAttribute("listInv");
 
-        MentorCV mCV = mentorSer.getCVById(u.getID(), listCV);
-        if (mCV == null) { //nếu chưa có CV thì chuyển về trang tạo CV
-            response.sendRedirect("views/mentors/createMentorCV.jsp");
-        } else {//đã có CV
-            ses.setAttribute("CV", mCV);
-            request.getRequestDispatcher("views/mentors/updateMentorCV.jsp").forward(request, response);
+        //lay info tu jsp
+        String invIdRaw = request.getParameter("id");
+        String type = request.getParameter("type");
+
+        if (invIdRaw != null && type != null) {
+            try {
+                invID = Integer.parseInt(invIdRaw.trim());
+                //lay invitation de update
+                Invitation inv = in.getInvitationById(invID, inlist);
+                if (type.equals("0")) {
+                    inv.setStatusID(4);
+                    in.update(inv, inlist);
+                    session.setAttribute("listInv", inlist);
+                    response.sendRedirect(request.getContextPath() + "/views/mentors/viewInvitationMentor.jsp");
+                }
+                if (type.equals("1")) {
+                    inv.setStatusID(1);
+                    in.update(inv, inlist);
+                    session.setAttribute("listInv", inlist);
+                    response.sendRedirect(request.getContextPath() + "/views/mentors/viewInvitationMentor.jsp");
+                }
+            } catch (Exception e) {
+            }
+        } else {
+            response.sendRedirect(request.getContextPath() + "/views/mentors/viewInvitationMentor.jsp");
         }
     }
 
@@ -93,32 +112,7 @@ public class UpdateCVController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession ses = request.getSession();
-        List<Skill> listSkill = (List<Skill>) ses.getAttribute("listSkill");
-        ISkillService skillSer = new SkillService();
-        List<MentorCV> listCV = (List<MentorCV>) ses.getAttribute("listMentorCV");
-        IMentorService mentorSer = new MentorService();
-        User u = (User) ses.getAttribute("Account");
-        
-        String profession =  request.getParameter("profession");
-        String serviceDes =  request.getParameter("serviceDes");
-        String achivements =  request.getParameter("achivements");
-        String introduction = request.getParameter("introduction");
-
-        List<Skill> mentorSkills = new ArrayList<>();
-        for (Skill s : listSkill){
-            String skillID =  request.getParameter("skill" + s.getID());
-            if (skillID!=null){
-                mentorSkills.add(s);
-            }
-        }
-
-        MentorCV mCV = new MentorCV(u.getID(), profession, introduction, serviceDes, achivements, mentorSkills);        
-        mentorSer.update(mCV, listCV);
-        ses.setAttribute("listMentorCV", listCV);
-        request.setAttribute("updateSuccess", "Update CV Successfully!");
-        request.getRequestDispatcher("views/mentors/updateMentorCV.jsp").forward(request, response);
-        
+        processRequest(request, response);
     }
 
     /**

@@ -81,8 +81,8 @@
                                                         ${Date2}
                                                     </td>
                                                     <td>${listStatus[inv.statusID]}</td>
-                                                    <td><a class="text-color" href="">update</a></td>
-                                                    <td><a class="text-color" href="">delete</a></td>
+                                                    <td><a class="text-color" href="<%=request.getContextPath()%>/editInvitation?type=1&id=${inv.ID}">update</a></td>
+                                                    <td><a class="text-color" href="<%=request.getContextPath()%>/editInvitation?type=0&id=${inv.ID}">delete</a></td>
                                                 </tr>
                                             </c:if>
                                         </c:forEach>

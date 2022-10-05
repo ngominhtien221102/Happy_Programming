@@ -16,16 +16,26 @@ public class Request {
     private int menteeID;
     private String createdAt;
     private String content;
+    private String title;
 
     public Request() {
     }
 
-    public Request(int ID, int mentorID, int menteeID, String createdAt, String content) {
+    public Request(int ID, int mentorID, int menteeID, String createdAt, String content, String title) {
         this.ID = ID;
         this.mentorID = mentorID;
         this.menteeID = menteeID;
         this.createdAt = createdAt;
         this.content = content;
+        this.title = title;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public int getID() {

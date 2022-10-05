@@ -56,12 +56,12 @@
 
         <!-- Nav Item - All transaction -->
         <li class="nav-item">
-            <a class="nav-link collapsed" href="<%=request.getContextPath()%>/order" >
+            <a class="nav-link collapsed" href="<%=request.getContextPath()%>/views/user/createRequest.jsp" >
                 <span>Create Request</span>
             </a>
         </li>   
         <li class="nav-item">
-            <a class="nav-link collapsed" href="<%=request.getContextPath()%>/order" >
+            <a class="nav-link collapsed" href="<%=request.getContextPath()%>/views/user/createRequest.jsp" >
                 <span>Sent Request</span>
             </a>
         </li>  
@@ -81,7 +81,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link collapsed" href="<%=request.getContextPath()%>/view_invitation" >
+            <a class="nav-link collapsed" href="<%=request.getContextPath()%>/views/user/viewInvitationMentee.jsp" >
                 <span>Sent invitation</span>
             </a>
         </li>

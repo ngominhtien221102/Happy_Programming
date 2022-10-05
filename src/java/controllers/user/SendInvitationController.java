@@ -2,26 +2,22 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controllers.common;
+package controllers.user;
+
 import java.io.IOException;
+import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
-import jakarta.servlet.http.HttpSession;
-import java.util.List;
-import model.User;
-import service.IUserService;
-
-import service.classimpl.UserService;
-import util.Utility;
+import service.IInvitationService;
+import service.classimpl.InvitationService;
 
 /**
  *
- * @author minhd
+ * @author ASUS
  */
-public class SignUpController extends HttpServlet {
+public class SendInvitationController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -35,7 +31,18 @@ public class SignUpController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+        try ( PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet SendInvitationController</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet SendInvitationController at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -47,9 +54,11 @@ public class SignUpController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    IInvitationService i = new InvitationService();
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.getRequestDispatcher("views/user/sendInvitation.jsp").forward(request, response);
     }
 
     /**
@@ -60,42 +69,10 @@ public class SignUpController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    IUserService service = new UserService();
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String username = request.getParameter("username").trim();
-        String password = request.getParameter("password").trim();
-        String repassword = request.getParameter("passwordRepeat").trim();
-        HttpSession ses = request.getSession();
-        Utility utility = new Utility();
-        List<User> userlst = (List<User>) ses.getAttribute("listUser");
-        boolean isSignUpAble = true;// add account if true
-        for (User user : userlst) {// check username in database
-            if(user.getAccountName().equalsIgnoreCase(username)){
-                request.setAttribute("username_alert", "User name already exist. Try again.");
-                isSignUpAble = false;
-                break;
-            }
-        }
-        if(!utility.checkPassword(password)){// password must have more than 8 character
-            request.setAttribute("Password_alert", "Minimum eight characters, at least one uppercase letter, one lowercase letter and one number");
-            isSignUpAble = false;
-        }
-        else if(!password.equalsIgnoreCase(repassword)){// comfirm password must match with password
-            request.setAttribute("Password_alert", "Those passwords didn’t match. Try again.");
-            isSignUpAble = false;
-        }
-        if(isSignUpAble){// if true add account
-            User u = new User(0, 4, username, password, true);
-            service.insert(u, userlst);
-            response.sendRedirect("views/user/index.jsp");
-        }else{// return back to signup jsp
-            request.setAttribute("username", username);
-            request.setAttribute("password", password);
-            request.getRequestDispatcher("views/user/registerView.jsp").forward(request, response);
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -107,4 +84,5 @@ public class SignUpController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
 }

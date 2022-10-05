@@ -29,27 +29,28 @@ public class InvitationService implements IInvitationService {
 
     @Override
     public String insert(Invitation u, List<Invitation> list) {
-            Invitation i = InvitationDAO.insert(u);
-            list.add(i);
-            return "OK";
+        Invitation i = InvitationDAO.insert(u);
+        list.add(i);
+        return "OK";
     }
 
     @Override
     public String update(Invitation u, List<Invitation> list) {
-            InvitationDAO.update(u);
-            Invitation invitation = getInvitationById(u.getID(), list);
-            invitation.setSkillID(u.getSkillID());
-            invitation.setTitle(u.getTitle());
-            invitation.setDeadlineDate(u.getDeadlineDate());
-            invitation.setContent(u.getContent());
-            return "OK";
+        InvitationDAO.update(u);
+        Invitation invitation = getInvitationById(u.getID(), list);
+        invitation.setSkillID(u.getSkillID());
+        invitation.setTitle(u.getTitle());
+        invitation.setDeadlineDate(u.getDeadlineDate());
+        invitation.setStatusID(u.getStatusID());
+        invitation.setContent(u.getContent());
+        return "OK";
     }
-    
-@Override
+
+    @Override
     public String delete(int id, List<Invitation> list) {
-       InvitationDAO.delete(id);
-       list.remove(getInvitationById(id, list));
-       return "OK";
+        InvitationDAO.delete(id);
+        list.remove(getInvitationById(id, list));
+        return "OK";
     }
 
     @Override
@@ -57,6 +58,4 @@ public class InvitationService implements IInvitationService {
         return InvitationDAO.getInvitation();
     }
 
-    
-    
 }
