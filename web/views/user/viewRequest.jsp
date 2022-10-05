@@ -43,10 +43,10 @@
                                                         </c:forEach>
                                                     </li>
                                                 </ul>
-                                                <a href="blog-single.jsp">
+                                                <a href="<%=request.getContextPath()%>/load_request?requestId=${request.ID}">
                                                     <h4 class="card-title">${request.title}</h4>
                                                 </a>
-                                                <a href="blog-single.jsp" class="btn btn-primary btn-sm">View</a>
+                                                <a href="<%=request.getContextPath()%>/load_request?requestId=${request.ID}" class="btn btn-primary btn-sm">View</a>
                                             </div>
                                         </div>
                                     </article>
