@@ -50,5 +50,36 @@ public class AddressService implements IAddressService {
         return "OK";
     }
 
+    @Override
+    public  List<String> getListProvince() {
+       return AddressDAO.getProvinceList();
+        
+    }
+
+    @Override
+    public List<String> getListDistTrict(String province) {
+        return AddressDAO.getDistrictList(province);
+    }
+
+    @Override
+    public List<String> getListWard(String Province, String District) {
+        return AddressDAO.getWardList(Province, District);
+    }
+
+    @Override
+    public int getIDAddress(String Province, String District, String Ward, List<Address> list) {
+        for (Address address : list) {
+            if(address.getTinh().equalsIgnoreCase(Province) && address.getHuyen().equalsIgnoreCase(District) && address.getXa().equalsIgnoreCase(Ward))
+            {
+                return address.getID();
+            }
+        }
+        return 0;
+    }
+
+    
+    
+    
+
 
 }
