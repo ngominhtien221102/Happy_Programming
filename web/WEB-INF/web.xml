@@ -52,6 +52,10 @@
         <servlet-name>AddressController</servlet-name>
         <servlet-class>controllers.user.AddressController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>UpdateProfileController</servlet-name>
+        <servlet-class>controllers.user.UpdateProfileController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ChangePasswordController</servlet-name>
         <url-pattern>/changepass</url-pattern>
@@ -103,6 +107,10 @@
     <servlet-mapping>
         <servlet-name>AddressController</servlet-name>
         <url-pattern>/addressControl</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateProfileController</servlet-name>
+        <url-pattern>/updateProfile</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
