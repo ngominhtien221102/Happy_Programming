@@ -92,6 +92,7 @@
                                 </div>
                                 <div class="app-form-group buttons">
                                     <button class="app-form-button">SEND</button>
+                                    <p>${message}</p>
                                 </div>
                             </div>
                         </form>
