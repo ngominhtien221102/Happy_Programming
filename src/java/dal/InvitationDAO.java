@@ -56,7 +56,7 @@ public class InvitationDAO extends DBContext {
 
     // Insert Invitation
     public Invitation insert(Invitation i) {
-        String sql = "insert into Mentor_CV values(?,?,?,?,?,?,?)";
+        String sql = "insert into Invitation values(?,?,?,?,?,?,?)";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, i.getMentorID());

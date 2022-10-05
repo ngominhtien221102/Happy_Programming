@@ -126,7 +126,7 @@ public class EditInvitationController extends HttpServlet {
         // lay du lieu de update  
         int mentorId = invitation.getMentorID();
         int menteeId = invitation.getMenteeID();
-        int skillId = Integer.parseInt(request.getParameter("skill"));
+        int skillId = invitation.getSkillID();
         int statusId = invitation.getStatusID();
         String title = request.getParameter("title");
         String deadline = request.getParameter("deadline");
@@ -137,7 +137,7 @@ public class EditInvitationController extends HttpServlet {
             session.setAttribute("invitation", invitation);
             request.setAttribute("success", "Update success");
         }else{
-            request.setAttribute("failed", "Update failed");            
+            request.setAttribute("failed", msg);            
         }
         request.getRequestDispatcher("/views/user/editInvitation.jsp").forward(request, response);
     }

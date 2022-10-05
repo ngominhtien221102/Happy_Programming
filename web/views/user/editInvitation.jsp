@@ -41,28 +41,26 @@
                         <div style="margin-bottom: 20px;margin-top: -10px"><button style="margin-right: 10px" class="cv"><a href="<%=request.getContextPath()%>/views/user/viewInvitationMentee.jsp"><i class="ti-arrow-left"></i></a></button> <a class="text-color" href="<%=request.getContextPath()%>/views/user/viewInvitationMentee.jsp">Back to VIEW INVITATIONS</a></div>
                         <h2 style="margin-bottom:30px">Edit invitation</h2>
                         <c:if test="${requestScope.success!=null}">
-                                <br><h3 style="color: green">${success}</h3>
-                            </c:if>
-                            <c:if test="${requestScope.failed!=null}">
-                                <br><h3 style="color: red">${failed}</h3>
-                            </c:if>
+                            <br><h3 style="color: green">${success}</h3>
+                        </c:if>
+                        <c:if test="${requestScope.failed!=null}">
+                            <br><h3 style="color: red">${failed}</h3>
+                        </c:if>
                         <form action="<%=request.getContextPath()%>/editInvitation" method="POST">
                             Mentor's name:
                             <input type="text" class="form-control" id="" name="mentorName" readonly="" value="${mentorName}">
                             <button class="cv" style=""><a href="<%=request.getContextPath()%>/viewCV?mentorID=${invitation.mentorID}">View mentor's CV</a></button>
-                            <br><label for="">Choose a skill:</label>
-                            <select style="margin-left:10px; margin-right: 30px" name="skill" id="">
-                                <c:forEach items="${mentorSkill}" var="m">
-                                    <option value="${m.ID}" <c:if test="${m.ID==invitation.skillID}">selected=""</c:if>>${m.name}</option>
-                                </c:forEach>
-                            </select>
+                            <br><label style="margin-right: 10px" for="">Skill:</label>
+                            <c:forEach items="${mentorSkill}" var="m">
+                                <c:if test="${m.ID==invitation.skillID}"><label style="margin-right: 30px;font-size: 20px;font-weight: 900;">${m.name}</label></c:if>
+                            </c:forEach>
                             Deadline date:<input required="" style="margin-left:10px" type="date" name="deadline" value="${invitation.deadlineDate}"><br>
                             Title:<input type="text" required="" class="form-control" id="" name="title" placeholder="" value="${invitation.title}">
                             <label style="margin-bottom: 16px" for="">Content:</label><textarea id="editor" class="form-control" required="" name="content" rows="4" cols="50">
                                 ${invitation.content}
                             </textarea>
                             <button type="submit" style="float:right; margin-top: 16px;" class="btn btn-primary">UPDATE</button>
-                            
+
                         </form>
                     </div>
 
