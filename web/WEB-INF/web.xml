@@ -49,8 +49,8 @@
         <servlet-class>controllers.user.AddressController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>LoadRequestResponse</servlet-name>
-        <servlet-class>controllers.user.LoadRequestResponse</servlet-class>
+        <servlet-name>LoadRequest</servlet-name>
+        <servlet-class>controllers.user.LoadRequest</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ChangePasswordController</servlet-name>
@@ -101,8 +101,8 @@
         <url-pattern>/addressControl</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>LoadRequestResponse</servlet-name>
-        <url-pattern>/load_request</url-pattern>
+        <servlet-name>LoadRequest</servlet-name>
+        <url-pattern>/loadRequest</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
