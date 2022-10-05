@@ -10,6 +10,15 @@
 <!DOCTYPE html>
 <html>
     <%@include file="headCSS2.jsp" %>
+    <style>
+        .card-title,.list-inline-item{
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 300px;
+            max-height: 150px;
+        }
+    </style>
     <body>
         <!-- header -->
         <%@include file="header.jsp" %>
@@ -26,7 +35,10 @@
                                     <!-- blog post -->
                                     <article class="col-lg-4 col-sm-6 mb-5">
                                         <div class="card rounded-0 border-bottom border-primary border-top-0 border-left-0 border-right-0 hover-shadow">
-                                            <div class="card-body">
+                                            <div class="card-body" >
+                                                <a href="<%=request.getContextPath()%>/loadRequest?requestId=${request.ID}">
+                                                    <h4 class="card-title">${request.title}</h4>
+                                                </a>
                                                 <!-- post meta -->
                                                 <ul class="list-inline mb-3">
                                                     <!-- post date -->
@@ -43,9 +55,7 @@
                                                         </c:forEach>
                                                     </li>
                                                 </ul>
-                                                <a href="<%=request.getContextPath()%>/loadRequest?requestId=${request.ID}">
-                                                    <h4 class="card-title">${request.title}</h4>
-                                                </a>
+
                                                 <a href="<%=request.getContextPath()%>/loadRequest?requestId=${request.ID}" class="btn btn-primary btn-sm">View</a>
                                             </div>
                                         </div>
