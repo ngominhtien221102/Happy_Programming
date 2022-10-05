@@ -16,22 +16,30 @@ public class Utility {
 
     public Utility() {
     }
-    
-    public String getString(String message){
+
+    public String getString(String message) {
         return "";
     }
-    
-    public int getInt(String message){
+
+    public int getInt(String message) {
         return 0;
     }
-    
-    public LocalDate getDate(String message){
+
+    public LocalDate getDate(String message) {
         return null;
     }
-    public boolean checkPassword(String password){//Minimum eight characters, at least one uppercase letter, one lowercase letter and one number
+
+    public boolean checkPassword(String password) {//Minimum eight characters, at least one uppercase letter, one lowercase letter and one number
         Pattern p = Pattern.compile("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$");
         Matcher m = p.matcher(password);
         return m.matches();
     }
-    
+
+    public int countWord(String sentence) {
+        String trim = sentence.trim();
+        if (trim.isEmpty()) {
+            return 0;
+        }
+        return trim.split("\\s+").length;
+    }
 }
