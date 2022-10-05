@@ -15,7 +15,6 @@
         <!-- header -->
         <%@include file="header.jsp" %>
         <!-- /header -->
-      
         <!-- page title -->
         <section class="page-title-section overlay" data-background="images/backgrounds/page-title.jpg">
             <div class="container">
@@ -164,7 +163,6 @@
         <!-- footer -->
         <%@include file="footer.jsp" %>
         <!-- /footer -->
-
         <!-- jQuery -->
         <%@include file="scriptJS.jsp" %>
 

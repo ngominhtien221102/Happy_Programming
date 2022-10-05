@@ -33,10 +33,6 @@
         <servlet-class>controllers.common.ResetPasswordController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ViewInvitationController</servlet-name>
-        <servlet-class>controllers.user.ViewInvitationController</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>ViewMenteeProfileController</servlet-name>
         <servlet-class>controllers.user.ViewMenteeProfileController</servlet-class>
     </servlet>
@@ -51,6 +47,10 @@
     <servlet>
         <servlet-name>AddressController</servlet-name>
         <servlet-class>controllers.user.AddressController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LoadRequestResponse</servlet-name>
+        <servlet-class>controllers.user.LoadRequestResponse</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ChangePasswordController</servlet-name>
@@ -85,10 +85,6 @@
         <url-pattern>/resetPassword</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ViewInvitationController</servlet-name>
-        <url-pattern>/view_invitation</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>ViewMenteeProfileController</servlet-name>
         <url-pattern>/viewMenteeProfile</url-pattern>
     </servlet-mapping>
@@ -103,6 +99,10 @@
     <servlet-mapping>
         <servlet-name>AddressController</servlet-name>
         <url-pattern>/addressControl</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LoadRequestResponse</servlet-name>
+        <url-pattern>/load_request</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
