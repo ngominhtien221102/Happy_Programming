@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.util.List;
 import model.Request;
+import model.User;
 import service.IRequestService;
 import service.classimpl.RequestService;
 
@@ -39,7 +40,7 @@ public class LoadRequest extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet LoadRequestResponse</title>");            
+            out.println("<title>Servlet LoadRequestResponse</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet LoadRequestResponse at " + request.getContextPath() + "</h1>");
@@ -66,11 +67,23 @@ public class LoadRequest extends HttpServlet {
         } catch (Exception e) {
         }
         HttpSession session = request.getSession();
-        IRequestService service = new RequestService();
         List<Request> requestLst = (List<Request>) session.getAttribute("listRequest");
-        Request r = service.getRequestById(requestId, requestLst);
-        request.setAttribute("request", r);
-        request.getRequestDispatcher("views/user/viewRequestSingle.jsp").forward(request, response);
+        User u = (User) session.getAttribute("Account");
+        boolean isViewAble = false;
+        for (Request request1 : requestLst) {
+            if (request1.getMenteeID() == u.getID() && requestId == request1.getID()) {
+                isViewAble = true;
+            }
+        }
+        if (isViewAble) {
+            IRequestService service = new RequestService();
+            Request r = service.getRequestById(requestId, requestLst);
+            request.setAttribute("request", r);
+            request.getRequestDispatcher("views/user/viewRequestSingle.jsp").forward(request, response);
+        }else{
+            response.sendRedirect("views/user/viewRequest.jsp");
+        }
+
     }
 
     /**
@@ -84,7 +97,7 @@ public class LoadRequest extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);    
+        processRequest(request, response);
     }
 
     /**
