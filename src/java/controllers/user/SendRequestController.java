@@ -8,6 +8,7 @@ package controllers.user;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -17,13 +18,16 @@ import model.Request;
 import model.User;
 import model.UserProfile;
 import service.IRequestService;
+import service.IUserProfileService;
 import service.classimpl.RequestService;
+import service.classimpl.UserProfileService;
 import util.Utility;
 
 /**
  *
  * @author minhd
  */
+@WebServlet(urlPatterns = {"/sendRequest"})
 public class SendRequestController extends HttpServlet {
 
     /**
@@ -64,7 +68,16 @@ public class SendRequestController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        HttpSession session = request.getSession();
+        int mentorId = 0;
+        try {
+            mentorId = Integer.parseInt(request.getParameter("mentorId"));
+        } catch (Exception e) {
+        }
+        IUserProfileService service = new UserProfileService();
+        UserProfile mentor = service.getUserProfileById(mentorId, (List<UserProfile>)session.getAttribute("listUserProfile"));
+        session.setAttribute("mentor", mentor);
+        request.getRequestDispatcher("/views/user/createRequest.jsp").forward(request, response);
     }
 
     /**
@@ -79,51 +92,27 @@ public class SendRequestController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        String name = (String) request.getParameter("mentorName");
         String title = (String) request.getParameter("title");
         String content = (String) request.getParameter("content");
-
+        UserProfile mentor = (UserProfile) session.getAttribute("mentor");
         boolean sendable = true;
         Utility u = new Utility();
-        List<UserProfile> lst = (List<UserProfile>) session.getAttribute("listUserProfile");
-        List<User> ulst = (List<User>) session.getAttribute("listUser");
-        UserProfile mentor = findMentor(ulst, lst, name);
-        if(mentor == null){
-            request.setAttribute("nanme_alert", "mentor not exist!");
-            sendable = false;
-        }
         if(u.countWord(content)<= 10){
             request.setAttribute("content_alert","message must have more than 10 letters");
             sendable = false;
-        }
-                
+        }       
         if(sendable){
             IRequestService service = new RequestService();
             User mentee = (User) session.getAttribute("Account");
             Request r = new Request(0, mentor.getID(), mentee.getID(), "", content, title);
             service.insert(r, (List<Request>)session.getAttribute("listRequest"));
             request.setAttribute("message","request sent!");
+            session.removeAttribute("mentor");
         }else{
-            request.setAttribute("mentorName", name);
             request.setAttribute("title", title);
             request.setAttribute("content", content);
         }
         request.getRequestDispatcher("/views/user/createRequest.jsp").forward(request, response);
-    }
-    public UserProfile findMentor(List<User> ulst, List<UserProfile> lst, String name){
-        for (UserProfile userProfile : lst) {
-            String fname = userProfile.getFirstName()+" "+userProfile.getLastName();
-            if(fname.equalsIgnoreCase(name)){
-                for (User user : ulst) {
-                    if(user.getID()==userProfile.getID()){
-                        if(user.getRoleID() == 3){
-                            return userProfile;
-                        }
-                    }
-                }
-            }
-        }
-        return null;
     }
 
     /**
