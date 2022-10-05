@@ -42,7 +42,7 @@
                 <section class="section" >
                     <h2 style="margin-left:15px">All invitations</h2>
                     <div class="container">
-
+                        
                         <br><h3>Invitations</h3>
                         <div class="row">  
                             <div class="col-md-12 table">
@@ -59,7 +59,7 @@
                                             <th colspan="2" style="text-align: center">Option</th>
                                         </tr>
                                     </thead>
-
+                                    
                                     <tbody>
                                         <c:forEach items="${listInv}" var="inv" varStatus="loop"> 
                                             <c:if test="${Account.ID == inv.menteeID}">
