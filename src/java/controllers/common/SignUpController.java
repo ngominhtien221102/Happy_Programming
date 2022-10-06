@@ -73,30 +73,26 @@ public class SignUpController extends HttpServlet {
         HttpSession ses = request.getSession();
         Utility utility = new Utility();
         List<User> userlst = (List<User>) ses.getAttribute("listUser");
-        boolean isSignUpAble = true;// add account if true
-        for (User user : userlst) {// check username in database
-            if(user.getAccountName().equalsIgnoreCase(username)){
-                request.setAttribute("username_alert", "User name already exist. Try again.");
-                isSignUpAble = false;
-                break;
-            }
-        }
-        if(!utility.checkPassword(password)){// password must have more than 8 character
-            request.setAttribute("Password_alert", "Minimum eight characters, at least one uppercase letter, one lowercase letter and one number");
+        boolean isSignUpAble = true;//add account if true
+        User user = service.getUserByAccountName(username, userlst);
+        if(user != null){
+            request.setAttribute("userNameAlert", "User name already exist!");
             isSignUpAble = false;
         }
-        else if(!password.equalsIgnoreCase(repassword)){// comfirm password must match with password
-            request.setAttribute("Password_alert", "Those passwords didn’t match. Try again.");
+        if(!utility.checkPassword(password)){//password must have more than 8 character
+            request.setAttribute("passwordAlert", "Minimum eight characters, at least one uppercase letter, one lowercase letter and one number");
+            isSignUpAble = false;
+        }
+        else if(!password.equalsIgnoreCase(repassword)){//comfirm password must match with password
+            request.setAttribute("passwordAlert", "Those passwords didn’t match. Try again.");
             isSignUpAble = false;
         }
         if(isSignUpAble){// if true add account
-            User u = new User(0, 4, username, password, true);
+            User u = new User(0, 4, username, password, false);
             service.insert(u, userlst);
             response.sendRedirect("views/user/index.jsp");
         }else{// return back to signup jsp
-            request.setAttribute("username", username);
-            request.setAttribute("password", password);
-            request.getRequestDispatcher("views/user/registerView.jsp").forward(request, response);
+            request.getRequestDispatcher("views/user/signup.jsp").forward(request, response);
         }
     }
 

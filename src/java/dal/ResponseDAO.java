@@ -4,7 +4,6 @@
  */
 package dal;
 
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -27,33 +26,43 @@ public class ResponseDAO extends DBContext {
         this.responselst = responselst;
     }
 
-
     public ArrayList<Response> getResponselst() {
         load();
         return responselst;
     }
 
     public void insert(Response response) {
-
+        LocalDate curDate = LocalDate.now();
+        String date = curDate.toString();
         String sql = "INSERT INTO [dbo].[Response]\n"
                 + "           ([Request_ID]\n"
                 + "           ,[Content]\n"
-                + "           ,[Created_at])\n"
+                + "           ,[Created_at]\n"
+                + "           ,[User_ID])\n"
                 + "     VALUES\n"
-                + "           (?,?,?)\n";
+                + "           (?,?,?,?)\n";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setInt(1, response.getId());
+            ps.setInt(1, response.getRequestId());
             ps.setString(2, response.getContent());
-            ps.setString(3, response.getCreate_at());
+            ps.setString(3, date);
+            ps.setInt(4, response.getUserId());
             ps.execute();
+            String sql1 = "SELECT top(1) [Response_ID]\n"
+                    + "  FROM [dbo].[Response]\n"
+                    + "  order by [Response_ID] desc";
+            ps = connection.prepareStatement(sql1);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                response.setId(rs.getInt(1));
+                response.setCreateAt(date);
+            }
         } catch (SQLException e) {
 
         }
     }
 
     public void update(Response response) {
-        Date date = new Date(System.currentTimeMillis());
         String sql = "UPDATE [dbo].[Response]\n"
                 + "   SET [Content] = ?\n"
                 + " WHERE Response_ID=?";
@@ -69,16 +78,22 @@ public class ResponseDAO extends DBContext {
 
     public void load() {
         responselst = new ArrayList<>();
-        String sql = "SELECT * FROM Response";
+        String sql = "SELECT [Response_ID]\n"
+                + "      ,[Request_ID]\n"
+                + "      ,[Content]\n"
+                + "      ,[Created_at]\n"
+                + "      ,[User_ID]\n"
+                + "  FROM [dbo].[Response]";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Response response = new Response();
                 response.setId(rs.getInt(1));
-                response.setRequest_id(rs.getInt(2));
+                response.setRequestId(rs.getInt(2));
                 response.setContent(rs.getString(3));
-                response.setCreate_at(rs.getString(4));
+                response.setCreateAt(rs.getString(4));
+                response.setUserId(rs.getInt(5));
                 responselst.add(response);
             }
         } catch (SQLException e) {

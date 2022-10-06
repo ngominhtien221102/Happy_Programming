@@ -133,7 +133,6 @@ public class CreateProfileController extends HttpServlet {
         }
 
         //Moi nguoi nho doi duong dan tren may moi nguoi nhe
-
             String uploadFolder = "D:\\Project_SE1628\\Happy_Programming\\web\\img\\avatar";
             Path uploadPath = Paths.get(uploadFolder);
             if (!Files.exists(uploadPath)) {
