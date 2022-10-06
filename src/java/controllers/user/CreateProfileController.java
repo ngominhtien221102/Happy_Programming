@@ -130,7 +130,7 @@ public class CreateProfileController extends HttpServlet {
             request.getRequestDispatcher("views/user/createMenteeProfile.jsp").forward(request, response);
         }
         //Moi nguoi nho doi duong dan tren may moi nguoi nhe
-            String uploadFolder = "D:\\Project_SE1628\\Happy_Programming\\web\\img\\avatar";
+            String uploadFolder = "C:\\Users\\minhd\\Documents\\NetBeansProjects\\Happy_Programming\\web\\img\\avatar";
             Path uploadPath = Paths.get(uploadFolder);
             if (!Files.exists(uploadPath)) {
                 Files.createDirectory(uploadPath);
