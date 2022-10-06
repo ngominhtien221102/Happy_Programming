@@ -4,15 +4,14 @@
  */
 package controllers.user;
 
-import com.sun.mail.imap.protocol.ID;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.util.ArrayList;
 import java.util.List;
 import model.Invitation;
 import model.MentorCV;
@@ -21,16 +20,15 @@ import model.UserProfile;
 import service.IInvitationService;
 import service.IMentorService;
 import service.IUserProfileService;
-import service.IUserService;
 import service.classimpl.InvitationService;
 import service.classimpl.MentorService;
 import service.classimpl.UserProfileService;
-import service.classimpl.UserService;
 
 /**
  *
  * @author ASUS
  */
+@WebServlet(name = "EditInvitationController", urlPatterns = {"/editInvitation"})
 public class EditInvitationController extends HttpServlet {
 
     /**

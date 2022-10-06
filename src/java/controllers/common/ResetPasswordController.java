@@ -7,6 +7,7 @@ package controllers.common;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -21,6 +22,7 @@ import util.Utility;
  *
  * @author ADMIN
  */
+@WebServlet(name = "ResetPasswordController", urlPatterns = {"/resetPassword"})
 public class ResetPasswordController extends HttpServlet {
 
     /**

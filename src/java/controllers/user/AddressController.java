@@ -7,6 +7,7 @@ package controllers.user;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -19,6 +20,7 @@ import service.classimpl.AddressService;
  *
  * @author Lenovo
  */
+@WebServlet(name = "AddressController", urlPatterns = {"/addressControl"})
 public class AddressController extends HttpServlet {
 
     /**

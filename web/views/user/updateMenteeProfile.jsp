@@ -129,7 +129,7 @@
         $(document).ready(function () {
             $("#province").change(function () {
                 $.ajax({
-                    url: "/Happy_Programming(Copy)/addressControl",
+                    url: "/Happy_Programming/addressControl",
                     type: 'GET',
                     data: {province: $('#province option:selected').val()},
 
@@ -147,7 +147,7 @@
         $(document).ready(function () {
             $("#district").change(function () {
                 $.ajax({
-                    url: "/Happy_Programming(Copy)/addressControl",
+                    url: "/Happy_Programming/addressControl",
                     type: 'GET',
                     data: {province: $('#province option:selected').val(),
                         district: $('#district option:selected').val()},

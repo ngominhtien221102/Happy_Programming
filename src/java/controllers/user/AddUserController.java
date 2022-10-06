@@ -8,6 +8,7 @@ package controllers.user;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -22,6 +23,7 @@ import service.classimpl.UserService;
  *
  * @author Admin
  */
+@WebServlet(name = "AddUserController", urlPatterns = {"/addUser"})
 public class AddUserController extends HttpServlet {
    
     /** 
