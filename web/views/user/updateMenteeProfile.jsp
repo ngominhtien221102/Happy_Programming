@@ -13,11 +13,11 @@
 
     </head>
     <body>
-
+        
         <%@include file="header.jsp" %>
 
         <!-- Main Content -->
-        <div id="content" class="row">
+        <div id="content" class="row" style="padding-top: 50px">
             <!-- Begin Page Content -->
 
             <%@include file="../user/sidebar.jsp" %>

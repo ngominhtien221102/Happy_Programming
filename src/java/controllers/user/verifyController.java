@@ -13,17 +13,21 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.util.List;
-import model.Request;
+import javax.mail.MessagingException;
 import model.User;
-import service.IRequestService;
-import service.classimpl.RequestService;
+import model.UserProfile;
+import service.IUserProfileService;
+import service.IUserService;
+import service.classimpl.UserProfileService;
+import service.classimpl.UserService;
+import util.*;
 
 /**
  *
- * @author minhd
+ * @author Lenovo
  */
-@WebServlet(name = "ViewRequestSingleController", urlPatterns = {"/singleRequest"})
-public class ViewRequestSingleController extends HttpServlet {
+@WebServlet(name = "verifyController", urlPatterns = {"/verifyControl"})
+public class verifyController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -42,10 +46,10 @@ public class ViewRequestSingleController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet LoadRequestResponse</title>");
+            out.println("<title>Servlet verifyController</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet LoadRequestResponse at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet verifyController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -63,30 +67,28 @@ public class ViewRequestSingleController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int requestId = 0;
+
+        HttpSession ses = request.getSession();
+        User u = (User) ses.getAttribute("Account");
+        List<UserProfile> uList;
+        uList = (List<UserProfile>) ses.getAttribute("listUserProfile");
+        IUserProfileService iU = new UserProfileService();
+        UserProfile uP = iU.getUserProfileById(u.getID(), uList);
+
+        Mail mail = new Mail();
+        String OTP = mail.getOTP();
+        ses.setAttribute("OTP", OTP);
+        String subject = "Verify Email to active account";
+        String message = "From Happy Programming, Your OTP is: " + OTP;
         try {
-            requestId = Integer.parseInt(request.getParameter("requestId"));
-        } catch (Exception e) {
-        }
-        HttpSession session = request.getSession();
-        List<Request> requestLst = (List<Request>) session.getAttribute("listRequest");
-        User u = (User) session.getAttribute("Account");
-        boolean isViewAble = false;
-        for (Request request1 : requestLst) {
-            if (request1.getMenteeID() == u.getID() && requestId == request1.getID()) {
-                isViewAble = true;
-                break;
-            }
-        }
-        if (isViewAble) {
-            IRequestService service = new RequestService();
-            Request r = service.getRequestById(requestId, requestLst);
-            request.setAttribute("request", r);
-            request.getRequestDispatcher("views/user/viewRequestSingle.jsp").forward(request, response);
-        } else {
-            response.sendRedirect("views/user/viewRequest.jsp");
+            mail.sendEmail("tiennmhe161579@fpt.edu.vn", "Minhtien01", uP.getEmail(), subject, message);
+        } catch (MessagingException ex) {
+            System.out.println("Send OTP error");
         }
 
+        response.sendRedirect("views/user/verify.jsp");
+
+//       
     }
 
     /**
@@ -100,7 +102,23 @@ public class ViewRequestSingleController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        IUserService i = new UserService();
+        HttpSession ses = request.getSession();
+        User u = (User) ses.getAttribute("Account");
+        String OTPsend = (String) ses.getAttribute("OTP");
+        String OTP = request.getParameter("OTP");
+        List<User> uList;
+        uList = (List<User>) ses.getAttribute("listUser");
+
+        if (OTP.equals(OTPsend)) {
+            User userUpdate = new User(u.getID(), u.getRoleID(), u.getAccountName(), u.getPassWord(), true);
+            i.update(userUpdate, uList);
+            response.sendRedirect("views/user/index.jsp");
+        } else {
+            request.setAttribute("Alert", "Incorrect OTP! Please check again OTP to active account!");
+            request.getRequestDispatcher("views/user/verify.jsp").forward(request, response);
+        }
+
     }
 
     /**

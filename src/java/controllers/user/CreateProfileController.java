@@ -74,7 +74,7 @@ public class CreateProfileController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        response.sendRedirect("views/user/index.jsp");
+        response.sendRedirect("verifyControl");
     }
 
     /**

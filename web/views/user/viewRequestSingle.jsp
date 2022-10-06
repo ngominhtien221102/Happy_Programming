@@ -69,7 +69,6 @@
                                                 <fmt:formatDate value="${Date}" var="Date2" pattern="dd/MM/yyyy"/>        
                                                 -  ${Date2}
                                             </span>
-
                                             <p class="card-text">${response.content}</p>
                                         </div>
                                     </div>

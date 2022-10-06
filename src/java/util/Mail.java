@@ -24,7 +24,7 @@ import javax.mail.internet.MimeMessage;
  */
 public class Mail {
 
-    public static void sendEmail(final String userName, final String password, String toAddress,
+    public void sendEmail(final String userName, final String password, String toAddress,
             String subject, String message) throws AddressException,
             MessagingException {
 
@@ -59,10 +59,10 @@ public class Mail {
 
     }
     
-    public int OTP() {
-        Random generator = new Random();
-        int code = (int) Math.floor(((Math.random() * 899999) + 100000));
-        return code;
+     public  String getOTP() {
+        Random rnd = new Random();
+        int number = rnd.nextInt(9999);
+        return String.format("%04d", number);
     }
 
     public static String RandomPass() {
