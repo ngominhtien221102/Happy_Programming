@@ -12,91 +12,76 @@
     <%@include file="headCSS2.jsp" %>
 
     <style>
-
-
-        .cv:hover{
-            background-color:#e9ecef;
-            color: #ffbc3b;
+        .card-title,.list-inline-item{
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 300px;
+            max-height: 150px;
         }
-        input,select,textarea,.cv{
-            margin: 16px 0px;
-            border-radius: 5px;
+        .signup__link{
+            margin: 2%;
         }
-        .cv{
-            color: black;
-            border-color: #ced4da;
-            background-color: #fff;
-            padding: 10px;
+        .signup__link:hover{
+            color: #1a1a37;
         }
-        table{
-            margin-top: 30px;
-        }
-
     </style>
     <body>
-        <%@include file= "header.jsp" %>
-        <div id="content" class="row" style="padding-top: 50px">
+        <!-- header -->
+        <%@include file="header.jsp" %>
+        <!-- /header -->
+        <div id="content" class="row" style="padding-top: 50px; ">
             <%@include file="sidebar.jsp" %>
-
             <div class="col-10">
                 <section class="section" >
-                    <h2 style="margin-left:15px">All invitations</h2>
+                    <h2 style="margin-left:15px">All Invitation</h2>
                     <div class="container">
-                        
-                        <br><h3>Invitations</h3>
-                        <div class="row">  
-                            <div class="col-md-12 table">
-                                <table border="2" style="width: 100%">
-                                    <thead>
-                                        <tr>
-                                            <th>.NO</th>
-                                            <th>Mentor</th>
-                                            <th>Skill</th>
-                                            <th>Title</th> 
-                                            <th>Content</th>         
-                                            <th>Deadline date</th>
-                                            <th>Status</th>
-                                            <th colspan="2" style="text-align: center">Option</th>
-                                        </tr>
-                                    </thead>
-                                    
-                                    <tbody>
-                                        <c:forEach items="${listInv}" var="inv" varStatus="loop"> 
-                                            <c:if test="${Account.ID == inv.menteeID}">
-                                                <tr>
-                                                    <td>${loop.index+1}</td>
-                                                    <td>
-                                                        <c:forEach items="${listUserProfile}" var="user" varStatus="loop">
-                                                            <c:if test="${user.ID == inv.mentorID}" >
-                                                                ${user.firstName} ${user.lastName}
+                        <div class="row">
+                            <c:forEach items="${listInv}" var="inv" varStatus="loop">
+                                <c:if test="${inv.menteeID == Account.ID}">
+                                    <!-- blog post -->
+                                    <article class="col-lg-4 col-sm-6 mb-5">
+                                        <div class="card rounded-0 border-bottom border-primary border-top-0 border-left-0 border-right-0 hover-shadow">
+                                            <div class="card-body" >
+                                                <a href="<%=request.getContextPath()%>/singleInvite?invitationId=${inv.ID}">
+                                                    <h4 class="card-title">${inv.title}</h4>
+                                                </a>
+                                                <!-- post meta -->
+                                                <ul class="list-inline mb-3">
+                                                    <!-- post date -->
+                                                    <li class="list-inline-item mr-3 ml-0">
+                                                        <fmt:parseDate value="${inv.deadlineDate}" pattern="yyyy-MM-dd" var="Date" />
+                                                        <fmt:formatDate value="${Date}" var="Date2" pattern="dd/MM/yyyy"/>        
+                                                        Deadline: ${Date2}
+                                                    </li>
+                                                    <!-- to -->
+                                                    <li class="list-inline-item mr-3 ml-0">
+                                                        <c:forEach items="${listUserProfile}" var="user">
+                                                            <c:if test="${user.ID == inv.mentorID}">
+                                                                To: ${user.firstName} ${user.lastName}
                                                             </c:if>
                                                         </c:forEach>
-                                                    </td>
-                                                    <td>${HmSkill[inv.skillID]}</td>
-                                                    <td>${inv.title}</td>
-                                                    <td>${inv.content}</td>
-                                                    <td>
-                                                        <fmt:parseDate value="${inv.deadlineDate}" pattern="yyyy-MM-dd" var="Date" />
-                                                        <fmt:formatDate value="${Date}" var="Date2" pattern="dd/MM/yyyy"/>
-                                                        ${Date2}
-                                                    </td>
-                                                    <td>${listStatus[inv.statusID]}</td>
-                                                    <td><a class="text-color" href="<%=request.getContextPath()%>/editInvitation?type=1&id=${inv.ID}">update</a></td>
-                                                    <td><a class="text-color" href="<%=request.getContextPath()%>/editInvitation?type=0&id=${inv.ID}">delete</a></td>
-                                                </tr>
-                                            </c:if>
-                                        </c:forEach>
-                                    </tbody>
-
-                                </table>
-                            </div>
+                                                    </li> <br>
+                                                    <li class="list-inline-item mr-3 ml-0">    
+                                                        Skill: ${HmSkill[inv.skillID]}
+                                                    </li><br>
+                                                    <li class="list-inline-item mr-3 ml-0">    
+                                                        Status: ${listStatus[inv.statusID]}
+                                                    </li>
+                                                </ul>
+                                                <a href="<%=request.getContextPath()%>/singleInvite?invitationId=${inv.ID}" class="signup__link">View</a>
+                                                <a class="signup__link" <c:if test="${inv.statusID==2}">href="<%=request.getContextPath()%>/editInvitation?type=1&id=${inv.ID}"</c:if><c:if test="${inv.statusID!=2}">href=""</c:if>>Update</a>
+                                                <a class="signup__link" href="<%=request.getContextPath()%>/editInvitation?type=0&id=${inv.ID}">Delete</a>
+                                            </div>
+                                        </div>
+                                    </article>
+                                </c:if>
+                            </c:forEach>
                         </div>
-                        <!--form-->
                     </div>
-                </section>
+                </section>    
             </div>
         </div>
-
         <!-- footer -->
         <%@include file="footer.jsp" %>
         <!-- /footer -->
