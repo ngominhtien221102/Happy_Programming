@@ -13,7 +13,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import jakarta.servlet.http.Part;
-import java.time.LocalDate;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import model.Address;
 import model.User;
@@ -22,17 +24,14 @@ import service.IAddressService;
 import service.IUserProfileService;
 import service.classimpl.AddressService;
 import service.classimpl.UserProfileService;
-import util.Utility;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+
 /**
  *
  * @author Lenovo
  */
 @MultipartConfig
-public class CreateProfileController extends HttpServlet {
-    
+public class UpdateProfileController extends HttpServlet {
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -50,10 +49,10 @@ public class CreateProfileController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AddProductServlet</title>");
+            out.println("<title>Servlet UpdateProfileController</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet AddProductServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet UpdateProfileController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -71,8 +70,22 @@ public class CreateProfileController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        response.sendRedirect("views/user/index.jsp");
+        HttpSession ses = request.getSession();
+        IUserProfileService iU = new UserProfileService();
+        User u = (User) ses.getAttribute("Account");
+        IAddressService ia = new AddressService();
+        List<UserProfile> uList;
+        uList = (List<UserProfile>) ses.getAttribute("listUserProfile");
+        List<Address> aList;
+        aList = (List<Address>) ses.getAttribute("listAddress");
+        UserProfile uP = iU.getUserProfileById(u.getID(), uList);
+        Address a = ia.getAddressById(uP.getAddressID(), aList);
+        request.setAttribute("u", uP);
+        request.setAttribute("province", a.getTinh());
+        request.setAttribute("district", a.getHuyen());
+        request.setAttribute("ward", a.getXa());
+        request.getRequestDispatcher("views/user/updateMenteeProfile.jsp").forward(request, response);
+
     }
 
     /**
@@ -86,68 +99,65 @@ public class CreateProfileController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
         HttpSession ses = request.getSession();
-        IAddressService i = new AddressService();
         IUserProfileService iU = new UserProfileService();
-        Utility ul = new Utility();
         User u = (User) ses.getAttribute("Account");
+        IAddressService ia = new AddressService();
         List<UserProfile> uList;
         uList = (List<UserProfile>) ses.getAttribute("listUserProfile");
         List<Address> aList;
         aList = (List<Address>) ses.getAttribute("listAddress");
-        List<UserProfile> upList;
-        upList = (List<UserProfile>) ses.getAttribute("listUserProfile");
-
-        String firstName = request.getParameter("firstName");
+      
+        UserProfile uP = iU.getUserProfileById(u.getID(), uList);
+          Address aOld = ia.getAddressById(uP.getAddressID(), aList);
         String lastName = request.getParameter("lastName");
+        String firstName = request.getParameter("firstName");
         String dob = request.getParameter("dob");
         String Email = request.getParameter("email");
-        String province = request.getParameter("province");
-        String district = request.getParameter("district");
-        String ward = request.getParameter("ward");
         boolean gender = true;
         try {
             gender = Boolean.parseBoolean(request.getParameter("gender"));
         } catch (Exception e) {
         }
-
-        if (ul.checkEmailDup(Email, uList)) {
-            request.setAttribute("Error", "Email already exists in the system, please re-enter email");
-            request.setAttribute("firstName", firstName);
-            request.setAttribute("lastName", lastName);
-            request.setAttribute("dob", dob);
-            request.setAttribute("gender", gender);
-            request.getRequestDispatcher("views/user/createMenteeProfile.jsp").forward(request, response);
+        String province = request.getParameter("province");
+        String district = request.getParameter("district");
+        if(district == null)
+        {
+            district = aOld.getHuyen();
         }
-        if (i.getIDAddress(province, district, ward, aList) == 0) {
+        
+        String ward = request.getParameter("ward");
+        if(ward == null)
+        {
+            ward = aOld.getXa();
+        }
+        if (ia.getIDAddress(province, district, ward, aList) == 0) {
             request.setAttribute("Error1", "This address could not be found, please check the address again");
-            request.setAttribute("firstName", firstName);
-            request.setAttribute("lastName", lastName);
-            request.setAttribute("dob", dob);
-            request.setAttribute("gender", gender);
-            request.setAttribute("email", Email);
-            request.getRequestDispatcher("views/user/createMenteeProfile.jsp").forward(request, response);
+            UserProfile us = new UserProfile(u.getID(), firstName, lastName, uP.getAvatar() , uP.getEmail(), dob, uP.getAddressID(), gender, uP.getCreateAt());
+            request.setAttribute("u", us);
+            request.getRequestDispatcher("views/user/updateMenteeProfile.jsp").forward(request, response);
         }
-
-        //Moi nguoi nho doi duong dan tren may moi nguoi nhe
-
-            String uploadFolder = "D:\\Project_SE1628\\Happy_Programming\\web\\img\\avatar";
-            Path uploadPath = Paths.get(uploadFolder);
-            if (!Files.exists(uploadPath)) {
-                Files.createDirectory(uploadPath);
-            }
-            Part imagePart = request.getPart("img");
-            String imgname = "p" + u.getID() + ".png";
-            imagePart.write(uploadFolder + "/" + imgname);
-
-            int addressID = i.getIDAddress(province, district, ward, aList);
-            LocalDate curDate = LocalDate.now();
-            String date = curDate.toString();
-            UserProfile newProfile = new UserProfile(u.getID(), firstName, lastName, imgname, Email, dob, addressID, gender, date);
-            String message = iU.insert(newProfile, uList);
-            doGet(request, response);
-            
+        String uploadFolder = "D:\\Project_SE1628\\Happy_Programming\\web\\img\\avatar";
+        Path uploadPath = Paths.get(uploadFolder);
+        if (!Files.exists(uploadPath)) {
+            Files.createDirectory(uploadPath);
+        }
+        Part imagePart = request.getPart("img");
+        String imgname = "";
+        if (imagePart == null) {
+            imgname = "p" + u.getID() + ".png";
+        }
+        imgname = "p" + u.getID() + ".png";
+        imagePart.write(uploadFolder + "/" + imgname);
+        int addressID = ia.getIDAddress(province, district, ward, aList);
+        UserProfile userProfile = new UserProfile(u.getID(), firstName, lastName, imgname, uP.getEmail(), dob, addressID, gender, uP.getCreateAt());
+        String s = iU.update(userProfile, uList);
+        request.setAttribute("u", userProfile);
+        request.setAttribute("province", province);
+        request.setAttribute("district", district);
+        request.setAttribute("ward", ward);
+        request.setAttribute("alert", s);
+        request.getRequestDispatcher("views/user/updateMenteeProfile.jsp").forward(request, response);
     }
 
     /**
