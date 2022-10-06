@@ -7,6 +7,7 @@ package controllers.user;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -16,10 +17,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.mail.MessagingException;
 import model.User;
-import model.UserProfile;
 import service.IUserProfileService;
 import service.IUserService;
-import service.classimpl.UserProfileService;
 import service.classimpl.UserService;
 import util.Mail;
 
@@ -29,6 +28,7 @@ import util.Mail;
  *
  * @author ADMIN
  */
+@WebServlet(name = "ForgotPassController", urlPatterns = {"/forgotPass"})
 public class ForgotPassController extends HttpServlet {
 
     /**

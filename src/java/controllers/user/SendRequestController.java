@@ -27,7 +27,7 @@ import util.Utility;
  *
  * @author minhd
  */
-@WebServlet(urlPatterns = {"/sendRequest"})
+@WebServlet(name = "SendRequestController", urlPatterns = {"/sendRequest"})
 public class SendRequestController extends HttpServlet {
 
     /**

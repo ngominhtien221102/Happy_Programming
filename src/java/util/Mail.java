@@ -6,6 +6,7 @@ package util;
 
 import java.security.SecureRandom;
 import java.util.Properties;
+import java.util.Random;
 import javax.mail.Authenticator;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -56,6 +57,12 @@ public class Mail {
         // sends the e-mail
         Transport.send(msg);
 
+    }
+    
+    public int OTP() {
+        Random generator = new Random();
+        int code = (int) Math.floor(((Math.random() * 899999) + 100000));
+        return code;
     }
 
     public static String RandomPass() {

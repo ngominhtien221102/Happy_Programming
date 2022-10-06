@@ -7,17 +7,14 @@ package controllers.user;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.util.ArrayList;
 import java.util.List;
-import model.Skill;
 import model.User;
-import service.ISkillService;
 import service.IUserService;
-import service.classimpl.SkillService;
 import service.classimpl.UserService;
 import util.Utility;
 
@@ -25,6 +22,7 @@ import util.Utility;
  *
  * @author Admin
  */
+@WebServlet(name = "ChangePasswordController", urlPatterns = {"/changepass"})
 public class ChangePasswordController extends HttpServlet {
 
     /**
