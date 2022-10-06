@@ -76,7 +76,7 @@
 
         <!-- Nav Item - All Admin -->
         <li class="nav-item">
-            <a class="nav-link collapsed" href="<%=request.getContextPath()%>/views/viewAdmin.jsp" >
+            <a class="nav-link collapsed" href="<%=request.getContextPath()%>/views/user/sendInvitation.jsp" >
                 <span>Create Invitation</span>
             </a>
         </li>

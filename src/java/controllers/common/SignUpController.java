@@ -5,6 +5,7 @@
 package controllers.common;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -21,6 +22,7 @@ import util.Utility;
  *
  * @author minhd
  */
+@WebServlet(name = "SignUpController", urlPatterns = {"/signup"})
 public class SignUpController extends HttpServlet {
 
     /**
