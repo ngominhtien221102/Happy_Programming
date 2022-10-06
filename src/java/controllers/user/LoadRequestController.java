@@ -10,12 +10,18 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import java.util.List;
+import model.Request;
+import model.User;
+import service.IRequestService;
+import service.classimpl.RequestService;
 
 /**
  *
  * @author minhd
  */
-public class ViewInvitationController extends HttpServlet {
+public class LoadRequestController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,10 +40,10 @@ public class ViewInvitationController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ViewInvitation</title>");            
+            out.println("<title>Servlet LoadRequestResponse</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ViewInvitation at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet LoadRequestResponse at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -55,7 +61,29 @@ public class ViewInvitationController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("views/user/viewInvitationMentee.jsp").forward(request, response);
+        int requestId = 0;
+        try {
+            requestId = Integer.parseInt(request.getParameter("requestId"));
+        } catch (Exception e) {
+        }
+        HttpSession session = request.getSession();
+        List<Request> requestLst = (List<Request>) session.getAttribute("listRequest");
+        User u = (User) session.getAttribute("Account");
+        boolean isViewAble = false;
+        for (Request request1 : requestLst) {
+            if (request1.getMenteeID() == u.getID() && requestId == request1.getID()) {
+                isViewAble = true;
+            }
+        }
+        if (isViewAble) {
+            IRequestService service = new RequestService();
+            Request r = service.getRequestById(requestId, requestLst);
+            request.setAttribute("request", r);
+            request.getRequestDispatcher("views/user/viewRequestSingle.jsp").forward(request, response);
+        }else{
+            response.sendRedirect("views/user/viewRequest.jsp");
+        }
+
     }
 
     /**

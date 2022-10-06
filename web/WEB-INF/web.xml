@@ -33,10 +33,6 @@
         <servlet-class>controllers.common.ResetPasswordController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ViewInvitationController</servlet-name>
-        <servlet-class>controllers.user.ViewInvitationController</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>ViewMenteeProfileController</servlet-name>
         <servlet-class>controllers.user.ViewMenteeProfileController</servlet-class>
     </servlet>
@@ -53,8 +49,21 @@
         <servlet-class>controllers.user.AddressController</servlet-class>
     </servlet>
     <servlet>
+
         <servlet-name>UpdateProfileController</servlet-name>
         <servlet-class>controllers.user.UpdateProfileController</servlet-class>
+
+        <servlet-name>LoadRequestController</servlet-name>
+        <servlet-class>controllers.user.LoadRequestController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditInvitationController</servlet-name>
+        <servlet-class>controllers.user.EditInvitationController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SendInvitationController</servlet-name>
+        <servlet-class>controllers.user.SendInvitationController</servlet-class>
+
     </servlet>
     <servlet-mapping>
         <servlet-name>ChangePasswordController</servlet-name>
@@ -89,10 +98,6 @@
         <url-pattern>/resetPassword</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ViewInvitationController</servlet-name>
-        <url-pattern>/view_invitation</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>ViewMenteeProfileController</servlet-name>
         <url-pattern>/viewMenteeProfile</url-pattern>
     </servlet-mapping>
@@ -109,8 +114,21 @@
         <url-pattern>/addressControl</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+
         <servlet-name>UpdateProfileController</servlet-name>
         <url-pattern>/updateProfile</url-pattern>
+
+        <servlet-name>LoadRequestController</servlet-name>
+        <url-pattern>/loadRequest</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditInvitationController</servlet-name>
+        <url-pattern>/editInvitation</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SendInvitationController</servlet-name>
+        <url-pattern>/sendInvitation</url-pattern>
+
     </servlet-mapping>
     <session-config>
         <session-timeout>

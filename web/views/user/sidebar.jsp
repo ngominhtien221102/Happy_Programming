@@ -56,8 +56,8 @@
 
         <!-- Nav Item - All transaction -->
         <li class="nav-item">
-            <a class="nav-link collapsed" href="<%=request.getContextPath()%>/views/user/createRequest.jsp" >
-                <span>Create Request</span>
+            <a class="nav-link collapsed" href="<%=request.getContextPath()%>/views/user/viewRequest.jsp" >
+                <span>View Request</span>
             </a>
         </li>   
         <li class="nav-item">
@@ -76,7 +76,7 @@
 
         <!-- Nav Item - All Admin -->
         <li class="nav-item">
-            <a class="nav-link collapsed" href="<%=request.getContextPath()%>/views/viewAdmin.jsp" >
+            <a class="nav-link collapsed" href="<%=request.getContextPath()%>/views/user/sendInvitation.jsp" >
                 <span>Create Invitation</span>
             </a>
         </li>

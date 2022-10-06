@@ -6,6 +6,7 @@ package service;
 
 import java.util.List;
 import model.MentorCV;
+import model.UserProfile;
 
 /**
  *
@@ -20,4 +21,5 @@ public interface IMentorService {
     String update(MentorCV u, List<MentorCV> list);
 
     String delete(int id, List<MentorCV> list);
+    List<MentorCV> searchMentor(String n, List<MentorCV> listMen, List<UserProfile> listUp);
 }

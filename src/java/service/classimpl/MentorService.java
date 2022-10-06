@@ -5,8 +5,11 @@
 package service.classimpl;
 
 import dal.MentorCVDAO;
+import java.util.ArrayList;
 import java.util.List;
 import model.MentorCV;
+import model.Skill;
+import model.UserProfile;
 import service.IMentorService;
 
 /**
@@ -58,4 +61,26 @@ public class MentorService implements IMentorService {
         return mentorCVDAO.getMentorCVList();
     }
 
+    @Override
+    public List<MentorCV> searchMentor(String keyword, List<MentorCV> listMen, List<UserProfile> listUp) {
+        keyword = keyword.toLowerCase().trim();
+        List<MentorCV> list = new ArrayList<>();
+        for (UserProfile u : listUp) {
+            MentorCV m = getCVById(u.getID(), listMen);
+            if (m != null) {
+                if (u.getFirstName().toLowerCase().contains(keyword) || u.getLastName().toLowerCase().contains(keyword)) {
+                    list.add(m);
+                }
+            }
+        }
+        for (MentorCV m : listMen) {
+            for (Skill s : m.getSkillList()) {
+                if(s.getName().toLowerCase().contains(keyword.toLowerCase().trim())){
+                    if(list.contains(m)==false) list.add(m);
+                    break;
+                }
+            }
+        }
+        return list;
+    }
 }
