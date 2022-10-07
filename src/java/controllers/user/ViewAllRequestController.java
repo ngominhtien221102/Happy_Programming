@@ -17,7 +17,7 @@ import java.util.List;
 import model.Request;
 import model.Response;
 import model.User;
-
+import model.UserProfile;
 /**
  *
  * @author minhd
