@@ -92,10 +92,14 @@ public class SendRequestController extends HttpServlet {
         }
         int mentorId;
         try {
-            mentorId = Integer.parseInt(request.getParameter("mentorId"));
-            IUserProfileService service = new UserProfileService();
-            UserProfile mentor = service.getUserProfileById(mentorId, (List<UserProfile>) session.getAttribute("listUserProfile"));
-            session.setAttribute("mentor", mentor);
+           mentorId = Integer.parseInt(request.getParameter("mentorId"));
+            for (UserProfile userProfile : upLst2) {
+                if (mentorId == userProfile.getID()) {
+                    IUserProfileService service = new UserProfileService();
+                    UserProfile mentor = service.getUserProfileById(mentorId, upLst2);
+                    session.setAttribute("mentor", mentor);
+                }
+            }
         } catch (Exception e) {
         }
         request.getRequestDispatcher("/views/user/createRequest.jsp").forward(request, response);
