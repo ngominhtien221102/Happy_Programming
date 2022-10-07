@@ -100,7 +100,7 @@ public class SendRequestController extends HttpServlet {
                     session.setAttribute("mentor", mentor);
                 }
             }
-            session.setAttribute("mentor", mentor);
+
         } catch (Exception e) {
         }
         request.getRequestDispatcher("/views/user/createRequest.jsp").forward(request, response);

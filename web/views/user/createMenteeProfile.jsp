@@ -10,7 +10,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <%@include file="headCSS.jsp" %>
+        <%@include file="headCSS2.jsp" %>
 
     </head>
     <body>
@@ -18,14 +18,14 @@
         <%@include file="header.jsp" %>
 
         <!-- Main Content -->
-        <div id="content" class="row">
+                <div id="content" class="row" style="padding-top: 50px">
             <!-- Begin Page Content -->
 
             <%@include file="../user/sidebar.jsp" %>
             <div class="col-10">
-                <div class="container" style="padding: 5% ;">
+                <div class="container" style="padding: 1.5% ;">
                     <div style="padding:5rem">
-                        <div class="text-center" >
+                        <div style="margin-bottom: 5%" class="text-center" >
                             <h3>
                                 Create Profile
                             </h3>
