@@ -42,7 +42,7 @@ public class ViewAllRequestController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ViewAllRequestController</title>");            
+            out.println("<title>Servlet ViewAllRequestController</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet ViewAllRequestController at " + request.getContextPath() + "</h1>");
@@ -66,21 +66,29 @@ public class ViewAllRequestController extends HttpServlet {
         HttpSession session = request.getSession();
         List<Request> listRequest = (List<Request>) session.getAttribute("listRequest");
         List<Response> listResponse = (List<Response>) session.getAttribute("listResponse");
+        List<UserProfile> upLst = (List<UserProfile>) session.getAttribute("listUserProfile");
+        List<UserProfile> mentorLst = new ArrayList<>();
         User mentee = (User) session.getAttribute("Account");
         ArrayList<Request> menteeLstRequest = new ArrayList<>();
         ArrayList<Integer> resCount = new ArrayList<>();
         for (Request request1 : listRequest) {
-            if(request1.getMenteeID() == mentee.getID()){
+            if (request1.getMenteeID() == mentee.getID()) {
                 menteeLstRequest.add(request1);
-                int count  = 0;
+                int count = 0;
                 for (Response response1 : listResponse) {
-                    if(request1.getID() == response1.getRequestId()){
+                    if (request1.getID() == response1.getRequestId()) {
                         count++;
                     }
                 }
                 resCount.add(count);
             }
+            for (UserProfile userProfile : upLst) {
+                if (request1.getMentorID() == userProfile.getID()) {
+                    mentorLst.add(userProfile);
+                }
+            }
         }
+        request.setAttribute("mentorLst", mentorLst);
         request.setAttribute("menteeLstRequest", menteeLstRequest);
         request.setAttribute("resCount", resCount);
         request.getRequestDispatcher("views/user/viewRequest.jsp").forward(request, response);
@@ -111,3 +119,4 @@ public class ViewAllRequestController extends HttpServlet {
     }// </editor-fold>
 
 }
+
