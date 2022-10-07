@@ -45,7 +45,7 @@
                                                     <fmt:parseDate value="${request.createdAt}" pattern="yyyy-MM-dd" var="Date" />
                                                     <fmt:formatDate value="${Date}" var="Date2" pattern="dd/MM/yyyy"/>        
                                                     Created: ${Date2}
-                                                </li>
+                                                </li><br>
                                                 <!-- to -->
                                                 <li class="list-inline-item mr-3 ml-0">                                                 
                                                         To: ${mentorLst.get(loop.index).firstName} ${mentorLst.get(loop.index).lastName}
