@@ -56,7 +56,7 @@
 
         <!-- Nav Item - All transaction -->
         <li class="nav-item">
-            <a class="nav-link collapsed" href="<%=request.getContextPath()%>/views/user/createRequest.jsp" >
+            <a class="nav-link collapsed" href="<%=request.getContextPath()%>/sendRequest" >
                 <span>Create Request</span>
             </a>
         </li>   
