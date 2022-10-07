@@ -18,6 +18,7 @@ import model.Request;
 import model.Response;
 import model.User;
 import model.UserProfile;
+
 /**
  *
  * @author minhd
@@ -119,4 +120,3 @@ public class ViewAllRequestController extends HttpServlet {
     }// </editor-fold>
 
 }
-
