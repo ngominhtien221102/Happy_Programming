@@ -4,7 +4,6 @@ package controllers.user;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -13,7 +12,9 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
+import model.Invitation;
 import model.Request;
 import model.User;
 import model.UserProfile;
@@ -27,7 +28,7 @@ import util.Utility;
  *
  * @author minhd
  */
-@WebServlet(name = "SendRequestController", urlPatterns = {"/sendRequest"})
+@WebServlet(urlPatterns = {"/sendRequest"})
 public class SendRequestController extends HttpServlet {
 
     /**
@@ -47,7 +48,7 @@ public class SendRequestController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet SendRequestController</title>");            
+            out.println("<title>Servlet SendRequestController</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet SendRequestController at " + request.getContextPath() + "</h1>");
@@ -69,14 +70,34 @@ public class SendRequestController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
-        int mentorId = 0;
+        List<UserProfile> upLst = (List<UserProfile>) session.getAttribute("listUserProfile");
+        List<UserProfile> upLst2 = (List<UserProfile>) session.getAttribute("upLst2");
+        if(upLst2 == null){
+            upLst2 = new ArrayList<>();
+            ArrayList<Integer> skillId = new ArrayList<>();
+            List<Invitation> invlst = (List<Invitation>) session.getAttribute("listInv");
+            User account = (User) session.getAttribute("Account");
+            for (UserProfile userProfile : upLst) {
+                for (Invitation inv : invlst) {
+                    if(userProfile.getID()==inv.getMentorID()&&account.getID()==inv.getMenteeID()){
+                        if(inv.getStatusID() == 1){
+                            upLst2.add(userProfile);
+                            skillId.add(inv.getSkillID());
+                        }
+                    }
+                }
+            }
+            session.setAttribute("upLst2", upLst2);
+            session.setAttribute("skillId", skillId);
+        }
+        int mentorId;
         try {
             mentorId = Integer.parseInt(request.getParameter("mentorId"));
+            IUserProfileService service = new UserProfileService();
+            UserProfile mentor = service.getUserProfileById(mentorId, (List<UserProfile>) session.getAttribute("listUserProfile"));
+            session.setAttribute("mentor", mentor);
         } catch (Exception e) {
         }
-        IUserProfileService service = new UserProfileService();
-        UserProfile mentor = service.getUserProfileById(mentorId, (List<UserProfile>)session.getAttribute("listUserProfile"));
-        session.setAttribute("mentor", mentor);
         request.getRequestDispatcher("/views/user/createRequest.jsp").forward(request, response);
     }
 
@@ -97,18 +118,19 @@ public class SendRequestController extends HttpServlet {
         UserProfile mentor = (UserProfile) session.getAttribute("mentor");
         boolean sendable = true;
         Utility u = new Utility();
-        if(u.countWord(content)<= 10){
-            request.setAttribute("content_alert","message must have more than 10 letters");
+        if (u.countWord(content) <= 5) {
+            request.setAttribute("content_alert", "Message must have more than 5 letters");
             sendable = false;
-        }       
-        if(sendable){
+        }
+        if (sendable) {
             IRequestService service = new RequestService();
             User mentee = (User) session.getAttribute("Account");
             Request r = new Request(0, mentor.getID(), mentee.getID(), "", content, title);
-            service.insert(r, (List<Request>)session.getAttribute("listRequest"));
-            request.setAttribute("message","request sent!");
+            service.insert(r, (List<Request>) session.getAttribute("listRequest"));
+            request.setAttribute("message", "Request sent!");
+            session.removeAttribute("upLst2");
             session.removeAttribute("mentor");
-        }else{
+        } else {
             request.setAttribute("title", title);
             request.setAttribute("content", content);
         }
@@ -126,3 +148,4 @@ public class SendRequestController extends HttpServlet {
     }// </editor-fold>
 
 }
+

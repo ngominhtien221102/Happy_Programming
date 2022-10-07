@@ -17,6 +17,10 @@
             padding-top: 3%;
             margin-top: 2%;
         }
+        .card{
+            width: 210%;
+            margin: 2%;
+        }
     </style>
     <body>
         <!-- header -->
@@ -31,11 +35,7 @@
                             <ul class="list-inline">
                                 <li class="list-inline-item mr-4 mb-3 mb-md-0 text-light">
                                     <span class="font-weight-bold mr-2">To:</span>
-                                    <c:forEach items="${listUserProfile}" var="user" varStatus="loop">
-                                        <c:if test="${user.ID == request.mentorID}">
-                                            ${user.firstName} ${user.lastName}
-                                        </c:if>
-                                    </c:forEach>
+                                    ${mentor.firstName} ${mentor.lastName}
                                 </li>
                                 <li class="list-inline-item mr-4 mb-3 mb-md-0 text-light">
                                     <fmt:parseDate value="${request.createdAt}" pattern="yyyy-MM-dd" var="Date" />
@@ -53,26 +53,26 @@
                         </div>
                         <div class="col-sm-5 col-md-6 col-12 pb-4">
                             <h3 class="card-title">Response</h3>
-                            <c:forEach items="${listResponse}" var="response" varStatus="loop">
-                                <c:if test="${response.requestId == request.ID}">
-                                    <div class="card" style="">
-                                        <div class="card-body">
-                                            <span class="font-weight-bold mr-2">
-                                                <c:forEach items="${listUserProfile}" var="user" varStatus="loop">
-                                                    <c:if test="${user.ID == response.userId}">
-                                                        ${user.firstName} ${user.lastName}
-                                                    </c:if>
-                                                </c:forEach>
-                                            </span>
-                                            <span>
-                                                <fmt:parseDate value="${response.createAt}" pattern="yyyy-MM-dd" var="Date" />
-                                                <fmt:formatDate value="${Date}" var="Date2" pattern="dd/MM/yyyy"/>        
-                                                -  ${Date2}
-                                            </span>
-                                            <p class="card-text">${response.content}</p>
-                                        </div>
+                            <c:forEach items="${responseLst}" var="response" varStatus="loop">
+                                <div class="card" style="">
+                                    <div class="card-body">
+                                        <span class="font-weight-bold mr-2">
+                                            <c:if test="${mentor.ID == response.userId}">
+                                                ${mentor.firstName} ${mentor.lastName}
+                                            </c:if>
+                                            <c:if test="${mentee.ID == response.userId}">
+                                                ${mentee.firstName} ${mentee.lastName}
+                                            </c:if>
+                                        </span>
+                                        <span>
+                                            <fmt:parseDate value="${response.createAt}" pattern="yyyy-MM-dd" var="Date" />
+                                            <fmt:formatDate value="${Date}" var="Date2" pattern="dd/MM/yyyy"/>        
+                                            -  ${Date2}
+                                        </span>
+
+                                        <p class="card-text">${response.content}</p>
                                     </div>
-                                </c:if>
+                                </div>
                             </c:forEach>
                         </div>
                         <!-- comment box -->
@@ -98,3 +98,4 @@
         <!-- /jQuery -->
     </body>
 </html>
+

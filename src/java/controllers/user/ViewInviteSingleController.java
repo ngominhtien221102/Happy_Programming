@@ -114,3 +114,4 @@ public class ViewInviteSingleController extends HttpServlet {
     }// </editor-fold>
 
 }
+

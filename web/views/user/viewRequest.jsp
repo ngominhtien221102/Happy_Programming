@@ -45,14 +45,10 @@
                                                     <fmt:parseDate value="${request.createdAt}" pattern="yyyy-MM-dd" var="Date" />
                                                     <fmt:formatDate value="${Date}" var="Date2" pattern="dd/MM/yyyy"/>        
                                                     Created: ${Date2}
-                                                </li>
+                                                </li><br>
                                                 <!-- to -->
-                                                <li class="list-inline-item mr-3 ml-0">
-                                                    <c:forEach items="${listUserProfile}" var="user">
-                                                        <c:if test="${user.ID == request.mentorID}">
-                                                            To: ${user.firstName} ${user.lastName}
-                                                        </c:if>
-                                                    </c:forEach>
+                                                <li class="list-inline-item mr-3 ml-0">                                                 
+                                                        To: ${mentorLst.get(loop.index).firstName} ${mentorLst.get(loop.index).lastName}
                                                 </li> <br>
                                                 <li class="list-inline-item mr-3 ml-0">    
                                                     Response: ${resCount.get(loop.index)}
@@ -77,3 +73,4 @@
         <!-- /jQuery -->
     </body>
 </html>
+

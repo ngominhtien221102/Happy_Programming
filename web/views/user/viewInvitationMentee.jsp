@@ -53,7 +53,7 @@
                                                         <fmt:parseDate value="${inv.deadlineDate}" pattern="yyyy-MM-dd" var="Date" />
                                                         <fmt:formatDate value="${Date}" var="Date2" pattern="dd/MM/yyyy"/>        
                                                         Deadline: ${Date2}
-                                                    </li>
+                                                    </li><br>
                                                     <!-- to -->
                                                     <li class="list-inline-item mr-3 ml-0">
                                                         <c:forEach items="${listUserProfile}" var="user">
@@ -61,7 +61,7 @@
                                                                 To: ${user.firstName} ${user.lastName}
                                                             </c:if>
                                                         </c:forEach>
-                                                    </li> <br>
+                                                    </li><br>
                                                     <li class="list-inline-item mr-3 ml-0">    
                                                         Skill: ${HmSkill[inv.skillID]}
                                                     </li><br>

@@ -40,6 +40,7 @@
             <div class="col-10">
                 <section class="section" ">
                     <h2 style="margin-left:15px">Send Request</h2>
+                    <h3 style="color: green; margin-left:15px;">${message}</h3>
                     <div class="container">
                         <br><h3>Invited Mentors</h3>
                         <div class="row">  
@@ -53,21 +54,15 @@
                                             <th>Option</th>         
                                         </tr>
                                     </thead>
-                                    <c:forEach items="${listUserProfile}" var="lst" varStatus="loop">
-                                        <c:forEach items="${listInv}" var="inv">
-                                            <c:if test="${lst.ID == inv.mentorID && Account.ID == inv.menteeID}">
-                                                <c:if test="${inv.statusID == 1}">
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>${loop.index}</td>
-                                                            <td>${lst.firstName} ${lst.lastName}</td>
-                                                            <td>${HmSkill[inv.skillID]}</td>
-                                                            <td><a class="text-color" href="<%=request.getContextPath()%>/sendRequest?mentorId=${lst.ID}">send</a></td>
-                                                        </tr>
-                                                    </tbody>
-                                                </c:if>
-                                            </c:if>
-                                        </c:forEach>
+                                    <c:forEach items="${upLst2}" var="lst" varStatus="loop">
+                                        <tbody>
+                                            <tr>
+                                                <td>${loop.index+1}</td>
+                                                <td>${lst.firstName} ${lst.lastName}</td>
+                                                <td>${HmSkill[skillId.get(loop.index)]}</td>
+                                                <td><a class="text-color" href="<%=request.getContextPath()%>/sendRequest?mentorId=${lst.ID}">send</a></td>
+                                            </tr>
+                                        </tbody>
                                     </c:forEach>
                                 </table>
                             </div>
@@ -80,10 +75,10 @@
                             <button class="cv" style=""><a>View mentor's CV</a></button><br>               
                             Title:<input type="text" class="form-control" id="" name="title" placeholder="" value="${title==null?"":title}">
                             <label style="margin-bottom: 16px" for="">Content:</label><textarea id="editor" class="form-control" name="content" rows="4" cols="50" value="">${content==null?"":content}</textarea>
-                            <p>${content_alert}</p>
+                            <p style="color: red">${content_alert}</p>
                             <input type="hidden" name="mentor" value="${mentor.ID}" >
                             <button type="submit" style="float:right; margin-top: 16px;" class="btn btn-primary">SEND</button>
-                            <p>${message}</p>
+
                         </form>
                     </div>
                 </section>
