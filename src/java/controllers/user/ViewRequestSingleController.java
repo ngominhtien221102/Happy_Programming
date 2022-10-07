@@ -23,6 +23,7 @@ import service.classimpl.RequestService;
  *
  * @author minhd
  */
+@WebServlet(name = "ViewRequestSingleController", urlPatterns = {"/singleRequest"})
 public class ViewRequestSingleController extends HttpServlet {
 
     /**
@@ -70,6 +71,9 @@ public class ViewRequestSingleController extends HttpServlet {
         }
         HttpSession session = request.getSession();
         List<Request> requestLst = (List<Request>) session.getAttribute("listRequest");
+        List<Response> responseLst = (List<Response>) session.getAttribute("listResponse");
+        List<UserProfile> upLst = (List<UserProfile>) session.getAttribute("listUserProfile");
+        List<Response> responseLst2 = new ArrayList<>();
         User u = (User) session.getAttribute("Account");
         boolean isViewAble = false;
         for (Request request1 : requestLst) {
@@ -80,7 +84,18 @@ public class ViewRequestSingleController extends HttpServlet {
         }
         if (isViewAble) {
             IRequestService service = new RequestService();
+            IUserProfileService service2 = new UserProfileService();
             Request r = service.getRequestById(requestId, requestLst);
+            UserProfile mentee = service2.getUserProfileById(r.getMenteeID(), upLst);
+            UserProfile mentor = service2.getUserProfileById(r.getMentorID(), upLst);
+            for (Response response1 : responseLst) {
+                if(response1.getRequestId() == r.getID()){
+                    responseLst2.add(response1);
+                }
+            }
+            request.setAttribute("mentee", mentee);
+            request.setAttribute("mentor", mentor);
+            request.setAttribute("responseLst", responseLst2);
             request.setAttribute("request", r);
             request.getRequestDispatcher("views/user/viewRequestSingle.jsp").forward(request, response);
         } else {
