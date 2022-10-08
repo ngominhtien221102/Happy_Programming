@@ -100,7 +100,6 @@ public class SendRequestController extends HttpServlet {
                     session.setAttribute("mentor", mentor);
                 }
             }
-
         } catch (Exception e) {
         }
         request.getRequestDispatcher("/views/user/createRequest.jsp").forward(request, response);
@@ -133,7 +132,6 @@ public class SendRequestController extends HttpServlet {
             Request r = new Request(0, mentor.getID(), mentee.getID(), "", content, title);
             service.insert(r, (List<Request>) session.getAttribute("listRequest"));
             request.setAttribute("message", "Request sent!");
-            session.removeAttribute("upLst2");
             session.removeAttribute("mentor");
         } else {
             request.setAttribute("title", title);
