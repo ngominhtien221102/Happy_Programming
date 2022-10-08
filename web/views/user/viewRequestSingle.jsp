@@ -52,7 +52,7 @@
                             <p class="card-text">${request.content}</p>
                         </div>
                         <div class="col-sm-5 col-md-6 col-12 pb-4">
-                            <h3 class="card-title">Response</h3>
+                            <h3 class="card-title" style="margin-left: 2%;">Response</h3>
                             <c:forEach items="${responseLst}" var="response" varStatus="loop">
                                 <div class="card" style="">
                                     <div class="card-body">

@@ -72,7 +72,7 @@
                         <form action="sendRequest" method="POST" class="">
                             Mentor's name:
                             <input type="text" class="form-control" id="" name="" readonly="" value="${mentor==null?"":mentor.firstName} ${mentor==null?"":mentor.lastName}">
-                            <button class="cv" style=""><a>View mentor's CV</a></button><br>               
+                            <button class="cv" style=""><a href="<%=request.getContextPath()%>/viewCV?mentorID=${mentor.ID}">View mentor's CV</a></button><br>               
                             Title:<input type="text" class="form-control" id="" name="title" placeholder="" value="${title==null?"":title}">
                             <label style="margin-bottom: 16px" for="">Content:</label><textarea id="editor" class="form-control" name="content" rows="4" cols="50" value="">${content==null?"":content}</textarea>
                             <p style="color: red">${content_alert}</p>
