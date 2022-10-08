@@ -83,6 +83,8 @@ public class ViewAllRequestController extends HttpServlet {
                 }
                 resCount.add(count);
             }
+        }
+        for (Request request1 : menteeLstRequest) {
             for (UserProfile userProfile : upLst) {
                 if (request1.getMentorID() == userProfile.getID()) {
                     mentorLst.add(userProfile);
