@@ -13,7 +13,7 @@
 
     </head>
     <body>
-        
+
         <%@include file="header.jsp" %>
 
         <!-- Main Content -->
@@ -21,13 +21,13 @@
             <!-- Begin Page Content -->
 
             <%@include file="../user/sidebar.jsp" %>
-           
+
             <div class="col-10">
                 <div class="container" style="padding: 5% ;">
-                     
+
                     <div style="padding:5rem">
                         <div class="text-center" >
-                             <p style="Color:green">${alert}</p>
+                            <p style="Color:green">${alert}</p>
                             <h3>
                                 Update Profile
                             </h3>
@@ -53,7 +53,7 @@
                             <!-- Email -->
                             <div class="form-group row" style="padding-bottom: 20px;" >
                                 <input type="email" class="form-control form-control-user"
-                                    readonly   placeholder="Email" name="email" value="${u.getEmail()}" required>
+                                       readonly   placeholder="Email" name="email" value="${u.getEmail()}" required>
                             </div>
 
                             <!-- Gender -->
@@ -67,9 +67,9 @@
                                        name="gender" value='False' ${u.isGender() ? "":"checked"} required style="height: 20px;width: 10%">
                                 <label for="female">Female</label>
                             </div>
-                              <p style="Color:red">${Error1}</p>   
+                            <p style="Color:red">${Error1}</p>   
                             <!--Adress-->
-                              <div class="form-group row" style="padding-bottom: 20px;">
+                            <div class="form-group row" style="padding-bottom: 20px;">
                                 <!--Province--> 
                                 <div class="input-group col-sm-4">
                                     <select id="province" name="province" class="form-control form-control-user" required="" style="height: 60px">
@@ -96,8 +96,13 @@
                             </div>
 
                             <!--upload img-->
+                            <div style="margin-bottom: 3%">
+                                  <h5 style="padding-right: 5%">Avatar:</h5>
+                                <img class="" style="height: 200px" src="<%=request.getContextPath()%>/img/avatar/${u.getAvatar()}" alt="Mentee">
+                            </div>
                             <div class="form-group row" style="padding-bottom: 20px;">
-                                <h5 style="padding-right: 5%">Avatar:</h5>
+
+                              
                                 <input type="file" id="img" name="img" accept="image/*" multiple="" style="height: 60px">
                             </div>
 
@@ -111,8 +116,8 @@
             <!-- End of Main Content -->
         </div>
     </body>
-    
-    
+
+
     <script>
         $(function () {
             $('input, select').on('focus', function () {

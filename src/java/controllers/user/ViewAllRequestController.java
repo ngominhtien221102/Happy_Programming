@@ -1,3 +1,4 @@
+
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
@@ -82,12 +83,10 @@ public class ViewAllRequestController extends HttpServlet {
                     }
                 }
                 resCount.add(count);
-            }
-        }
-        for (Request request1 : menteeLstRequest) {
-            for (UserProfile userProfile : upLst) {
-                if (request1.getMentorID() == userProfile.getID()) {
-                    mentorLst.add(userProfile);
+                for (UserProfile userProfile : upLst) {
+                    if (request1.getMentorID() == userProfile.getID()) {
+                        mentorLst.add(userProfile);
+                    }
                 }
             }
         }

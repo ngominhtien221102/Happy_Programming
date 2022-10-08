@@ -30,7 +30,7 @@ Cường Trần
         <%@include file="header.jsp" %>
         <!-- /header -->
         <!-- Modal -->
-        <div id="content" class="row" style="padding-top: 50px">
+        <div id="content" class="row" style="padding-top: 30px">
         <%@include file="sidebar.jsp" %>
         <div class="col-10">
             <!-- teachers -->

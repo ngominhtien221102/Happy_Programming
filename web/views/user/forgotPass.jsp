@@ -18,15 +18,18 @@
             <div  id="loginModal" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content rounded-0 border-0 p-4">
-
+                        <div class="text-center" >
+                            <h2>Forgot Password</h2>
+                        </div>
                         <div class="modal-body">
+                            <h
                             <p style="color: red">${Error}</p>
                             <form action="<%=request.getContextPath()%>/forgotPass" method="POST" class="row">
                                 <div class="col-12">
                                     <input type="text" class="form-control mb-3" id="loginName" name="accountName" placeholder="Account Name">
                                 </div>
                                 <div class="col-12">
-                                    <input type="password" class="form-control mb-3" id="signupEmail" name="email" placeholder="Email">
+                                    <input type="email" class="form-control mb-3" id="signupEmail" name="email" placeholder="Email">
                                 </div>
 
                                 <div class="col-12" style="margin-left: 40%;">

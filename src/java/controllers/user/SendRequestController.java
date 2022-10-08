@@ -92,7 +92,7 @@ public class SendRequestController extends HttpServlet {
         }
         int mentorId;
         try {
-           mentorId = Integer.parseInt(request.getParameter("mentorId"));
+            mentorId = Integer.parseInt(request.getParameter("mentorId"));
             for (UserProfile userProfile : upLst2) {
                 if (mentorId == userProfile.getID()) {
                     IUserProfileService service = new UserProfileService();

@@ -49,15 +49,7 @@ public class CreateProfileController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet AddProductServlet</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet AddProductServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+
         }
     }
 
@@ -73,8 +65,8 @@ public class CreateProfileController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.sendRedirect(request.getContextPath() + "/views/user/createMenteeProfile.jsp");
         
-        response.sendRedirect("verifyControl");
     }
 
     /**
@@ -147,7 +139,7 @@ public class CreateProfileController extends HttpServlet {
             String date = curDate.toString();
             UserProfile newProfile = new UserProfile(u.getID(), firstName, lastName, imgname, Email, dob, addressID, gender, date);
             String message = iU.insert(newProfile, uList);
-            doGet(request, response);
+            response.sendRedirect( request.getContextPath() + "/verifyControl");
             
     }
 
