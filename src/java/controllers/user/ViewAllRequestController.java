@@ -73,19 +73,19 @@ public class ViewAllRequestController extends HttpServlet {
         User mentee = (User) session.getAttribute("Account");
         ArrayList<Request> menteeLstRequest = new ArrayList<>();
         ArrayList<Integer> resCount = new ArrayList<>();
-        for (Request request1 : listRequest) {
-            if (request1.getMenteeID() == mentee.getID()) {
-                menteeLstRequest.add(request1);
+        for (Request req : listRequest) {
+            if (req.getMenteeID() == mentee.getID()) {
+                menteeLstRequest.add(req);
                 int count = 0;
                 for (Response response1 : listResponse) {
-                    if (request1.getID() == response1.getRequestId()) {
+                    if (req.getID() == response1.getRequestID()) {
                         count++;
                     }
                 }
                 resCount.add(count);
-                for (UserProfile userProfile : upLst) {
-                    if (request1.getMentorID() == userProfile.getID()) {
-                        mentorLst.add(userProfile);
+                for (UserProfile up : upLst) {
+                    if (req.getMentorID() == up.getID()) {
+                        mentorLst.add(up);
                     }
                 }
             }
