@@ -57,10 +57,10 @@
                                 <div class="card" style="">
                                     <div class="card-body">
                                         <span class="font-weight-bold mr-2">
-                                            <c:if test="${mentor.ID == response.userId}">
+                                            <c:if test="${mentor.ID == response.userID}">
                                                 ${mentor.firstName} ${mentor.lastName}
                                             </c:if>
-                                            <c:if test="${mentee.ID == response.userId}">
+                                            <c:if test="${mentee.ID == response.userID}">
                                                 ${mentee.firstName} ${mentee.lastName}
                                             </c:if>
                                         </span>
