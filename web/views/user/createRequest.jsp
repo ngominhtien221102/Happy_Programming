@@ -89,6 +89,22 @@
         <!-- /footer -->
         <!-- jQuery -->
         <%@include file="scriptJS.jsp" %> 
+        <script src="https://cdn.ckeditor.com/ckeditor5/34.1.0/classic/ckeditor.js"></script>
+        <script>
+            var value;
+            ClassicEditor
+                    .create(document.querySelector('#editor'))
+                    .then(editor => {
+                        value = editor;
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    });
+
+            const handleSubmit = () => {
+                document.getElementById('a').innerHTML = value.getData()
+            }
+        </script>
         <!-- /jQuery -->
     </body>
 </html>

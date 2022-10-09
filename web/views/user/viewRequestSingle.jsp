@@ -57,10 +57,10 @@
                                 <div class="card" style="">
                                     <div class="card-body">
                                         <span class="font-weight-bold mr-2">
-                                            <c:if test="${mentor.ID == response.userId}">
+                                            <c:if test="${mentor.ID == response.userID}">
                                                 ${mentor.firstName} ${mentor.lastName}
                                             </c:if>
-                                            <c:if test="${mentee.ID == response.userId}">
+                                            <c:if test="${mentee.ID == response.userID}">
                                                 ${mentee.firstName} ${mentee.lastName}
                                             </c:if>
                                         </span>
@@ -79,10 +79,10 @@
                         <div class="col-12">
                             <form action="#" class="row">
                                 <div class="col-12">
-                                    <textarea name="comment" id="comment" class="form-control mb-4" placeholder="Type your response here..."></textarea>
+                                    <textarea name="comment" id="editor" class="form-control mb-4" placeholder="Type your response here..."></textarea>
                                 </div>
                                 <div class="col-12">
-                                    <button type="submit" value="send" class="btn btn-primary">Post Response</button>
+                                    <button type="submit" value="send" class="btn btn-primary" style="margin-top: 1%;">Post Response</button>
                                 </div>
                             </form>
                         </div>
@@ -94,7 +94,23 @@
         <%@include file="footer.jsp" %>
         <!-- /footer -->
         <!-- jQuery -->
-        <%@include file="scriptJS.jsp" %> 
+        <%@include file="scriptJS.jsp" %>
+        <script src="https://cdn.ckeditor.com/ckeditor5/34.1.0/classic/ckeditor.js"></script>
+        <script>
+            var value;
+            ClassicEditor
+                    .create(document.querySelector('#editor'))
+                    .then(editor => {
+                        value = editor;
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    });
+
+            const handleSubmit = () => {
+                document.getElementById('a').innerHTML = value.getData()
+            }
+        </script>
         <!-- /jQuery -->
     </body>
 </html>
