@@ -67,7 +67,7 @@ public class ViewRequestSingleController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+   protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int requestId = 0;
         try {
@@ -78,35 +78,34 @@ public class ViewRequestSingleController extends HttpServlet {
         List<Request> requestLst = (List<Request>) session.getAttribute("listRequest");
         List<Response> responseLst = (List<Response>) session.getAttribute("listResponse");
         List<UserProfile> upLst = (List<UserProfile>) session.getAttribute("listUserProfile");
-        List<Response> responseLst2 = new ArrayList<>();
+        List<Response> rResponse = new ArrayList<>();
         User u = (User) session.getAttribute("Account");
         boolean isViewAble = false;
-        for (Request request1 : requestLst) {
-            if (request1.getMenteeID() == u.getID() && requestId == request1.getID()) {
+        for (Request req : requestLst) {
+            if (req.getMenteeID() == u.getID() && requestId == req.getID()) {
                 isViewAble = true;
                 break;
             }
         }
         if (isViewAble) {
-            IRequestService service = new RequestService();
+            IRequestService rs = new RequestService();
             IUserProfileService service2 = new UserProfileService();
-            Request r = service.getRequestById(requestId, requestLst);
+            Request r = rs.getRequestById(requestId, requestLst);
             UserProfile mentee = service2.getUserProfileById(r.getMenteeID(), upLst);
             UserProfile mentor = service2.getUserProfileById(r.getMentorID(), upLst);
-            for (Response response1 : responseLst) {
-                if(response1.getRequestId() == r.getID()){
-                    responseLst2.add(response1);
+            for (Response res : responseLst) {
+                if(res.getRequestID() == r.getID()){
+                    rResponse.add(res);
                 }
             }
             request.setAttribute("mentee", mentee);
             request.setAttribute("mentor", mentor);
-            request.setAttribute("responseLst", responseLst2);
+            request.setAttribute("responseLst", rResponse);
             request.setAttribute("request", r);
             request.getRequestDispatcher("views/user/viewRequestSingle.jsp").forward(request, response);
         } else {
             response.sendRedirect("views/user/viewRequest.jsp");
         }
-
     }
 
     /**
