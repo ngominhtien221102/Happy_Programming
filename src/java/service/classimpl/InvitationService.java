@@ -65,7 +65,15 @@ public class InvitationService implements IInvitationService {
             return "Invitation has been expired to update";
         }
     }
-
+    
+    @Override
+    public String cancel(Invitation u, List<Invitation> list) {
+        Invitation invitation = getInvitationById(u.getID(), list);
+        invitation.setStatusID(3);    
+        InvitationDAO.update(invitation);
+            return "OK";
+    }
+    
     @Override
     public String delete(int id, List<Invitation> list) {
         InvitationDAO.delete(id);
