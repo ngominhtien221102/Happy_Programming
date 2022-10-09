@@ -35,9 +35,8 @@
     </style>
     <body>
         <%@include file= "header.jsp" %>
-        <div class="row">
+        <div id="content" class="row" style="padding-top: 50px;  min-height: 800px">
             <%@include file="../mentors/mentorSidebar.jsp" %>
-
             <div class="col-10">
                 <section class="section" style="margin-top: 50px">
                     <h2 style="margin-left:15px">All invitations</h2>
