@@ -19,7 +19,7 @@
 
         <!-- Main Content -->
 
-        <div id="content" class="row" style="padding-top: 50px">
+        <div id="content" class="row" style="padding-top: 50px;  min-height: 800px">
 
             <%@include file="mentorSidebar.jsp" %>
 

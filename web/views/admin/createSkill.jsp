@@ -11,7 +11,7 @@
     <%@include file="headCSS.jsp" %>
 
     <body>
-        <div class="wrapper">
+       
             <%--<%@include file="headtop.jsp" %>--%>
 
             <div class="page-wrap">
@@ -287,7 +287,7 @@
                 </div>
             </div>
         </div>
-        
+                </div>
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
         <script>window.jQuery || document.write('<script src="../src/js/vendor/jquery-3.3.1.min.js"><\/script>')</script>
         <script src="../node_modules/popper.js/dist/umd/popper.min.js"></script>
@@ -304,5 +304,5 @@
             r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
             ga('create','UA-XXXXX-X','auto');ga('send','pageview');
         </script>
-    </body>
+            </div></body>
 </html>

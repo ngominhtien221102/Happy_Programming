@@ -157,7 +157,7 @@
                             <input type="text" class="form-control" id="" name="" readonly="" value="${requestScope.mentorName}">
                             <button class="cv" style=""><a href="<%=request.getContextPath()%>/viewCV?mentorID=${requestScope.mentorId}">View mentor's CV</a></button>
                             <br><label for="">Choose a skill:</label>
-                            <select style="margin-left:10px;margin-right: 30px" name="skill" id="">
+                            <select style="margin-left:10px;margin-right: 30px" name="skill" required="" id="">
                                 <c:forEach items="${requestScope.listSkill}" var="m">
                                     <option value="${m.ID}">${m.name}</option>
                                 </c:forEach>
