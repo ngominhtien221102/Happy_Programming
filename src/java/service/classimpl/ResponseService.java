@@ -24,7 +24,7 @@ public class ResponseService implements IResponseService {
     @Override
     public Response getResponseById(int id, List<Response> list) {
         for (Response response : list) {
-            if(response.getId() == id )
+            if(response.getID() == id )
             {
                 return response;
             }
@@ -44,7 +44,7 @@ public class ResponseService implements IResponseService {
     public String update(Response u, List<Response> list) {
         
         responseDAO.update(u);
-        Response r = getResponseById(u.getId(), list);
+        Response r = getResponseById(u.getID(), list);
         r.setContent(u.getContent());
         return "Update successful!";
     }
