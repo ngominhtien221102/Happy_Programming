@@ -188,7 +188,7 @@
                                 </div>
                             </article>
 
-                            <article class="col-md-10" style="margin: 50px auto 0 auto">
+<!--                            <article class="col-md-12" style="margin: 50px auto 0 auto">
                                 <div class="card border-bottom hover-shadow" style="border-radius: 5px;background-color: #f3f3f3">
                                     <div class="card-body row align-items-center" >
                                         <div class="col-6">
@@ -213,7 +213,7 @@
                                 </div>
                                 
 
-                            </article>
+                            </article>-->
                         </div>
                         <div class="card-block" >
                             <h3 style="margin-bottom: 20px" class="">Invitations</h3>
