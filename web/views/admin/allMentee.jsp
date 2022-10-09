@@ -107,7 +107,7 @@
             <%@include file="sidebar.jsp" %>
             <div class="col-10">
                 <section class="section" >
-                    <h2 style="margin-left:15px; text-align: center">Mentor</h2>
+                    <h2 style="margin-left:15px; text-align: center">Mentee</h2>
                     <div class="container">
                         <div class="row" style="margin-top: 50px">
 
@@ -117,7 +117,7 @@
                                     <div class="card-body row align-items-center" >
                                         <div class="col-8">
                                             <h4 style="color: #0ac282;">696</h4>
-                                            <h6 class="text-muted">All Mentors</h6>
+                                            <h6 class="text-muted">All Mentees</h6>
                                         </div>
                                         <div class="col-4 text-right">
                                             <i class="ti-user" style="color: #0ac282;"></i>
@@ -126,7 +126,7 @@
                                     <div style="background: linear-gradient(to right,#0ac282,#0df3a3); text-align: center; align-items: center; padding: 20px;
                                          border-bottom-left-radius: 5px;
                                          border-bottom-right-radius: 5px;">
-                                        <p style="color: #fff; margin: 0 ">Total Mentor</p>
+                                        <p style="color: #fff; margin: 0 ">Total Mentee</p>
                                     </div>
                                 </div>
 
@@ -139,11 +139,11 @@
                                 <div class="card border-bottom hover-shadow" style="border-radius: 5px;background-color: #f3f3f3">
                                     <div class="card-body row align-items-center" >
                                         <div class="col-6">
-                                            <h4 style="color: #01a9ac;">300 Mentors</h4>
+                                            <h4 style="color: #01a9ac;">300 Mentees</h4>
                                             <h6 class="text-muted">Last month</h6>
                                         </div>
                                         <div class="col-6">
-                                            <h4 style="color: #01a9ac;">369 Mentors</h4>
+                                            <h4 style="color: #01a9ac;">369 Mentees</h4>
                                             <h6 class="text-muted">This month</h6>
                                         </div>
                                     </div>
@@ -161,12 +161,12 @@
 
                         <div class="card-block" style="">
                             <div class="search" style="margin-left:15px" > 
-                                <form action="<%=request.getContextPath()%>/sendMentor" class="row">
-                                    <input  type="text" name="search" value="" placeholder="Search Mentors">
+                                <form action="<%=request.getContextPath()%>/sendMentee" class="row">
+                                    <input  type="text" name="search" value="" placeholder="Search Mentees">
                                     <button type="submit"><i class="ti ti-search" aria-hidden="true"></i></button>
                                 </form>
                             </div>
-                            <br><h3>Mentors</h3>
+                            <br><h3>Mentees</h3>
                             <div class="row">  
                                 <div class="col-md-12 table">
 
@@ -180,7 +180,7 @@
                                                 <th>DOB</th>
                                                 <th>Created At</th>
                                                 <th>Status</th>
-                                                <th>Rate</th>
+                                                <th>Rate
                                                 <th colspan="2"></th>
                                             </tr>
                                         </thead>
@@ -253,13 +253,13 @@
                                     <!--phan trang-->
                                     <div class="pagination">
                                         <%--<c:if test="${pageIf.cp!=1 && pageIf.end!=null}">
-                                            <a href="<%=request.getContextPath()%>/sendMentor?page=1&search=${search}"><<</a>  
+                                            <a href="<%=request.getContextPath()%>/sendMentee?page=1&search=${search}"><<</a>  
                                         </c:if>      
                                         <c:forEach begin="${1}" end="${pageIf.np}" var="i">
-                                            <a class="${i==pageIf.cp?"active":""}" href="<%=request.getContextPath()%>/sendMentor?page=${i}&search=${search}">${i}</a>
+                                            <a class="${i==pageIf.cp?"active":""}" href="<%=request.getContextPath()%>/sendMentee?page=${i}&search=${search}">${i}</a>
                                         </c:forEach>
                                         <c:if test="${pageIf.cp!=pageIf.np && pageIf.end!=0}">
-                                            <a href="<%=request.getContextPath()%>/sendMentor?page=${pageIf.np}&search=${search}">>></a>  
+                                            <a href="<%=request.getContextPath()%>/sendMentee?page=${pageIf.np}&search=${search}">>></a>  
                                         </c:if>  --%>
                                         <a class="active" href="">1</a>
                                         <a class="" href="">2</a>

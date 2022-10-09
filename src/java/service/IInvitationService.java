@@ -12,7 +12,9 @@ import model.Invitation;
  * @author Admin
  */
 public interface IInvitationService {
-List<Invitation> getList();
+
+    List<Invitation> getList();
+
     Invitation getInvitationById(int id, List<Invitation> list);
 
     String insert(Invitation u, List<Invitation> list);
@@ -20,5 +22,6 @@ List<Invitation> getList();
     String update(Invitation u, List<Invitation> list);
 
     String delete(int id, List<Invitation> list);
-    
+
+    String cancel(Invitation u, List<Invitation> list);
 }
