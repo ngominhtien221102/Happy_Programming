@@ -4,54 +4,52 @@
  */
 package model;
 
-import java.sql.Date;
-
 /**
  *
  * @author minhd
  */
 public class Response {
-    private int id;
-    private int requestId;
-    private int userId;
+    private int ID;
+    private int requestID;
+    private int userID;
     private String content;
     private String createAt;
 
     public Response(int id, int requestId, int userId, String content, String createAt) {
-        this.id = id;
-        this.requestId = requestId;
-        this.userId = userId;
+        this.ID = id;
+        this.requestID = requestId;
+        this.userID = userId;
         this.content = content;
         this.createAt = createAt;
     }
 
     
 
-    public int getUserId() {
-        return userId;
+    public int getUserID() {
+        return userID;
     }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
+    public void setUserID(int userID) {
+        this.userID = userID;
     }
 
     public Response() {
     }
 
-    public int getId() {
-        return id;
+    public int getID() {
+        return ID;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setID(int ID) {
+        this.ID = ID;
     }
 
-    public int getRequestId() {
-        return requestId;
+    public int getRequestID() {
+        return requestID;
     }
 
-    public void setRequestId(int requestId) {
-        this.requestId = requestId;
+    public void setRequestID(int requestID) {
+        this.requestID = requestID;
     }
 
     public String getContent() {
@@ -70,3 +68,4 @@ public class Response {
         this.createAt = createAt;
     }    
 }
+

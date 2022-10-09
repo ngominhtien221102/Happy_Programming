@@ -71,32 +71,32 @@ public class SendRequestController extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         List<UserProfile> upLst = (List<UserProfile>) session.getAttribute("listUserProfile");
-        List<UserProfile> upLst2 = (List<UserProfile>) session.getAttribute("upLst2");
-        if(upLst2 == null){
-            upLst2 = new ArrayList<>();
+        List<UserProfile> upInvLst = (List<UserProfile>) session.getAttribute("upInvLst");
+        if (upInvLst == null) {
+            upInvLst = new ArrayList<>();
             ArrayList<Integer> skillId = new ArrayList<>();
             List<Invitation> invlst = (List<Invitation>) session.getAttribute("listInv");
             User account = (User) session.getAttribute("Account");
             for (UserProfile userProfile : upLst) {
                 for (Invitation inv : invlst) {
-                    if(userProfile.getID()==inv.getMentorID()&&account.getID()==inv.getMenteeID()){
-                        if(inv.getStatusID() == 1){
-                            upLst2.add(userProfile);
+                    if (userProfile.getID() == inv.getMentorID() && account.getID() == inv.getMenteeID()) {
+                        if (inv.getStatusID() == 1) {
+                            upInvLst.add(userProfile);
                             skillId.add(inv.getSkillID());
                         }
                     }
                 }
             }
-            session.setAttribute("upLst2", upLst2);
+            session.setAttribute("upInvLst", upInvLst);
             session.setAttribute("skillId", skillId);
         }
         int mentorId;
         try {
             mentorId = Integer.parseInt(request.getParameter("mentorId"));
-            for (UserProfile userProfile : upLst2) {
+            for (UserProfile userProfile : upInvLst) {
                 if (mentorId == userProfile.getID()) {
-                    IUserProfileService service = new UserProfileService();
-                    UserProfile mentor = service.getUserProfileById(mentorId, upLst2);
+                    IUserProfileService up = new UserProfileService();
+                    UserProfile mentor = up.getUserProfileById(mentorId, upInvLst);
                     session.setAttribute("mentor", mentor);
                 }
             }
@@ -127,10 +127,10 @@ public class SendRequestController extends HttpServlet {
             sendable = false;
         }
         if (sendable) {
-            IRequestService service = new RequestService();
+            IRequestService rs = new RequestService();
             User mentee = (User) session.getAttribute("Account");
             Request r = new Request(0, mentor.getID(), mentee.getID(), "", content, title);
-            service.insert(r, (List<Request>) session.getAttribute("listRequest"));
+            rs.insert(r, (List<Request>) session.getAttribute("listRequest"));
             request.setAttribute("message", "Request sent!");
             session.removeAttribute("mentor");
         } else {

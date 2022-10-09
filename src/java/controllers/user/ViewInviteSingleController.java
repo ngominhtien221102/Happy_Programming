@@ -63,30 +63,29 @@ public class ViewInviteSingleController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        int inviteId = 0;
+        int invId = 0;
         try {
-            inviteId = Integer.parseInt(request.getParameter("invitationId"));
+            invId = Integer.parseInt(request.getParameter("invitationId"));
         } catch (Exception e) {
         }
         HttpSession session = request.getSession();
-        List<Invitation> invitationLst = (List<Invitation>) session.getAttribute("listInv");
+        List<Invitation> listInv = (List<Invitation>) session.getAttribute("listInv");
         User u = (User) session.getAttribute("Account");
         boolean isViewAble = false;
-        for (Invitation invitation1 : invitationLst) {
-            if (invitation1.getMenteeID() == u.getID() && inviteId == invitation1.getID()) {
+        for (Invitation inv : listInv) {
+            if (inv.getMenteeID() == u.getID() && invId == inv.getID()) {
                 isViewAble = true;
                 break;
             }
         }
         if (isViewAble) {
             IInvitationService service = new InvitationService();
-                Invitation i = service.getInvitationById(inviteId, invitationLst);
+                Invitation i = service.getInvitationById(invId, listInv);
                 request.setAttribute("Invitation", i);
                 request.getRequestDispatcher("views/user/ViewInvitationSingle.jsp").forward(request, response);
         }else{
             response.sendRedirect("views/user/viewRequest.jsp");
-        }
-        
+        }      
     }
 
     /**
