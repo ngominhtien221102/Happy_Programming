@@ -86,7 +86,7 @@
                                 <input class="btn btn--form" type="submit" value="Register" />
                             </li>
                             <li style="margin-top: 3%">
-                                <a class="signup__link" href="#" >I am already a member</a>
+                                <a class="signup__link" href="<%=request.getContextPath()%>/views/user/login.jsp" >I am already a member</a>
                             </li>
                         </ul>
                     </div>
