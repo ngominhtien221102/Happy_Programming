@@ -54,7 +54,7 @@
                                             <th>Option</th>         
                                         </tr>
                                     </thead>
-                                    <c:forEach items="${upLst2}" var="lst" varStatus="loop">
+                                    <c:forEach items="${upInvLst}" var="lst" varStatus="loop">
                                         <tbody>
                                             <tr>
                                                 <td>${loop.index+1}</td>
