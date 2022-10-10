@@ -6,6 +6,7 @@
 <html lang="zxx">
 
     <%@include file="../user/headCSS2.jsp" %>
+    <%@include file="../user/rateCSS.jsp" %>  
 
     <body>
         <!-- header -->
@@ -39,8 +40,8 @@
                                     <li class="mb-3"><a class="text-color" href="mailto:johndoe@email.com"><i class="ti-email mr-2"></i>${mentorProfile.email}</a></li>
 
                                     <li class="mb-3"><a class="text-color" href="#"><i class="ti-location-pin mr-2"></i>
-                                        
-                                        Address: ${xa} , ${huyen} , ${tinh}
+
+                                            Address: ${xa} , ${huyen} , ${tinh}
                                         </a></li>
                                 </ul>
                             </div>
@@ -58,39 +59,144 @@
                                 <p>${s.name}</p>
                             </c:forEach>
                         </div>
-                        <!-- course item -->
-<!--                        <div class="col-lg-4 col-sm-6 mb-5">
-                            <div class="card p-0 border-primary rounded-0 hover-shadow">
-                                <img class="card-img-top rounded-0" src="images/courses/course-4.jpg" alt="course thumb">
-                                <div class="card-body">
-                                    <ul class="list-inline mb-2">
-                                        <li class="list-inline-item"><i class="ti-calendar mr-1 text-color"></i>02-14-2018</li>
-                                        <li class="list-inline-item"><a class="text-color" href="#">Humanities</a></li>
-                                    </ul>
-                                    <a href="course-single.jsp">
-                                        <h4 class="card-title">Complete Freelancing</h4>
-                                    </a>
-                                    <p class="card-text mb-4"> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                        incididunt ut labore et dolore magna.</p>
-                                    <a href="course-single.jsp" class="btn btn-primary btn-sm">Apply now</a>
+                    </div>
+                    <!--Rate-->
+                    <div class="row">
+                        <div class="col-xs-12 col-md-6">
+                            <div class="well well-sm">
+                                <div class="row">
+                                    <div class="col-xs-12 col-md-6 text-center">
+                                        <h1 class="rating-num">
+                                            4.0</h1>
+                                        <div class="rating">
+                                            <span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star">
+                                            </span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star">
+                                            </span><span class="glyphicon glyphicon-star-empty"></span>
+                                        </div>
+                                        <div>
+                                            <span class="glyphicon glyphicon-user"></span>1,050,008 total
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-6">
+                                        <div class="row rating-desc">
+                                            <div class="col-xs-3 col-md-3 text-right">
+                                                <span class="glyphicon glyphicon-star"></span>5
+                                            </div>
+                                            <div class="col-xs-8 col-md-9">
+                                                <div class="progress progress-striped">
+                                                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="20"
+                                                         aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+                                                        
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- end 5 -->
+                                            <div class="col-xs-3 col-md-3 text-right">
+                                                <span class="glyphicon glyphicon-star"></span>4
+                                            </div>
+                                            <div class="col-xs-8 col-md-9">
+                                                <div class="progress">
+                                                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="20"
+                                                         aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- end 4 -->
+                                            <div class="col-xs-3 col-md-3 text-right">
+                                                <span class="glyphicon glyphicon-star"></span>3
+                                            </div>
+                                            <div class="col-xs-8 col-md-9">
+                                                <div class="progress">
+                                                    <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20"
+                                                         aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- end 3 -->
+                                            <div class="col-xs-3 col-md-3 text-right">
+                                                <span class="glyphicon glyphicon-star"></span>2
+                                            </div>
+                                            <div class="col-xs-8 col-md-9">
+                                                <div class="progress">
+                                                    <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="20"
+                                                         aria-valuemin="0" aria-valuemax="100" style="width: 20%">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- end 2 -->
+                                            <div class="col-xs-3 col-md-3 text-right">
+                                                <span class="glyphicon glyphicon-star"></span>1
+                                            </div>
+                                            <div class="col-xs-8 col-md-9">
+                                                <div class="progress">
+                                                    <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80"
+                                                         aria-valuemin="0" aria-valuemax="100" style="width: 15%">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- end 1 -->
+                                        </div>
+                                        <!-- end row -->
+                                    </div>
                                 </div>
                             </div>
-                        </div>-->
-                        <!-- course item -->
-
+                        </div>
                     </div>
+
+
+                    <!--comment-->
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <img src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid"/>
+                                <p class="text-secondary text-center">15 Minutes Ago</p>
+                            </div>
+                            <div class="col-md-10">
+                                <p>
+                                    <a class="float-left" href="https://maniruzzaman-akash.blogspot.com/p/contact.html"><strong>Maniruzzaman Akash</strong></a>
+                                    <span class="float-right"><i class="text-warning fa fa-star"></i></span>
+                                    <span class="float-right"><i class="text-warning fa fa-star"></i></span>
+                                    <span class="float-right"><i class="text-warning fa fa-star"></i></span>
+                                    <span class="float-right"><i class="text-warning fa fa-star"></i></span>
+
+                                </p>
+                                <div class="clearfix"></div>
+                                <p>Lorem Ipsum is simply dummy text of the pr make  but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                                <p>
+                                    <a class="float-right btn btn-outline-primary ml-2"> <i class="fa fa-reply"></i> Reply</a>
+                                    <a class="float-right btn text-white btn-danger"> <i class="fa fa-heart"></i> Like</a>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="card card-inner">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <img src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid"/>
+                                        <p class="text-secondary text-center">15 Minutes Ago</p>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <p><a href="https://maniruzzaman-akash.blogspot.com/p/contact.html"><strong>Maniruzzaman Akash</strong></a></p>
+                                        <p>Lorem Ipsum is simply dummy text of the pr make  but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+                                        <p>
+                                            <a class="float-right btn btn-outline-primary ml-2">  <i class="fa fa-reply"></i> Reply</a>
+                                            <a class="float-right btn text-white btn-danger"> <i class="fa fa-heart"></i> Like</a>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </section>
-            <!-- /teachers -->
-        </div>
 
+            <!-- footer -->
+            <%@include file="../user/footer.jsp" %>
+            <!-- /footer -->
 
-        <!-- footer -->
-        <%@include file="../user/footer.jsp" %>
-        <!-- /footer -->
-
-        <!-- jQuery -->
-        <%@include file="../user/scriptJS.jsp" %>
+            <!-- jQuery -->
+            <%@include file="../user/scriptJS.jsp" %>
 
     </body>
 </html>
