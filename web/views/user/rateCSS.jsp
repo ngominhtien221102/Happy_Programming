@@ -6,20 +6,11 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<html>
+
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" href="<%=request.getContextPath()%>/template1/plugins/bootstrap/bootstrap.min.css">
-        <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-        <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
         <style>
         .card-inner{
             margin-left: 4rem;
-        }
-
-        body{
-            margin-top:20px;
         }
         .glyphicon {
             margin-right:5px;
@@ -50,4 +41,3 @@
 
     </head>
 
-</html>

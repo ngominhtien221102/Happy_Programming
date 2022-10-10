@@ -6,7 +6,7 @@
 <html lang="zxx">
 
     <%@include file="../user/headCSS2.jsp" %>
-    <%@include file="../user/rateCSS.jsp" %>  
+    <%@include file="../user/rateCSS.jsp" %>
 
     <body>
         <!-- header -->
@@ -69,9 +69,11 @@
                                         <h1 class="rating-num">
                                             4.0</h1>
                                         <div class="rating">
-                                            <span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star">
-                                            </span><span class="glyphicon glyphicon-star"></span><span class="glyphicon glyphicon-star">
-                                            </span><span class="glyphicon glyphicon-star-empty"></span>
+                                            <span class="ti ti-star"></span>
+                                            <span class="ti ti-star"></span>
+                                            <span class="ti ti-star"></span>
+                                            <span class="ti ti-star"></span>
+                                            <span class="ti ti-star"></span>
                                         </div>
                                         <div>
                                             <span class="glyphicon glyphicon-user"></span>1,050,008 total
@@ -80,11 +82,11 @@
                                     <div class="col-xs-12 col-md-8">
                                         <div class="row rating-desc">
                                             <div class="col-xs-3 col-md-3 text-right">
-                                                <span class="glyphicon glyphicon-star"></span>5
+                                                5<span class="ti ti-star"></span>
                                             </div>
                                             <div class="col-xs-8 col-md-9">
-                                                <div class="progress progress-striped">
-                                                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="20"
+                                                <div class="progress ">
+                                                    <div class="progress-bar bg-success progress-striped" role="progressbar" aria-valuenow="20"
                                                          aria-valuemin="0" aria-valuemax="100" style="width: 80%">
 
                                                     </div>
@@ -92,44 +94,44 @@
                                             </div>
                                             <!-- end 5 -->
                                             <div class="col-xs-3 col-md-3 text-right">
-                                                <span class="glyphicon glyphicon-star"></span>4
+                                                4<span class="ti ti-star"></span>
                                             </div>
                                             <div class="col-xs-8 col-md-9">
                                                 <div class="progress">
-                                                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="20"
+                                                    <div class="progress-bar bg-dark" role="progressbar" aria-valuenow="20"
                                                          aria-valuemin="0" aria-valuemax="100" style="width: 60%">
                                                     </div>
                                                 </div>
                                             </div>
                                             <!-- end 4 -->
                                             <div class="col-xs-3 col-md-3 text-right">
-                                                <span class="glyphicon glyphicon-star"></span>3
+                                                3<span class="ti ti-star"></span>
                                             </div>
                                             <div class="col-xs-8 col-md-9">
                                                 <div class="progress">
-                                                    <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="20"
+                                                    <div class="progress-bar bg-info" role="progressbar" aria-valuenow="20"
                                                          aria-valuemin="0" aria-valuemax="100" style="width: 40%">
                                                     </div>
                                                 </div>
                                             </div>
                                             <!-- end 3 -->
                                             <div class="col-xs-3 col-md-3 text-right">
-                                                <span class="glyphicon glyphicon-star"></span>2
+                                                2<span class="ti ti-star"></span>
                                             </div>
                                             <div class="col-xs-8 col-md-9">
                                                 <div class="progress">
-                                                    <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="20"
+                                                    <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="20"
                                                          aria-valuemin="0" aria-valuemax="100" style="width: 20%">
                                                     </div>
                                                 </div>
                                             </div>
                                             <!-- end 2 -->
                                             <div class="col-xs-3 col-md-3 text-right">
-                                                <span class="glyphicon glyphicon-star"></span>1
+                                                1<span class="ti ti-star"></span>
                                             </div>
                                             <div class="col-xs-8 col-md-9">
                                                 <div class="progress">
-                                                    <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="80"
+                                                    <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="80"
                                                          aria-valuemin="0" aria-valuemax="100" style="width: 15%">
                                                     </div>
                                                 </div>
@@ -167,10 +169,10 @@
                                 <p>Lorem Ipsum is simply dummy text of the pr make  but also the leap into electronic 
                                     typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of 
                                     Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-                                
+
                             </div>
                         </div>
-                        
+
                     </div>
 
                 </div>
