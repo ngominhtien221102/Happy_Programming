@@ -100,7 +100,7 @@
         <!-- /header -->
         <div id="content" class="row" style="padding-top: 50px;  min-height: 800px">
             <%@include file="mentorSidebar.jsp" %>
-            <div class="col-10">
+            <div class="col-10" style="padding: 0">
                 <section class="section" >
                     <h2 style="margin-left:15px; text-align: center">Invitation</h2>
                     <div class="container">
