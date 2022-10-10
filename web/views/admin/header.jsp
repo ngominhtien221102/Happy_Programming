@@ -20,13 +20,13 @@
                 <div class="collapse navbar-collapse" id="navigation">
                     <ul class="navbar-nav ml-auto text-center">
                         <li class="nav-item ">
-                            <a class="nav-link" href="<%=request.getContextPath()%>/views/user/index.jsp">Home</a>
+                            <a class="nav-link" href="<%=request.getContextPath()%>/views/user/index.jsp">HOME</a>
                         </li>
                         <li class="nav-item ">
                             <a class="nav-link" href="<%=request.getContextPath()%>/views/user/skills.jsp">SKILLS</a>
                         </li>
                         <li class="nav-item ">
-                            <a class="nav-link" href="<%=request.getContextPath()%>/views/user/events.jsp">EVENTS</a>
+                            <a class="nav-link" href="<%=request.getContextPath()%>/views/user/mentorSuggest.jsp">SUGGEST</a>
                         </li>
                         <li class="nav-item ">
                             <a class="nav-link" href="<%=request.getContextPath()%>/views/user/blog.jsp">BLOG</a>
