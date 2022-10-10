@@ -14,6 +14,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.util.List;
 import model.Invitation;
+import model.User;
 import service.IInvitationService;
 import service.classimpl.InvitationService;
 
@@ -64,29 +65,33 @@ public class StatisticInvitationController extends HttpServlet {
             throws ServletException, IOException {
         HttpSession ses = request.getSession();
         List<Invitation> invList = (List<Invitation>) ses.getAttribute("listInv");
-
+        User mentor = (User) ses.getAttribute("Account");
         IInvitationService InvService = new InvitationService();
 
-        int totalInv = invList.size();
+        int totalInv = 0;
         int totalRejectedInv = 0;
         int totalAcceptedInv = 0;
         int totalProcessingInv = 0;
         int totalCancelInv = 0;
         for (Invitation i : invList) {
-            switch (i.getStatusID()) {
-                case 1:
-                    totalAcceptedInv++;
-                    break;
-                case 2:
-                    totalProcessingInv++;
-                    break;
-                case 3:
-                    totalCancelInv++;
-                    break;
-                case 4:
-                    totalRejectedInv++;
-                    break;
+            if (i.getMentorID() == mentor.getID()) {
+                totalInv++;
+                switch (i.getStatusID()) {
+                    case 1:
+                        totalAcceptedInv++;
+                        break;
+                    case 2:
+                        totalProcessingInv++;
+                        break;
+                    case 3:
+                        totalCancelInv++;
+                        break;
+                    case 4:
+                        totalRejectedInv++;
+                        break;
+                }
             }
+
         }
 
         request.setAttribute("totalInv", totalInv);
@@ -95,11 +100,11 @@ public class StatisticInvitationController extends HttpServlet {
         request.setAttribute("totalProcessingInv", totalProcessingInv);
         request.setAttribute("totalCancelInv", totalCancelInv);
 
-        request.setAttribute("percentRejected", totalRejectedInv*100/totalInv);
-        request.setAttribute("percentAccepted", totalAcceptedInv*100/totalInv);
-        request.setAttribute("percentProcessing", totalProcessingInv*100/totalInv);
-        request.setAttribute("percentCancel", totalCancelInv*100/totalInv);
-        
+        request.setAttribute("percentRejected", totalRejectedInv * 100 / totalInv);
+        request.setAttribute("percentAccepted", totalAcceptedInv * 100 / totalInv);
+        request.setAttribute("percentProcessing", totalProcessingInv * 100 / totalInv);
+        request.setAttribute("percentCancel", totalCancelInv * 100 / totalInv);
+
         request.getRequestDispatcher("views/mentors/statisticInvitation.jsp").forward(request, response);
 
     }
