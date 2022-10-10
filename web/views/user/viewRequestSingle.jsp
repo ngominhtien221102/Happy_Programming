@@ -52,6 +52,7 @@
                     </div>
                     <div class="col-sm-5 col-md-6 col-12 pb-4">
                         <h3 class="card-title" style="margin-left: 2%;">Response</h3>
+                        <h4 style="color: green; margin-left: 2%">${resAlert2}</h4>
                         <c:forEach items="${responseLst}" var="response" varStatus="loop">
                             <div class="card">
                                 <div class="card-body">
@@ -75,13 +76,17 @@
                         </c:forEach>
                         <div class="card">
                             <div class="card-body">
-                                <form action="#" class="row">
+                                <form action="singleRequest" method="POST" class="row">
+                                    <input type="hidden" name="userID" value="${Account.ID}">
+                                    <input type="hidden" name="requestId" value="${request.ID}">
                                     <div class="card-body">
-                                        <textarea name="comment" id="editor" class="form-control mb-6" placeholder="Type your response here..."></textarea>
+                                        <textarea name="response" id="editor" class="form-control mb-6" placeholder="Type your response here..."></textarea>
                                     </div>
                                     <div class="col-12">
                                         <button type="submit" value="send" class="btn btn-primary" style="margin-top: 1%; border-radius: 2%;">Post Response</button>
+                                        <p style="color: #ff3333; margin-top: 1%;">${resAlert}</p>
                                     </div>
+                                    
                                 </form>
                             </div>
                         </div>

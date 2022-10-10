@@ -119,7 +119,21 @@ public class ViewRequestSingleController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+       IResponseService rs = new ResponseService();
+        HttpSession session = request.getSession();
+        try{
+            int requestID = Integer.parseInt(request.getParameter("requestId"));
+            int userID = Integer.parseInt(request.getParameter("userID"));
+            String resContent = request.getParameter("response").trim();
+            if(resContent.equalsIgnoreCase("")){
+                request.setAttribute("resAlert", "Write something to response!");
+            }else{
+                rs.insert(new Response(0, requestID, userID, resContent, ""), (List<Response>) session.getAttribute("listResponse"));
+                request.setAttribute("resAlert2", "Response sent!");
+            }   
+        }catch(Exception e){     
+        }
+        doGet(request, response);
     }
 
     /**
