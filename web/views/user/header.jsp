@@ -26,7 +26,7 @@
                             <a class="nav-link" href="<%=request.getContextPath()%>/views/user/skills.jsp">SKILLS</a>
                         </li>
                         <li class="nav-item ">
-                            <a class="nav-link" href="<%=request.getContextPath()%>/views/user/events.jsp">EVENTS</a>
+                            <a class="nav-link" href="<%=request.getContextPath()%>/views/user/mentorSuggest.jsp">SUGGEST</a>
                         </li>
                         <li class="nav-item ">
                             <a class="nav-link" href="<%=request.getContextPath()%>/views/user/blog.jsp">BLOG</a>
