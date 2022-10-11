@@ -12,6 +12,16 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import java.util.HashMap;
+import java.util.List;
+import model.MentorCV;
+
+import model.UserProfile;
+import service.IInvitationService;
+import service.IRateService;
+import service.classimpl.InvitationService;
+import service.classimpl.RateService;
 
 /**
  *
@@ -55,6 +65,39 @@ public class SuggestMentorController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
+        HttpSession ses = request.getSession();
+        
+        List<MentorCV> CVs = (List<MentorCV>) ses.getAttribute("listMentorCV");
+        List<UserProfile> userProfiles = (List<UserProfile>) ses.getAttribute("listUserProfile");
+        
+        IRateService rateSer = new RateService();
+        IInvitationService invSer = new InvitationService();
+
+        
+        List<Integer> listIDSkill = invSer.getListIDSkill();
+        List<Integer> idMentorsSuggest = rateSer.getMentorsSuggest(listIDSkill, CVs);
+        
+        HashMap<Integer, MentorCV> suggestCVs = new HashMap<>();
+        HashMap<Integer, UserProfile> suggestProfiles = new HashMap<>();
+        HashMap<Integer, Float> rateHm = rateSer.getHmAvgRate();
+        
+        for (MentorCV cv : CVs){
+            if (idMentorsSuggest.contains(cv.getID())){
+                suggestCVs.put(cv.getID(), cv);
+            }
+        }
+        
+        for (UserProfile p : userProfiles){
+            if (idMentorsSuggest.contains(p.getID())){
+                suggestProfiles.put(p.getID(), p);
+            }
+        }
+        
+        request.setAttribute("idMentorsSuggest", idMentorsSuggest);
+        request.setAttribute("CVsHm", suggestCVs);
+        request.setAttribute("profilesHm", suggestProfiles);
+        request.setAttribute("rateHm", rateHm);
+        request.getRequestDispatcher("views/user/mentorSuggest.jsp").forward(request, response);
         
     } 
 

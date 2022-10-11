@@ -47,27 +47,36 @@
         </section>
 
         <!-- /page title -->
+        <c:set value="${requestScope.idMentorsSuggest}" var="ids"/>
+        <c:set value="${requestScope.CVsHm}" var="CVs"/>
+        <c:set value="${requestScope.profilesHm}" var="pfs"/>
+        <c:set value="${requestScope.rateHm}" var="rates"/>
 
         <section class="section">
             <div class="container">
                 <div class="row">
 
                     <div class="col-md-12 table">
-                        <!-- skills -->
+                        
                         <div class="row justify-content-center">
-                            <!-- course item -->
+                            <c:forEach items="${ids}" var="id">
+                                <!-- course item -->
                             <div class="col-lg-4 col-sm-6 mb-5">
                                 <div class="card p-0 border-primary rounded-0 hover-shadow">
-                                    <img class="card-img-top rounded-0" src="<%=request.getContextPath()%>/img/avatar/p1.png" alt="">
+                                    <img class="card-img-top rounded-0" src="<%=request.getContextPath()%>/img/avatar/p${id}.png" alt="">
                                     <div class="card-body">
                                         <ul class="list-inline mb-2">
-                                            <li class="list-inline-item"><i class="ti-calendar mr-1 text-color"></i>XX-MM-YYY</li>
+                                            <li class="list-inline-item"><i class="ti-calendar mr-1 text-color"></i>${pfs.get(id).dob}</li>
                                         </ul>
 
-                                        <h4 class="card-title">Ngo Minh Tien</h4>
-                                        <p class="card-text">Gender: Male</p>
-                                        <p class="card-text">Skill: java, C#, C++</p>
-                                        <div style="margin-bottom: 20px">Rate: 
+                                        <h4 class="card-title">${pfs.get(id).firstName} ${pfs.get(id).lastName}</h4>
+                                        <p class="card-text">Gender: ${pfs.get(id).gender}</p>
+                                        <p class="card-text">Skill: 
+                                            <c:forEach items="${CVs.get(id).skillList}" var="s">
+                                                ${s.name} 
+                                            </c:forEach>
+                                        </p>
+                                        <div style="margin-bottom: 20px">Rate: ${rates.get(id)}
                                             <span style="margin-left: 10px" class="fa fa-star checked"></span>
                                             <span class="fa fa-star checked"></span>
                                             <span class="fa fa-star checked"></span>
@@ -77,11 +86,11 @@
                                     </div>
                                 </div>
                             </div>
-
-                        <!-- /skills -->
+                            </c:forEach>
+                            
+                        </div>
                     </div>
                 </div>
-            </div>
         </section>
 
 
