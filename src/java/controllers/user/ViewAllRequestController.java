@@ -95,7 +95,6 @@ public class ViewAllRequestController extends HttpServlet {
             for (Request req : listRequest) {
                 if (req.getMentorID() == Account.getID()) {
                     LstRequest.add(req);
-                    System.out.print(req.getMentorID() + "-");
                     int count = 0;
                     for (Response response1 : listResponse) {
                         if (req.getID() == response1.getRequestID()) {
@@ -112,14 +111,11 @@ public class ViewAllRequestController extends HttpServlet {
                 }
             }
         }
-        System.out.println(LstRequest.size());
-        System.out.println(urLst.size());
         request.setAttribute("urLst", urLst);
         request.setAttribute("LstRequest", LstRequest);
         request.setAttribute("resCount", resCount);
         request.getRequestDispatcher("views/user/viewRequest.jsp").forward(request, response);
     }
-
     /**
      * Handles the HTTP <code>POST</code> method.
      *
