@@ -33,8 +33,13 @@
                     <div class="col-12">
                         <ul class="list-inline">
                             <li class="list-inline-item mr-4 mb-3 mb-md-0 text-light">
-                                <span class="font-weight-bold mr-2">To:</span>
-                                ${mentor.firstName} ${mentor.lastName}
+                                <span class="font-weight-bold mr-2">${Account.roleID==2?"To:":"From:"}</span>
+                                <c:if test="${Account.roleID==2}">
+                                    ${mentor.firstName} ${mentor.lastName}
+                                </c:if>
+                                <c:if test="${Account.roleID!=2}">
+                                    ${mentee.firstName} ${mentee.lastName}
+                                </c:if>
                             </li>
                             <li class="list-inline-item mr-4 mb-3 mb-md-0 text-light">
                                 <fmt:parseDate value="${request.createdAt}" pattern="yyyy-MM-dd" var="Date" />
@@ -86,7 +91,7 @@
                                         <button type="submit" value="send" class="btn btn-primary" style="margin-top: 1%; border-radius: 2%;">Post Response</button>
                                         <p style="color: #ff3333; margin-top: 1%;">${resAlert}</p>
                                     </div>
-                                    
+
                                 </form>
                             </div>
                         </div>
