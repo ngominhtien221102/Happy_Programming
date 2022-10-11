@@ -188,32 +188,32 @@
                                 </div>
                             </article>
 
-<!--                            <article class="col-md-12" style="margin: 50px auto 0 auto">
-                                <div class="card border-bottom hover-shadow" style="border-radius: 5px;background-color: #f3f3f3">
-                                    <div class="card-body row align-items-center" >
-                                        <div class="col-6">
-                                            <h3 style="color: #fe9365;">Last month</h3>
-                                            <h4 style="color: #fe9365;">300</h4>
-                                            <h6 class="text-muted">Invitations</h6>
-                                        </div>
-                                        <div class="col-6">
-                                            <h3 style="color: #fe9365;">This month</h3>
-                                            <h4 style="color: #fe9365;">369</h4>
-                                            <h6 class="text-muted">Invitations</h6>
-                                        </div>
-                                    </div>
-                                    
-                                    <div style="background: linear-gradient(to right,#2b5876,#4e4376); text-align: center; align-items: center; padding: 20px;
-                                         border-bottom-left-radius: 5px;
-                                         border-bottom-right-radius: 5px;">
-                                        <div style="color: #fff">Note: tăng hoặc giảm </div>
-                                        <p style="color: #fff; margin: 0 "><i class="ti-arrow-up m-2"></i>10%</p>
-                                        <p style="color: #fff; margin: 0 "><i class="ti-arrow-down m-2"></i>10%</p>
-                                    </div>
-                                </div>
-                                
-
-                            </article>-->
+                            <!--                            <article class="col-md-12" style="margin: 50px auto 0 auto">
+                                                            <div class="card border-bottom hover-shadow" style="border-radius: 5px;background-color: #f3f3f3">
+                                                                <div class="card-body row align-items-center" >
+                                                                    <div class="col-6">
+                                                                        <h3 style="color: #fe9365;">Last month</h3>
+                                                                        <h4 style="color: #fe9365;">300</h4>
+                                                                        <h6 class="text-muted">Invitations</h6>
+                                                                    </div>
+                                                                    <div class="col-6">
+                                                                        <h3 style="color: #fe9365;">This month</h3>
+                                                                        <h4 style="color: #fe9365;">369</h4>
+                                                                        <h6 class="text-muted">Invitations</h6>
+                                                                    </div>
+                                                                </div>
+                                                                
+                                                                <div style="background: linear-gradient(to right,#2b5876,#4e4376); text-align: center; align-items: center; padding: 20px;
+                                                                     border-bottom-left-radius: 5px;
+                                                                     border-bottom-right-radius: 5px;">
+                                                                    <div style="color: #fff">Note: tăng hoặc giảm </div>
+                                                                    <p style="color: #fff; margin: 0 "><i class="ti-arrow-up m-2"></i>10%</p>
+                                                                    <p style="color: #fff; margin: 0 "><i class="ti-arrow-down m-2"></i>10%</p>
+                                                                </div>
+                                                            </div>
+                                                            
+                            
+                                                        </article>-->
                         </div>
                         <div class="card-block" >
                             <h3 style="margin-bottom: 20px" class="">Invitations</h3>
@@ -338,7 +338,9 @@
                                     </div>
                                 </div>
                             </div>
-                        </div></section>
+                        </div>
+                    </div>
+                </section>
             </div>
         </div>
         <!-- footer -->
