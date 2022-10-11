@@ -69,29 +69,53 @@ public class ViewAllRequestController extends HttpServlet {
         List<Request> listRequest = (List<Request>) session.getAttribute("listRequest");
         List<Response> listResponse = (List<Response>) session.getAttribute("listResponse");
         List<UserProfile> upLst = (List<UserProfile>) session.getAttribute("listUserProfile");
-        List<UserProfile> mentorLst = new ArrayList<>();
-        User mentee = (User) session.getAttribute("Account");
-        ArrayList<Request> menteeLstRequest = new ArrayList<>();
+        List<UserProfile> urLst = new ArrayList<>();
+        User Account = (User) session.getAttribute("Account");
+        ArrayList<Request> LstRequest = new ArrayList<>();
         ArrayList<Integer> resCount = new ArrayList<>();
-        for (Request req : listRequest) {
-            if (req.getMenteeID() == mentee.getID()) {
-                menteeLstRequest.add(req);
-                int count = 0;
-                for (Response response1 : listResponse) {
-                    if (req.getID() == response1.getRequestID()) {
-                        count++;
+        if (Account.getRoleID() == 2) {
+            for (Request req : listRequest) {
+                if (req.getMenteeID() == Account.getID()) {
+                    LstRequest.add(req);
+                    int count = 0;
+                    for (Response response1 : listResponse) {
+                        if (req.getID() == response1.getRequestID()) {
+                            count++;
+                        }
+                    }
+                    resCount.add(count);
+                    for (UserProfile up : upLst) {
+                        if (req.getMentorID() == up.getID()) {
+                            urLst.add(up);
+                        }
                     }
                 }
-                resCount.add(count);
-                for (UserProfile up : upLst) {
-                    if (req.getMentorID() == up.getID()) {
-                        mentorLst.add(up);
+            }
+        } else if (Account.getRoleID() == 3) {
+            for (Request req : listRequest) {
+                if (req.getMentorID() == Account.getID()) {
+                    LstRequest.add(req);
+                    System.out.print(req.getMentorID() + "-");
+                    int count = 0;
+                    for (Response response1 : listResponse) {
+                        if (req.getID() == response1.getRequestID()) {
+                            count++;
+                        }
+                    }
+                    resCount.add(count);
+                    for (UserProfile up : upLst) {
+                        if (req.getMenteeID() == up.getID()) {
+                            urLst.add(up);
+                            break;
+                        }
                     }
                 }
             }
         }
-        request.setAttribute("mentorLst", mentorLst);
-        request.setAttribute("menteeLstRequest", menteeLstRequest);
+        System.out.println(LstRequest.size());
+        System.out.println(urLst.size());
+        request.setAttribute("urLst", urLst);
+        request.setAttribute("LstRequest", LstRequest);
         request.setAttribute("resCount", resCount);
         request.getRequestDispatcher("views/user/viewRequest.jsp").forward(request, response);
     }
