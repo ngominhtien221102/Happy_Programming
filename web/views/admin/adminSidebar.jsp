@@ -5,7 +5,7 @@
 --%>
 
 
-<div class="col-2" style="padding-top: 5%; background-color: #1a1a37;">
+<div class="col-2" style="padding-top: 5%; background-color: #1a1a37">
     <!-- Sidebar -->
     <ul class="navbar-nav"  style="background-color: #1a1a37; margin-top: 10px; padding: 20px 10px 0px 30px">
         <!-- Nav Item - Dashboard -->
@@ -21,47 +21,71 @@
         <!-- Nav Item - Add product -->
         <li class="nav-item">
             <a class="nav-link collapsed" href="<%=request.getContextPath()%>/views/common/viewMentorCV.jsp" >
-                <span>Profile</span>
+                <span>Mentor</span>
             </a>
         </li>
 
         <!-- Nav Item - Update product -->
         <li class="nav-item">
             <a class="nav-link collapsed" href="<%=request.getContextPath()%>/views/user/changePassword.jsp" >
-                <span>Change password</span>
+                <span>Mentee</span>
             </a>
         </li>
 
-      
+        <!-- Nav Item - Add product -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="<%=request.getContextPath()%>/views/common/viewMentorCV.jsp" >
+                <span>Static</span>
+            </a>
+        </li>
+        <hr class="sidebar-divider">
+
+        <!-- Heading -->
+        <div class="sidebar-heading">
+            Skill
+        </div>
+
+        <!-- Nav Item - Add product -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="<%=request.getContextPath()%>/addproduct" >
+                <span>Create Skill</span>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="<%=request.getContextPath()%>/addproduct" >
+                <span>View Skill</span>
+            </a>
+        </li>
         <!-- Divider -->
         <hr class="sidebar-divider">
 
         <!-- Heading -->
         <div class="sidebar-heading">
-            Management
+            Request
         </div>
 
         <!-- Nav Item - All transaction -->
         <li class="nav-item">
-            <a class="nav-link collapsed" href="" >
-                <span>Mentee</span>
+            <a class="nav-link collapsed" href="<%=request.getContextPath()%>/order" >
+                <span>View Request</span>
             </a>
         </li>    
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="" >
-                <span>Mentor</span>
-            </a>
-        </li>  
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="<" >
-                <span>Invitation</span>
-            </a>
-        </li>  
 
         <!-- Divider -->
         <hr class="sidebar-divider">
 
-       
+        <!-- Heading -->
+        <div class="sidebar-heading">
+            Invitation
+        </div>
+
+        <!-- Nav Item - All Admin -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="<%=request.getContextPath()%>/views/user/viewInvitationMentor.jsp" >
+                <span>View Invitation</span>
+            </a>
+        </li>
 
         <!-- Divider -->
         <hr class="sidebar-divider">

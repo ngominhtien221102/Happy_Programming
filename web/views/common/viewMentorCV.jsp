@@ -6,6 +6,7 @@
 <html lang="zxx">
 
     <%@include file="../user/headCSS2.jsp" %>
+    <%@include file="../user/rateCSS.jsp" %>
 
     <body>
         <!-- header -->
@@ -39,8 +40,8 @@
                                     <li class="mb-3"><a class="text-color" href="mailto:johndoe@email.com"><i class="ti-email mr-2"></i>${mentorProfile.email}</a></li>
 
                                     <li class="mb-3"><a class="text-color" href="#"><i class="ti-location-pin mr-2"></i>
-                                        
-                                        Address: ${xa} , ${huyen} , ${tinh}
+
+                                            Address: ${xa} , ${huyen} , ${tinh}
                                         </a></li>
                                 </ul>
                             </div>
@@ -58,39 +59,131 @@
                                 <p>${s.name}</p>
                             </c:forEach>
                         </div>
-                        <!-- course item -->
-<!--                        <div class="col-lg-4 col-sm-6 mb-5">
-                            <div class="card p-0 border-primary rounded-0 hover-shadow">
-                                <img class="card-img-top rounded-0" src="images/courses/course-4.jpg" alt="course thumb">
-                                <div class="card-body">
-                                    <ul class="list-inline mb-2">
-                                        <li class="list-inline-item"><i class="ti-calendar mr-1 text-color"></i>02-14-2018</li>
-                                        <li class="list-inline-item"><a class="text-color" href="#">Humanities</a></li>
-                                    </ul>
-                                    <a href="course-single.jsp">
-                                        <h4 class="card-title">Complete Freelancing</h4>
-                                    </a>
-                                    <p class="card-text mb-4"> Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
-                                        incididunt ut labore et dolore magna.</p>
-                                    <a href="course-single.jsp" class="btn btn-primary btn-sm">Apply now</a>
+                    </div>
+                    <!--Rate-->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="well well-sm">
+                                <div class="row">
+                                    <div class="col-xs-12 col-md-4 text-center">
+                                        <h1 class="rating-num">
+                                            4.0</h1>
+                                        <div class="rating">
+                                            <span class="ti ti-star"></span>
+                                            <span class="ti ti-star"></span>
+                                            <span class="ti ti-star"></span>
+                                            <span class="ti ti-star"></span>
+                                            <span class="ti ti-star"></span>
+                                        </div>
+                                        <div>
+                                            <span class="glyphicon glyphicon-user"></span>1,050,008 total
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-md-8">
+                                        <div class="row rating-desc">
+                                            <div class="col-xs-3 col-md-3 text-right">
+                                                5<span class="ti ti-star"></span>
+                                            </div>
+                                            <div class="col-xs-8 col-md-9">
+                                                <div class="progress ">
+                                                    <div class="progress-bar bg-success progress-striped" role="progressbar" aria-valuenow="20"
+                                                         aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- end 5 -->
+                                            <div class="col-xs-3 col-md-3 text-right">
+                                                4<span class="ti ti-star"></span>
+                                            </div>
+                                            <div class="col-xs-8 col-md-9">
+                                                <div class="progress">
+                                                    <div class="progress-bar bg-dark" role="progressbar" aria-valuenow="20"
+                                                         aria-valuemin="0" aria-valuemax="100" style="width: 60%">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- end 4 -->
+                                            <div class="col-xs-3 col-md-3 text-right">
+                                                3<span class="ti ti-star"></span>
+                                            </div>
+                                            <div class="col-xs-8 col-md-9">
+                                                <div class="progress">
+                                                    <div class="progress-bar bg-info" role="progressbar" aria-valuenow="20"
+                                                         aria-valuemin="0" aria-valuemax="100" style="width: 40%">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- end 3 -->
+                                            <div class="col-xs-3 col-md-3 text-right">
+                                                2<span class="ti ti-star"></span>
+                                            </div>
+                                            <div class="col-xs-8 col-md-9">
+                                                <div class="progress">
+                                                    <div class="progress-bar bg-warning" role="progressbar" aria-valuenow="20"
+                                                         aria-valuemin="0" aria-valuemax="100" style="width: 20%">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- end 2 -->
+                                            <div class="col-xs-3 col-md-3 text-right">
+                                                1<span class="ti ti-star"></span>
+                                            </div>
+                                            <div class="col-xs-8 col-md-9">
+                                                <div class="progress">
+                                                    <div class="progress-bar bg-danger" role="progressbar" aria-valuenow="80"
+                                                         aria-valuemin="0" aria-valuemax="100" style="width: 15%">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- end 1 -->
+                                        </div>
+                                        <!-- end row -->
+                                    </div>
                                 </div>
                             </div>
-                        </div>-->
-                        <!-- course item -->
+                        </div>
+                    </div>
+
+
+                    <!--comment-->
+                    <form action="/action_page.php" id="usrform">
+                        <div class="d-flex flex-row add-comment-section mt-4 mb-4">
+                            <img class="img-fluid img-responsive rounded-circle mr-2" src="https://i.imgur.com/qdiP4DB.jpg" width="38">
+                            <input type="text" class="form-control mr-3" placeholder="Add comment">
+                            <button class="btn btn-primary" type="button">Comment</button>
+                        </div>
+                    </form>
+
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <img src="https://image.ibb.co/jw55Ex/def_face.jpg" class="img img-rounded img-fluid"/>
+                                <p class="text-secondary text-center">15 Minutes Ago</p>
+                            </div>
+                            <div class="col-md-10">
+                                <p>
+                                    <a class="float-left" href="https://maniruzzaman-akash.blogspot.com/p/contact.html"><strong>Maniruzzaman Akash</strong></a>
+                                </p>
+                                <div class="clearfix"></div>
+                                <p>Lorem Ipsum is simply dummy text of the pr make  but also the leap into electronic 
+                                    typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of 
+                                    Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+
+                            </div>
+                        </div>
 
                     </div>
+
                 </div>
             </section>
-            <!-- /teachers -->
-        </div>
 
+            <!-- footer -->
+            <%@include file="../user/footer.jsp" %>
+            <!-- /footer -->
 
-        <!-- footer -->
-        <%@include file="../user/footer.jsp" %>
-        <!-- /footer -->
-
-        <!-- jQuery -->
-        <%@include file="../user/scriptJS.jsp" %>
+            <!-- jQuery -->
+            <%@include file="../user/scriptJS.jsp" %>
 
     </body>
 </html>

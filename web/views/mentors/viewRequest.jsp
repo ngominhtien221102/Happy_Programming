@@ -23,45 +23,44 @@
         <!-- header -->
         <%@include file="header.jsp" %>
         <!-- /header -->
-        <div id="content" class="row" style="padding-top: 50px; ">
-            <%@include file="sidebar.jsp" %>
+        <div id="content" class="row" style="padding-top: 50px;  min-height: 800px">
+            <%@include file="mentorSidebar.jsp" %>
             <div class="col-10">
                 <section class="section" >
                     <h2 style="margin-left:15px">All Requests</h2>
                     <div class="container">
                         <div class="row">
-                            <c:forEach items="${LstRequest}" var="request" varStatus="loop">
+                            
                                 <!-- blog post -->
                                 <article class="col-lg-4 col-sm-6 mb-5">
                                     <div class="card rounded-0 border-bottom border-primary border-top-0 border-left-0 border-right-0 hover-shadow">
                                         <div class="card-body" >
-                                            <a href="<%=request.getContextPath()%>/singleRequest?requestId=${request.ID}">
-                                                <h4 class="card-title">${request.title}</h4>
+                                            <a href="">
+                                                <h4 class="card-title"></h4>
                                             </a>
                                             <!-- post meta -->
                                             <ul class="list-inline mb-3">
                                                 <!-- post date -->
                                                 <li class="list-inline-item mr-3 ml-0">
-                                                    <fmt:parseDate value="${request.createdAt}" pattern="yyyy-MM-dd" var="Date" />
-                                                    <fmt:formatDate value="${Date}" var="Date2" pattern="dd/MM/yyyy"/>        
-                                                    Created: ${Date2}
-                                                </li> 
-                                                <br>
+                                                         
+                                                    Created: 25/10/2002
+                                                </li>
                                                 <!-- to -->
-                                                <li class="list-inline-item mr-3 ml-0">                                                 
-                                                        ${Account.roleID==2?"To:":"From:"} ${urLst.get(loop.index).firstName} ${urLst.get(loop.index).lastName} 
-                                                </li> 
-                                                <br>
+                                                <li class="list-inline-item mr-3 ml-0">
+                                                    
+                                                            From: Minh
+                                                        
+                                                </li> <br>
                                                 <li class="list-inline-item mr-3 ml-0">    
-                                                    Response: ${resCount.get(loop.index)}
+                                                    Response: 20
                                                 </li>
                                             </ul>
 
-                                            <a href="<%=request.getContextPath()%>/singleRequest?requestId=${request.ID}" class="btn btn-primary btn-sm">View</a>
+                                            <a href="<%=request.getContextPath()%>/views/mentors/viewRequestSingle.jsp" class="btn btn-primary btn-sm">View</a>
                                         </div>
                                     </div>
                                 </article>
-                            </c:forEach>
+                            
                         </div>
                     </div>
                 </section>
@@ -71,7 +70,7 @@
         <%@include file="footer.jsp" %>
         <!-- /footer -->
         <!-- jQuery -->
-        <%@include file="scriptJS.jsp" %> 
+        
         <!-- /jQuery -->
     </body>
 </html>

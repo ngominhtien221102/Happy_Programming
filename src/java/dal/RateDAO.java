@@ -7,6 +7,7 @@ package dal;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashMap;
 import model.Rate;
 import model.Request;
 
@@ -29,6 +30,27 @@ public class RateDAO extends DBContext {
 
     public void setRateList(ArrayList<Rate> rateList) {
         this.rateList = rateList;
+    }
+
+    public HashMap<Integer, Float> getHmAvgRate() {
+        HashMap<Integer, Float> avgRateHm = new HashMap<>();
+        String sql = "SELECT Mentor_ID, avg (1.0 * [Rate])\n"
+                + "  FROM [dbo].[Rate]\n"
+                + "  Group by Mentor_ID";
+        try {
+            PreparedStatement ps = connection.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                int MentorId = rs.getInt(1);
+                float rate = rs.getFloat(2);
+                avgRateHm.put(MentorId, rate);
+            }
+        } catch (Exception e) {
+            System.out.println("Error get average rate " + e.getMessage());
+
+        }
+        return avgRateHm;
+        
     }
 
     public void load() {

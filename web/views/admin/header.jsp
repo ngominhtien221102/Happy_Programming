@@ -20,7 +20,7 @@
                 <div class="collapse navbar-collapse" id="navigation">
                     <ul class="navbar-nav ml-auto text-center">
                         <li class="nav-item ">
-                            <a class="nav-link" href="<%=request.getContextPath()%>/views/user/index.jsp">Home</a>
+                            <a class="nav-link" href="<%=request.getContextPath()%>/views/user/index.jsp">HOME</a>
                         </li>
                         <li class="nav-item ">
                             <a class="nav-link" href="<%=request.getContextPath()%>/views/user/skills.jsp">SKILLS</a>
@@ -74,29 +74,11 @@
                                 <i class="ti ti-user" aria-hidden="true"></i>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="left:-50px">
-
-                                <c:if test="${sessionScope.Account != null}">
-                                    <c:if test="${sessionScope.Account.getRoleID() == 2}">
-                                        <a class="dropdown-item" href="<%=request.getContextPath()%>/viewMenteeProfile">Profile</a>
-                                    </c:if>   
-                                    <c:if test="${sessionScope.Account.getRoleID() == 3}">
-                                        <a class="dropdown-item" href="<%=request.getContextPath()%>/views/user/profile.jsp">Profile</a>
-                                    </c:if>   
-                                </c:if>  
-
-
-                                <c:if test="${sessionScope.Account != null}">
-                                    <a class="dropdown-item" href="<%=request.getContextPath()%>/views/user/changePassword.jsp">Change password</a>
-                                </c:if>  
+                                <a class="dropdown-item" href="<%=request.getContextPath()%>/views/user/profile.jsp">Profile</a>
+                                <a class="dropdown-item" href="<%=request.getContextPath()%>/views/user/changePassword.jsp">Change password</a>
                                 <a class="dropdown-item" href="<%=request.getContextPath()%>/views/user/signup.jsp">Register</a>
-
-                                <c:if test="${sessionScope.Account == null}">
-                                    <a class="dropdown-item" href="<%=request.getContextPath()%>/views/user/login.jsp">Login</a>
-                                </c:if>
-                                <c:if test="${sessionScope.Account != null}">
-                                    <a class="dropdown-item" href="<%=request.getContextPath()%>/logout">Logout</a>
-                                </c:if>
-
+                                <a class="dropdown-item" href="<%=request.getContextPath()%>/views/user/login.jsp">Login</a>
+                                <a class="dropdown-item" href="<%=request.getContextPath()%>/views/user/notice-single.jsp">Logout</a>
 
                             </div>
                         </li>
