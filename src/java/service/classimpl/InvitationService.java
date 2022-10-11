@@ -5,6 +5,7 @@
 package service.classimpl;
 
 import dal.InvitationDAO;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -85,5 +86,18 @@ public class InvitationService implements IInvitationService {
     public List<Invitation> getList() {
         return InvitationDAO.getInvitation();
     }
+
+    @Override
+    public List<Integer> getListIDSkill() {
+        List<Invitation> invList = getList();
+        List<Integer> idSkillList = new ArrayList<>();
+        for (Invitation i : invList){
+            if (!idSkillList.contains(i.getSkillID()) && i.getStatusID()!= 3)
+                idSkillList.add(i.getSkillID());
+        }
+        return idSkillList;
+    }
+    
+    
 
 }

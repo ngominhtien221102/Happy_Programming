@@ -43,10 +43,7 @@
                         <p class="text-lighten">Here are our top mentors, in addition there are mentors that support the skills you have been learning.</p>
                     </div>
                 </div>
-
-
             </div>
-
         </section>
 
         <!-- /page title -->
@@ -65,7 +62,6 @@
                                     <div class="card-body">
                                         <ul class="list-inline mb-2">
                                             <li class="list-inline-item"><i class="ti-calendar mr-1 text-color"></i>XX-MM-YYY</li>
-
                                         </ul>
 
                                         <h4 class="card-title">Ngo Minh Tien</h4>
@@ -81,121 +77,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <!-- course item -->
-                            <div class="col-lg-4 col-sm-6 mb-5">
-                                <div class="card p-0 border-primary rounded-0 hover-shadow">
-                                    <img class="card-img-top rounded-0" src="<%=request.getContextPath()%>/img/avatar/p1.png" alt="">
-                                    <div class="card-body">
-                                        <ul class="list-inline mb-2">
-                                            <li class="list-inline-item"><i class="ti-calendar mr-1 text-color"></i>XX-MM-YYY</li>
 
-                                        </ul>
-
-                                        <h4 class="card-title">Ngo Minh Tien</h4>
-                                        <p class="card-text">Gender: Male</p>
-                                        <p class="card-text">Skill: java, C#, C++</p>
-                                        <div style="margin-bottom: 20px">Rate: 
-                                            <span style="margin-left: 10px" class="fa fa-star checked"></span>
-                                            <span class="fa fa-star checked"></span>
-                                            <span class="fa fa-star checked"></span>
-                                            <span class="fa fa-star"></span>
-                                            <span class="fa fa-star"></span></div>
-                                        <a href="" class="btn btn-primary btn-sm">Invite now</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- course item -->
-                            <div class="col-lg-4 col-sm-6 mb-5">
-                                <div class="card p-0 border-primary rounded-0 hover-shadow">
-                                    <img class="card-img-top rounded-0" src="<%=request.getContextPath()%>/img/avatar/p1.png" alt="">
-                                    <div class="card-body">
-                                        <ul class="list-inline mb-2">
-                                            <li class="list-inline-item"><i class="ti-calendar mr-1 text-color"></i>XX-MM-YYY</li>
-
-                                        </ul>
-
-                                        <h4 class="card-title">Ngo Minh Tien</h4>
-                                        <p class="card-text">Gender: Male</p>
-                                        <p class="card-text">Skill: java, C#, C++</p>
-                                        <div style="margin-bottom: 20px">Rate: 
-                                            <span style="margin-left: 10px" class="fa fa-star checked"></span>
-                                            <span class="fa fa-star checked"></span>
-                                            <span class="fa fa-star checked"></span>
-                                            <span class="fa fa-star"></span>
-                                            <span class="fa fa-star"></span></div>
-                                        <a href="" class="btn btn-primary btn-sm">Invite now</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- course item -->
-                            <div class="col-lg-4 col-sm-6 mb-5">
-                                <div class="card p-0 border-primary rounded-0 hover-shadow">
-                                    <img class="card-img-top rounded-0" src="<%=request.getContextPath()%>/img/avatar/p1.png" alt="">
-                                    <div class="card-body">
-                                        <ul class="list-inline mb-2">
-                                            <li class="list-inline-item"><i class="ti-calendar mr-1 text-color"></i>XX-MM-YYY</li>
-
-                                        </ul>
-
-                                        <h4 class="card-title">Ngo Minh Tien</h4>
-                                        <p class="card-text">Gender: Male</p>
-                                        <p class="card-text">Skill: java, C#, C++</p>
-                                        <div style="margin-bottom: 20px">Rate: 
-                                            <span style="margin-left: 10px" class="fa fa-star checked"></span>
-                                            <span class="fa fa-star checked"></span>
-                                            <span class="fa fa-star checked"></span>
-                                            <span class="fa fa-star"></span>
-                                            <span class="fa fa-star"></span></div>
-                                        <a href="" class="btn btn-primary btn-sm">Invite now</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- course item -->
-                            <div class="col-lg-4 col-sm-6 mb-5">
-                                <div class="card p-0 border-primary rounded-0 hover-shadow">
-                                    <img class="card-img-top rounded-0" src="<%=request.getContextPath()%>/img/avatar/p1.png" alt="">
-                                    <div class="card-body">
-                                        <ul class="list-inline mb-2">
-                                            <li class="list-inline-item"><i class="ti-calendar mr-1 text-color"></i>XX-MM-YYY</li>
-
-                                        </ul>
-
-                                        <h4 class="card-title">Ngo Minh Tien</h4>
-                                        <p class="card-text">Gender: Male</p>
-                                        <p class="card-text">Skill: java, C#, C++</p>
-                                        <div style="margin-bottom: 20px">Rate: 
-                                            <span style="margin-left: 10px" class="fa fa-star checked"></span>
-                                            <span class="fa fa-star checked"></span>
-                                            <span class="fa fa-star checked"></span>
-                                            <span class="fa fa-star"></span>
-                                            <span class="fa fa-star"></span></div>
-                                        <a href="" class="btn btn-primary btn-sm">Invite now</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- course item -->
-                            <div class="col-lg-4 col-sm-6 mb-5">
-                                <div class="card p-0 border-primary rounded-0 hover-shadow">
-                                    <img class="card-img-top rounded-0" src="<%=request.getContextPath()%>/img/avatar/p1.png" alt="">
-                                    <div class="card-body">
-                                        <ul class="list-inline mb-2">
-                                            <li class="list-inline-item"><i class="ti-calendar mr-1 text-color"></i>XX-MM-YYY</li>
-
-                                        </ul>
-
-                                        <h4 class="card-title">Ngo Minh Tien</h4>
-                                        <p class="card-text">Gender: Male</p>
-                                        <p class="card-text">Skill: java, C#, C++</p>
-                                        <div style="margin-bottom: 20px">Rate: 
-                                            <span style="margin-left: 10px" class="fa fa-star checked"></span>
-                                            <span class="fa fa-star checked"></span>
-                                            <span class="fa fa-star checked"></span>
-                                            <span class="fa fa-star"></span>
-                                            <span class="fa fa-star"></span></div>
-                                        <a href="" class="btn btn-primary btn-sm">Invite now</a>
-                                    </div>
-                                </div>
-                            </div>
                         <!-- /skills -->
                     </div>
                 </div>
