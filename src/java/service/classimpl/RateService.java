@@ -8,10 +8,13 @@ import dal.RateDAO;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.SortedSet;
+import model.MentorCV;
 import model.Rate;
+import model.Skill;
 import model.User;
 import service.IRateService;
 
@@ -39,25 +42,51 @@ public class RateService implements IRateService {
     }
 
     @Override
-    public HashMap getHmAvgRate(List<User> userList) {
+    public HashMap getHmAvgRate() {
         return rateDAO.getHmAvgRate();
     }
-
+    
     @Override
-    public List<User> getMentorsSuggest(List<Integer> listIDSkill, List<User> userList) {
-        List<User> mentorsSuggest = new ArrayList<>();
+    public List<Integer> getMentorsSuggest(List<Integer> listIDSkill, List<MentorCV> CVList) {
+        List<Integer> idMentorsSuggest = new ArrayList<>();
         
-        HashMap<Integer, Float> avgRateHm = getHmAvgRate(userList);
-        List<Float> rateList = new ArrayList<>(avgRateHm.values());
-        Collections.sort(rateList);
-        Collections.reverse(rateList);
-        int count = 0;
-        for (Float rate : rateList){
-            if (count==9) break;
-            
+        HashMap<Integer, Float> avgRateHm = getHmAvgRate();
+        
+        for (MentorCV cv : CVList){
+            if (!avgRateHm.containsKey(cv.getID())){
+                avgRateHm.put(cv.getID(), 0f);
+            }
         }
         
+        for (MentorCV cv : CVList){
+            boolean skillExist = false;
+            for (Skill skill : cv.getSkillList()){
+                if (listIDSkill.contains(skill.getID())){
+                    skillExist = true;
+                    break;
+                }
+            }
+            if (skillExist){
+                if (idMentorsSuggest.size()==0) idMentorsSuggest.add(cv.getID());
+                else
+                    for (int i=0; i<idMentorsSuggest.size(); i++){
+                        float rate1 = avgRateHm.get(idMentorsSuggest.get(i));
+                        float rate2 = avgRateHm.get(cv.getID());
+                        if (rate1<rate2){
+                            idMentorsSuggest.add(i, cv.getID());
+                            break;
+                        }
+                    }
+                if (idMentorsSuggest.size()>9){
+                    idMentorsSuggest.remove(idMentorsSuggest.get(idMentorsSuggest.size()-1));
+                }
+            }
+        }
+        return idMentorsSuggest;
+        
     }
+    
+    
 
     @Override
     public String insert(Rate u, List<Rate> list) {
