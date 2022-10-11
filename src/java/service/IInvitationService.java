@@ -14,6 +14,8 @@ import model.Invitation;
 public interface IInvitationService {
 
     List<Invitation> getList();
+    
+    List<Integer> getListIDSkill();
 
     Invitation getInvitationById(int id, List<Invitation> list);
 

@@ -6,8 +6,13 @@ package service.classimpl;
 
 import dal.RateDAO;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.SortedSet;
 import model.Rate;
+import model.User;
 import service.IRateService;
 
 /**
@@ -34,8 +39,28 @@ public class RateService implements IRateService {
     }
 
     @Override
-    public String insert(Rate u, List<Rate> list) {
+    public HashMap getHmAvgRate(List<User> userList) {
+        return rateDAO.getHmAvgRate();
+    }
 
+    @Override
+    public List<User> getMentorsSuggest(List<Integer> listIDSkill, List<User> userList) {
+        List<User> mentorsSuggest = new ArrayList<>();
+        
+        HashMap<Integer, Float> avgRateHm = getHmAvgRate(userList);
+        List<Float> rateList = new ArrayList<>(avgRateHm.values());
+        Collections.sort(rateList);
+        Collections.reverse(rateList);
+        int count = 0;
+        for (Float rate : rateList){
+            if (count==9) break;
+            
+        }
+        
+    }
+
+    @Override
+    public String insert(Rate u, List<Rate> list) {
         Rate rate = rateDAO.insert(u);
         list.add(rate);
         return "OK";

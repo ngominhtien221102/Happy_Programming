@@ -5,7 +5,9 @@
 package service;
 
 import java.util.List;
+import java.util.Map;
 import model.Rate;
+import model.User;
 
 /**
  *
@@ -13,6 +15,9 @@ import model.Rate;
  */
 public interface IRateService {
     List<Rate> getList();
+    
+    List<User> getMentorsSuggest(List<Integer> listIDSkill, List<User> userList);
+    
     Rate getRateById(int id, List<Rate> list);
 
     String insert(Rate u, List<Rate> list);
@@ -20,4 +25,6 @@ public interface IRateService {
     String update(Rate u, List<Rate> list);
 
     String delete(int id, List<Rate> list);
+    
+    Map getHmAvgRate(List<User> userList);
 }
