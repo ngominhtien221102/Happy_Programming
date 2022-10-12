@@ -20,6 +20,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import model.MentorCV;
+import model.PageInfor;
 import model.User;
 import model.UserProfile;
 import service.IRateService;
@@ -84,6 +85,7 @@ public class allMentorController extends HttpServlet {
         request.setAttribute("iRate", iRate);
         IUserService iUser = new UserService();
         request.setAttribute("iUser", iUser);
+        IUserProfileService iS = new UserProfileService();
 
         List<User> uList;
         uList = (List<User>) ses.getAttribute("listUser");
@@ -139,56 +141,83 @@ public class allMentorController extends HttpServlet {
         List<UserProfile> listMentor = new ArrayList<>();
         String search = request.getParameter("search");
         request.setAttribute("search", search);
+        int cp;
         if (search == null) {
             listMentor = mentorProfile;
         } else {
-            IUserProfileService iS = new UserProfileService();
+            iS = new UserProfileService();
             listMentor = iS.search(search, mentorProfile);
         }
-        int sort = 1;
-        request.setAttribute("sort", sort);
-        String getSort = request.getParameter("sort");
-        int sort1 = 0;
-
-        if (getSort != null) {
+                      String page = request.getParameter("page");
+                if (page == null || page.equals("")) { // trang = null => page =1  
+                    cp = 1;
+                } else {
+                    cp = Integer.parseInt(page);
+                }
+                PageInfor pageIf = new PageInfor(5, listMentor.size(), cp);
+                request.setAttribute("pageIf", pageIf);
+        //Sortname
+        int sortName = 1;
+        request.setAttribute("sortName", sortName);
+        String getSortName = request.getParameter("sortName");
+        int sortNameget = 0;
+        if (getSortName != null) {
             try {
-                sort1 = Integer.parseInt(getSort);
+                sortNameget = Integer.parseInt(getSortName);
 
-            } catch (Exception e) {
+            } catch (NumberFormatException e) {
             }
 
-            if (sort1 == 1) {
-                for (int i = 0; i < listMentor.size() - 1; i++) {
-                    for (int j = i + 1; j < listMentor.size(); j++) {
-                        if (listMentor.get(i).getFirstName().compareTo(listMentor.get(j).getFirstName()) > 0) {
-                            Collections.swap(listMentor, i, j);
-                        }
-                    }
-                }
-                sort = 2;
-                request.setAttribute("sort", sort);
-                int statusSort = 1;
-                request.setAttribute("statusSort", statusSort);
-            }
-            if (sort1 == 2) {
+            if (sortNameget == 1) {
 
-                for (int i = 0; i < listMentor.size() - 1; i++) {
-                    float rate1 = (float) iRate.getRateByMentorID(listMentor.get(i).getID());
-                    for (int j = i + 1; j < listMentor.size(); j++) {
-                        float rate2 = (float) iRate.getRateByMentorID(listMentor.get(j).getID());
-                        if (rate1 < rate2) {
-                            Collections.swap(listMentor, i, j);
-                        }
-                    }
-                }
-                sort = 1;
-                request.setAttribute("sort", sort);
-                int statusSort = 2;
-                request.setAttribute("statusSort", statusSort);
+                sortName = 2;
+                request.setAttribute("sortName", sortName);
+                request.setAttribute("listMentor", iS.sortName(listMentor));
+
+                int statusName = 1;
+                request.setAttribute("statusName", statusName);
+            }
+            if (sortNameget == 2) {
+
+                request.setAttribute("listMentor", listMentor);
+                sortName = 1;
+                request.setAttribute("sortName", sortName);
+                int statusName = 2;
+                request.setAttribute("statusName", statusName);
+            }
+        } 
+        //SortRate
+        
+        int sortRate = 1;
+        request.setAttribute("sortRate", sortRate);
+        String getSortRate = request.getParameter("sortRate");
+        int sortRateget = 0;
+        if (getSortRate != null) {
+            try {
+                sortRateget = Integer.parseInt(getSortRate);
+
+            } catch (NumberFormatException e) {
+            }
+
+            if (sortRateget == 1) {
+
+                sortRate = 2;
+                request.setAttribute("sortRate", sortRate);
+                request.setAttribute("listMentor", iS.sortRate(listMentor));
+
+                int statusRate = 1;
+                request.setAttribute("statusRate", statusRate);
+            }
+            if (sortRateget == 2) {
+
+                request.setAttribute("listMentor", listMentor);
+                sortRate = 1;
+                request.setAttribute("sortRate", sortRate);
+                int statusRate = 2;
+                request.setAttribute("statusRate", statusRate);
             }
         }
-
-        request.setAttribute("listMentor", listMentor);
+         request.setAttribute("listMentor", listMentor);
         request.getRequestDispatcher("views/admin/allMentor.jsp").forward(request, response);
 
     }
