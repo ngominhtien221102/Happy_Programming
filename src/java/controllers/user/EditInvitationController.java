@@ -108,7 +108,7 @@ public class EditInvitationController extends HttpServlet {
                     }
                 }
             }
-        }else {
+        } else {
             response.sendRedirect(request.getContextPath() + "/views/user/viewInvitationMentee.jsp");
 
         }
@@ -137,15 +137,22 @@ public class EditInvitationController extends HttpServlet {
         String title = request.getParameter("title");
         String deadline = request.getParameter("deadline");
         String content = request.getParameter("content");
-        Invitation iv = new Invitation(id, mentorId, menteeId, skillId, statusId, title, deadline, content);
-        String msg = i.update(iv, list);
-        if (msg.equals("OK")) {
-            session.setAttribute("invitation", invitation);
-            request.setAttribute("success", "Update success");
-        } else {
+        String msg;
+        if (content.equals("")) {
+            msg = "Please enter content to update this invitation!";
             request.setAttribute("failed", msg);
+            request.getRequestDispatcher("/views/user/editInvitation.jsp").forward(request, response);
+        } else {
+            Invitation iv = new Invitation(id, mentorId, menteeId, skillId, statusId, title, deadline, content);
+            msg = i.update(iv, list);
+            if (msg.equals("OK")) {
+                session.setAttribute("invitation", invitation);
+                request.setAttribute("success", "Update success");
+            } else {
+                request.setAttribute("failed", msg);
+            }
+            request.getRequestDispatcher("/views/user/editInvitation.jsp").forward(request, response);
         }
-        request.getRequestDispatcher("/views/user/editInvitation.jsp").forward(request, response);
     }
 
     /**

@@ -4,7 +4,6 @@
  */
 package controllers.user;
 
-import com.sun.mail.imap.protocol.ID;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -13,7 +12,6 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import jakarta.websocket.Session;
 import java.util.List;
 import model.Invitation;
 import model.MentorCV;
@@ -76,8 +74,9 @@ public class SendInvitationController extends HttpServlet {
     IUserProfileService up = new UserProfileService();
     IMentorService m = new MentorService();
 
-    int mentorID,cp;
-    String msg,search;
+    int mentorID, cp;
+    String msg, search;
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -150,10 +149,16 @@ public class SendInvitationController extends HttpServlet {
         String deadline = request.getParameter("deadline");
         String title = request.getParameter("title");
         String content = request.getParameter("content");
-        Invitation inv = new Invitation(0, mentorID, menteeID, skill, 2, title, deadline, content);
-        msg = i.insert(inv, list);
-        // du lieu de sendRedirect
-        response.sendRedirect(request.getContextPath()+"/sendInvitation?search="+search+"&page="+cp+"&mentorID="+mentorID);
+        if (content.equals("")) {
+            msg = "Please enter content to invite this mentor!";
+            response.sendRedirect(request.getContextPath() + "/sendInvitation?search=" + search + "&page=" + cp + "&mentorID=" + mentorID);
+        } else {
+            Invitation inv = new Invitation(0, mentorID, menteeID, skill, 2, title, deadline, content);
+            msg = i.insert(inv, list);
+            // du lieu de sendRedirect
+            response.sendRedirect(request.getContextPath() + "/sendInvitation?search=" + search + "&page=" + cp + "&mentorID=" + mentorID);
+        }
+
     }
 
     /**
