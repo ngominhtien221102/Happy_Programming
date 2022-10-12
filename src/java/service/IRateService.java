@@ -16,7 +16,7 @@ import model.User;
 public interface IRateService {
     List<Rate> getList();
     
-    List<User> getMentorsSuggest(List<Integer> listIDSkill, List<User> userList);
+    List<User> getMentorsSuggest(List<Integer> listIDSkill);
     
     Rate getRateById(int id, List<Rate> list);
 
@@ -26,5 +26,6 @@ public interface IRateService {
 
     String delete(int id, List<Rate> list);
     
-    Map getHmAvgRate(List<User> userList);
+    Map getHmAvgRate();
+    float getRateByMentorID(int id);
 }

@@ -100,7 +100,6 @@
     </style>
     <body>
         <!-- header -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <%@include file="header.jsp" %>
         <!-- /header -->
         <div id="content" class="row" style="padding-top: 50px;  min-height: 800px">
@@ -116,7 +115,7 @@
                                 <div class="card border-bottom hover-shadow" style="border-radius: 5px;background-color: #f3f3f3">
                                     <div class="card-body row align-items-center" >
                                         <div class="col-8">
-                                            <h4 style="color: #0ac282;">696</h4>
+                                            <h4 style="color: #0ac282;">${total}</h4>
                                             <h6 class="text-muted">All Mentors</h6>
                                         </div>
                                         <div class="col-4 text-right">
@@ -133,24 +132,24 @@
                             </article>
                             <!--number of invitations accepted-->
 
-                            
+
 
                             <article class="col-6" >
                                 <div class="card border-bottom hover-shadow" style="border-radius: 5px;background-color: #f3f3f3">
                                     <div class="card-body row align-items-center" >
                                         <div class="col-6">
-                                            <h4 style="color: #01a9ac;">300 Mentors</h4>
+                                            <h4 style="color: #01a9ac;">${lastMonth} Mentors</h4>
                                             <h6 class="text-muted">Last month</h6>
                                         </div>
                                         <div class="col-6">
-                                            <h4 style="color: #01a9ac;">369 Mentors</h4>
+                                            <h4 style="color: #01a9ac;">${thisMonth} Mentors</h4>
                                             <h6 class="text-muted">This month</h6>
                                         </div>
                                     </div>
                                     <div style="background: linear-gradient(to right,#01a9ac,#01dbdf); text-align: center; align-items: center; padding: 20px;
                                          border-bottom-left-radius: 5px;
                                          border-bottom-right-radius: 5px;">
-                                        <p style="color: #fff; margin: 0 "><i class="ti-arrow-up m-2"></i>10%</p>
+                                        <p style="color: #fff; margin: 0 "><i class="ti-arrow-up m-2"></i>${percent}%</p>
                                         <!--                                        <p style="color: #fff; margin: 0 "><i class="ti-arrow-down m-2"></i>10%</p>-->
                                     </div>
                                 </div>
@@ -161,8 +160,8 @@
 
                         <div class="card-block" style="">
                             <div class="search" style="margin-left:15px" > 
-                                <form action="<%=request.getContextPath()%>/sendMentor" class="row">
-                                    <input  type="text" name="search" value="" placeholder="Search Mentors">
+                                <form action="<%=request.getContextPath()%>/allMentorControl" class="row">
+                                    <input  type="text" name="search" value="${search}" placeholder="Search Mentors">
                                     <button type="submit"><i class="ti ti-search" aria-hidden="true"></i></button>
                                 </form>
                             </div>
@@ -174,11 +173,10 @@
                                         <thead>
                                             <tr>
                                                 <th>STT</th> 
-                                                <th>Name<a style="float: right;color: #000" href=""><i class="ti-arrow-down"></i><i class="ti-arrow-up"></i></a></th>
+                                                <th>Name<a style="float: right;color: #000" href="<%=request.getContextPath()%>/allMentorControl?sort=${sort}&search=${search}"><i class="ti-arrow-down"></i><i class="ti-arrow-up"></i></a></th>
                                                 <th>Gender</th>
-                                                <th>Address</th>
+                                                <th style="width: 30%">Address</th>
                                                 <th>DOB</th>
-                                                <th>Created At</th>
                                                 <th>Status</th>
                                                 <th>Rate</th>
                                                 <th colspan="2"></th>
@@ -186,67 +184,22 @@
                                         </thead>
 
                                         <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Tran Ngoc Cuong</td>
-                                                <td>Male</td>
-                                                <td>Tân Mai, Hoàng Mai, Hà Nội</td>
-                                                <td>25/10/2002</td>
-                                                <td>9/10/2022</td>
-                                                <td>Active</td>
-                                                <td>4.5 <span class="fa fa-star" style="color: orange"></span></td>
-                                                <td><a>Detail</a></td>
-                                                <td><a>Open</a></td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>Tran Ngoc Cuong</td>
-                                                <td>Male</td>
-                                                <td>Tân Mai, Hoàng Mai, Hà Nội</td>
-                                                <td>25/10/2002</td>
-                                                <td>9/10/2022</td>
-                                                <td>Active</td>
-                                                <td>4.5 <span class="fa fa-star" style="color: orange"></span></td>
-                                                <td><a>Detail</a></td>
-                                                <td><a>Open</a></td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>Tran Ngoc Cuong</td>
-                                                <td>Male</td>
-                                                <td>Tân Mai, Hoàng Mai, Hà Nội</td>
-                                                <td>25/10/2002</td>
-                                                <td>9/10/2022</td>
-                                                <td>Active</td>
-                                                <td>4.5 <span class="fa fa-star" style="color: orange"></span></td>
-                                                <td><a>Detail</a></td>
-                                                <td><a>Open</a></td>
-                                            </tr>
-                                            <tr>
-                                                <td>4</td>
-                                                <td>Tran Ngoc Cuong</td>
-                                                <td>Male</td>
-                                                <td>Tân Mai, Hoàng Mai, Hà Nội</td>
-                                                <td>25/10/2002</td>
-                                                <td>9/10/2022</td>
-                                                <td>Active</td>
-                                                <td>4.5 <span class="fa fa-star" style="color: orange"></span></td>
-                                                <td><a>Detail</a></td>
-                                                <td><a>Open</a></td>
-                                            </tr>
-                                            <tr>
-                                                <td>5</td>
-                                                <td>Tran Ngoc Cuong</td>
-                                                <td>Male</td>
-                                                <td>Tân Mai, Hoàng Mai, Hà Nội</td>
-                                                <td>25/10/2002</td>
-                                                <td>9/10/2022</td>
-                                                <td>Active</td>
-                                                <td>4.5 <span class="fa fa-star" style="color: orange"></span></td>
-                                                <td><a>Detail</a></td>
-                                                <td><a>Open</a></td>
-                                            </tr>
-                                            
+
+                                            <c:forEach items="${listMentor}" var="m" varStatus="loop">
+                                                <tr>
+                                                    <td>${loop.index + 1}</td>
+                                                    <td>${m.getFirstName()} ${m.getLastName()}</td>
+                                                    <td>${m.getGender()}</td>
+                                                    <td>${m.getAddress(m.getID(), listAddress)}</td>
+                                                    <td>${m.getDob()}</td>
+                                                    <td>${iUser.getUserById(m.getID(), listUser).isStatus()?'Active':'In-active'}</td>
+                                                    <td>${iRate.getRateByMentorID(m.getID())}</td>
+                                                    <td><a href="<%=request.getContextPath()%>/viewCV?mentorID=${m.getID()}">Detail</a></td>
+                                                    <td><a href="<%=request.getContextPath()%>/allMentorControl?mentorID=${m.getID()}&sort=${statusSort}">${iUser.getUserById(m.getID(), listUser).isStatus()?'Ban':'Open'}</a></td>
+                                                </tr> 
+                                            </c:forEach>
+
+
                                         </tbody>
 
                                     </table>

@@ -41,7 +41,7 @@ Cường Trần
                             <img class="img-fluid w-100" src="<%=request.getContextPath()%>/img/avatar/${us.getAvatar()}" alt="Mentee">
                         </div>
                         <div class="col-md-6 mb-5">
-                            <h3>Name:  ${us.getLastName()}  ${us.getFirstName()} </h3>
+                            <h3>Name: ${us.getFirstName()} ${us.getLastName()}</h3>
 
 
                             <div class="row" style="margin-top:20px">

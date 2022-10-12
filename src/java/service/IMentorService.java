@@ -22,4 +22,5 @@ public interface IMentorService {
 
     String delete(int id, List<MentorCV> list);
     List<MentorCV> searchMentor(String n, List<MentorCV> listMen, List<UserProfile> listUp);
+    
 }

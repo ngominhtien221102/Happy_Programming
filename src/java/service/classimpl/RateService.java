@@ -14,6 +14,7 @@ import java.util.SortedSet;
 import model.Rate;
 import model.User;
 import service.IRateService;
+import service.IUserService;
 
 /**
  *
@@ -39,15 +40,15 @@ public class RateService implements IRateService {
     }
 
     @Override
-    public HashMap getHmAvgRate(List<User> userList) {
+    public HashMap getHmAvgRate() {
         return rateDAO.getHmAvgRate();
     }
 
     @Override
-    public List<User> getMentorsSuggest(List<Integer> listIDSkill, List<User> userList) {
+    public List<User> getMentorsSuggest(List<Integer> listIDSkill) {
         List<User> mentorsSuggest = new ArrayList<>();
         
-        HashMap<Integer, Float> avgRateHm = getHmAvgRate(userList);
+        HashMap<Integer, Float> avgRateHm = getHmAvgRate();
         List<Float> rateList = new ArrayList<>(avgRateHm.values());
         Collections.sort(rateList);
         Collections.reverse(rateList);
@@ -56,6 +57,7 @@ public class RateService implements IRateService {
             if (count==9) break;
             
         }
+        return null;
         
     }
 
@@ -86,5 +88,18 @@ public class RateService implements IRateService {
         list.remove(getRateById(id, list));
         return "OK";
     }
+    
+    @Override
+    public float getRateByMentorID(int id)
+    {
+        HashMap<Integer, Float> avgRate = getHmAvgRate();
+        if(avgRate.get(id) == null)
+        {
+            return 0;
+        }
+        return avgRate.get(id);
+    }
+    
+
 
 }
