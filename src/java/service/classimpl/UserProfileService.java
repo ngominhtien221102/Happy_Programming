@@ -68,9 +68,10 @@ public class UserProfileService implements IUserProfileService {
 
     @Override
     public List<UserProfile> search(String name, List<UserProfile> upList) {
+        name = name.toLowerCase().trim();
         List<UserProfile> uList = new ArrayList<>();
         for (UserProfile u : upList) {
-            if(u.getFirstName().contains(name) || u.getLastName().contains(name))
+            if(u.getFirstName().toLowerCase().contains(name) || u.getLastName().toLowerCase().contains(name))
             {
                 uList.add(u);
             }
