@@ -81,7 +81,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link collapsed" href="<%=request.getContextPath()%>/views/user/viewInvitationMentee.jsp" >
+            <a class="nav-link collapsed" href="<%=request.getContextPath()%>/viewAllInvite" >
                 <span>Sent invitation</span>
             </a>
         </li>
