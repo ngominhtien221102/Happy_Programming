@@ -160,7 +160,7 @@
 
                         <div class="card-block" style="">
                             <div class="search" style="margin-left:15px" > 
-                                <form action="<%=request.getContextPath()%>/allMentorControl" class="row">
+                                <form action="<%=request.getContextPath()%>/allMentor" class="row">
                                     <input  type="text" name="search" value="${search}" placeholder="Search Mentors">
                                     <button type="submit"><i class="ti ti-search" aria-hidden="true"></i></button>
                                 </form>
@@ -173,12 +173,12 @@
                                         <thead>
                                             <tr>
                                                 <th>STT</th> 
-                                                <th>Name<a style="float: right;color: #000" href="<%=request.getContextPath()%>/allMentorControl?sortName=${sortName}&search=${search}"><i class="ti-arrow-down"></i><i class="ti-arrow-up"></i></a></th>
+                                                <th>Name<a style="float: right;color: #000" href="<%=request.getContextPath()%>/allMentor?sortName=${sortName}&search=${search}"><i class="ti-arrow-down"></i><i class="ti-arrow-up"></i></a></th>
                                                 <th>Gender</th>
                                                 <th style="width: 25%">Address</th>
                                                 <th>DOB</th>
                                                 <th>Status</th>
-                                                <th style="width: 10%">Rate<a style="float: right;color: #000" href="<%=request.getContextPath()%>/allMentorControl?&sortRate=${sortRate}&search=${search}"><i class="ti-arrow-down"></i><i class="ti-arrow-up"></i></a></th>
+                                                <th style="width: 10%">Rate<a style="float: right;color: #000" href="<%=request.getContextPath()%>/allMentor?&sortRate=${sortRate}&search=${search}"><i class="ti-arrow-down"></i><i class="ti-arrow-up"></i></a></th>
                                                 <th colspan="2" style="text-align: center">Action</th>
                                             </tr>
                                         </thead>
@@ -195,7 +195,7 @@
                                                     <td>${iUser.getUserById(m.getID(), listUser).isStatus()?'Active':'In-active'}</td>
                                                     <td>${iRate.getRateByMentorID(m.getID())}</td>
                                                     <td><a href="<%=request.getContextPath()%>/viewCV?mentorID=${m.getID()}">Detail</a></td>
-                                                    <td><a href="<%=request.getContextPath()%>/allMentorControl?mentorID=${m.getID()}&sortName=${statusName}&sortRate=${statusRate}&search=${search}&page=${pageIf.cp}">${iUser.getUserById(m.getID(), listUser).isStatus()?'Ban':'Open'}</a></td>
+                                                    <td><a href="<%=request.getContextPath()%>/allMentor?mentorID=${m.getID()}&sortName=${statusName}&sortRate=${statusRate}&search=${search}&page=${pageIf.cp}">${iUser.getUserById(m.getID(), listUser).isStatus()?'Ban':'Open'}</a></td>
                                                 </tr> 
                                             </c:forEach>
 
@@ -206,13 +206,13 @@
                                     <!--phan trang-->
                                     <div class="pagination">
                                         <c:if test="${pageIf.cp!=1 && pageIf.end!=null}">
-                                            <a href="<%=request.getContextPath()%>/allMentorControl?mentorID=${m.getID()}&sortName=${statusName}&sortRate=${statusRate}&search=${search}&page=1"><<</a>  
+                                            <a href="<%=request.getContextPath()%>/allMentor?mentorID=${m.getID()}&sortName=${statusName}&sortRate=${statusRate}&search=${search}&page=1"><<</a>  
                                         </c:if>      
                                         <c:forEach begin="${1}" end="${pageIf.np}" var="i">
-                                            <a class="${i==pageIf.cp?"active":""}" href="<%=request.getContextPath()%>/allMentorControl?mentorID=${m.getID()}&sortName=${statusName}&sortRate=${statusRate}&search=${search}&page=${i}">${i}</a>
+                                            <a class="${i==pageIf.cp?"active":""}" href="<%=request.getContextPath()%>/allMentor?mentorID=${m.getID()}&sortName=${statusName}&sortRate=${statusRate}&search=${search}&page=${i}">${i}</a>
                                         </c:forEach>
                                         <c:if test="${pageIf.cp!=pageIf.np && pageIf.end!=0}">
-                                            <a href="<%=request.getContextPath()%>/allMentorControl?mentorID=${m.getID()}&sortName=${statusName}&sortRate=${statusRate}&search=${search}&page=${pageIf.np}">>></a>  
+                                            <a href="<%=request.getContextPath()%>/allMentor?mentorID=${m.getID()}&sortName=${statusName}&sortRate=${statusRate}&search=${search}&page=${pageIf.np}">>></a>  
                                         </c:if>  
 
                                     </div>

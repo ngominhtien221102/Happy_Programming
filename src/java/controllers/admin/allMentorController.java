@@ -12,11 +12,9 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import static java.nio.file.Files.list;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import model.MentorCV;
@@ -34,7 +32,7 @@ import service.classimpl.UserService;
  *
  * @author Lenovo
  */
-@WebServlet(name = "allMentorController", urlPatterns = {"/allMentorControl"})
+@WebServlet(name = "allMentorController", urlPatterns = {"/allMentor"})
 public class allMentorController extends HttpServlet {
 
     /**
