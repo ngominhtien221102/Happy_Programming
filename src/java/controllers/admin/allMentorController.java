@@ -134,7 +134,7 @@ public class allMentorController extends HttpServlet {
             }
             IUserService iU = new UserService();
             iU.update(new User(user.getID(), user.getRoleID(), user.getAccountName(), user.getPassWord(), !user.isStatus()), uList);
-        } catch (Exception e) {
+        } catch (NumberFormatException e) {
         }
         List<UserProfile> listMentor = new ArrayList<>();
         String search = request.getParameter("search");
@@ -143,50 +143,50 @@ public class allMentorController extends HttpServlet {
             listMentor = mentorProfile;
         } else {
             IUserProfileService iS = new UserProfileService();
-            listMentor = iS.search(search);       
+            listMentor = iS.search(search, mentorProfile);
         }
         int sort = 1;
-            request.setAttribute("sort", sort);
-            String getSort = request.getParameter("sort");
-            int sort1 = 0;
+        request.setAttribute("sort", sort);
+        String getSort = request.getParameter("sort");
+        int sort1 = 0;
 
-            if (getSort != null) {
-                try {
-                    sort1 = Integer.parseInt(getSort);
+        if (getSort != null) {
+            try {
+                sort1 = Integer.parseInt(getSort);
 
-                } catch (Exception e) {
-                }
-
-                if (sort1 == 1) {
-                    for (int i = 0; i < listMentor.size() - 1; i++) {
-                        for (int j = i + 1; j < listMentor.size(); j++) {
-                            if (listMentor.get(i).getFirstName().compareTo(listMentor.get(j).getFirstName()) > 0) {
-                                Collections.swap(listMentor, i, j);
-                            }
-                        }
-                    }
-                    sort = 2;
-                    request.setAttribute("sort", sort);
-                    int statusSort = 1;
-                    request.setAttribute("statusSort", statusSort);
-                }
-                if (sort1 == 2) {
-
-                    for (int i = 0; i < listMentor.size() - 1; i++) {
-                        float rate1 = (float) iRate.getRateByMentorID(listMentor.get(i).getID());
-                        for (int j = i + 1; j < listMentor.size(); j++) {
-                            float rate2 = (float) iRate.getRateByMentorID(listMentor.get(j).getID());
-                            if (rate1 < rate2) {
-                                Collections.swap(listMentor, i, j);
-                            }
-                        }
-                    }
-                    sort = 1;
-                    request.setAttribute("sort", sort);
-                    int statusSort = 2;
-                    request.setAttribute("statusSort", statusSort);
-                }
+            } catch (Exception e) {
             }
+
+            if (sort1 == 1) {
+                for (int i = 0; i < listMentor.size() - 1; i++) {
+                    for (int j = i + 1; j < listMentor.size(); j++) {
+                        if (listMentor.get(i).getFirstName().compareTo(listMentor.get(j).getFirstName()) > 0) {
+                            Collections.swap(listMentor, i, j);
+                        }
+                    }
+                }
+                sort = 2;
+                request.setAttribute("sort", sort);
+                int statusSort = 1;
+                request.setAttribute("statusSort", statusSort);
+            }
+            if (sort1 == 2) {
+
+                for (int i = 0; i < listMentor.size() - 1; i++) {
+                    float rate1 = (float) iRate.getRateByMentorID(listMentor.get(i).getID());
+                    for (int j = i + 1; j < listMentor.size(); j++) {
+                        float rate2 = (float) iRate.getRateByMentorID(listMentor.get(j).getID());
+                        if (rate1 < rate2) {
+                            Collections.swap(listMentor, i, j);
+                        }
+                    }
+                }
+                sort = 1;
+                request.setAttribute("sort", sort);
+                int statusSort = 2;
+                request.setAttribute("statusSort", statusSort);
+            }
+        }
 
         request.setAttribute("listMentor", listMentor);
         request.getRequestDispatcher("views/admin/allMentor.jsp").forward(request, response);

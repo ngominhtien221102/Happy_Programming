@@ -64,9 +64,9 @@ public class UserProfileService implements IUserProfileService {
     }
 
     @Override
-    public List<UserProfile> search(String name) {
+    public List<UserProfile> search(String name, List<UserProfile> upList) {
         List<UserProfile> uList = new ArrayList<>();
-        for (UserProfile u : getList()) {
+        for (UserProfile u : upList) {
             if(u.getFirstName().contains(name) || u.getLastName().contains(name))
             {
                 uList.add(u);

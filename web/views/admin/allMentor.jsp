@@ -195,7 +195,7 @@
                                                     <td>${iUser.getUserById(m.getID(), listUser).isStatus()?'Active':'In-active'}</td>
                                                     <td>${iRate.getRateByMentorID(m.getID())}</td>
                                                     <td><a href="<%=request.getContextPath()%>/viewCV?mentorID=${m.getID()}">Detail</a></td>
-                                                    <td><a href="<%=request.getContextPath()%>/allMentorControl?mentorID=${m.getID()}&sort=${statusSort}">${iUser.getUserById(m.getID(), listUser).isStatus()?'Ban':'Open'}</a></td>
+                                                    <td><a href="<%=request.getContextPath()%>/allMentorControl?mentorID=${m.getID()}&sort=${statusSort}&search=${search}">${iUser.getUserById(m.getID(), listUser).isStatus()?'Ban':'Open'}</a></td>
                                                 </tr> 
                                             </c:forEach>
 
