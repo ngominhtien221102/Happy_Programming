@@ -69,7 +69,15 @@ public class InvitationService implements IInvitationService {
             return "Invitation has been expired to update";
         }
     }
-
+    
+    @Override
+    public String cancel(Invitation u, List<Invitation> list) {
+        Invitation invitation = getInvitationById(u.getID(), list);
+        invitation.setStatusID(3);    
+        InvitationDAO.update(invitation);
+            return "OK";
+    }
+    
     @Override
     public String delete(int id, List<Invitation> list) {
         InvitationDAO.delete(id);
@@ -83,6 +91,7 @@ public class InvitationService implements IInvitationService {
     }
 
     @Override
+
     public int countInv(int staId, List<Invitation> list) {
         int count = 0;
         for (Invitation invitation : list) {
@@ -114,5 +123,16 @@ public class InvitationService implements IInvitationService {
         }
         return list;
     }
+
+    public List<Integer> getListIDSkill() {
+        List<Invitation> invList = getList();
+        List<Integer> idSkillList = new ArrayList<>();
+        for (Invitation i : invList){
+            if (!idSkillList.contains(i.getSkillID()) && i.getStatusID()!= 3)
+                idSkillList.add(i.getSkillID());
+        }
+        return idSkillList;
+    }
+
 
 }

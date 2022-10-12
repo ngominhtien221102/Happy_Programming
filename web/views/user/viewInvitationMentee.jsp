@@ -71,6 +71,7 @@
                                                 </ul>
                                                 <a href="<%=request.getContextPath()%>/singleInvite?invitationId=${inv.ID}" class="signup__link">View</a>
                                                 <a class="signup__link" <c:if test="${inv.statusID==2}">href="<%=request.getContextPath()%>/editInvitation?type=1&id=${inv.ID}"</c:if><c:if test="${inv.statusID!=2}">href=""</c:if>>Update</a>
+                                                <a class="signup__link" <c:if test="${inv.statusID==2}">href="<%=request.getContextPath()%>/editInvitation?type=2&id=${inv.ID}"</c:if><c:if test="${inv.statusID!=2}">href=""</c:if>>Cancel</a>
                                                 <a class="signup__link" href="<%=request.getContextPath()%>/editInvitation?type=0&id=${inv.ID}">Delete</a>
                                             </div>
                                         </div>

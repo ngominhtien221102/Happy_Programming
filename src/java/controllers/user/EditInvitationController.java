@@ -86,23 +86,31 @@ public class EditInvitationController extends HttpServlet {
                 i.delete(id, list);
                 session.setAttribute("listInv", list);
                 response.sendRedirect(request.getContextPath() + "/views/user/viewInvitationMentee.jsp");
-            } else { // update goi den trang update
-                if (i.getInvitationById(id, list) != null) {
-                    Invitation invitation = i.getInvitationById(id, list);
-                    session.setAttribute("invitation", invitation);
-                    UserProfile mentorProfile = up.getUserProfileById(invitation.getMentorID(), listUp);
-                    String mentorName = mentorProfile.getFirstName()+" "+mentorProfile.getLastName();
-                    MentorCV mentorCV = m.getCVById(invitation.getMentorID(), listCV);
-                    List<Skill> mentorSkill = mentorCV.getSkillList();
-                    session.setAttribute("mentorSkill", mentorSkill);
-                    session.setAttribute("mentorName", mentorName);
-                    request.getRequestDispatcher("/views/user/editInvitation.jsp").forward(request, response);
-                } else {
+            } else {
+                if (type.equals("2")) {
+                    Invitation invitation = new Invitation(id, 0, 0, 0, 0, "", "", "");
+                    i.cancel(invitation, list);
+                    session.setAttribute("listInv", list);
                     response.sendRedirect(request.getContextPath() + "/views/user/viewInvitationMentee.jsp");
+                } else { // update goi den trang update
+                    if (i.getInvitationById(id, list) != null) {
+                        Invitation invitation = i.getInvitationById(id, list);
+                        session.setAttribute("invitation", invitation);
+                        UserProfile mentorProfile = up.getUserProfileById(invitation.getMentorID(), listUp);
+                        String mentorName = mentorProfile.getFirstName() + " " + mentorProfile.getLastName();
+                        MentorCV mentorCV = m.getCVById(invitation.getMentorID(), listCV);
+                        List<Skill> mentorSkill = mentorCV.getSkillList();
+                        session.setAttribute("mentorSkill", mentorSkill);
+                        session.setAttribute("mentorName", mentorName);
+                        request.getRequestDispatcher("/views/user/editInvitation.jsp").forward(request, response);
+                    } else {
+                        response.sendRedirect(request.getContextPath() + "/views/user/viewInvitationMentee.jsp");
+                    }
                 }
             }
         } else {
             response.sendRedirect(request.getContextPath() + "/views/user/viewInvitationMentee.jsp");
+
         }
 
     }
@@ -120,7 +128,7 @@ public class EditInvitationController extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         List<Invitation> list = (List<Invitation>) session.getAttribute("listInv");
-        Invitation invitation = (Invitation)session.getAttribute("invitation");
+        Invitation invitation = (Invitation) session.getAttribute("invitation");
         // lay du lieu de update  
         int mentorId = invitation.getMentorID();
         int menteeId = invitation.getMenteeID();
@@ -129,15 +137,22 @@ public class EditInvitationController extends HttpServlet {
         String title = request.getParameter("title");
         String deadline = request.getParameter("deadline");
         String content = request.getParameter("content");
-        Invitation iv = new Invitation(id, mentorId, menteeId, skillId, statusId, title, deadline, content);
-        String msg = i.update(iv, list);
-        if(msg.equals("OK")){
-            session.setAttribute("invitation", invitation);
-            request.setAttribute("success", "Update success");
-        }else{
-            request.setAttribute("failed", msg);            
+        String msg;
+        if (content.equals("")) {
+            msg = "Please enter content to update this invitation!";
+            request.setAttribute("failed", msg);
+            request.getRequestDispatcher("/views/user/editInvitation.jsp").forward(request, response);
+        } else {
+            Invitation iv = new Invitation(id, mentorId, menteeId, skillId, statusId, title, deadline, content);
+            msg = i.update(iv, list);
+            if (msg.equals("OK")) {
+                session.setAttribute("invitation", invitation);
+                request.setAttribute("success", "Update success");
+            } else {
+                request.setAttribute("failed", msg);
+            }
+            request.getRequestDispatcher("/views/user/editInvitation.jsp").forward(request, response);
         }
-        request.getRequestDispatcher("/views/user/editInvitation.jsp").forward(request, response);
     }
 
     /**

@@ -1,9 +1,8 @@
-
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controllers.user;
+package controllers.mentor;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -13,19 +12,18 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.util.ArrayList;
 import java.util.List;
-import model.Request;
-import model.Response;
+import model.Invitation;
 import model.User;
-import model.UserProfile;
+import service.IInvitationService;
+import service.classimpl.InvitationService;
 
 /**
  *
- * @author minhd
+ * @author Admin
  */
-@WebServlet(name = "ViewAllRequestController", urlPatterns = {"/viewAllRequest"})
-public class ViewAllRequestController extends HttpServlet {
+@WebServlet(name = "StatisticInvitationController", urlPatterns = {"/statisticInv"})
+public class StatisticInvitationController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -44,10 +42,10 @@ public class ViewAllRequestController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ViewAllRequestController</title>");
+            out.println("<title>Servlet StatisticInvitationController</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ViewAllRequestController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet StatisticInvitationController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -65,57 +63,52 @@ public class ViewAllRequestController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        List<Request> listRequest = (List<Request>) session.getAttribute("listRequest");
-        List<Response> listResponse = (List<Response>) session.getAttribute("listResponse");
-        List<UserProfile> upLst = (List<UserProfile>) session.getAttribute("listUserProfile");
-        List<UserProfile> urLst = new ArrayList<>();
-        User Account = (User) session.getAttribute("Account");
-        ArrayList<Request> LstRequest = new ArrayList<>();
-        ArrayList<Integer> resCount = new ArrayList<>();
-        if (Account.getRoleID() == 2) {
-            for (Request req : listRequest) {
-                if (req.getMenteeID() == Account.getID()) {
-                    LstRequest.add(req);
-                    int count = 0;
-                    for (Response response1 : listResponse) {
-                        if (req.getID() == response1.getRequestID()) {
-                            count++;
-                        }
-                    }
-                    resCount.add(count);
-                    for (UserProfile up : upLst) {
-                        if (req.getMentorID() == up.getID()) {
-                            urLst.add(up);
-                        }
-                    }
+        HttpSession ses = request.getSession();
+        List<Invitation> invList = (List<Invitation>) ses.getAttribute("listInv");
+        User mentor = (User) ses.getAttribute("Account");
+        IInvitationService InvService = new InvitationService();
+
+        int totalInv = 0;
+        int totalRejectedInv = 0;
+        int totalAcceptedInv = 0;
+        int totalProcessingInv = 0;
+        int totalCancelInv = 0;
+        for (Invitation i : invList) {
+            if (i.getMentorID() == mentor.getID()) {
+                totalInv++;
+                switch (i.getStatusID()) {
+                    case 1:
+                        totalAcceptedInv++;
+                        break;
+                    case 2:
+                        totalProcessingInv++;
+                        break;
+                    case 3:
+                        totalCancelInv++;
+                        break;
+                    case 4:
+                        totalRejectedInv++;
+                        break;
                 }
             }
-        } else if (Account.getRoleID() == 3) {
-            for (Request req : listRequest) {
-                if (req.getMentorID() == Account.getID()) {
-                    LstRequest.add(req);
-                    int count = 0;
-                    for (Response response1 : listResponse) {
-                        if (req.getID() == response1.getRequestID()) {
-                            count++;
-                        }
-                    }
-                    resCount.add(count);
-                    for (UserProfile up : upLst) {
-                        if (req.getMenteeID() == up.getID()) {
-                            urLst.add(up);
-                            break;
-                        }
-                    }
-                }
-            }
+
         }
-        request.setAttribute("urLst", urLst);
-        request.setAttribute("LstRequest", LstRequest);
-        request.setAttribute("resCount", resCount);
-        request.getRequestDispatcher("views/user/viewRequest.jsp").forward(request, response);
+
+        request.setAttribute("totalInv", totalInv);
+        request.setAttribute("totalRejectedInv", totalRejectedInv);
+        request.setAttribute("totalAcceptedInv", totalAcceptedInv);
+        request.setAttribute("totalProcessingInv", totalProcessingInv);
+        request.setAttribute("totalCancelInv", totalCancelInv);
+
+        request.setAttribute("percentRejected", totalRejectedInv * 100 / totalInv);
+        request.setAttribute("percentAccepted", totalAcceptedInv * 100 / totalInv);
+        request.setAttribute("percentProcessing", totalProcessingInv * 100 / totalInv);
+        request.setAttribute("percentCancel", totalCancelInv * 100 / totalInv);
+
+        request.getRequestDispatcher("views/mentors/statisticInvitation.jsp").forward(request, response);
+
     }
+
     /**
      * Handles the HTTP <code>POST</code> method.
      *

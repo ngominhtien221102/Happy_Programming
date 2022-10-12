@@ -170,7 +170,7 @@
                                     </div>
                                 </div>
                             </article>
-
+                            
                             <!--                            cancel invitation -->
                             <article class="col-xl-3 col-md-6">
                                 <div class="card border-bottom hover-shadow" style="border-radius: 5px;background-color: #f3f3f3">
@@ -191,6 +191,7 @@
                                 </div>
 
                             </article>
+
 
                         </div>
                         <div class="card-block" >
@@ -312,7 +313,9 @@
                                     </div>
                                 </div>
                             </div>
-                        </div></section>
+                        </div>
+                    </div>
+                </section>
             </div>
         </div>
         <!-- footer -->

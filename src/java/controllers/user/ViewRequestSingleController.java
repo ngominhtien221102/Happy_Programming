@@ -20,8 +20,10 @@ import model.Response;
 import model.User;
 import model.UserProfile;
 import service.IRequestService;
+import service.IResponseService;
 import service.IUserProfileService;
 import service.classimpl.RequestService;
+import service.classimpl.ResponseService;
 import service.classimpl.UserProfileService;
 
 /**
@@ -86,13 +88,17 @@ public class ViewRequestSingleController extends HttpServlet {
                 isViewAble = true;
                 break;
             }
+            if(req.getMentorID() == u.getID() && requestId == req.getID()) {
+                isViewAble = true;
+                break;
+            }
         }
         if (isViewAble) {
             IRequestService rs = new RequestService();
-            IUserProfileService service2 = new UserProfileService();
+            IUserProfileService ups = new UserProfileService();
             Request r = rs.getRequestById(requestId, requestLst);
-            UserProfile mentee = service2.getUserProfileById(r.getMenteeID(), upLst);
-            UserProfile mentor = service2.getUserProfileById(r.getMentorID(), upLst);
+            UserProfile mentee = ups.getUserProfileById(r.getMenteeID(), upLst);
+            UserProfile mentor = ups.getUserProfileById(r.getMentorID(), upLst);
             for (Response res : responseLst) {
                 if(res.getRequestID() == r.getID()){
                     rResponse.add(res);
@@ -119,7 +125,21 @@ public class ViewRequestSingleController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        IResponseService rs = new ResponseService();
+        HttpSession session = request.getSession();
+        try{
+            int requestID = Integer.parseInt(request.getParameter("requestId"));
+            int userID = Integer.parseInt(request.getParameter("userID"));
+            String resContent = request.getParameter("response").trim();
+            if(resContent.equalsIgnoreCase("")){
+                request.setAttribute("resAlert", "Write something to response!");
+            }else{
+                rs.insert(new Response(0, requestID, userID, resContent, ""), (List<Response>) session.getAttribute("listResponse"));
+                request.setAttribute("resAlert2", "Response sent!");
+            }   
+        }catch(Exception e){     
+        }
+        doGet(request, response);
     }
 
     /**
@@ -133,6 +153,4 @@ public class ViewRequestSingleController extends HttpServlet {
     }// </editor-fold>
 
 }
-
-
 

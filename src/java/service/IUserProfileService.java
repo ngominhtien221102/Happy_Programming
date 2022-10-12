@@ -23,6 +23,8 @@ public interface IUserProfileService {
     String insert(UserProfile u, List<UserProfile> list);
     String update(UserProfile u, List<UserProfile> list);
     String delete(UserProfile u, List<UserProfile> list);
-    
+    List<UserProfile> search(String name, List<UserProfile> uList);
+    List<UserProfile> sortName(List<UserProfile> uList);
+    List<UserProfile> sortRate(List<UserProfile> uList);
    
 }

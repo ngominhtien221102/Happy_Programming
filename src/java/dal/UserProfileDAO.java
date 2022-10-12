@@ -91,6 +91,19 @@ public class UserProfileDAO extends DBContext {
         }
     }
     
+    public static void main(String[] args) {
+        UserProfileDAO u = new UserProfileDAO();
+        ArrayList<Integer> listID = new ArrayList<>();
+        listID.add(6);
+        listID.add(7);
+        
+        for (UserProfile userProfile : u.getUsProList()) {
+            if(listID.contains(userProfile.getID()))
+            {
+                System.out.println(userProfile);
+            }
+        }
+    }
  
     
 
