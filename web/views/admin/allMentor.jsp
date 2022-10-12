@@ -119,7 +119,7 @@
                                             <h6 class="text-muted">All Mentors</h6>
                                         </div>
                                         <div class="col-6">
-                                            <h4 style="color: #0ac282;">${total}</h4>
+                                            <h4 style="color: #0ac282;">${mActive}</h4>
                                             <h6 class="text-muted">Active Mentors</h6>
                                         </div>
                                     </div>

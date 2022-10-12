@@ -85,13 +85,22 @@ public class AllMentorController extends HttpServlet {
         request.setAttribute("iUser", iUser);
         IUserProfileService iS = new UserProfileService();
 
+
         List<User> uList;
         uList = (List<User>) ses.getAttribute("listUser");
 
         //Get total Mentor
         int toltal = mList.size();
         request.setAttribute("total", toltal);
-
+        //
+        int mActive = 0;
+        for (MentorCV m : mList) {
+            if(iUser.getUserById(m.getID(), uList).isStatus() == true)
+            {
+                mActive++;
+            }
+        }
+        request.setAttribute("mActive", mActive);
         //Get total mentor this month
         Date date = new Date();
         LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
