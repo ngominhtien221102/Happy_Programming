@@ -30,7 +30,7 @@
                     <h2 style="margin-left:15px">All Requests</h2>
                     <div class="container">
                         <div class="row">
-                            <c:forEach items="${menteeLstRequest}" var="request" varStatus="loop">
+                            <c:forEach items="${LstRequest}" var="request" varStatus="loop">
                                 <!-- blog post -->
                                 <article class="col-lg-4 col-sm-6 mb-5">
                                     <div class="card rounded-0 border-bottom border-primary border-top-0 border-left-0 border-right-0 hover-shadow">
@@ -49,7 +49,7 @@
                                                 <br>
                                                 <!-- to -->
                                                 <li class="list-inline-item mr-3 ml-0">                                                 
-                                                        To: ${mentorLst.get(loop.index).firstName} ${mentorLst.get(loop.index).lastName} 
+                                                        ${Account.roleID==2?"To:":"From:"} ${urLst.get(loop.index).firstName} ${urLst.get(loop.index).lastName} 
                                                 </li> 
                                                 <br>
                                                 <li class="list-inline-item mr-3 ml-0">    
@@ -75,4 +75,3 @@
         <!-- /jQuery -->
     </body>
 </html>
-

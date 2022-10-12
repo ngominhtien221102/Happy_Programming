@@ -88,13 +88,17 @@ public class ViewRequestSingleController extends HttpServlet {
                 isViewAble = true;
                 break;
             }
+            if(req.getMentorID() == u.getID() && requestId == req.getID()) {
+                isViewAble = true;
+                break;
+            }
         }
         if (isViewAble) {
             IRequestService rs = new RequestService();
-            IUserProfileService service2 = new UserProfileService();
+            IUserProfileService ups = new UserProfileService();
             Request r = rs.getRequestById(requestId, requestLst);
-            UserProfile mentee = service2.getUserProfileById(r.getMenteeID(), upLst);
-            UserProfile mentor = service2.getUserProfileById(r.getMentorID(), upLst);
+            UserProfile mentee = ups.getUserProfileById(r.getMenteeID(), upLst);
+            UserProfile mentor = ups.getUserProfileById(r.getMentorID(), upLst);
             for (Response res : responseLst) {
                 if(res.getRequestID() == r.getID()){
                     rResponse.add(res);
@@ -121,7 +125,7 @@ public class ViewRequestSingleController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       IResponseService rs = new ResponseService();
+        IResponseService rs = new ResponseService();
         HttpSession session = request.getSession();
         try{
             int requestID = Integer.parseInt(request.getParameter("requestId"));
@@ -149,6 +153,4 @@ public class ViewRequestSingleController extends HttpServlet {
     }// </editor-fold>
 
 }
-
-
 
