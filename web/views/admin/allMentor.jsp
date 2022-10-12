@@ -175,11 +175,11 @@
                                                 <th>STT</th> 
                                                 <th>Name<a style="float: right;color: #000" href="<%=request.getContextPath()%>/allMentorControl?sort=${sort}&search=${search}"><i class="ti-arrow-down"></i><i class="ti-arrow-up"></i></a></th>
                                                 <th>Gender</th>
-                                                <th style="width: 30%">Address</th>
+                                                <th style="width: 25%">Address</th>
                                                 <th>DOB</th>
                                                 <th>Status</th>
-                                                <th>Rate</th>
-                                                <th colspan="2"></th>
+                                                <th style="width: 10%">Rate<a style="float: right;color: #000" href="<%=request.getContextPath()%>/allMentorControl?sort=${sort}&search=${search}"><i class="ti-arrow-down"></i><i class="ti-arrow-up"></i></a></th>
+                                                <th colspan="2" style="text-align: center">Action</th>
                                             </tr>
                                         </thead>
 
