@@ -90,7 +90,7 @@
             <%@include file="sidebar.jsp" %>
 
             <div class="col-10">
-                <section class="section" ">
+                <section class="section" >
 
                     <div class="container">
                         <div style="margin-bottom: 20px;margin-top: -10px"><button style="margin-right: 10px" class="cv"><a href="<%=request.getContextPath()%>/views/user/viewInvitationMentee.jsp"><i class="ti-arrow-left"></i></a></button> <a class="text-color" href="<%=request.getContextPath()%>/views/user/viewInvitationMentee.jsp">Back to VIEW INVITATIONS</a></div>

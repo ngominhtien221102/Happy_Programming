@@ -74,19 +74,18 @@
                         <div class="container"> 
                             <div class="row">
                                 <c:forEach items="${sessionScope.listSkill}" var="lst" varStatus="loop"> 
-                                    <article class="col-xl-3 col-md-6 skill">    
-                                        <div class="card border-bottom hover-shadow" style="">
-                                            <div class="card-body row align-items-center justify-content-center" >
-                                                <div >
-                                                    <h4 class="name">${lst.name}</h4>
-                                                </div>
-                                            </div>
-                                            <div class="skillBot">
-                                                <a href="" style="color: #fff;">View Mentors</a>
+                                    <div class="col-lg-4 col-sm-6 mb-5">
+                                        <div class="card p-0 border-primary rounded-0 hover-shadow">
+                                            <div class="card-body">
+
+                                                <a href="course-single.jsp">
+                                                    <h4 class="card-title">${lst.name}</h4>
+                                                </a>
+                                                <p class="card-text mb-4"> Our skills offer a good compromise between the continuous assessment favoured by some universities and the emphasis placed on final exams by others.</p>
+                                                <a href="course-single.jsp" class="btn btn-primary btn-sm">Apply now</a>
                                             </div>
                                         </div>
-
-                                    </article>
+                                    </div>
                                 </c:forEach>
 
                             </div>

@@ -1,4 +1,4 @@
-
+ 
 
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -114,12 +114,13 @@
                             <article class="col-6">
                                 <div class="card border-bottom hover-shadow" style="border-radius: 5px;background-color: #f3f3f3">
                                     <div class="card-body row align-items-center" >
-                                        <div class="col-8">
+                                        <div class="col-6">
                                             <h4 style="color: #0ac282;">${total}</h4>
                                             <h6 class="text-muted">All Mentors</h6>
                                         </div>
-                                        <div class="col-4 text-right">
-                                            <i class="ti-user" style="color: #0ac282;"></i>
+                                        <div class="col-6">
+                                            <h4 style="color: #0ac282;">${total}</h4>
+                                            <h6 class="text-muted">Active Mentors</h6>
                                         </div>
                                     </div>
                                     <div style="background: linear-gradient(to right,#0ac282,#0df3a3); text-align: center; align-items: center; padding: 20px;
