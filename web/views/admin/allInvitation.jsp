@@ -107,33 +107,14 @@
                     <div class="container">
                         <div class="row" style="margin-top: 50px">
 
-                            <!--                            total invitation -->
-                            <article class="col-xl-3 col-md-6">
-                                <div class="card border-bottom hover-shadow" style="border-radius: 5px;background-color: #f3f3f3">
-                                    <div class="card-body row align-items-center" >
-                                        <div class="col-8">
-                                            <h4 style="color: #fe9365;">696</h4>
-                                            <h6 class="text-muted">All Invitations</h6>
-                                        </div>
-                                        <div class="col-4 text-right">
-                                            <i class="ti-user" style="color: #fe9365;"></i>
-                                        </div>
-                                    </div>
-                                    <div style="background: linear-gradient(to right,#fe9365,#feb798); text-align: center; align-items: center; padding: 20px;
-                                         border-bottom-left-radius: 5px;
-                                         border-bottom-right-radius: 5px;">
-                                        <p style="color: #fff; margin: 0 ">Total Invitation</p>
-                                    </div>
-                                </div>
 
-                            </article>
                             <!--number of invitations accepted-->
 
                             <article class="col-xl-3 col-md-6">
                                 <div class="card border-bottom hover-shadow" style="border-radius: 5px;background-color: #f3f3f3">
                                     <div class="card-body row align-items-center" >
                                         <div class="col-8">
-                                            <h4 style="color: #0ac282;">300</h4>
+                                            <h4 style="color: #0ac282;">${acpt}</h4>
                                             <h6 class="text-muted">Accepted</h6>
                                         </div>
                                         <div class="col-4 text-right" style="color: #0ac282;" >
@@ -153,7 +134,7 @@
                                 <div class="card border-bottom hover-shadow" style="border-radius: 5px;background-color: #f3f3f3">
                                     <div class="card-body row align-items-center" >
                                         <div class="col-8">
-                                            <h4 style="color: #fe5d70;">200</h4>
+                                            <h4 style="color: #fe5d70;">${reject}</h4>
                                             <h6 class="text-muted">Rejected</h6>
                                         </div>
                                         <div class="col-4 text-right" style="color: #fe5d70;">
@@ -169,12 +150,14 @@
 
                                 <!--Invitation in progress-->
                             </article>
+
+                            <!--Invitation processing-->
                             <article class="col-xl-3 col-md-6">
                                 <div class="card border-bottom hover-shadow" style="border-radius: 5px;background-color: #f3f3f3">
                                     <div class="card-body row align-items-center" >
                                         <div class="col-8">
-                                            <h4 style="color: #01a9ac;">169</h4>
-                                            <h6 class="text-muted">Progressing</h6>
+                                            <h4 style="color: #01a9ac;">${process}</h4>
+                                            <h6 class="text-muted">Processing</h6>
                                         </div>
                                         <div class="col-4 text-right" style="color: #01a9ac;">
                                             <i class="ti-user"></i>
@@ -187,73 +170,80 @@
                                     </div>
                                 </div>
                             </article>
-
-                            <!--                            <article class="col-md-12" style="margin: 50px auto 0 auto">
-                                                            <div class="card border-bottom hover-shadow" style="border-radius: 5px;background-color: #f3f3f3">
-                                                                <div class="card-body row align-items-center" >
-                                                                    <div class="col-6">
-                                                                        <h3 style="color: #fe9365;">Last month</h3>
-                                                                        <h4 style="color: #fe9365;">300</h4>
-                                                                        <h6 class="text-muted">Invitations</h6>
-                                                                    </div>
-                                                                    <div class="col-6">
-                                                                        <h3 style="color: #fe9365;">This month</h3>
-                                                                        <h4 style="color: #fe9365;">369</h4>
-                                                                        <h6 class="text-muted">Invitations</h6>
-                                                                    </div>
-                                                                </div>
-                                                                
-                                                                <div style="background: linear-gradient(to right,#2b5876,#4e4376); text-align: center; align-items: center; padding: 20px;
-                                                                     border-bottom-left-radius: 5px;
-                                                                     border-bottom-right-radius: 5px;">
-                                                                    <div style="color: #fff">Note: tăng hoặc giảm </div>
-                                                                    <p style="color: #fff; margin: 0 "><i class="ti-arrow-up m-2"></i>10%</p>
-                                                                    <p style="color: #fff; margin: 0 "><i class="ti-arrow-down m-2"></i>10%</p>
-                                                                </div>
-                                                            </div>
-                                                            
                             
-                                                        </article>-->
+                            <!--                            cancel invitation -->
+                            <article class="col-xl-3 col-md-6">
+                                <div class="card border-bottom hover-shadow" style="border-radius: 5px;background-color: #f3f3f3">
+                                    <div class="card-body row align-items-center" >
+                                        <div class="col-8">
+                                            <h4 style="color: #fe9365;">${cancel}</h4>
+                                            <h6 class="text-muted">Cancel</h6>
+                                        </div>
+                                        <div class="col-4 text-right">
+                                            <i class="ti-user" style="color: #fe9365;"></i>
+                                        </div>
+                                    </div>
+                                    <div style="background: linear-gradient(to right,#fe9365,#feb798); text-align: center; align-items: center; padding: 20px;
+                                         border-bottom-left-radius: 5px;
+                                         border-bottom-right-radius: 5px;">
+                                        <p style="color: #fff; margin: 0 ">Invitation Canceled</p>
+                                    </div>
+                                </div>
+
+                            </article>
+
+
                         </div>
                         <div class="card-block" >
                             <h3 style="margin-bottom: 20px" class="">Invitations</h3>
-                            <h4>696</h4>
+                            <h4>${totalInv}</h4>
                             <p class="text-muted">All invitation</p>
                             <!--accepted-->
                             <div style="margin: 20px 0">
-                                <h5 class="">300</h5>
-                                <p class="text-muted">Accepted<span style="float: right">60%</span></p>
+                                <h5 class="">${acpt}</h5>
+                                <p class="text-muted">Accepted<span style="float: right">${acpt*100/totalInv}%</span></p>
 
                                 <div class="progress">
-                                    <div class="progress-bar" style="width: 60%;background: linear-gradient(to right,#0ac282,#0df3a3); "></div>
+                                    <div class="progress-bar" style="width: ${acpt*100/totalInv}%;background: linear-gradient(to right,#0ac282,#0df3a3); "></div>
                                 </div>
                             </div>
                             <!--rejected-->
                             <div style="margin: 20px 0">
-                                <h5 class="">200</h5>
-                                <p class="text-muted">Rejected<span style="float: right">20%</span></p>
+                                <h5 class="">${reject}</h5>
+                                <p class="text-muted">Rejected<span style="float: right">${reject*100/totalInv}%</span></p>
 
                                 <div class="progress">
-                                    <div class="progress-bar" style="width: 20%;background: linear-gradient(to right,#fe5d70,#fe909d); "></div>
+                                    <div class="progress-bar" style="width: ${reject*100/totalInv}%;background: linear-gradient(to right,#fe5d70,#fe909d); "></div>
                                 </div>
                             </div>
                             <!--progress-->
                             <div style="margin: 20px 0">
-                                <h5 class="">169</h5>
-                                <p class="text-muted">Progressing<span style="float: right">20%</span></p>
+                                <h5 class="">${process}</h5>
+                                <p class="text-muted">Processing<span style="float: right">${process*100/totalInv}%</span></p>
                                 <div class="progress">
-                                    <div class="progress-bar" style="width: 20%; background: linear-gradient(to right,#01a9ac,#01dbdf); "></div>
+                                    <div class="progress-bar" style="width: ${process*100/totalInv}%; background: linear-gradient(to right,#01a9ac,#01dbdf); "></div>
+                                </div>
+                            </div>
+
+                            <!--Cancel-->
+                            <div style="margin: 20px 0">
+                                <h5 class="">${cancel}</h5>
+                                <p class="text-muted">Cancel<span style="float: right">${cancel*100/totalInv}%</span></p>
+                                <div class="progress">
+                                    <div class="progress-bar" style="width: ${cancel*100/totalInv}%; background: linear-gradient(to right,#fe9365,#feb798); "></div>
                                 </div>
                             </div>
                         </div>
+
                         <div class="card-block" style="">
                             <div class="search" style="margin-left:15px" > 
-                                <form action="<%=request.getContextPath()%>/sendInvitation" class="row">
-                                    <input  type="text" name="search" value="" placeholder="Search Your Mentor">
+                                <form action="<%=request.getContextPath()%>/allInvitation" method="" class="row">
+                                    <input  type="text" name="search" value="${requestScope.search}" placeholder="Search Your Invitation">
                                     <button type="submit"><i class="ti ti-search" aria-hidden="true"></i></button>
                                 </form>
                             </div>
-                            <br><h3>Mentors</h3>
+                            <br>
+                            <h3>Invitation</h3>
                             <div class="row">  
                                 <div class="col-md-12 table">
 
@@ -265,63 +255,52 @@
                                                 <th>Mentor</th>
                                                 <th>Status</th>
                                                 <!--sap xep theo tittle-->
-                                                <th>Title<a style="float: right;color: #000" href=""><i class="ti-arrow-down"></i><i class="ti-arrow-up"></i></a></th>         
+                                                <th>
+                                                    Title
+                                                    <a style="float: right;color: #000" href="<%=request.getContextPath()%>/allInvitation?Type=down&urltext=<%=request.getRequestURL().toString()%>">
+                                                        <i class="ti-arrow-down" ></i>
+                                                    </a>
+                                                    <a style="float: right;color: #000" href="<%=request.getContextPath()%>/allInvitation?Type=up&urltext=<%=request.getRequestURL().toString()%>">
+                                                        <i class="ti-arrow-up"></i>
+                                                    </a>
+                                                </th> 
+
                                                 <th>Deadline Date</th>
                                             </tr>
                                         </thead>
 
                                         <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Dang Nhat Minh</td>
-                                                <td>Tran Ngoc Cuong</td>
-                                                <td>Processing</td>
-                                                <td>Hello Cuong Dep Trai !</td>
-                                                <td>25/10/2002</td>
-                                                <td><a href="">Detail</a></td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>Dang Nhat Minh</td>
-                                                <td>Tran Ngoc Cuong</td>
-                                                <td>Processing</td>
-                                                <td>Hello Cuong Dep Trai !</td>
-                                                <td>25/10/2002</td>
-                                                <td><a href="">Detail</a></td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>Dang Nhat Minh</td>
-                                                <td>Tran Ngoc Cuong</td>
-                                                <td>Processing</td>
-                                                <td>Hello Cuong Dep Trai !</td>
-                                                <td>25/10/2002</td>
-                                                <td><a href="">Detail</a></td>
-                                            </tr><!-- comment -->
-                                            <tr>
-                                                <td>4</td>
-                                                <td>Dang Nhat Minh</td>
-                                                <td>Tran Ngoc Cuong</td>
-                                                <td>Processing</td>
-                                                <td>Hello Cuong Dep Trai !</td>
-                                                <td>25/10/2002</td>
-                                                <td><a href="">Detail</a></td>
-                                            </tr>
-                                            <tr>
-                                                <td>5</td>
-                                                <td>Dang Nhat Minh</td>
-                                                <td>Tran Ngoc Cuong</td>
-                                                <td>Processing</td>
-                                                <td>Hello Cuong Dep Trai !</td>
-                                                <td>25/10/2002</td>
-                                                <td><a href="">Detail</a></td>
-                                            </tr>
+                                            <c:forEach items="${searchList}" var="inv" varStatus="loop" >
+                                                <tr>
+                                                    <td>${loop.count}</td>
+                                                    <td>
+                                                        <c:forEach items="${listUserProfile}" var="user">
+                                                            <c:if test="${user.ID == inv.menteeID}">
+                                                                ${user.firstName} ${user.lastName}
+                                                            </c:if>
+                                                        </c:forEach>
+                                                    </td>
+                                                    <td>
+                                                        <c:forEach items="${listUserProfile}" var="user">
+                                                            <c:if test="${user.ID == inv.mentorID}">
+                                                                ${user.firstName} ${user.lastName}
+                                                            </c:if>
+                                                        </c:forEach>
+                                                    </td>
+                                                    <td>Processing</td>
+                                                    <td>${inv.title}</td>
+                                                    <td>${inv.deadlineDate}</td>
+                                                    <td><a href="<%=request.getContextPath()%>/">Detail</a></td>
+                                                </tr>
+                                            </c:forEach>
+
                                         </tbody>
 
                                     </table>
+
                                     <!--phan trang-->
                                     <div class="pagination">
-                                        <%--<c:if test="${pageIf.cp!=1 && pageIf.end!=null}">
+                                        <c:if test="${pageIf.cp!=1 && pageIf.end!=null}">
                                             <a href="<%=request.getContextPath()%>/sendInvitation?page=1&search=${search}"><<</a>  
                                         </c:if>      
                                         <c:forEach begin="${1}" end="${pageIf.np}" var="i">
@@ -329,12 +308,8 @@
                                         </c:forEach>
                                         <c:if test="${pageIf.cp!=pageIf.np && pageIf.end!=0}">
                                             <a href="<%=request.getContextPath()%>/sendInvitation?page=${pageIf.np}&search=${search}">>></a>  
-                                        </c:if>  --%>
-                                        <a class="active" href="">1</a>
-                                        <a class="" href="">2</a>
-                                        <a class="" href="">3</a>
-                                        <a class="" href="">4</a>
-                                        <a class="" href="">>></a>
+                                        </c:if> 
+
                                     </div>
                                 </div>
                             </div>

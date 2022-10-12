@@ -25,5 +25,12 @@ public interface IInvitationService {
 
     String delete(int id, List<Invitation> list);
 
+    int countInv(int staId, List<Invitation> list);
+
+    List<Invitation> sortList(List<Invitation> list);
+    
+    List<Invitation> searchInv (String keyword, List<Invitation> invList);    
+
     String cancel(Invitation u, List<Invitation> list);
+
 }
