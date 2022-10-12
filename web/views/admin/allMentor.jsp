@@ -174,18 +174,18 @@
                                         <thead>
                                             <tr>
                                                 <th>STT</th> 
-                                                <th>Name<a style="float: right;color: #000" href="<%=request.getContextPath()%>/allMentor?sortName=${sortName}&search=${search}"><i class="ti-arrow-down"></i><i class="ti-arrow-up"></i></a></th>
+                                                <th>Name<a style="float: right;color: #000" href="<%=request.getContextPath()%>/allMentor?sortName=${sortName}<c:if test="${search != null}">&search=${search}</c:if>"><i class="ti-arrow-down"></i><i class="ti-arrow-up"></i></a></th>
                                                 <th>Gender</th>
                                                 <th style="width: 25%">Address</th>
                                                 <th>DOB</th>
-                                                <th>Status</th>
-                                                <th style="width: 10%">Rate<a style="float: right;color: #000" href="<%=request.getContextPath()%>/allMentor?&sortRate=${sortRate}&search=${search}"><i class="ti-arrow-down"></i><i class="ti-arrow-up"></i></a></th>
+                                                <th>Active</th>
+                                                <th style="width: 10%">Rate<a style="float: right;color: #000" href="<%=request.getContextPath()%>/allMentor?sortRate=${sortRate}<c:if test="${search != null}">&search=${search}</c:if>"><i class="ti-arrow-down"></i><i class="ti-arrow-up"></i></a></th>
                                                 <th colspan="2" style="text-align: center">Action</th>
                                             </tr>
                                         </thead>
 
                                         <tbody>
-
+                                            
                                             <c:forEach items="${listMentor}" var="m" varStatus="loop" begin="${pageIf.start}" end="${pageIf.end}">
                                                 <tr>
                                                     <td>${loop.index + 1}</td>
@@ -193,27 +193,27 @@
                                                     <td>${m.getGender()}</td>
                                                     <td>${m.getAddress(m.getID(), listAddress)}</td>
                                                     <td>${m.getDob()}</td>
-                                                    <td>${iUser.getUserById(m.getID(), listUser).isStatus()?'Active':'In-active'}</td>
+                                                    <td>${iUser.getUserById(m.getID(), listUser).isStatus()}</td>
                                                     <td>${iRate.getRateByMentorID(m.getID())}</td>
-                                                    <td><a href="<%=request.getContextPath()%>/viewCV?mentorID=${m.getID()}">Detail</a></td>
-                                                    <td><a href="<%=request.getContextPath()%>/allMentor?mentorID=${m.getID()}&sortName=${statusName}&sortRate=${statusRate}&search=${search}&page=${pageIf.cp}">${iUser.getUserById(m.getID(), listUser).isStatus()?'Ban':'Open'}</a></td>
+                                                    <td><a href="<%=request.getContextPath()%>/viewCV?mentorID=${m.getID()}">View CV</a></td>   
+                                                    <td><a style="${iUser.getUserById(m.getID(), listUser).isStatus()?'color:red':'color:green'}" href="<%=request.getContextPath()%>/allMentor?mentorID=${m.getID()}<c:if test="${statusName != null}">&sortName=${statusName}</c:if><c:if test="${statusRate != null}">&sortRate=${statusRate}</c:if><c:if test="${search != null}">&search=${search}</c:if>&page=${pageIf.cp}">${iUser.getUserById(m.getID(), listUser).isStatus()?'Ban':'Open'}</a></td>
                                                 </tr> 
                                             </c:forEach>
 
-
+                                                    
                                         </tbody>
-
+                                    
                                     </table>
                                     <!--phan trang-->
                                     <div class="pagination">
                                         <c:if test="${pageIf.cp!=1 && pageIf.end!=null}">
-                                            <a href="<%=request.getContextPath()%>/allMentor?mentorID=${m.getID()}&sortName=${statusName}&sortRate=${statusRate}&search=${search}&page=1"><<</a>  
+                                            <a href="<%=request.getContextPath()%>/allMentor?page=1<c:if test="${statusName != null}">&sortName=${statusName}</c:if><c:if test="${statusRate != null}">&sortRate=${statusRate}</c:if><c:if test="${search != null}">&search=${search}</c:if>"><<</a>  
                                         </c:if>      
                                         <c:forEach begin="${1}" end="${pageIf.np}" var="i">
-                                            <a class="${i==pageIf.cp?"active":""}" href="<%=request.getContextPath()%>/allMentor?mentorID=${m.getID()}&sortName=${statusName}&sortRate=${statusRate}&search=${search}&page=${i}">${i}</a>
+                                            <a class="${i==pageIf.cp?"active":""}" href="<%=request.getContextPath()%>/allMentor?page=${i}<c:if test="${statusName != null}">&sortName=${statusName}</c:if><c:if test="${statusRate != null}">&sortRate=${statusRate}</c:if><c:if test="${search != null}">&search=${search}</c:if>">${i}</a>
                                         </c:forEach>
                                         <c:if test="${pageIf.cp!=pageIf.np && pageIf.end!=0}">
-                                            <a href="<%=request.getContextPath()%>/allMentor?mentorID=${m.getID()}&sortName=${statusName}&sortRate=${statusRate}&search=${search}&page=${pageIf.np}">>></a>  
+                                            <a href="<%=request.getContextPath()%>/allMentor?page=${pageIf.np}<c:if test="${statusName != null}">&sortName=${statusName}</c:if><c:if test="${statusRate != null}">&sortRate=${statusRate}</c:if><c:if test="${search != null}">&search=${search}</c:if>">>></a>  
                                         </c:if>  
 
                                     </div>
