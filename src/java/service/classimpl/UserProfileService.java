@@ -5,6 +5,7 @@
 package service.classimpl;
 
 import dal.UserProfileDAO;
+import java.util.ArrayList;
 import java.util.List;
 import model.User;
 import model.UserProfile;
@@ -60,6 +61,18 @@ public class UserProfileService implements IUserProfileService {
     @Override
     public List<UserProfile> getList() {
         return userProfileDAO.getUsProList();
+    }
+
+    @Override
+    public List<UserProfile> search(String name) {
+        List<UserProfile> uList = new ArrayList<>();
+        for (UserProfile u : getList()) {
+            if(u.getFirstName().contains(name) || u.getLastName().contains(name))
+            {
+                uList.add(u);
+            }
+        }
+        return uList;
     }
 
 

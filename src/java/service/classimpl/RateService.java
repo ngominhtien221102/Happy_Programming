@@ -17,6 +17,7 @@ import model.Rate;
 import model.Skill;
 import model.User;
 import service.IRateService;
+import service.IUserService;
 
 /**
  *
@@ -83,6 +84,7 @@ public class RateService implements IRateService {
             }
         }
         return idMentorsSuggest;
+
         
     }
     
@@ -115,5 +117,18 @@ public class RateService implements IRateService {
         list.remove(getRateById(id, list));
         return "OK";
     }
+    
+    @Override
+    public float getRateByMentorID(int id)
+    {
+        HashMap<Integer, Float> avgRate = getHmAvgRate();
+        if(avgRate.get(id) == null)
+        {
+            return 0;
+        }
+        return avgRate.get(id);
+    }
+    
+
 
 }

@@ -9,6 +9,7 @@ package model;
  * @author Lenovo
  */
 import java.time.LocalDate;
+import java.util.List;
 
 /**
  *
@@ -115,6 +116,19 @@ public class UserProfile {
     public void setCreateAt(String createAt) {
         this.createAt = createAt;
     }
+    
+    public String getAddress(int id, List<Address> aList)
+    {
+        String address = "";
+        for (Address a : aList) {
+            if(a.getID() == id)
+            {  
+               address = a.getXa() + ", " + a.getHuyen() + ", " + a.getTinh();
+            }
+        }
+        return address;
+    }
+    
     
    
 
