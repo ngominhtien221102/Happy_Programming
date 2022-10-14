@@ -16,7 +16,16 @@ public class PageInfor {
     private int cp; //current page // can truyen vao
     private int start;
     private int end;
+    private int [] arrNrpp = {3,5,7,9};
 
+    public int[] getArrNrpp() {
+        return arrNrpp;
+    }
+
+    public void setArrNrpp(int[] arrNrpp) {
+        this.arrNrpp = arrNrpp;
+    }
+ 
     public PageInfor(int npp, int size, int cp) {
         this.npp = npp;
         this.size = size;
