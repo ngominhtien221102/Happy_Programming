@@ -64,7 +64,7 @@
             background-color:#e9ecef;
             color: #ffbc3b;
         }
-        input,select,textarea,.cv{
+        input,textarea,.cv{
             margin: 16px 0px;
             border-radius: 5px;
         }
@@ -80,11 +80,16 @@
         .col-9{
             margin: 0 auto;
         }
-        .pagination a{
+        .pagination a,.pagination select{
             border: #ced4da solid 1px;
             padding: 10px;
             border-radius: 5px;
             margin-right: 10px;
+            height: 40px;
+        }
+        .pagination select{
+            color: #ffbc3b;
+            background: #f3f3f3;
         }
         .pagination a:hover, .pagination a.active{
             background-color:#e9ecef;
@@ -175,17 +180,17 @@
                                             <tr>
                                                 <th>STT</th> 
                                                 <th>Name<a style="float: right;color: #000" href="<%=request.getContextPath()%>/allMentor?sortName=${sortName}<c:if test="${search != null}">&search=${search}</c:if>"><i class="ti-arrow-down"></i><i class="ti-arrow-up"></i></a></th>
-                                                <th>Gender</th>
-                                                <th style="width: 25%">Address</th>
-                                                <th>DOB</th>
-                                                <th>Active</th>
-                                                <th style="width: 10%">Rate<a style="float: right;color: #000" href="<%=request.getContextPath()%>/allMentor?sortRate=${sortRate}<c:if test="${search != null}">&search=${search}</c:if>"><i class="ti-arrow-down"></i><i class="ti-arrow-up"></i></a></th>
-                                                <th colspan="2" style="text-align: center">Action</th>
-                                            </tr>
-                                        </thead>
+                                                    <th>Gender</th>
+                                                    <th style="width: 25%">Address</th>
+                                                    <th>DOB</th>
+                                                    <th>Active</th>
+                                                    <th style="width: 10%">Rate<a style="float: right;color: #000" href="<%=request.getContextPath()%>/allMentor?sortRate=${sortRate}<c:if test="${search != null}">&search=${search}</c:if>"><i class="ti-arrow-down"></i><i class="ti-arrow-up"></i></a></th>
+                                                    <th colspan="2" style="text-align: center">Action</th>
+                                                </tr>
+                                            </thead>
 
-                                        <tbody>
-                                            
+                                            <tbody>
+
                                             <c:forEach items="${listMentor}" var="m" varStatus="loop" begin="${pageIf.start}" end="${pageIf.end}">
                                                 <tr>
                                                     <td>${loop.index + 1}</td>
@@ -197,12 +202,12 @@
                                                     <td>${iRate.getRateByMentorID(m.getID())}</td>
                                                     <td><a href="<%=request.getContextPath()%>/viewCV?mentorID=${m.getID()}">View CV</a></td>   
                                                     <td><a style="${iUser.getUserById(m.getID(), listUser).isStatus()?'color:red':'color:green'}" href="<%=request.getContextPath()%>/allMentor?mentorID=${m.getID()}<c:if test="${statusName != null}">&sortName=${statusName}</c:if><c:if test="${statusRate != null}">&sortRate=${statusRate}</c:if><c:if test="${search != null}">&search=${search}</c:if>&page=${pageIf.cp}">${iUser.getUserById(m.getID(), listUser).isStatus()?'Ban':'Open'}</a></td>
-                                                </tr> 
+                                                    </tr> 
                                             </c:forEach>
 
-                                                    
+
                                         </tbody>
-                                    
+
                                     </table>
                                     <!--phan trang-->
                                     <div class="pagination">
@@ -215,7 +220,13 @@
                                         <c:if test="${pageIf.cp!=pageIf.np && pageIf.end!=0}">
                                             <a href="<%=request.getContextPath()%>/allMentor?page=${pageIf.np}<c:if test="${statusName != null}">&sortName=${statusName}</c:if><c:if test="${statusRate != null}">&sortRate=${statusRate}</c:if><c:if test="${search != null}">&search=${search}</c:if>">>></a>  
                                         </c:if>  
-
+                                            <form action="<%=request.getContextPath()%>/allMentor" method="GET">
+                                                <select name="nrpp" id="selectElementId" onchange="this.form.submit()">
+                                                <c:forEach items="${pageIf.arrNrpp}" var="i">
+                                                    <option value="${i}">${i}</option>
+                                                </c:forEach>
+                                            </select>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -224,6 +235,17 @@
         </div>
         <!-- footer -->
         <%@include file="footer.jsp" %>
+<!--        <script >
+            $('#selectElementId').change(
+    function(){
+         $(this).closest('form').trigger('submit');
+         /* or:
+         $('#formElementId').trigger('submit');
+            or:
+         $('#formElementId').submit();
+         */
+    });
+        </script>-->
         <!-- /footer -->
         <!-- jQuery -->
 
