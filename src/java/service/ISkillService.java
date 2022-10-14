@@ -24,4 +24,6 @@ public interface ISkillService {
     String update(Skill u, List<Skill> list);
 
     String delete(int id, List<Skill> list);
+    
+    List<Skill> search(String name, List<Skill> list);
 }

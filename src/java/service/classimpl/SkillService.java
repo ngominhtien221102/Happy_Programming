@@ -5,6 +5,7 @@
 package service.classimpl;
 
 import dal.SkillDAO;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import model.Skill;
@@ -66,6 +67,17 @@ public class SkillService implements ISkillService {
         skill.setName(u.getName());
         return "OK";
 
+    }
+    @Override
+    public List<Skill> search(String name, List<Skill> list) {
+        name = name.toLowerCase().trim();
+        List<Skill> listSearch = new ArrayList<>();
+        for (Skill s : list) {
+            if (s.getName().toLowerCase().contains(name)) {
+                listSearch.add(s);
+            }
+        }
+        return listSearch;
     }
 
     @Override

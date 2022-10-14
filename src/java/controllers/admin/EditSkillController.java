@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controllers.user;
+package controllers.admin;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -14,27 +14,18 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
-import model.Invitation;
-import model.MentorCV;
 import model.PageInfor;
 import model.Skill;
-import model.User;
-import model.UserProfile;
-import service.IInvitationService;
-import service.IMentorService;
-
-import service.IUserProfileService;
-import service.classimpl.InvitationService;
-import service.classimpl.MentorService;
-
-import service.classimpl.UserProfileService;
+import service.ISkillService;
+import service.classimpl.SkillService;
+import sun.security.mscapi.CPublicKey;
 
 /**
  *
  * @author ASUS
  */
-@WebServlet(name = "SendInvitationController", urlPatterns = {"/sendInvitation"})
-public class SendInvitationController extends HttpServlet {
+@WebServlet(name = "EditSkillController", urlPatterns = {"/editSkill"})
+public class EditSkillController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -53,10 +44,10 @@ public class SendInvitationController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet SendInvitationController</title>");
+            out.println("<title>Servlet EditSkillController</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet SendInvitationController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet EditSkillController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -71,27 +62,22 @@ public class SendInvitationController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    IInvitationService i = new InvitationService();
-    IUserProfileService up = new UserProfileService();
-    IMentorService m = new MentorService();
-
-    int mentorID, cp;
-    String msg, search;
+    ISkillService s = new SkillService();
+    int cp, skillID;
+    String type, search, msg;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // search
-        HttpSession session = request.getSession();
-        List<UserProfile> listUp = (List<UserProfile>) session.getAttribute("listUserProfile");
-        List<MentorCV> listCV = (List<MentorCV>) session.getAttribute("listMentorCV");
+        HttpSession ses = request.getSession();
         search = request.getParameter("search");
         request.setAttribute("search", search);
-        List<MentorCV> listSearch = new ArrayList<>();
+        List<Skill> lstSkill = (List<Skill>) ses.getAttribute("listSkill");
+        List<Skill> listSearch = new ArrayList<>();
         if (search != null) {
-            listSearch = m.searchMentor(search, listCV, listUp);
+            listSearch = s.search(search, lstSkill);
         } else {
-            listSearch = listCV;
+            listSearch = lstSkill;
         }
         // phân trang
         String page = request.getParameter("page");
@@ -104,30 +90,26 @@ public class SendInvitationController extends HttpServlet {
         request.setAttribute("listSearch", listSearch);
         request.setAttribute("pageIf", pageIf);
 
-        // lay du lieu 
-        String mentorId = request.getParameter("mentorID");
-        try {
-            mentorID = Integer.parseInt(mentorId);
-            request.setAttribute("mentorId", mentorID);
-            UserProfile mentorPf = up.getUserProfileById(mentorID, listUp);
-            String mentorName = mentorPf.getFirstName() + " " + mentorPf.getLastName();
-            request.setAttribute("mentorName", mentorName);
-            MentorCV mentorCV = m.getCVById(mentorID, listCV);
-            List<Skill> mentorSkill = mentorCV.getSkillList();
-            request.setAttribute("listSkill", mentorSkill);
-        } catch (Exception e) {
-
-        }
-        // gui thanh cong or that bai
-        if (msg != null) {
-            if (msg.equals("OK")) {
-                request.setAttribute("success", "Send invitation success");
+        type = request.getParameter("type");
+        String sSkillID = request.getParameter("skillID");
+        if (sSkillID != null && type != null) {
+            skillID = Integer.parseInt(sSkillID);
+            if (type.equals("0")) {
+                s.delete(skillID, lstSkill);
+                if (search != null) {
+                    response.sendRedirect(request.getContextPath() + "/editSkill?page=" + cp + "&search=" + search);
+                } else {
+                    response.sendRedirect(request.getContextPath() + "/editSkill?page=" + cp);
+                }
             } else {
-                request.setAttribute("failed", msg);
+                Skill skillUd = s.getSkillById(skillID, lstSkill);
+                String name = skillUd.getName();
+                request.setAttribute("name", name);
+                request.getRequestDispatcher("views/admin/allSkill.jsp").forward(request, response);
             }
-            msg = "";
+        } else {
+            request.getRequestDispatcher("views/admin/allSkill.jsp").forward(request, response);
         }
-        request.getRequestDispatcher("views/user/sendInvitation.jsp").forward(request, response);
     }
 
     /**
@@ -141,26 +123,19 @@ public class SendInvitationController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Send invitation 
-        HttpSession session = request.getSession();
-        List<Invitation> list = (List<Invitation>) session.getAttribute("listInv");
-        User mentee = (User) session.getAttribute("Account");
-        // cac data
-        int menteeID = mentee.getID();
-        int skill = Integer.parseInt(request.getParameter("skill"));
-        String deadline = request.getParameter("deadline");
-        String title = request.getParameter("title");
-        String content = request.getParameter("content");
-        if (content.equals("")) {
-            msg = "Please enter content to invite this mentor!";
-            response.sendRedirect(request.getContextPath() + "/sendInvitation?search=" + search + "&page=" + cp + "&mentorID=" + mentorID);
+        HttpSession ses = request.getSession();
+        List<Skill> lstSkill = (List<Skill>) ses.getAttribute("listSkill");
+        if (type != null) {
+            if (type.equals("1")) {
+                // update
+            }
         } else {
-            Invitation inv = new Invitation(0, mentorID, menteeID, skill, 2, title, deadline, content);
-            msg = i.insert(inv, list);
-            // du lieu de sendRedirect
-            response.sendRedirect(request.getContextPath() + "/sendInvitation?search=" + search + "&page=" + cp + "&mentorID=" + mentorID);
-        }
+            // create
+            String name = request.getParameter("name");
+            msg = s.insert(new Skill(0, name), lstSkill);
 
+        }
+        response.sendRedirect("");
     }
 
     /**

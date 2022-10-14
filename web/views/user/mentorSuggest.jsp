@@ -14,7 +14,6 @@
         .card-img-top{
             height: 300px;
             object-fit: cover;
-
         }
         .card{
             height: 581px;
@@ -87,7 +86,7 @@
                                 </div>
                             </div>
                             </c:forEach>
-                            
+                            <c:set value="${index+1}" var="a"></c:set>
                         </div>
                     </div>
                 </div>
