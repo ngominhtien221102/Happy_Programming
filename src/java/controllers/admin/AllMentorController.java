@@ -60,7 +60,7 @@ public class AllMentorController extends HttpServlet {
             out.println("</html>");
         }
     }
-    
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -85,7 +85,6 @@ public class AllMentorController extends HttpServlet {
         request.setAttribute("iUser", iUser);
         IUserProfileService iS = new UserProfileService();
 
-
         List<User> uList;
         uList = (List<User>) ses.getAttribute("listUser");
 
@@ -95,8 +94,7 @@ public class AllMentorController extends HttpServlet {
         //
         int mActive = 0;
         for (MentorCV m : mList) {
-            if(iUser.getUserById(m.getID(), uList).isStatus() == true)
-            {
+            if (iUser.getUserById(m.getID(), uList).isStatus() == true) {
                 mActive++;
             }
         }
@@ -148,6 +146,15 @@ public class AllMentorController extends HttpServlet {
         List<UserProfile> listMentor = new ArrayList<>();
         String search = request.getParameter("search");
         request.setAttribute("search", search);
+        //Phân trang
+        String getNrpp = request.getParameter("nrpp");
+        int nrpp = 5;
+        if(getNrpp != null)
+        {
+            nrpp = Integer.parseInt(getNrpp);
+        }
+        request.setAttribute("nrpp", nrpp);
+        
         int cp;
         if (search == null) {
             listMentor = mentorProfile;
@@ -155,14 +162,14 @@ public class AllMentorController extends HttpServlet {
             iS = new UserProfileService();
             listMentor = iS.search(search, mentorProfile);
         }
-                      String page = request.getParameter("page");
-                if (page == null || page.equals("")) { // trang = null => page =1  
-                    cp = 1;
-                } else {
-                    cp = Integer.parseInt(page);
-                }
-                PageInfor pageIf = new PageInfor(5, listMentor.size(), cp);
-                request.setAttribute("pageIf", pageIf);
+        String page = request.getParameter("page");
+        if (page == null || page.equals("")) { // trang = null => page =1  
+            cp = 1;
+        } else {
+            cp = Integer.parseInt(page);
+        }
+        PageInfor pageIf = new PageInfor(nrpp, listMentor.size(), cp);
+        request.setAttribute("pageIf", pageIf);
         //Sortname
         int sortName = 1;
         request.setAttribute("sortName", sortName);
@@ -192,9 +199,9 @@ public class AllMentorController extends HttpServlet {
                 int statusName = 2;
                 request.setAttribute("statusName", statusName);
             }
-        } 
+        }
         //SortRate
-        
+
         int sortRate = 1;
         request.setAttribute("sortRate", sortRate);
         String getSortRate = request.getParameter("sortRate");
@@ -224,7 +231,8 @@ public class AllMentorController extends HttpServlet {
                 request.setAttribute("statusRate", statusRate);
             }
         }
-         request.setAttribute("listMentor", listMentor);
+
+        request.setAttribute("listMentor", listMentor);
         request.getRequestDispatcher("views/admin/allMentor.jsp").forward(request, response);
 
     }
