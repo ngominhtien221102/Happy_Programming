@@ -136,20 +136,21 @@
                                     </c:forEach>
                                 </table>
                                 <!--phan trang-->
+
                                 <div class="pagination">
                                     <c:if test="${pageIf.cp!=1 && pageIf.end!=null}">
-                                        <a href="<%=request.getContextPath()%>/sendInvitation?page=1&search=${search}"><<</a>  
+                                        <a href="<%=request.getContextPath()%>/sendInvitation?page=1<c:if test="${search!=null}">&search=${search}</c:if>"><<</a>  
                                     </c:if>      
                                     <c:forEach begin="${1}" end="${pageIf.np}" var="i">
-                                        <a class="${i==pageIf.cp?"active":""}" href="<%=request.getContextPath()%>/sendInvitation?page=${i}&search=${search}">${i}</a>
+                                        <a class="${i==pageIf.cp?"active":""}" href="<%=request.getContextPath()%>/sendInvitation?page=${i}<c:if test="${search!=null}">&search=${search}</c:if>">${i}</a>
                                     </c:forEach>
                                     <c:if test="${pageIf.cp!=pageIf.np && pageIf.end!=0}">
-                                        <a href="<%=request.getContextPath()%>/sendInvitation?page=${pageIf.np}&search=${search}">>></a>  
+                                        <a href="<%=request.getContextPath()%>/sendInvitation?page=${pageIf.np}<c:if test="${search!=null}">&search=${search}</c:if>">>></a>  
                                     </c:if>  
                                 </div>
 
                             </div>
-                        </div>
+                        </div>          
                         <!--form-->
 
                         <form action="<%=request.getContextPath()%>/sendInvitation" method="post" id="myForm">

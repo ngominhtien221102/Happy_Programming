@@ -12,7 +12,6 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import jakarta.websocket.Session;
 import java.util.List;
 import model.Skill;
 import service.ISkillService;
@@ -63,7 +62,7 @@ public class CreateSkillController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.sendRedirect("views/admin/createSkill.jsp");
+        response.sendRedirect("views/admin/allSkill.jsp");
     }
 
     /**
@@ -90,7 +89,7 @@ public class CreateSkillController extends HttpServlet {
             request.setAttribute("failed", message);
         }
         session.setAttribute("listSkill", list);
-        request.getRequestDispatcher("views/admin/createSkill.jsp").forward(request, response);
+        request.getRequestDispatcher("views/admin/allSkill.jsp").forward(request, response);
     }
 
     /**
