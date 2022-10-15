@@ -77,6 +77,7 @@ public class RateDAO extends DBContext {
     public Rate insert(Rate rate) {
         String sql = "INSERT INTO [dbo].[Rate]\n"
                 + "           ([Mentor_ID]\n"
+                + "           ,[Mentee_ID]\n"
                 + "           ,[Skill_ID]\n"
                 + "           ,[Rate])\n"
                 + "     VALUES(?,?,?,?)";

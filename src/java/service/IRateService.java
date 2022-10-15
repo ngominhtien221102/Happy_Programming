@@ -32,4 +32,10 @@ public interface IRateService {
 
     HashMap getHmAvgRate();
 
+    int countRate(int rate, List<Rate> list);
+
+    Rate getRateByIds(int skillId, int mentorId, int menteeId, List<Rate> list);
+
+    List<Rate> getListByMentorID(int mentorID, List<Rate> list);
+
 }

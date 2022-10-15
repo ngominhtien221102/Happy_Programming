@@ -129,6 +129,37 @@ public class RateService implements IRateService {
         return avgRate.get(id);
     }
     
+    @Override
+    public int countRate(int rate, List<Rate> list) {
+        int count = 0;
+        for (Rate ratelist : list) {
+            if (ratelist.getRate() == rate) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    @Override
+    public Rate getRateByIds(int skillId, int mentorId, int menteeId ,List<Rate> list) {
+        for (Rate rate : list) {
+            if (rate.getMentorID() == mentorId && rate.getSkillID() == skillId && rate.getMenteeID() == menteeId) {
+                return rate;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public List<Rate> getListByMentorID(int mentorID, List<Rate> list) {
+        List<Rate> rList = new ArrayList<>();
+        for (Rate rate : list) {
+            if (rate.getMentorID() == mentorID) {
+                rList.add(rate);
+            }
+        }
+        return rList;
+    }
 
 
 }
