@@ -75,8 +75,8 @@ public class SendInvitationController extends HttpServlet {
     IUserProfileService up = new UserProfileService();
     IMentorService m = new MentorService();
 
-    int mentorID, cp;
-    String msg, search;
+    int mentorID, cp, nrpp;
+    String msg, search = "";
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -93,6 +93,12 @@ public class SendInvitationController extends HttpServlet {
         } else {
             listSearch = listCV;
         }
+        String getNrpp = request.getParameter("nrpp");
+        nrpp = 5;
+        if (getNrpp != null) {
+            nrpp = Integer.parseInt(getNrpp);
+        }
+        request.setAttribute("nrpp", nrpp);
         // phân trang
         String page = request.getParameter("page");
         if (page == null || page.equals("")) { // trang = null => page =1  
@@ -100,7 +106,7 @@ public class SendInvitationController extends HttpServlet {
         } else {
             cp = Integer.parseInt(page);
         }
-        PageInfor pageIf = new PageInfor(5, listSearch.size(), cp);
+        PageInfor pageIf = new PageInfor(nrpp, listSearch.size(), cp);
         request.setAttribute("listSearch", listSearch);
         request.setAttribute("pageIf", pageIf);
 
@@ -153,14 +159,21 @@ public class SendInvitationController extends HttpServlet {
         String content = request.getParameter("content");
         if (content.equals("")) {
             msg = "Please enter content to invite this mentor!";
-            response.sendRedirect(request.getContextPath() + "/sendInvitation?search=" + search + "&page=" + cp + "&mentorID=" + mentorID);
+            if (search != null) {
+                response.sendRedirect(request.getContextPath() + "/sendInvitation?search=" + search + "&page=" + cp + "&mentorID=" + mentorID + "&nrpp=" + nrpp);
+            } else {
+                response.sendRedirect(request.getContextPath() + "/sendInvitation?page=" + cp + "&mentorID=" + mentorID + "&nrpp=" + nrpp);
+            }
         } else {
             Invitation inv = new Invitation(0, mentorID, menteeID, skill, 2, title, deadline, content);
             msg = i.insert(inv, list);
             // du lieu de sendRedirect
-            response.sendRedirect(request.getContextPath() + "/sendInvitation?search=" + search + "&page=" + cp + "&mentorID=" + mentorID);
+            if (search != null) {
+                response.sendRedirect(request.getContextPath() + "/sendInvitation?search=" + search + "&page=" + cp + "&mentorID=" + mentorID + "&nrpp=" + nrpp);
+            } else {
+                response.sendRedirect(request.getContextPath() + "/sendInvitation?page=" + cp + "&mentorID=" + mentorID + "&nrpp=" + nrpp);
+            }
         }
-
     }
 
     /**

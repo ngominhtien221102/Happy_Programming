@@ -43,5 +43,15 @@
             .navigation{
                 background-color: #ffbc3b;
             }
+            .form-control {
+            background-color: transparent;
+            border-top: 0;
+            border-right: 0;
+            border-left: 0;
+            border-radius: 0;
+            &:focus {
+                border-color: #111;
+            }
+        }
         </style>
     </head>
