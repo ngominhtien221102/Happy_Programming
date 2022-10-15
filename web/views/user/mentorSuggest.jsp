@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html lang="zxx">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <%@include file="headCSS.jsp" %>
+    <%@include file="headCSS2.jsp" %>
     <style>
         .card-img-top{
             height: 300px;
@@ -31,7 +31,7 @@
         <!-- /header -->
 
         <!-- page title -->
-        <section class="page-title-section overlay" data-background="images/backgrounds/page-title.jpg">
+        <section class="page-title-section overlay col-12" data-background="images/backgrounds/page-title.jpg">
             <div class="container">
                 <div class="row">
                     <div class="col-md-8">

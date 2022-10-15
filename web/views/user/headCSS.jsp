@@ -32,5 +32,16 @@
         <!--Favicon-->
         <link rel="shortcut icon" href="<%=request.getContextPath()%>/template1/images/favicon.ico" type="image/x-icon">
         <link rel="icon" href="<%=request.getContextPath()%>/template1/images/favicon.ico" type="image/x-icon">
-
+        <style>
+            .form-control {
+            background-color: transparent;
+            border-top: 0;
+            border-right: 0;
+            border-left: 0;
+            border-radius: 0;
+            &:focus {
+                border-color: #111;
+            }
+        }
+        </style>
     </head>
