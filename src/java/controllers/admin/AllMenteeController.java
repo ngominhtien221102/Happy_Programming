@@ -95,7 +95,7 @@ public class AllMenteeController extends HttpServlet {
         Date date = new Date();
         LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         int month = localDate.getMonthValue();
-
+        int year = localDate.getYear();
         int nMenteeThisMonth = 0;
         for (UserProfile userProfile : menteeProfiles) {
             String[] s = userProfile.getCreateAt().split("-");
@@ -110,13 +110,29 @@ public class AllMenteeController extends HttpServlet {
         for (UserProfile userProfile : menteeProfiles) {
             String[] s = userProfile.getCreateAt().split("-");
             int m = Integer.parseInt(s[1]);
-            if (m != month) {
-                nMenteeLastMonth += 1;
+            int n = Integer.parseInt(s[0]);
+            if (month != 1) {
+                if (m == month - 1) {
+                    nMenteeLastMonth += 1;
+                }
+            } else {
+                if (m == 12 && n == year - 1) {
+                    nMenteeLastMonth += 1;
+                }
             }
         }
         request.setAttribute("lastMonth", nMenteeLastMonth);
-
-        float perGrowth = (float) (nMenteeThisMonth * 100) / nMenteeLastMonth;
+        float perGrowth = 0;
+        if(nMenteeLastMonth <= nMenteeThisMonth)
+        {
+             perGrowth = (float) ((nMenteeThisMonth - nMenteeLastMonth) * 100) / nMenteeLastMonth;
+        }
+        else
+        {
+            perGrowth = (float) ((nMenteeLastMonth - nMenteeThisMonth) * 100) / nMenteeLastMonth;
+        }
+        
+        
         String percent = String.format("%.01f", perGrowth);
         request.setAttribute("percent", percent);
 

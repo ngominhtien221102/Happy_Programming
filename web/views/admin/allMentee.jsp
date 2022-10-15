@@ -156,7 +156,12 @@
                                     <div style="background: linear-gradient(to right,#01a9ac,#01dbdf); text-align: center; align-items: center; padding: 20px;
                                          border-bottom-left-radius: 5px;
                                          border-bottom-right-radius: 5px;">
-                                        <p style="color: #fff; margin: 0 "><i class="ti-arrow-up m-2"></i>${percent}%</p>
+                                        <c:if test="${thisMonth >= lastMonth}" >
+                                            <p style="color: #fff; margin: 0 "><i class="ti-arrow-up m-2"></i>${percent}%</p>
+                                        </c:if>
+                                        <c:if test="${thisMonth < lastMonth}" >
+                                            <p style="color: #fff; margin: 0 "><i class="ti-arrow-down m-2"></i>${percent}%</p>
+                                        </c:if>
                                         <!--                                        <p style="color: #fff; margin: 0 "><i class="ti-arrow-down m-2"></i>10%</p>-->
                                     </div>
                                 </div>
@@ -172,74 +177,73 @@
                                     <button type="submit"><i class="ti ti-search" aria-hidden="true"></i></button>
                                 </form>
                             </div>
-                            </div>
-                            <br><h3>Mentees</h3>
-                            <div class="row">  
-                                <div class="col-md-12 table">
+                        </div>
+                        <br><h3>Mentees</h3>
+                        <div class="row">  
+                            <div class="col-md-12 table">
 
-                                    <table border="2" style="width: 100%">
-                                        <thead>
-                                            <tr>
-                                                <th>STT</th> 
-                                                <th>Name<a style="float: right;color: #000" 
-                                                           href="<%=request.getContextPath()%>/allMentee?sort=${sort}&nrpp=${nrpp}<c:if test="${search != null}">&search=${search}</c:if>"><i class="ti-arrow-down"></i><i class="ti-arrow-up"></i></a></th>
+                                <table border="2" style="width: 100%">
+                                    <thead>
+                                        <tr>
+                                            <th>STT</th> 
+                                            <th>Name<a style="float: right;color: #000" 
+                                                       href="<%=request.getContextPath()%>/allMentee?sort=${sort}&nrpp=${nrpp}<c:if test="${search != null}">&search=${search}</c:if>"><i class="ti-arrow-down"></i><i class="ti-arrow-up"></i></a></th>
                                                 <th>Gender</th>
                                                 <th style="width: 25%">Address</th>
                                                 <th>DOB</th>
                                                 <th>Email</th>
-                                                <th>Status</th>
+                                                <th>Active</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
 
                                         <tbody>
-                                            <c:forEach items="${listMentee}" var="m" varStatus="loop" begin="${pageIf.start}" end="${pageIf.end}">
-                                                <tr>
-                                                    <td>${loop.index + 1}</td>
-                                                    <td>${m.getFirstName()} ${m.getLastName()}</td>
-                                                    <td>${m.getGender()}</td>
-                                                    <td>${m.getAddress(m.getID(), listAddress)}</td>
-                                                    <td>${m.getDob()}</td>
-                                                    <td>${m.getEmail()}</td>
-                                                    <td>${iUser.getUserById(m.getID(), listUser).isStatus()}</td>
-                                                    <td><a style="${iUser.getUserById(m.getID(), listUser).isStatus()?'color:red':'color:green'}"
-                                                           href="<%=request.getContextPath()%>/allMentee?menteeID=${m.getID()}&nrpp=${nrpp}&page=${pageIf.cp}<c:if test="${search != null}">&search=${search}</c:if><c:if test="${status != null}">&sort=${status}</c:if>">
-                                                            ${iUser.getUserById(m.getID(), listUser).isStatus()?'Ban':'Open'}</a></td>
-                                                </tr>
-                                            </c:forEach>
-                                        </tbody>
-
-                                    </table>
-                                    <!--phan trang-->
-                                    <div class="pagination">
-                                        <c:if test="${pageIf.cp!=1 && pageIf.end!=null}">
-                                            <a href="<%=request.getContextPath()%>/allMentee?page=1&nrpp=${nrpp}<c:if test="${status != null}">&sort=${status}</c:if><c:if test="${search != null}">&search=${search}</c:if>"><<</a>  
-                                        </c:if>      
-                                        <c:forEach begin="${1}" end="${pageIf.np}" var="i">
-                                            <a class="${i==pageIf.cp?"active":""}" href="<%=request.getContextPath()%>/allMentee?page=${i}&nrpp=${nrpp}<c:if test="${status != null}">&sort=${status}</c:if><c:if test="${search != null}">&search=${search}</c:if>">${i}</a>
+                                        <c:forEach items="${listMentee}" var="m" varStatus="loop" begin="${pageIf.start}" end="${pageIf.end}">
+                                            <tr>
+                                                <td>${loop.index + 1}</td>
+                                                <td>${m.getFirstName()} ${m.getLastName()}</td>
+                                                <td>${m.getGender()}</td>
+                                                <td>${m.getAddress(m.getID(), listAddress)}</td>
+                                                <td>${m.getDob()}</td>
+                                                <td>${m.getEmail()}</td>
+                                                <td>${iUser.getUserById(m.getID(), listUser).isStatus()}</td>
+                                                <td><a style="${iUser.getUserById(m.getID(), listUser).isStatus()?'color:red':'color:green'}"
+                                                       href="<%=request.getContextPath()%>/allMentee?menteeID=${m.getID()}&nrpp=${nrpp}&page=${pageIf.cp}<c:if test="${search != null}">&search=${search}</c:if><c:if test="${status != null}">&sort=${status}</c:if>">
+                                                        ${iUser.getUserById(m.getID(), listUser).isStatus()?'Ban':'Open'}</a></td>
+                                            </tr>
                                         </c:forEach>
-                                        <c:if test="${pageIf.cp!=pageIf.np && pageIf.end!=0}">
-                                            <a href="<%=request.getContextPath()%>/allMentee?page=${pageIf.np}&nrpp=${nrpp}<c:if test="${status != null}">&sort=${status}</c:if><c:if test="${search != null}">&search=${search}</c:if>">>></a>  
-                                        </c:if>  
-                                            <form action="<%=request.getContextPath()%>/allMentee" method="GET">
-                                                <select name="nrpp" id="selectElementId" onchange="this.form.submit()">
-                                                    <option>Show ${nrpp}</option>
-                                                <c:forEach items="${pageIf.arrNrpp}" var="i">
-                                                    <option value="${i}">${i}</option>
-                                                </c:forEach>
-                                            </select>
-                                        </form>
-                                    </div>
+                                    </tbody>
+
+                                </table>
+                                <!--phan trang-->
+                                <div class="pagination">
+                                    <c:if test="${pageIf.cp!=1 && pageIf.end!=null}">
+                                        <a href="<%=request.getContextPath()%>/allMentee?page=1&nrpp=${nrpp}<c:if test="${status != null}">&sort=${status}</c:if><c:if test="${search != null}">&search=${search}</c:if>"><<</a>  
+                                    </c:if>      
+                                    <c:forEach begin="${1}" end="${pageIf.np}" var="i">
+                                        <a class="${i==pageIf.cp?"active":""}" href="<%=request.getContextPath()%>/allMentee?page=${i}&nrpp=${nrpp}<c:if test="${status != null}">&sort=${status}</c:if><c:if test="${search != null}">&search=${search}</c:if>">${i}</a>
+                                    </c:forEach>
+                                    <c:if test="${pageIf.cp!=pageIf.np && pageIf.end!=0}">
+                                        <a href="<%=request.getContextPath()%>/allMentee?page=${pageIf.np}&nrpp=${nrpp}<c:if test="${status != null}">&sort=${status}</c:if><c:if test="${search != null}">&search=${search}</c:if>">>></a>  
+                                    </c:if>  
+                                    <form action="<%=request.getContextPath()%>/allMentee" method="GET">
+                                        <select name="nrpp" id="selectElementId" onchange="this.form.submit()">
+                                            <c:forEach items="${pageIf.arrNrpp}" var="i">
+                                                <option <c:if test="${nrpp == i}">selected=""</c:if>value="${i}">${i}</option>
+                                            </c:forEach>
+                                        </select>
+                                    </form>
                                 </div>
                             </div>
-                        </div></div></section>
-            </div>
-        </div>
-        <!-- footer -->
-        <%@include file="footer.jsp" %>
-        <!-- /footer -->
-        <!-- jQuery -->
+                        </div>
+                    </div></div></section>
+    </div>
+</div>
+<!-- footer -->
+<%@include file="footer.jsp" %>
+<!-- /footer -->
+<!-- jQuery -->
 
-        <!-- /jQuery -->
-    </body>
+<!-- /jQuery -->
+</body>
 </html>

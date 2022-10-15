@@ -155,7 +155,12 @@
                                     <div style="background: linear-gradient(to right,#01a9ac,#01dbdf); text-align: center; align-items: center; padding: 20px;
                                          border-bottom-left-radius: 5px;
                                          border-bottom-right-radius: 5px;">
-                                        <p style="color: #fff; margin: 0 "><i class="ti-arrow-up m-2"></i>${percent}%</p>
+                                        <c:if test="${thisMonth >= lastMonth}" >
+                                            <p style="color: #fff; margin: 0 "><i class="ti-arrow-up m-2"></i>${percent}%</p>
+                                        </c:if>
+                                        <c:if test="${thisMonth < lastMonth}" >
+                                            <p style="color: #fff; margin: 0 "><i class="ti-arrow-down m-2"></i>${percent}%</p>
+                                        </c:if>  
                                         <!--                                        <p style="color: #fff; margin: 0 "><i class="ti-arrow-down m-2"></i>10%</p>-->
                                     </div>
                                 </div>
@@ -220,11 +225,11 @@
                                         <c:if test="${pageIf.cp!=pageIf.np && pageIf.end!=0}">
                                             <a href="<%=request.getContextPath()%>/allMentor?page=${pageIf.np}&nrpp=${nrpp}<c:if test="${statusName != null}">&sortName=${statusName}</c:if><c:if test="${statusRate != null}">&sortRate=${statusRate}</c:if><c:if test="${search != null}">&search=${search}</c:if>">>></a>  
                                         </c:if>  
-                                            <form action="<%=request.getContextPath()%>/allMentor" method="GET">
-                                                <select name="nrpp" id="selectElementId" onchange="this.form.submit()">
-                                                    <option>Show ${nrpp}</option>
+                                        <form action="<%=request.getContextPath()%>/allMentor" method="GET">
+                                            <select name="nrpp" id="selectElementId" onchange="this.form.submit()">
+
                                                 <c:forEach items="${pageIf.arrNrpp}" var="i">
-                                                    <option value="${i}">${i}</option>
+                                                    <option <c:if test="${nrpp == i}">selected=""</c:if> value="${i}">${i}</option>
                                                 </c:forEach>
                                             </select>
                                         </form>
@@ -236,17 +241,17 @@
         </div>
         <!-- footer -->
         <%@include file="footer.jsp" %>
-<!--        <script >
-            $('#selectElementId').change(
-    function(){
-         $(this).closest('form').trigger('submit');
-         /* or:
-         $('#formElementId').trigger('submit');
-            or:
-         $('#formElementId').submit();
-         */
-    });
-        </script>-->
+        <!--        <script >
+                    $('#selectElementId').change(
+            function(){
+                 $(this).closest('form').trigger('submit');
+                 /* or:
+                 $('#formElementId').trigger('submit');
+                    or:
+                 $('#formElementId').submit();
+                 */
+            });
+                </script>-->
         <!-- /footer -->
         <!-- jQuery -->
 
