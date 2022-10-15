@@ -16,7 +16,7 @@ public class PageInfor {
     private int cp; //current page // can truyen vao
     private int start;
     private int end;
-    private int [] arrNrpp = {3,5,7,9};
+    private int [] arrNrpp = {5,10,15,20};
 
     public int[] getArrNrpp() {
         return arrNrpp;

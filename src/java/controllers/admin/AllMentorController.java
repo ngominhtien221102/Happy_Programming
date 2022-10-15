@@ -103,6 +103,7 @@ public class AllMentorController extends HttpServlet {
         Date date = new Date();
         LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         int month = localDate.getMonthValue();
+        int year = localDate.getYear();
 
         int nMentorThisMonth = 0;
         for (UserProfile userProfile : mentorProfile) {
@@ -118,15 +119,29 @@ public class AllMentorController extends HttpServlet {
         for (UserProfile userProfile : mentorProfile) {
             String[] s = userProfile.getCreateAt().split("-");
             int m = Integer.parseInt(s[1]);
-            if (m != month) {
-                nMentorLastMonth += 1;
+            int n = Integer.parseInt(s[0]);
+            if (month != 1) {
+                if (m == month - 1) {
+                    nMentorLastMonth += 1;
+                }
+            } else {
+                if (m == 12 && n == year - 1) {
+                    nMentorLastMonth += 1;
+                }
             }
         }
         request.setAttribute("lastMonth", nMentorLastMonth);
-
-        float perGrowth = (float) (nMentorThisMonth * 100) / nMentorLastMonth;
+        float perGrowth = 0;
+        if(nMentorLastMonth <= nMentorThisMonth)
+        {
+             perGrowth = (float) ((nMentorThisMonth - nMentorLastMonth) * 100) / nMentorLastMonth;
+        }
+        else
+        {
+            perGrowth = (float) ((nMentorLastMonth - nMentorThisMonth) * 100) / nMentorLastMonth;
+        }
         String percent = String.format("%.01f", perGrowth);
-
+        
         request.setAttribute("percent", percent);
 
         //Ban or open account
