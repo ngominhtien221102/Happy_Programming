@@ -17,14 +17,11 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import model.MentorCV;
 import model.PageInfor;
 import model.User;
 import model.UserProfile;
-import service.IRateService;
 import service.IUserProfileService;
 import service.IUserService;
-import service.classimpl.RateService;
 import service.classimpl.UserProfileService;
 import service.classimpl.UserService;
 
@@ -32,8 +29,8 @@ import service.classimpl.UserService;
  *
  * @author Lenovo
  */
-@WebServlet(name = "AllMentorController", urlPatterns = {"/allMentor"})
-public class AllMentorController extends HttpServlet {
+@WebServlet(name = "AllMenteeController", urlPatterns = {"/allMentee"})
+public class AllMenteeController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -52,10 +49,10 @@ public class AllMentorController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet allMentorController</title>");
+            out.println("<title>Servlet AllMenteeController</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet allMentorController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet AllMenteeController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -74,168 +71,125 @@ public class AllMentorController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession ses = request.getSession();
-        List<MentorCV> mList;
-        mList = (List<MentorCV>) ses.getAttribute("listMentorCV");
-        List<UserProfile> upList;
-        upList = (List<UserProfile>) ses.getAttribute("listUserProfile");
-        List<UserProfile> mentorProfile = getProfileOfMentor(mList, upList);
-        IRateService iRate = new RateService();
-        request.setAttribute("iRate", iRate);
+        List<User> uList = (List<User>) ses.getAttribute("listUser");
+        List<UserProfile> upList = (List<UserProfile>) ses.getAttribute("listUserProfile");
+        List<UserProfile> menteeProfiles = getProfileOfMentee(upList, uList);
         IUserService iUser = new UserService();
         request.setAttribute("iUser", iUser);
         IUserProfileService iS = new UserProfileService();
 
-        List<User> uList;
-        uList = (List<User>) ses.getAttribute("listUser");
-
-        //Get total Mentor
-        int toltal = mList.size();
+        //Get total Mentee
+        int toltal = menteeProfiles.size();
         request.setAttribute("total", toltal);
         //
         int mActive = 0;
-        for (MentorCV m : mList) {
-            if (iUser.getUserById(m.getID(), uList).isStatus() == true) {
-                mActive++;
+        for (UserProfile m : menteeProfiles) {
+            if (iUser.getUserById(m.getID(), uList).isStatus()) {
+                mActive += 1;
             }
         }
         request.setAttribute("mActive", mActive);
+        //
+
         //Get total mentor this month
         Date date = new Date();
         LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         int month = localDate.getMonthValue();
 
-        int nMentorThisMonth = 0;
-        for (UserProfile userProfile : mentorProfile) {
+        int nMenteeThisMonth = 0;
+        for (UserProfile userProfile : menteeProfiles) {
             String[] s = userProfile.getCreateAt().split("-");
             int m = Integer.parseInt(s[1]);
             if (m == month) {
-                nMentorThisMonth += 1;
+                nMenteeThisMonth += 1;
             }
         }
-        request.setAttribute("thisMonth", nMentorThisMonth);
+        request.setAttribute("thisMonth", nMenteeThisMonth);
 
-        int nMentorLastMonth = 0;
-        for (UserProfile userProfile : mentorProfile) {
+        int nMenteeLastMonth = 0;
+        for (UserProfile userProfile : menteeProfiles) {
             String[] s = userProfile.getCreateAt().split("-");
             int m = Integer.parseInt(s[1]);
             if (m != month) {
-                nMentorLastMonth += 1;
+                nMenteeLastMonth += 1;
             }
         }
-        request.setAttribute("lastMonth", nMentorLastMonth);
+        request.setAttribute("lastMonth", nMenteeLastMonth);
 
-        float perGrowth = (float) (nMentorThisMonth * 100) / nMentorLastMonth;
+        float perGrowth = (float) (nMenteeThisMonth * 100) / nMenteeLastMonth;
         String percent = String.format("%.01f", perGrowth);
-
         request.setAttribute("percent", percent);
 
-        //Ban or open account
-        String mentorID = request.getParameter("mentorID");
+        //Ban or open
+        String menteeID = request.getParameter("menteeID");
         try {
-            int id = Integer.parseInt(mentorID);
+            int id = Integer.parseInt(menteeID);
             User user = new User();
             for (User u : uList) {
                 if (u.getID() == id) {
                     user = u;
                 }
             }
-            IUserService iU = new UserService();
-            iU.update(new User(user.getID(), user.getRoleID(), user.getAccountName(), user.getPassWord(), !user.isStatus()), uList);
+            iUser.update(new User(user.getID(), user.getRoleID(), user.getAccountName(), user.getPassWord(), !user.isStatus()), uList);
         } catch (NumberFormatException e) {
         }
         //Search
-        List<UserProfile> listMentor = new ArrayList<>();
+        List<UserProfile> listMentees = new ArrayList<>();
         String search = request.getParameter("search");
         request.setAttribute("search", search);
-         if (search == null) {
-            listMentor = mentorProfile;
+        if (search == null) {
+            listMentees = menteeProfiles;
         } else {
-            listMentor = iS.search(search, mentorProfile);
+            listMentees = iS.search(search, menteeProfiles);
         }
-        //Phân trang
+        //Phan trang
         String getNrpp = request.getParameter("nrpp");
         int nrpp = 5;
-        if(getNrpp != null)
-        {
+        if (getNrpp != null) {
             nrpp = Integer.parseInt(getNrpp);
         }
         request.setAttribute("nrpp", nrpp);
-        
+
         int cp;
-       
+
         String page = request.getParameter("page");
         if (page == null || page.equals("")) { // trang = null => page =1  
             cp = 1;
         } else {
             cp = Integer.parseInt(page);
         }
-        PageInfor pageIf = new PageInfor(nrpp, listMentor.size(), cp);
+        PageInfor pageIf = new PageInfor(nrpp, listMentees.size(), cp);
         request.setAttribute("pageIf", pageIf);
-        //Sortname
-        int sortName = 1;
-        request.setAttribute("sortName", sortName);
-        String getSortName = request.getParameter("sortName");
-        int sortNameget = 0;
-        if (getSortName != null) {
+        //Sort
+        int sort = 1;
+        request.setAttribute("sort", sort);
+        String getSort = request.getParameter("sort");
+        int sortGet = 0;
+        if (getSort != null) {
             try {
-                sortNameget = Integer.parseInt(getSortName);
+                sortGet = Integer.parseInt(getSort);
 
             } catch (NumberFormatException e) {
             }
 
-            if (sortNameget == 1) {
-
-                sortName = 2;
-                request.setAttribute("sortName", sortName);
-                request.setAttribute("listMentor", iS.sortName(listMentor));
-
-                int statusName = 1;
-                request.setAttribute("statusName", statusName);
+            if (sortGet == 1) {
+                sort = 2;
+                request.setAttribute("sort", sort);
+                request.setAttribute("listMentee", iS.sortName(listMentees));
+                int status = 1;
+                request.setAttribute("status", status);
             }
-            if (sortNameget == 2) {
-
-                request.setAttribute("listMentor", listMentor);
-                sortName = 1;
-                request.setAttribute("sortName", sortName);
-                int statusName = 2;
-                request.setAttribute("statusName", statusName);
-            }
-        }
-        //SortRate
-
-        int sortRate = 1;
-        request.setAttribute("sortRate", sortRate);
-        String getSortRate = request.getParameter("sortRate");
-        int sortRateget = 0;
-        if (getSortRate != null) {
-            try {
-                sortRateget = Integer.parseInt(getSortRate);
-
-            } catch (NumberFormatException e) {
-            }
-
-            if (sortRateget == 1) {
-
-                sortRate = 2;
-                request.setAttribute("sortRate", sortRate);
-                request.setAttribute("listMentor", iS.sortRate(listMentor));
-
-                int statusRate = 1;
-                request.setAttribute("statusRate", statusRate);
-            }
-            if (sortRateget == 2) {
-
-                request.setAttribute("listMentor", listMentor);
-                sortRate = 1;
-                request.setAttribute("sortRate", sortRate);
-                int statusRate = 2;
-                request.setAttribute("statusRate", statusRate);
+            if (sortGet == 2) {
+                request.setAttribute("listMentee", listMentees);
+                sort = 1;
+                request.setAttribute("sort", sort);
+                int status = 2;
+                request.setAttribute("status", status);
             }
         }
 
-        request.setAttribute("listMentor", listMentor);
-        request.getRequestDispatcher("views/admin/allMentor.jsp").forward(request, response);
-
+        request.setAttribute("listMentee", listMentees);
+        request.getRequestDispatcher("views/admin/allMentee.jsp").forward(request, response);
     }
 
     /**
@@ -262,18 +216,20 @@ public class AllMentorController extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private List<UserProfile> getProfileOfMentor(List<MentorCV> mList, List<UserProfile> uList) {
-        List<UserProfile> mentorProfile = new ArrayList<>();
+    private List<UserProfile> getProfileOfMentee(List<UserProfile> upList, List<User> uList) {
+        List<UserProfile> menteeProfile = new ArrayList<>();
         ArrayList<Integer> listID = new ArrayList<>();
-        for (MentorCV mentorCV : mList) {
-            listID.add(mentorCV.getID());
-        }
-        for (UserProfile userProfile : uList) {
-            if (listID.contains(userProfile.getID())) {
-                mentorProfile.add(userProfile);
+        for (User user : uList) {
+            if (user.getRoleID() == 2) {
+                listID.add(user.getID());
             }
         }
-        return mentorProfile;
-    }
+        for (UserProfile u : upList) {
+            if (listID.contains(u.getID())) {
+                menteeProfile.add(u);
+            }
+        }
+        return menteeProfile;
 
+    }
 }
