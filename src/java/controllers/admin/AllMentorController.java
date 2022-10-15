@@ -131,8 +131,15 @@ public class AllMentorController extends HttpServlet {
             }
         }
         request.setAttribute("lastMonth", nMentorLastMonth);
-
-        float perGrowth = (float) ((nMentorThisMonth - nMentorLastMonth) * 100) / nMentorLastMonth;
+        float perGrowth = 0;
+        if(nMentorLastMonth <= nMentorThisMonth)
+        {
+             perGrowth = (float) ((nMentorThisMonth - nMentorLastMonth) * 100) / nMentorLastMonth;
+        }
+        else
+        {
+            perGrowth = (float) ((nMentorLastMonth - nMentorThisMonth) * 100) / nMentorLastMonth;
+        }
         String percent = String.format("%.01f", perGrowth);
         
         request.setAttribute("percent", percent);
