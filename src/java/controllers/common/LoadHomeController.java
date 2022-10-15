@@ -86,6 +86,7 @@ public class LoadHomeController extends HttpServlet {
         ses.setAttribute("listInv", iS.getList());
         ses.setAttribute("listAddress", aS.getList());
         ses.setAttribute("listProvince", aS.getListProvince());
+       ses.setAttribute("listComment", cS.getList());
         
         response.sendRedirect("views/user/index.jsp");
     } 
