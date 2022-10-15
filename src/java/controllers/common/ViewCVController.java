@@ -12,17 +12,25 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import model.Address;
+import model.Invitation;
 import model.MentorCV;
+import model.Rate;
 import model.Skill;
+import model.User;
 import model.UserProfile;
 import service.IAddressService;
 import service.IMentorService;
+import service.IRateService;
 import service.ISkillService;
 import service.IUserProfileService;
 import service.classimpl.AddressService;
 import service.classimpl.MentorService;
+import service.classimpl.RateService;
 import service.classimpl.SkillService;
 import service.classimpl.UserProfileService;
 
@@ -68,6 +76,8 @@ public class ViewCVController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    IRateService ra = new RateService();
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -76,6 +86,8 @@ public class ViewCVController extends HttpServlet {
         List<MentorCV> listCV = (List<MentorCV>) ses.getAttribute("listMentorCV");
         List<UserProfile> profiles = (List<UserProfile>) ses.getAttribute("listUserProfile");
         List<Address> addList = (List<Address>) ses.getAttribute("listAddress");
+        List<Rate> rateList = (List<Rate>) ses.getAttribute("listRate");
+        List<Invitation> invList = (List<Invitation>) ses.getAttribute("listInv");
 
         ISkillService skillSer = new SkillService();
         IMentorService mentorSer = new MentorService();
@@ -84,12 +96,22 @@ public class ViewCVController extends HttpServlet {
         IAddressService ia = new AddressService();
 
         String id_raw = request.getParameter("mentorID");
+        User u = (User) ses.getAttribute("Account");
 
         try {
             int id = Integer.parseInt(id_raw);
+            int menteeId = u.getID();
             UserProfile mentorProfile = uSer.getUserProfileById(id, profiles);
             MentorCV mentorCV = mentorSer.getCVById(id, listCV);
-            
+
+            List<Invitation> invListAcept = new ArrayList<>();
+            for (Invitation invitation : invList) {
+                if (invitation.getStatusID() == 1 && invitation.getMentorID() == id && invitation.getMenteeID() == menteeId) {
+                    invListAcept.add(invitation);
+                }
+            }
+            request.setAttribute("invListAcept", invListAcept);
+
             Address a = ia.getAddressById(mentorProfile.getAddressID(), addList);
             String tinh = a.getTinh();
             String huyen = a.getHuyen();
@@ -97,15 +119,33 @@ public class ViewCVController extends HttpServlet {
             request.setAttribute("tinh", tinh);
             request.setAttribute("huyen", huyen);
             request.setAttribute("xa", xa);
-            
+
             request.setAttribute("mentorCV", mentorCV);
             request.setAttribute("mentorProfile", mentorProfile);
+
+            List<Rate> rList = ra.getListByMentorID(id, rateList);
+
+            int rateTotal = rList.size();
+            request.setAttribute("rateTotal", rateTotal);
+            int five = ra.countRate(5, rList);
+            int four = ra.countRate(4, rList);
+            int three = ra.countRate(3, rList);
+            int two = ra.countRate(2, rList);
+            int one = ra.countRate(1, rList);
+            HashMap<Integer, Float> rateHm = ra.getHmAvgRate();
+
+            request.setAttribute("rateHm", rateHm);
+            request.setAttribute("five", five * 100 / rateTotal);
+            request.setAttribute("four", four * 100 / rateTotal);
+            request.setAttribute("three", three * 100 / rateTotal);
+            request.setAttribute("two", two * 100 / rateTotal);
+            request.setAttribute("one", one * 100 / rateTotal);
+
             request.getRequestDispatcher("views/common/viewMentorCV.jsp").forward(request, response);
-            
-        } catch (Exception e) { //id mentor truyền vào không hợp lệ => home
+
+        } catch (ServletException | IOException | NumberFormatException e) { //id mentor truyền vào không hợp lệ => home
             response.sendRedirect("views/user/index.jsp");
         }
-
     }
 
     /**
@@ -119,7 +159,7 @@ public class ViewCVController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+
     }
 
     /**

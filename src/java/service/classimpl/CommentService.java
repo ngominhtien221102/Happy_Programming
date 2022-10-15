@@ -6,6 +6,8 @@ package service.classimpl;
 
 import dal.CommentDAO;
 import jakarta.servlet.jsp.jstl.core.Config;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import model.Comment;
 import service.ICommentService;
@@ -19,8 +21,16 @@ public class CommentService implements ICommentService {
     CommentDAO cmtDAO = new CommentDAO();
     
     @Override
-    public List<Comment> getList() {
-        return cmtDAO.getCmList();
+   public List<Comment> getList() {
+        List<Comment> cmtList = cmtDAO.getCmList();
+        Collections.sort(cmtList, new Comparator<Comment>() {
+            @Override
+            public int compare(Comment cmt1, Comment cmt2) {
+                return cmt1.getCreatedAt().compareTo(cmt2.getCreatedAt());
+            }
+        });
+        Collections.reverse(cmtList);
+        return cmtList;
     }
 
     @Override
