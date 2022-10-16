@@ -97,9 +97,9 @@ public class UserProfileService implements IUserProfileService {
         List<UserProfile> listMentor = uList;
         IRateService iRate = new RateService();
          for (int i = 0; i < listMentor.size() - 1; i++) {
-                    float rate1 = (float) iRate.getRateByMentorID(listMentor.get(i).getID());
+                    float rate1 = iRate.getRateByMentorID(listMentor.get(i).getID());
                     for (int j = i + 1; j < listMentor.size(); j++) {
-                        float rate2 = (float) iRate.getRateByMentorID(listMentor.get(j).getID());
+                        float rate2 = iRate.getRateByMentorID(listMentor.get(j).getID());
                         if (rate1 < rate2) {
                             Collections.swap(listMentor, i, j);
                         }

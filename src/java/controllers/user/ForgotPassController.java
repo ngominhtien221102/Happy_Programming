@@ -96,7 +96,7 @@ public class ForgotPassController extends HttpServlet {
         List<User> ulist = (List<User>) ses.getAttribute("listUser");
 
         //random pass moi de gui mail
-        String newPass = m.RandomPass();
+        String newPass = Mail.RandomPass();
         //tk mail dung de gui      
         String userName = "hungnxhe160592@fpt.edu.vn";
         String password = "hungnguyen2002";

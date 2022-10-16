@@ -16,7 +16,7 @@ import service.ISkillService;
  */
 public class SkillService implements ISkillService {
 
-    private SkillDAO skillDAO;
+    private final SkillDAO skillDAO;
 
     public SkillService() {
         skillDAO = new SkillDAO();

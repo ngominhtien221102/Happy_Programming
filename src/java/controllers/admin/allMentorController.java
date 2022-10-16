@@ -176,7 +176,6 @@ public class allMentorController extends HttpServlet {
                 request.setAttribute("statusName", statusName);
             }
             if (sortNameget == 2) {
-
                 request.setAttribute("listMentor", listMentor);
                 sortName = 1;
                 request.setAttribute("sortName", sortName);

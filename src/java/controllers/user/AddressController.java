@@ -4,17 +4,17 @@
  */
 package controllers.user;
 
-import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.ArrayList;
-import java.util.List;
 import service.IAddressService;
 import service.classimpl.AddressService;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.List;
 
 /**
  *
@@ -85,6 +85,7 @@ public class AddressController extends HttpServlet {
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
+     * @noinspection JavadocReference
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)

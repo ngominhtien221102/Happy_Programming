@@ -74,6 +74,7 @@ public class LoadHomeController extends HttpServlet {
         ICommentService cS = new CommentService();
         IAddressService aS = new AddressService();
         
+        ses.setAttribute("RoleID", 1); //set role = guest
         ses.setAttribute("HmSkill", sS.getHm());
         ses.setAttribute("listSkill", sS.getList());
         ses.setAttribute("listUser", uS.getList());
