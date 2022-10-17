@@ -16,7 +16,7 @@
         }
         .responseBox{
             padding: 0;
-            margin: 2% 0;
+            margin-bottom:20px;
             height: fit-content;
             max-height: 500px;
             overflow-y: scroll;
@@ -24,7 +24,7 @@
             display: flex;
             flex-direction: column;
             padding: 5%;
-            border-radius: 15px;
+            border-radius: 0 15px 15px 15px;
         }
         .responseContent{
             margin: 0 ;
@@ -43,7 +43,6 @@
             flex-direction: column;
             align-items: flex-start;
         }
-
         .card-body{
             background-color: #f3f3f3;
             border-radius: 15px;
@@ -52,12 +51,10 @@
             background: rgb(0, 132, 255);
 
         }
-
         .otherResponseCnt{
             background: #E4E6EB;
             color: #050505;
             position: relative;
-
         }
         .resHead{
             margin: 1%;
@@ -67,6 +64,15 @@
         }
         .text-white p{
             color: #fff;
+        }
+        .request{
+            display: flex;
+            justify-content: space-around;
+            align-items:  center;
+            background: #f3f3f3;
+            border-radius: 15px 15px 0 0;
+            border-bottom: 1px #dee2e6 solid;
+            padding: 2%;
         }
     </style>
     <body>
@@ -78,29 +84,43 @@
             <div class="col-10">
                 <section class="section">
                     <div class="container">
-
-                        <div class="card-body" style="width: 100%;">
-                            <h3 class="card-title" style="margin: 2% 0;">Request</h3>
-                            <h3 class="card-title">${request.title}</h3>
+                        <h2 style="margin: 2% 0;">Request Detail</h2>
                         
-                            <span class="font-weight-bold mr-2">${Account.roleID==2?"To:":"From:"}</span>
-                            <c:if test="${Account.roleID==2}">
-                                ${mentor.firstName} ${mentor.lastName}
-                            </c:if>
-                            <c:if test="${Account.roleID!=2}">
-                                ${mentee.firstName} ${mentee.lastName}
-                            </c:if>
+                        <div class="request" style="width: 100%;">
+                            <h3>Title: ${request.title}</h3>
+                            <span class="font-weight-bold mr-2">${Account.roleID==2?"To:":"From:"}
+                                <c:if test="${Account.roleID==2}">
+                                    ${mentor.firstName} ${mentor.lastName}
+                                </c:if>
+                                <c:if test="${Account.roleID!=2}">
+                                    ${mentee.firstName} ${mentee.lastName}
+                                </c:if>
+                            </span>
                             <fmt:parseDate value="${request.createdAt}" pattern="yyyy-MM-dd" var="Date" />
                             <fmt:formatDate value="${Date}" var="Date2" pattern="dd/MM/yyyy"/>        
-                            <br><br><span class="font-weight-bold mr-2">Created:</span> ${Date2}<br><br>
-                            <span class="font-weight-bold mr-2">Content:</span><p class="card-text">${request.content}</p>
-                        </div>  
-                        <h3 class="card-title" style="margin: 2% 0;">Response</h3>
-                        <h4 style="color: green;">${resAlert2}</h4>
-                        <div class="col-12 responseBox" id="chat" >
+                            <br><br><span class="font-weight-bold mr-2">Created: ${Date2}</span> <br><br>
+                            
+                        </div>
+                        <div class="col-12 responseBox">
+                            <div class="response ${Account.ID==request.menteeID?"myResponse":"otherResponse"}">
+                               <!--                                request dau tien-->
+                                <div class="resHead">
+                                    <span class="font-weight-bold mr-2">
+                                        ${mentee.firstName} ${mentee.lastName}
+                                    </span>
+                                    <span>
+                                        <fmt:parseDate value="${request.createdAt}" pattern="yyyy-MM-dd" var="Date" />
+                                        <fmt:formatDate value="${Date}" var="Date2" pattern="dd/MM/yyyy"/>        
+                                        -  ${Date2}
+                                    </span>
+                                </div>
+                                <div class="responseContent ${Account.ID==request.menteeID?"myResponseCnt":"otherResponseCnt"}">
+                                    <div class="${Account.ID==request.menteeID?"text-white":"text-black"}">${request.content}</div>
+                                </div>
+                            </div>
                             <c:forEach items="${responseLst}" var="response" varStatus="loop">
                                 <div class="response ${Account.ID==response.userID?"myResponse":"otherResponse"}">
-                                    <div class="resHead ${Account.ID==response.userID?"":""}">
+                                    <div class="resHead">
                                         <span class="font-weight-bold mr-2">
                                             <c:if test="${mentor.ID == response.userID}">
                                                 ${mentor.firstName} ${mentor.lastName}
@@ -118,11 +138,12 @@
                                     <div class="responseContent ${Account.ID==response.userID?"myResponseCnt":"otherResponseCnt"}">
                                         <div class="${Account.ID==response.userID?"text-white":"text-black"}">${response.content}</div>
                                     </div>
+                                    
                                 </div>
                             </c:forEach>
-
                         </div>
                         <div class="card-body">
+                             <h4 style="color: green;">${resAlert2}</h4>
                             <form action="singleRequest" method="POST" class="row">
                                 <input type="hidden" name="userID" value="${Account.ID}">
                                 <input type="hidden" name="requestId" value="${request.ID}">
@@ -169,6 +190,7 @@
 
         </script>
         <script>
+            // tu keo xuong cuoi o chat
             $('.responseBox').scrollTop($('.responseBox')[0].scrollHeight);
         </script>
         <!-- /jQuery -->
