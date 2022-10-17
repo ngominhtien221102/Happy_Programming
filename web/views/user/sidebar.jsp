@@ -20,7 +20,7 @@
 
         <!-- Nav Item - Add product -->
         <li class="nav-item">
-            <a class="nav-link collapsed" href="<%=request.getContextPath()%>/views/user/viewMenteeProfile.jsp" >
+            <a class="nav-link collapsed" href="<%=request.getContextPath()%>/viewMenteeProfile" >
                 <span>Profile</span>
             </a>
         </li>
@@ -76,7 +76,7 @@
 
         <!-- Nav Item - All Admin -->
         <li class="nav-item">
-            <a class="nav-link collapsed" href="<%=request.getContextPath()%>/views/user/sendInvitation.jsp" >
+            <a class="nav-link collapsed" href="<%=request.getContextPath()%>/sendInvitation" >
                 <span>Create Invitation</span>
             </a>
         </li>
