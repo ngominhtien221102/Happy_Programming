@@ -85,13 +85,13 @@ public class EditInvitationController extends HttpServlet {
             if (type.equals("0")) { // delete xong van ve view
                 i.delete(id, list);
                 session.setAttribute("listInv", list);
-                response.sendRedirect(request.getContextPath() + "/views/user/viewInvitationMentee.jsp");
+                response.sendRedirect(request.getContextPath() + "/viewAllInvite");
             } else {
                 if (type.equals("2")) {
                     Invitation invitation = new Invitation(id, 0, 0, 0, 0, "", "", "");
                     i.cancel(invitation, list);
                     session.setAttribute("listInv", list);
-                    response.sendRedirect(request.getContextPath() + "/views/user/viewInvitationMentee.jsp");
+                                    response.sendRedirect(request.getContextPath() + "/singleInvite?invitationId="+id);
                 } else { // update goi den trang update
                     if (i.getInvitationById(id, list) != null) {
                         Invitation invitation = i.getInvitationById(id, list);
@@ -104,7 +104,7 @@ public class EditInvitationController extends HttpServlet {
                         session.setAttribute("mentorName", mentorName);
                         request.getRequestDispatcher("/views/user/editInvitation.jsp").forward(request, response);
                     } else {
-                        response.sendRedirect(request.getContextPath() + "/views/user/viewInvitationMentee.jsp");
+                        response.sendRedirect(request.getContextPath() + "/viewAllInvite");
                     }
                 }
             }

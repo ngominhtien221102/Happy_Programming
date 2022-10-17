@@ -39,9 +39,9 @@
             <%@include file="sidebar.jsp" %>
             <div class="col-10">
                 <section class="section" ">
-                    <h2 style="margin-left:15px">Send Request</h2>
-                    <h3 style="color: green; margin-left:15px;">${message}</h3>
                     <div class="container">
+                        <h2>Send Request</h2>
+                        <h3 style="color: green;">${message}</h3>
                         <br><h3>Invited Mentors</h3>
                         <div class="row">  
                             <div class="col-md-12 table">

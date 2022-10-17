@@ -11,11 +11,33 @@
 <html>
     <%@include file="headCSS2.jsp" %>
     <style>
-        .section-sm{
-            float: right;
-            width: 80%;
-            padding-top: 3%;
-            margin-top: 2%;
+        .invite{
+            border: 1px #dee2e6 solid;
+            padding: 3% 5% 5% 5%;
+            width: 60%;
+            background-color: #f3f3f3;
+            border-radius: 5px;
+        }
+        .content{
+            word-wrap: break-word;
+        }
+        .signup__link{
+            color: #1e1e4b;
+            margin: 2%;
+            border:  1px #ededf1 solid ;
+            border-radius: 5px;
+            padding: 2%;
+            background: rgba(9,30,66,0.04);
+        }
+        .signup__link:hover{
+            color: #ffbc3b;
+            background: rgba(9,30,66,0.08);
+        }
+        .title{
+            color: #ffbc3b;
+        }
+        .mentor{
+
         }
     </style>
     <body>
@@ -24,49 +46,54 @@
         <!-- /header -->
         <div id="content" class="row" style="padding-top: 50px; ">
             <%@include file="sidebar.jsp" %>
-            <section class="section-sm bg-gray">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12">
-                            <ul class="list-inline">
-                                <li class="list-inline-item mr-4 mb-3 mb-md-0 text-light">
-                                    <span class="font-weight-bold mr-2">To:</span>
+            <div class="col-10">
+                <section class="section" >
+                    <div class="container" style="display: flex">
+                        <div class="invite" style="margin:30px auto;">
+                            <h2 class="title text-align-center">${Invitation.title} </h2><br>
+                            <div class="ml-5" style="">
+                                <h5 class=""><span class="font-weight-bold mr-2">To:</span>
                                     <c:forEach items="${listUserProfile}" var="user" varStatus="loop">
                                         <c:if test="${user.ID == Invitation.mentorID}">
-                                            ${user.firstName} ${user.lastName}
+                                            <a  class="text-color" href="viewCV?mentorID=${Invitation.mentorID}">${user.firstName} ${user.lastName}</a>
                                         </c:if>
                                     </c:forEach>
-                                </li>
-                                <li class="list-inline-item mr-4 mb-3 mb-md-0 text-light">
-                                    <fmt:parseDate value="${Invitation.deadlineDate}" pattern="yyyy-MM-dd" var="Date" />
-                                    <fmt:formatDate value="${Date}" var="Date2" pattern="dd/MM/yyyy"/>        
-                                    <span class="font-weight-bold mr-2">Deadline:</span> ${Date2}
-                                </li><br>
-                                <li class="list-inline-item mr-4 mb-3 mb-md-0 text-light" style="margin-top: 1%">    
-                                    <span class="font-weight-bold mr-2">Skill: </span>${HmSkill[Invitation.skillID]}
-                                </li><br>
-                                <li class="list-inline-item mr-4 mb-3 mb-md-0 text-light" style="margin-top: 1%">    
-                                    <span class="font-weight-bold mr-2">Status: </span>${listStatus[Invitation.statusID]}
-                                </li>
-                            </ul>
+                                </h5><br>
+                                <fmt:parseDate value="${Invitation.deadlineDate}" pattern="yyyy-MM-dd" var="Date" />
+                                <fmt:formatDate value="${Date}" var="Date2" pattern="dd/MM/yyyy"/>        
+                                <span class="font-weight-bold mr-2">Deadline:</span> ${Date2}
+                                <br><br>
+                                <span class="font-weight-bold mr-2">Skill: </span>${HmSkill[Invitation.skillID]}
+                                <br><br>
+
+                                <span class="font-weight-bold mr-2">Status: </span>${listStatus[Invitation.statusID]}<br><br>
+                                <span class="font-weight-bold mr-2">Content: </span>
+                                <div class="content"><br>${Invitation.content}</div>
+                                <br><br>
+                            </div>
+                            <div class="text-align-center">
+                                <a class="signup__link " <c:if test="${Invitation.statusID==2}">href="<%=request.getContextPath()%>/editInvitation?type=1&id=${Invitation.ID}"</c:if><c:if test="${Invitation.statusID!=2}">href=""</c:if>>Update</a>
+                                <a class="signup__link " <c:if test="${Invitation.statusID==2}">href="<%=request.getContextPath()%>/editInvitation?type=2&id=${Invitation.ID}"</c:if><c:if test="${Invitation.statusID!=2}">href=""</c:if>>Cancel</a>
+
+                                </div>
+
+                            </div>
                         </div>
                         <!-- border -->
                         <!-- blog contect -->
-                        <div class="col-12 mb-5">
-                            <h2>${Invitation.title} </h2>
-                            <p>${Invitation.content}</p>
-                        </div>
-                        <!-- comment box -->
-                    </div>
-                </div>
+
+
+
+                    </section></div>
             </section>
         </div>
-        <!-- footer -->
-        <%@include file="footer.jsp" %>
-        <!-- /footer -->
-        <!-- jQuery -->
-        <%@include file="scriptJS.jsp" %> 
-        <!-- /jQuery -->
-    </body>
+    </div>
+    <!-- footer -->
+<%@include file="footer.jsp" %>
+<!-- /footer -->
+<!-- jQuery -->
+<%@include file="scriptJS.jsp" %> 
+<!-- /jQuery -->
+</body>
 </html>
 
