@@ -12,17 +12,20 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
+import model.PageInfor;
 import model.Skill;
 import service.ISkillService;
 import service.classimpl.SkillService;
+import sun.security.mscapi.CPublicKey;
 
 /**
  *
  * @author ASUS
  */
-@WebServlet(name = "CreateSkillController", urlPatterns = {"/createSkill"})
-public class CreateSkillController extends HttpServlet {
+@WebServlet(name = "EditSkillController", urlPatterns = {"/editSkill"})
+public class EditSkillController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,10 +44,10 @@ public class CreateSkillController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet CreateSkillController</title>");
+            out.println("<title>Servlet EditSkillController</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet CreateSkillController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet EditSkillController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -59,10 +62,54 @@ public class CreateSkillController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    ISkillService s = new SkillService();
+    int cp, skillID;
+    String type, search, msg;
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.sendRedirect("views/admin/allSkill.jsp");
+        HttpSession ses = request.getSession();
+        search = request.getParameter("search");
+        request.setAttribute("search", search);
+        List<Skill> lstSkill = (List<Skill>) ses.getAttribute("listSkill");
+        List<Skill> listSearch = new ArrayList<>();
+        if (search != null) {
+            listSearch = s.search(search, lstSkill);
+        } else {
+            listSearch = lstSkill;
+        }
+        // phân trang
+        String page = request.getParameter("page");
+        if (page == null || page.equals("")) { // trang = null => page =1  
+            cp = 1;
+        } else {
+            cp = Integer.parseInt(page);
+        }
+        PageInfor pageIf = new PageInfor(5, listSearch.size(), cp);
+        request.setAttribute("listSearch", listSearch);
+        request.setAttribute("pageIf", pageIf);
+
+        type = request.getParameter("type");
+        String sSkillID = request.getParameter("skillID");
+        if (sSkillID != null && type != null) {
+            skillID = Integer.parseInt(sSkillID);
+            if (type.equals("0")) {
+                s.delete(skillID, lstSkill);
+                if (search != null) {
+                    response.sendRedirect(request.getContextPath() + "/editSkill?page=" + cp + "&search=" + search);
+                } else {
+                    response.sendRedirect(request.getContextPath() + "/editSkill?page=" + cp);
+                }
+            } else {
+                Skill skillUd = s.getSkillById(skillID, lstSkill);
+                String name = skillUd.getName();
+                request.setAttribute("name", name);
+                request.getRequestDispatcher("views/admin/allSkill.jsp").forward(request, response);
+            }
+        } else {
+            request.getRequestDispatcher("views/admin/allSkill.jsp").forward(request, response);
+        }
     }
 
     /**
@@ -73,23 +120,22 @@ public class CreateSkillController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    ISkillService s = new SkillService();
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String skillName = request.getParameter("name");
-        HttpSession session = request.getSession();
-        Skill skill = new Skill(0, skillName);
-        List<Skill> list = (List<Skill>) session.getAttribute("listSkill");
-        String message = s.insert(skill, list);
-        if (message.equals("OK")) {
-            request.setAttribute("success", "Create skill success");
+        HttpSession ses = request.getSession();
+        List<Skill> lstSkill = (List<Skill>) ses.getAttribute("listSkill");
+        if (type != null) {
+            if (type.equals("1")) {
+                // update
+            }
         } else {
-            request.setAttribute("failed", message);
+            // create
+            String name = request.getParameter("name");
+            msg = s.insert(new Skill(0, name), lstSkill);
+
         }
-        session.setAttribute("listSkill", list);
-        request.getRequestDispatcher("views/admin/allSkill.jsp").forward(request, response);
+        response.sendRedirect("");
     }
 
     /**

@@ -4,8 +4,9 @@
  */
 package service;
 
+import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import model.MentorCV;
 import model.Rate;
 import model.User;
 
@@ -14,10 +15,11 @@ import model.User;
  * @author Admin
  */
 public interface IRateService {
+
     List<Rate> getList();
-    
-    List<User> getMentorsSuggest(List<Integer> listIDSkill, List<User> userList);
-    
+
+    List<Integer> getMentorsSuggest(List<Integer> listIDSkill, List<MentorCV> CVList);
+
     Rate getRateById(int id, List<Rate> list);
 
     String insert(Rate u, List<Rate> list);
@@ -25,6 +27,15 @@ public interface IRateService {
     String update(Rate u, List<Rate> list);
 
     String delete(int id, List<Rate> list);
-    
-    Map getHmAvgRate(List<User> userList);
+
+    float getRateByMentorID(int id);
+
+    HashMap getHmAvgRate();
+
+    int countRate(int rate, List<Rate> list);
+
+    Rate getRateByIds(int skillId, int mentorId, int menteeId, List<Rate> list);
+
+    List<Rate> getListByMentorID(int mentorID, List<Rate> list);
+
 }

@@ -8,7 +8,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
-    <%@include file="headCSS.jsp" %>
+    <%@include file="headCSS2.jsp" %>
     <style>
         .signup_container{
             margin: 12% 10% 10% 10%;
@@ -26,31 +26,10 @@
         .form-group{
             margin: 2%;
         }
-        .form-control {
-            background-color: transparent;
-            border-top: 0;
-            border-right: 0;
-            border-left: 0;
-            border-radius: 0;
-            &:focus {
-                border-color: #111;
-            }
-        }
         .m-t-lg{
             margin: 2%;
         }
-        .btn--form {
-            padding: .5rem 2.5rem;
-            font-size: .95rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            color: #fff;
-            background: #182b45;
-            border-radius: 5%; 
-        }
-        .btn--form:focus,.btn--form:hover {
-                color: #fd7e14;
-            }
+        
     </style>
     <body>
         <!-- header -->

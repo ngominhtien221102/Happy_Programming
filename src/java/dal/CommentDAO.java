@@ -70,8 +70,8 @@ public class CommentDAO extends DBContext {
             ps.setInt(1, cmt.getMentorID());
             ps.setInt(2, cmt.getMenteeID());
             ps.setInt(3, cmt.getSkillID());
-            ps.setString(4, cmt.getCreatedAt());
-            ps.setString(5, date);
+            ps.setString(4, date);
+            ps.setString(5, cmt.getContent());
             ps.execute();
 
             String sql1 = "SELECT top(1) [Comment_ID]\n"

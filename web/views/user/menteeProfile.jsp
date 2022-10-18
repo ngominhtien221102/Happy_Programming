@@ -12,18 +12,15 @@ Cường Trần
 
     <%@include file="headCSS2.jsp" %>
     <style>
-        .img-fluid {
-            max-width: 60%;
-            height: auto;
-            margin-left: 20%;
+        .avatar{
+            margin: 0;
+            border-radius: 50%;
+            height: 300px;
+            width: 300px;
+            object-fit: cover;
         }
-
-        img {
-            vertical-align: middle;
-            border: 0px;
-            border-radius: 100%;
-            margin: 0px auto;
-        }
+        
+        
     </style>
     <body>
         <!-- header -->
@@ -36,14 +33,12 @@ Cường Trần
             <!-- teachers -->
             <section class="section" style="padding-top: 200px;">
                 <div class="container">
-                    <div class="row" >
-                        <div class="col-md-5 mb-5">
-                            <img class="img-fluid w-100" src="<%=request.getContextPath()%>/img/avatar/${us.getAvatar()}" alt="Mentee">
+                    <div class="row" style="justify-content: space-around">
+                        <div class="">
+                            <img class="img-fluid avatar" src="<%=request.getContextPath()%>/img/avatar/${us.getAvatar()}" alt="Mentee">
                         </div>
-                        <div class="col-md-6 mb-5">
-                            <h3>Name:  ${us.getLastName()}  ${us.getFirstName()} </h3>
-
-
+                        <div class="">
+                            <h3>Name: ${us.getFirstName()} ${us.getLastName()}</h3>
                             <div class="row" style="margin-top:20px">
                                 <div class="col-md-6 mb-5 mb-md-0">
                                     <h4 class="mb-4">CONTACT INFO:</h4>

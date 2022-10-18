@@ -6,8 +6,8 @@ package service.classimpl;
 
 import dal.InvitationDAO;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import model.Invitation;
 import service.IInvitationService;
@@ -35,14 +35,17 @@ public class InvitationService implements IInvitationService {
         // khi insert phai check co bi trung mentorid menteeid skillid ko
         // Neu trung thi check tiep xem cai status cua cai cu, neu no la close/reject (3,4) thi cho send tiep
         // Neu la accepted,processing (1,2) thi ko cho send
-        for (int i = list.size()-1; i >=0; i--) {
+        for (int i = list.size() - 1; i >= 0; i--) {
             if (list.get(i).getMenteeID() == u.getMenteeID() && list.get(i).getMentorID() == u.getMentorID() && list.get(i).getSkillID() == u.getSkillID()) {
-                    if (list.get(i).getStatusID() == 3 || list.get(i).getStatusID() == 4) {
-                        break;
-                    }else{
-                        if(list.get(i).getStatusID()== 1 ) return "Invitation has been sent and accepted";
-                        else return "The invitation has been sent and is being processed";
+                if (list.get(i).getStatusID() == 3 || list.get(i).getStatusID() == 4) {
+                    break;
+                } else {
+                    if (list.get(i).getStatusID() == 1) {
+                        return "Invitation has been sent and accepted";
+                    } else {
+                        return "The invitation has been sent and is being processed";
                     }
+                }
             }
         }
         Invitation newInv = InvitationDAO.insert(u);
@@ -88,6 +91,39 @@ public class InvitationService implements IInvitationService {
     }
 
     @Override
+
+    public int countInv(int staId, List<Invitation> list) {
+        int count = 0;
+        for (Invitation invitation : list) {
+            if (invitation.getStatusID() == staId) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+    @Override
+    public List<Invitation> sortList(List<Invitation> list) {
+        Collections.sort(list, new Comparator<Invitation>() {
+            @Override
+            public int compare(Invitation inv1, Invitation inv2) {
+                return inv1.getTitle().compareTo(inv2.getTitle());
+            }
+        });
+        return list;
+    }
+
+    @Override
+    public List<Invitation> searchInv(String keyword, List<Invitation> invList) {
+        List<Invitation> list = new ArrayList<>();
+        for (Invitation invitation : invList) {
+            if (invitation.getTitle().trim().contains(keyword.trim())) {
+                list.add(invitation);
+            }
+        }
+        return list;
+    }
+
     public List<Integer> getListIDSkill() {
         List<Invitation> invList = getList();
         List<Integer> idSkillList = new ArrayList<>();
@@ -97,7 +133,6 @@ public class InvitationService implements IInvitationService {
         }
         return idSkillList;
     }
-    
-    
+
 
 }

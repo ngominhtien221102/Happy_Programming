@@ -52,8 +52,11 @@
             background-color:#e9ecef;
             color: #ffbc3b;
         }
-        input,select,textarea,.cv{
+        input,textarea,.cv{
             margin: 16px 0px;
+            border-radius: 5px;
+        }
+        select{
             border-radius: 5px;
         }
         .cv{
@@ -68,11 +71,15 @@
         .col-9{
             margin: 0 auto;
         }
-        .pagination a{
+        .pagination a,.pagination select{
             border: #ced4da solid 1px;
             padding: 10px;
             border-radius: 5px;
             margin-right: 10px;
+        }
+        .pagination select{
+            color: #ffbc3b;
+            background: #f3f3f3;
         }
         .pagination a:hover, .pagination a.active{
             background-color:#e9ecef;
@@ -90,11 +97,11 @@
             <%@include file="sidebar.jsp" %>
 
             <div class="col-10">
-                <section class="section" ">
+                <section class="section" >
 
                     <div class="container">
                         <div style="margin-bottom: 20px;margin-top: -10px"><button style="margin-right: 10px" class="cv"><a href="<%=request.getContextPath()%>/views/user/viewInvitationMentee.jsp"><i class="ti-arrow-left"></i></a></button> <a class="text-color" href="<%=request.getContextPath()%>/views/user/viewInvitationMentee.jsp">Back to VIEW INVITATIONS</a></div>
-                        <h2 style="margin-bottom:30px">Send invitation</h2>
+                        <h2>Send Invitation</h2>
                         <c:if test="${requestScope.success!=null}">
                             <br><h3 style="color: green">${success}</h3>
                         </c:if>
@@ -130,26 +137,33 @@
                                                 <td><c:forEach items="${m.skillList}" var="s">
                                                         ${s.name}
                                                     </c:forEach></td>
-                                                <td><a class="text-color" href="<%=request.getContextPath()%>/sendInvitation?search=${search}&page=${pageIf.cp}&mentorID=${m.ID}">invite</a></td>
-                                            </tr>
-                                        </tbody>
+                                                <td><a class="text-color" href="<%=request.getContextPath()%>/sendInvitation?mentorID=${m.ID}&nrpp=${nrpp}<c:if test="${search!=null}">&search=${search}</c:if>&page=${pageIf.cp}">invite</a></td>
+                                                </tr>
+                                            </tbody>
                                     </c:forEach>
                                 </table>
                                 <!--phan trang-->
+
                                 <div class="pagination">
                                     <c:if test="${pageIf.cp!=1 && pageIf.end!=null}">
-                                        <a href="<%=request.getContextPath()%>/sendInvitation?page=1&search=${search}"><<</a>  
+                                        <a href="<%=request.getContextPath()%>/sendInvitation?page=1&nrpp=${nrpp}<c:if test="${search!=null}">&search=${search}</c:if>"><<</a>  
                                     </c:if>      
                                     <c:forEach begin="${1}" end="${pageIf.np}" var="i">
-                                        <a class="${i==pageIf.cp?"active":""}" href="<%=request.getContextPath()%>/sendInvitation?page=${i}&search=${search}">${i}</a>
+                                        <a class="${i==pageIf.cp?"active":""}" href="<%=request.getContextPath()%>/sendInvitation?page=${i}&nrpp=${nrpp}<c:if test="${search!=null}">&search=${search}</c:if>">${i}</a>
                                     </c:forEach>
                                     <c:if test="${pageIf.cp!=pageIf.np && pageIf.end!=0}">
-                                        <a href="<%=request.getContextPath()%>/sendInvitation?page=${pageIf.np}&search=${search}">>></a>  
+                                        <a href="<%=request.getContextPath()%>/sendInvitation?page=${pageIf.np}&nrpp=${nrpp}<c:if test="${search!=null}">&search=${search}</c:if>">>></a>  
                                     </c:if>  
+                                    <form action="<%=request.getContextPath()%>/sendInvitation" method="GET">
+                                        <select name="nrpp" onchange="this.form.submit()">
+                                            <c:forEach items="${pageIf.arrNrpp}" var="i">
+                                                <option <c:if test="${nrpp==i}">selected=""</c:if> value="${i}">${i}</option>
+                                            </c:forEach>
+                                        </select>
+                                    </form>
                                 </div>
-
                             </div>
-                        </div>
+                        </div>          
                         <!--form-->
 
                         <form action="<%=request.getContextPath()%>/sendInvitation" method="post" id="myForm">
@@ -181,19 +195,19 @@
         <%@include file="scriptJS.jsp" %>
         <script src="https://cdn.ckeditor.com/ckeditor5/34.1.0/classic/ckeditor.js"></script>
         <script>
-            var value;
-            ClassicEditor
-                    .create(document.querySelector('#editor'))
-                    .then(editor => {
-                        value = editor;
-                    })
-                    .catch(error => {
-                        console.error(error);
-                    });
+                                                    var value;
+                                                    ClassicEditor
+                                                            .create(document.querySelector('#editor'))
+                                                            .then(editor => {
+                                                                value = editor;
+                                                            })
+                                                            .catch(error => {
+                                                                console.error(error);
+                                                            });
 
-            const handleSubmit = () => {
-                document.getElementById('a').innerHTML = value.getData()
-            }
+                                                    const handleSubmit = () => {
+                                                        document.getElementById('a').innerHTML = value.getData()
+                                                    }
 
 
         </script>

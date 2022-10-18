@@ -7,8 +7,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
-    <head>
-        <style>
+<head>
+    <style>
         .card-inner{
             margin-left: 4rem;
         }
@@ -36,8 +36,43 @@
             overflow: visible;
             clip: auto;
         }
+        .rating {
+            display: flex;
+            flex-direction: row-reverse;
+            /*justify-content: center;*/
+        }
+
+        .rating > input{
+            display:none;
+        }
+
+        .rating > label {
+/*            position: relative;*/
+            width: 1em;
+            font-size: 2vw;
+            color: #FFD600;
+            cursor: pointer;
+        }
+        .rating > label::before{
+            content: "\2605";
+            position: absolute;
+            opacity: 0;
+        }
+        .rating > label:hover:before,
+        .rating > label:hover ~ label:before {
+            opacity: 1 !important;
+        }
+
+        .rating > input:checked ~ label:before{
+            opacity:1;
+        }
+
+        .rating:hover > input:checked ~ label:before{
+            opacity: 0.4;
+        }
+
     </style>
 
 
-    </head>
+</head>
 

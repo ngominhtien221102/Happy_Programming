@@ -18,6 +18,23 @@
             max-width: 300px;
             max-height: 150px;
         }
+        .request{
+            border: 1px #dee2e6 solid;
+            background-color: #f3f3f3;
+            border-radius: 5px;
+        }
+        .signup__link{
+            color: #1e1e4b;
+            margin: 2%;
+            border:  1px #ededf1 solid ;
+            border-radius: 5px;
+            padding: 2%;
+            background: rgba(9,30,66,0.04);
+        }
+        .signup__link:hover{
+            color: #ffbc3b;
+            background: rgba(9,30,66,0.08);
+        }
     </style>
     <body>
         <!-- header -->
@@ -26,38 +43,41 @@
         <div id="content" class="row" style="padding-top: 50px; ">
             <%@include file="sidebar.jsp" %>
             <div class="col-10">
-                <section class="section" >
-                    <h2 style="margin-left:15px">All Requests</h2>
+                <section class="section">
                     <div class="container">
+                        <h2>All Requests</h2>
                         <div class="row">
                             <c:forEach items="${LstRequest}" var="request" varStatus="loop">
                                 <!-- blog post -->
                                 <article class="col-lg-4 col-sm-6 mb-5">
-                                    <div class="card rounded-0 border-bottom border-primary border-top-0 border-left-0 border-right-0 hover-shadow">
+                                    <div class="card border-bottom border-primary hover-shadow request">
                                         <div class="card-body" >
                                             <a href="<%=request.getContextPath()%>/singleRequest?requestId=${request.ID}">
-                                                <h4 class="card-title">${request.title}</h4>
+                                                <h4 class="card-title text-align-center">${request.title}</h4>
                                             </a>
                                             <!-- post meta -->
-                                            <ul class="list-inline mb-3">
-                                                <!-- post date -->
-                                                <li class="list-inline-item mr-3 ml-0">
-                                                    <fmt:parseDate value="${request.createdAt}" pattern="yyyy-MM-dd" var="Date" />
-                                                    <fmt:formatDate value="${Date}" var="Date2" pattern="dd/MM/yyyy"/>        
-                                                    Created: ${Date2}
-                                                </li> 
-                                                <br>
-                                                <!-- to -->
-                                                <li class="list-inline-item mr-3 ml-0">                                                 
+                                            <div class="ml-5">
+                                                <ul class="list-inline mb-3">
+                                                    <!-- post date -->
+                                                    <li class="list-inline-item mr-3 ml-0">
+                                                        <fmt:parseDate value="${request.createdAt}" pattern="yyyy-MM-dd" var="Date" />
+                                                        <fmt:formatDate value="${Date}" var="Date2" pattern="dd/MM/yyyy"/>        
+                                                        Created: ${Date2}
+                                                    </li> 
+                                                    <br>
+                                                    <!-- to -->
+                                                    <li class="list-inline-item mr-3 ml-0">                                                 
                                                         ${Account.roleID==2?"To:":"From:"} ${urLst.get(loop.index).firstName} ${urLst.get(loop.index).lastName} 
-                                                </li> 
-                                                <br>
-                                                <li class="list-inline-item mr-3 ml-0">    
-                                                    Response: ${resCount.get(loop.index)}
-                                                </li>
-                                            </ul>
-
-                                            <a href="<%=request.getContextPath()%>/singleRequest?requestId=${request.ID}" class="btn btn-primary btn-sm">View</a>
+                                                    </li> 
+                                                    <br>
+                                                    <li class="list-inline-item mr-3 ml-0">    
+                                                        Response: ${resCount.get(loop.index)}
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="text-align-center">
+                                                <a class="signup__link" href="<%=request.getContextPath()%>/singleRequest?requestId=${request.ID}" >View</a>
+                                            </div>
                                         </div>
                                     </div>
                                 </article>

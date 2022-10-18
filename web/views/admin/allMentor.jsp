@@ -1,4 +1,4 @@
-
+ 
 
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -64,7 +64,7 @@
             background-color:#e9ecef;
             color: #ffbc3b;
         }
-        input,select,textarea,.cv{
+        input,textarea,.cv{
             margin: 16px 0px;
             border-radius: 5px;
         }
@@ -80,11 +80,16 @@
         .col-9{
             margin: 0 auto;
         }
-        .pagination a{
+        .pagination a,.pagination select{
             border: #ced4da solid 1px;
             padding: 10px;
             border-radius: 5px;
             margin-right: 10px;
+            height: 40px;
+        }
+        .pagination select{
+            color: #ffbc3b;
+            background: #f3f3f3;
         }
         .pagination a:hover, .pagination a.active{
             background-color:#e9ecef;
@@ -100,7 +105,6 @@
     </style>
     <body>
         <!-- header -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <%@include file="header.jsp" %>
         <!-- /header -->
         <div id="content" class="row" style="padding-top: 50px;  min-height: 800px">
@@ -115,12 +119,13 @@
                             <article class="col-6">
                                 <div class="card border-bottom hover-shadow" style="border-radius: 5px;background-color: #f3f3f3">
                                     <div class="card-body row align-items-center" >
-                                        <div class="col-8">
-                                            <h4 style="color: #0ac282;">696</h4>
+                                        <div class="col-6">
+                                            <h4 style="color: #0ac282;">${total}</h4>
                                             <h6 class="text-muted">All Mentors</h6>
                                         </div>
-                                        <div class="col-4 text-right">
-                                            <i class="ti-user" style="color: #0ac282;"></i>
+                                        <div class="col-6">
+                                            <h4 style="color: #0ac282;">${mActive}</h4>
+                                            <h6 class="text-muted">Active Mentors</h6>
                                         </div>
                                     </div>
                                     <div style="background: linear-gradient(to right,#0ac282,#0df3a3); text-align: center; align-items: center; padding: 20px;
@@ -133,24 +138,29 @@
                             </article>
                             <!--number of invitations accepted-->
 
-                            
+
 
                             <article class="col-6" >
                                 <div class="card border-bottom hover-shadow" style="border-radius: 5px;background-color: #f3f3f3">
                                     <div class="card-body row align-items-center" >
                                         <div class="col-6">
-                                            <h4 style="color: #01a9ac;">300 Mentors</h4>
+                                            <h4 style="color: #01a9ac;">${lastMonth} Mentors</h4>
                                             <h6 class="text-muted">Last month</h6>
                                         </div>
                                         <div class="col-6">
-                                            <h4 style="color: #01a9ac;">369 Mentors</h4>
+                                            <h4 style="color: #01a9ac;">${thisMonth} Mentors</h4>
                                             <h6 class="text-muted">This month</h6>
                                         </div>
                                     </div>
                                     <div style="background: linear-gradient(to right,#01a9ac,#01dbdf); text-align: center; align-items: center; padding: 20px;
                                          border-bottom-left-radius: 5px;
                                          border-bottom-right-radius: 5px;">
-                                        <p style="color: #fff; margin: 0 "><i class="ti-arrow-up m-2"></i>10%</p>
+                                        <c:if test="${thisMonth >= lastMonth}" >
+                                            <p style="color: #fff; margin: 0 "><i class="ti-arrow-up m-2"></i>${percent}%</p>
+                                        </c:if>
+                                        <c:if test="${thisMonth < lastMonth}" >
+                                            <p style="color: #fff; margin: 0 "><i class="ti-arrow-down m-2"></i>${percent}%</p>
+                                        </c:if>  
                                         <!--                                        <p style="color: #fff; margin: 0 "><i class="ti-arrow-down m-2"></i>10%</p>-->
                                     </div>
                                 </div>
@@ -161,8 +171,8 @@
 
                         <div class="card-block" style="">
                             <div class="search" style="margin-left:15px" > 
-                                <form action="<%=request.getContextPath()%>/sendMentor" class="row">
-                                    <input  type="text" name="search" value="" placeholder="Search Mentors">
+                                <form action="<%=request.getContextPath()%>/allMentor" class="row">
+                                    <input  type="text" name="search" value="${search}" placeholder="Search Mentors">
                                     <button type="submit"><i class="ti ti-search" aria-hidden="true"></i></button>
                                 </form>
                             </div>
@@ -174,98 +184,55 @@
                                         <thead>
                                             <tr>
                                                 <th>STT</th> 
-                                                <th>Name<a style="float: right;color: #000" href=""><i class="ti-arrow-down"></i><i class="ti-arrow-up"></i></a></th>
-                                                <th>Gender</th>
-                                                <th>Address</th>
-                                                <th>DOB</th>
-                                                <th>Created At</th>
-                                                <th>Status</th>
-                                                <th>Rate</th>
-                                                <th colspan="2"></th>
-                                            </tr>
-                                        </thead>
+                                                <th>Name<a style="float: right;color: #000" href="<%=request.getContextPath()%>/allMentor?sortName=${sortName}&nrpp=${nrpp}<c:if test="${search != null}">&search=${search}</c:if>"><i class="ti-arrow-down"></i><i class="ti-arrow-up"></i></a></th>
+                                                    <th>Gender</th>
+                                                    <th style="width: 25%">Address</th>
+                                                    <th>DOB</th>
+                                                    <th>Active</th>
+                                                    <th style="width: 10%">Rate<a style="float: right;color: #000" href="<%=request.getContextPath()%>/allMentor?sortRate=${sortRate}&nrpp=${nrpp}<c:if test="${search != null}">&search=${search}</c:if>"><i class="ti-arrow-down"></i><i class="ti-arrow-up"></i></a></th>
+                                                    <th colspan="2" style="text-align: center">Action</th>
+                                                </tr>
+                                            </thead>
 
-                                        <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Tran Ngoc Cuong</td>
-                                                <td>Male</td>
-                                                <td>Tân Mai, Hoàng Mai, Hà Nội</td>
-                                                <td>25/10/2002</td>
-                                                <td>9/10/2022</td>
-                                                <td>Active</td>
-                                                <td>4.5 <span class="fa fa-star" style="color: orange"></span></td>
-                                                <td><a>Detail</a></td>
-                                                <td><a>Open</a></td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>Tran Ngoc Cuong</td>
-                                                <td>Male</td>
-                                                <td>Tân Mai, Hoàng Mai, Hà Nội</td>
-                                                <td>25/10/2002</td>
-                                                <td>9/10/2022</td>
-                                                <td>Active</td>
-                                                <td>4.5 <span class="fa fa-star" style="color: orange"></span></td>
-                                                <td><a>Detail</a></td>
-                                                <td><a>Open</a></td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>Tran Ngoc Cuong</td>
-                                                <td>Male</td>
-                                                <td>Tân Mai, Hoàng Mai, Hà Nội</td>
-                                                <td>25/10/2002</td>
-                                                <td>9/10/2022</td>
-                                                <td>Active</td>
-                                                <td>4.5 <span class="fa fa-star" style="color: orange"></span></td>
-                                                <td><a>Detail</a></td>
-                                                <td><a>Open</a></td>
-                                            </tr>
-                                            <tr>
-                                                <td>4</td>
-                                                <td>Tran Ngoc Cuong</td>
-                                                <td>Male</td>
-                                                <td>Tân Mai, Hoàng Mai, Hà Nội</td>
-                                                <td>25/10/2002</td>
-                                                <td>9/10/2022</td>
-                                                <td>Active</td>
-                                                <td>4.5 <span class="fa fa-star" style="color: orange"></span></td>
-                                                <td><a>Detail</a></td>
-                                                <td><a>Open</a></td>
-                                            </tr>
-                                            <tr>
-                                                <td>5</td>
-                                                <td>Tran Ngoc Cuong</td>
-                                                <td>Male</td>
-                                                <td>Tân Mai, Hoàng Mai, Hà Nội</td>
-                                                <td>25/10/2002</td>
-                                                <td>9/10/2022</td>
-                                                <td>Active</td>
-                                                <td>4.5 <span class="fa fa-star" style="color: orange"></span></td>
-                                                <td><a>Detail</a></td>
-                                                <td><a>Open</a></td>
-                                            </tr>
-                                            
+                                            <tbody>
+
+                                            <c:forEach items="${listMentor}" var="m" varStatus="loop" begin="${pageIf.start}" end="${pageIf.end}">
+                                                <tr>
+                                                    <td>${loop.index + 1}</td>
+                                                    <td>${m.getFirstName()} ${m.getLastName()}</td>
+                                                    <td>${m.getGender()}</td>
+                                                    <td>${m.getAddress(m.getID(), listAddress)}</td>
+                                                    <td>${m.getDob()}</td>
+                                                    <td>${iUser.getUserById(m.getID(), listUser).isStatus()}</td>
+                                                    <td>${iRate.getRateByMentorID(m.getID())}</td>
+                                                    <td><a href="<%=request.getContextPath()%>/viewCV?mentorID=${m.getID()}">View CV</a></td>   
+                                                    <td><a style="${iUser.getUserById(m.getID(), listUser).isStatus()?'color:red':'color:green'}" href="<%=request.getContextPath()%>/allMentor?mentorID=${m.getID()}&nrpp=${nrpp}<c:if test="${statusName != null}">&sortName=${statusName}</c:if><c:if test="${statusRate != null}">&sortRate=${statusRate}</c:if><c:if test="${search != null}">&search=${search}</c:if>&page=${pageIf.cp}">${iUser.getUserById(m.getID(), listUser).isStatus()?'Ban':'Open'}</a></td>
+                                                    </tr> 
+                                            </c:forEach>
+
+
                                         </tbody>
 
                                     </table>
                                     <!--phan trang-->
                                     <div class="pagination">
-                                        <%--<c:if test="${pageIf.cp!=1 && pageIf.end!=null}">
-                                            <a href="<%=request.getContextPath()%>/sendMentor?page=1&search=${search}"><<</a>  
+                                        <c:if test="${pageIf.cp!=1 && pageIf.end!=null}">
+                                            <a href="<%=request.getContextPath()%>/allMentor?page=1&nrpp=${nrpp}<c:if test="${statusName != null}">&sortName=${statusName}</c:if><c:if test="${statusRate != null}">&sortRate=${statusRate}</c:if><c:if test="${search != null}">&search=${search}</c:if>"><<</a>  
                                         </c:if>      
                                         <c:forEach begin="${1}" end="${pageIf.np}" var="i">
-                                            <a class="${i==pageIf.cp?"active":""}" href="<%=request.getContextPath()%>/sendMentor?page=${i}&search=${search}">${i}</a>
+                                            <a class="${i==pageIf.cp?"active":""}" href="<%=request.getContextPath()%>/allMentor?page=${i}&nrpp=${nrpp}<c:if test="${statusName != null}">&sortName=${statusName}</c:if><c:if test="${statusRate != null}">&sortRate=${statusRate}</c:if><c:if test="${search != null}">&search=${search}</c:if>">${i}</a>
                                         </c:forEach>
                                         <c:if test="${pageIf.cp!=pageIf.np && pageIf.end!=0}">
-                                            <a href="<%=request.getContextPath()%>/sendMentor?page=${pageIf.np}&search=${search}">>></a>  
-                                        </c:if>  --%>
-                                        <a class="active" href="">1</a>
-                                        <a class="" href="">2</a>
-                                        <a class="" href="">3</a>
-                                        <a class="" href="">4</a>
-                                        <a class="" href="">>></a>
+                                            <a href="<%=request.getContextPath()%>/allMentor?page=${pageIf.np}&nrpp=${nrpp}<c:if test="${statusName != null}">&sortName=${statusName}</c:if><c:if test="${statusRate != null}">&sortRate=${statusRate}</c:if><c:if test="${search != null}">&search=${search}</c:if>">>></a>  
+                                        </c:if>  
+                                        <form action="<%=request.getContextPath()%>/allMentor" method="GET">
+                                            <select name="nrpp" id="selectElementId" onchange="this.form.submit()">
+
+                                                <c:forEach items="${pageIf.arrNrpp}" var="i">
+                                                    <option <c:if test="${nrpp == i}">selected=""</c:if> value="${i}">${i}</option>
+                                                </c:forEach>
+                                            </select>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -274,6 +241,17 @@
         </div>
         <!-- footer -->
         <%@include file="footer.jsp" %>
+        <!--        <script >
+                    $('#selectElementId').change(
+            function(){
+                 $(this).closest('form').trigger('submit');
+                 /* or:
+                 $('#formElementId').trigger('submit');
+                    or:
+                 $('#formElementId').submit();
+                 */
+            });
+                </script>-->
         <!-- /footer -->
         <!-- jQuery -->
 
