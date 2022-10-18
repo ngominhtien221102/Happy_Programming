@@ -126,6 +126,9 @@
                                 <!--                                request dau tien-->
                                 <div class="resHead">
                                     <span class="font-weight-bold mr-2">
+                                        <img src="<%=request.getContextPath()%>/img/avatar/${mentee.avatar}" 
+                                             onerror="this.src='<%=request.getContextPath()%>/img/avatar/p9.png'" 
+                                             class="rounded-circle mr-2 avatar"/>
                                         ${mentee.firstName} ${mentee.lastName}
                                     </span>
                                     <span>

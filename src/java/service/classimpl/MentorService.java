@@ -7,7 +7,6 @@ package service.classimpl;
 import dal.MentorCVDAO;
 import java.util.ArrayList;
 import java.util.List;
-import model.Invitation;
 import model.MentorCV;
 import model.Skill;
 import model.UserProfile;

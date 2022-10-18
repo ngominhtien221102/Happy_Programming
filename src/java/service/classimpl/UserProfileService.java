@@ -8,9 +8,8 @@ import dal.UserProfileDAO;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import model.User;
+
 import model.UserProfile;
-import service.IAddressService;
 import service.IRateService;
 import service.IUserProfileService;
 

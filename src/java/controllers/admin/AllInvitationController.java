@@ -12,17 +12,13 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.util.ArrayList;
+
 import java.util.Collections;
 import java.util.List;
 import model.Invitation;
-import model.MentorCV;
 import model.PageInfor;
-import model.UserProfile;
 import service.IInvitationService;
-import service.IMentorService;
 import service.classimpl.InvitationService;
-import service.classimpl.MentorService;
 
 /**
  *
