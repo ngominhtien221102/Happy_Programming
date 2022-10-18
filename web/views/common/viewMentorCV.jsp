@@ -61,8 +61,8 @@
                         <div class="col-12">
                             <h4 class="mb-4">SKILL</h4>
                             <c:forEach items="${mentorCV.skillList}" var="s" varStatus="loop">
-                            <form action="<%=request.getContextPath()%>/rate" method="">
-                                
+                                <form action="<%=request.getContextPath()%>/rate" method="">
+
                                     <p>
                                         ${s.name}
                                     </p>
@@ -72,9 +72,9 @@
                                                 <button class=" btn-primary" type="submit"  style="border-color:#ffbc3b">Rate</button>
                                                 <input style="" name="skillID" value="${s.ID}">
                                                 <input style="" name="mentorID" value="${mentorCV.ID}">
-                                                <%--<c:if test="${}">--%>
+
                                                 <input type="radio" name="rate" value="5" id="5${s.ID}"><label for="5${s.ID}">☆</label>
-                                                <input class="checked" type="radio" name="rate" value="4"  id="4${s.ID}"><label for="4${s.ID}">☆</label>
+                                                <input type="radio" name="rate" value="4" id="4${s.ID}"><label for="4${s.ID}">☆</label>
                                                 <input type="radio" name="rate" value="3" id="3${s.ID}"><label for="3${s.ID}">☆</label>
                                                 <input type="radio" name="rate" value="2" id="2${s.ID}"><label for="2${s.ID}">☆</label>
                                                 <input type="radio" name="rate" value="1" id="1${s.ID}"><label for="1${s.ID}">☆</label>
@@ -87,7 +87,7 @@
 
                         </div>
                     </div>
-                            <c:set value="${requestScope.rateHm}" var="rate"/>
+                    <c:set value="${requestScope.rateHm}" var="rate"/>
                     <div id="rateAndCmt">   
                         <!--Rate-->
                         <div class="well well-sm">
@@ -167,23 +167,24 @@
                         </div>
 
                         <!--comment-->
+                        <h4 class="mb-4" style="margin-top: 30px">COMMENT</h4>
                         <form action="<%=request.getContextPath()%>/comment" id="usrform" method="">
 
                             <div class="d-flex flex-row add-comment-section mt-4 mb-4">
 
                                 <c:forEach items="${listUserProfile}" var="user">
                                     <c:if test="${Account.ID == user.ID}">
-                                        <img class=" rounded-circle mr-2" onerror="this.src='<%=request.getContextPath()%>/img/avatar/p9.png'" src="<%=request.getContextPath()%>/img/avatar/p1.png"  style="height: 55px;
-                                             width: 73px; ">
+                                        <img class=" rounded-circle mr-2" onerror="this.src='<%=request.getContextPath()%>/img/avatar/default.png'" src="<%=request.getContextPath()%>/img/avatar/p.png"  style="height: 55px;
+                                             width: 73px; margin-left: 20px;">
+                                        <input name="content" type="text" class="form-control mr-3"  placeholder="Add comment">
+                                        <input style="display: none" name="mentorID" value="${mentorCV.ID}">
+                                        <button class="btn btn-primary" type="submit">Comment</button>
                                     </c:if>
                                 </c:forEach>
-                                <input name="content" type="text" class="form-control mr-3"  placeholder="Add comment">
-                                <input style="display: none" name="mentorID" value="${mentorCV.ID}">
-                                <button class="btn btn-primary" type="submit">Comment</button>
+
                             </div>
                         </form>
                         <!--show comment-->
-
 
                         <c:forEach items="${sessionScope.listComment}" var="cmt">
                             <c:if test="${mentorCV.ID == cmt.mentorID}">
@@ -191,11 +192,11 @@
                                     <div class="row">
                                         <div class="col-md-2 row">
                                             <div class="col-md-8">
-                                                <img src="<%=request.getContextPath()%>/img/avatar/p9.png" onerror="this.src='<%=request.getContextPath()%>/img/avatar/p9.png'" style="height: 55px;
-                                                             width: 55px;" class="rounded-circle mr-2 "/>
+                                                <img src="<%=request.getContextPath()%>/img/avatar/p9.png" onerror="this.src='<%=request.getContextPath()%>/img/avatar/default.png'" style="height: 55px;
+                                                     width: 55px;" class="rounded-circle mr-2 "/>
                                                 <c:forEach items="${listUserProfile}" var="user">
                                                     <c:if test="${user.ID == cmt.menteeID}">
-                                                        
+
                                                     </c:if>
                                                 </c:forEach>
                                             </div>
