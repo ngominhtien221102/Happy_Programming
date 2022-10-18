@@ -129,13 +129,12 @@ public class SendRequestController extends HttpServlet {
         } else {
             cp = Integer.parseInt(page);
         }
-        
-        PageInfor pageIf = new PageInfor(1, upInvLst.size(), cp);
+        PageInfor pageIf = new PageInfor(5, upInvLst.size(), cp);
         if(nrpp != 0){
             pageIf = new PageInfor(nrpp, upInvLst.size(), cp);
         }
-        request.setAttribute("nrpp", nrpp);
         request.setAttribute("pageIf", pageIf);
+        request.setAttribute("nrpp", nrpp);
         int mentorId;
         try {
             mentorId = Integer.parseInt(request.getParameter("mentorId"));
