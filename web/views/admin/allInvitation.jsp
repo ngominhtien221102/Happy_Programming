@@ -100,7 +100,7 @@
         <%@include file="header.jsp" %>
         <!-- /header -->
         <div id="content" class="row" style="padding-top: 50px;  min-height: 800px">
-            <%@include file="sidebar.jsp" %>
+            <%@include file="adminSidebar.jsp" %>
             <div class="col-10">
                 <section class="section" >
                     <h2 style="margin-left:15px; text-align: center">Invitation</h2>
@@ -201,7 +201,7 @@
                             <!--accepted-->
                             <div style="margin: 20px 0">
                                 <h5 class="">${acpt}</h5>
-                                <p class="text-muted">Accepted<span style="float: right">${acpt*100/totalInv}%</span></p>
+                                <p class="text-muted">Accepted<span style="float: right">${Math.round(acpt*100/totalInv) }%</span></p>
 
                                 <div class="progress">
                                     <div class="progress-bar" style="width: ${acpt*100/totalInv}%;background: linear-gradient(to right,#0ac282,#0df3a3); "></div>
@@ -210,7 +210,7 @@
                             <!--rejected-->
                             <div style="margin: 20px 0">
                                 <h5 class="">${reject}</h5>
-                                <p class="text-muted">Rejected<span style="float: right">${reject*100/totalInv}%</span></p>
+                                <p class="text-muted">Rejected<span style="float: right">${Math.round(reject*100/totalInv)}%</span></p>
 
                                 <div class="progress">
                                     <div class="progress-bar" style="width: ${reject*100/totalInv}%;background: linear-gradient(to right,#fe5d70,#fe909d); "></div>
@@ -219,7 +219,7 @@
                             <!--progress-->
                             <div style="margin: 20px 0">
                                 <h5 class="">${process}</h5>
-                                <p class="text-muted">Processing<span style="float: right">${process*100/totalInv}%</span></p>
+                                <p class="text-muted">Processing<span style="float: right">${Math.round(process*100/totalInv)}%</span></p>
                                 <div class="progress">
                                     <div class="progress-bar" style="width: ${process*100/totalInv}%; background: linear-gradient(to right,#01a9ac,#01dbdf); "></div>
                                 </div>
@@ -228,7 +228,7 @@
                             <!--Cancel-->
                             <div style="margin: 20px 0">
                                 <h5 class="">${cancel}</h5>
-                                <p class="text-muted">Cancel<span style="float: right">${cancel*100/totalInv}%</span></p>
+                                <p class="text-muted">Cancel<span style="float: right">${Math.round(cancel*100/totalInv)}%</span></p>
                                 <div class="progress">
                                     <div class="progress-bar" style="width: ${cancel*100/totalInv}%; background: linear-gradient(to right,#fe9365,#feb798); "></div>
                                 </div>

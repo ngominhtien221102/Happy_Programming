@@ -20,7 +20,7 @@
 
         <!-- Nav Item - Add product -->
         <li class="nav-item">
-            <a class="nav-link collapsed" href="<%=request.getContextPath()%>/views/common/viewMentorCV.jsp" >
+            <a class="nav-link collapsed" href="<%=request.getContextPath()%>/viewCV?mentorID=${Account.ID}" >
                 <span>Profile</span>
             </a>
         </li>
@@ -41,7 +41,7 @@
 
         <!-- Nav Item - Add product -->
         <li class="nav-item">
-            <a class="nav-link collapsed" href="<%=request.getContextPath()%>/addproduct" >
+            <a class="nav-link collapsed" href="<%=request.getContextPath()%>/allNofication" >
                 <span>All Notification</span>
             </a>
         </li>
@@ -56,7 +56,7 @@
 
         <!-- Nav Item - All transaction -->
         <li class="nav-item">
-            <a class="nav-link collapsed" href="<%=request.getContextPath()%>/order" >
+            <a class="nav-link collapsed" href="<%=request.getContextPath()%>/views/mentors/viewRequest.jsp" >
                 <span>View Request</span>
             </a>
         </li>    
@@ -71,7 +71,7 @@
 
         <!-- Nav Item - All Admin -->
         <li class="nav-item">
-            <a class="nav-link collapsed" href="<%=request.getContextPath()%>/views/user/viewInvitationMentor.jsp" >
+            <a class="nav-link collapsed" href="<%=request.getContextPath()%>/views/mentors/viewInvitationMentor.jsp" >
                 <span>View Invitation</span>
             </a>
         </li>
