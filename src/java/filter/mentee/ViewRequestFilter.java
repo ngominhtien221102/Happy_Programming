@@ -110,7 +110,7 @@ public class ViewRequestFilter implements Filter {
         HttpSession ses = req.getSession();
         String url = req.getServletPath();
         int roleId = (int)ses.getAttribute("RoleID");
-        if (roleId ==1 && roleId == 4){
+        if (roleId ==1 || roleId == 4){
             res.sendRedirect(req.getContextPath()+"/views/user/index.jsp");
         } else {
             if (url.endsWith(".jsp")){
