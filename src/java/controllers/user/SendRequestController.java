@@ -77,7 +77,6 @@ public class SendRequestController extends HttpServlet {
         String page = "";
         int nrpp = 0;
         try {
-            nrpp = Integer.parseInt(request.getParameter("nrpp"));
             search = (String) request.getParameter("search");
             page = request.getParameter("page");
             nrpp = Integer.parseInt(request.getParameter("nrpp"));
@@ -130,7 +129,6 @@ public class SendRequestController extends HttpServlet {
         } else {
             cp = Integer.parseInt(page);
         }
-        
         PageInfor pageIf = new PageInfor(5, upInvLst.size(), cp);
         if(nrpp != 0){
             pageIf = new PageInfor(nrpp, upInvLst.size(), cp);
