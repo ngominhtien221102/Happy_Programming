@@ -67,12 +67,24 @@
         }
         .request{
             display: flex;
-            justify-content: space-around;
-            align-items:  center;
+
             background: #f3f3f3;
             border-radius: 15px 15px 0 0;
             border-bottom: 1px #dee2e6 solid;
-            padding: 2%;
+
+        }
+        .mentorCV {
+            border-radius: 10px;
+            padding: 20px;
+            margin: 8px;
+            color: #5c5c77;
+        }
+        .mentorCV:hover{
+            background-color: #E4E6EB;
+        }
+        .avatar{
+            width: 40px;
+            height: 40px;
         }
     </style>
     <body>
@@ -84,26 +96,34 @@
             <div class="col-10">
                 <section class="section">
                     <div class="container">
-                        <h2 style="margin: 2% 0;">Request Detail</h2>
-                        
+                        <h2>${request.title}</h2>
+
                         <div class="request" style="width: 100%;">
-                            <h3>Title: ${request.title}</h3>
-                            <span class="font-weight-bold mr-2">${Account.roleID==2?"To:":"From:"}
-                                <c:if test="${Account.roleID==2}">
-                                    ${mentor.firstName} ${mentor.lastName}
-                                </c:if>
-                                <c:if test="${Account.roleID!=2}">
-                                    ${mentee.firstName} ${mentee.lastName}
-                                </c:if>
-                            </span>
-                            <fmt:parseDate value="${request.createdAt}" pattern="yyyy-MM-dd" var="Date" />
-                            <fmt:formatDate value="${Date}" var="Date2" pattern="dd/MM/yyyy"/>        
-                            <br><br><span class="font-weight-bold mr-2">Created: ${Date2}</span> <br><br>
-                            
+                            <div class="">
+                                <span class="font-weight-bold">
+                                    <c:if test="${Account.roleID==2}">
+                                        <a class="" href="viewCV?mentorID=${mentor.ID}"><div class="mentorCV">
+                                                <img src="<%=request.getContextPath()%>/img/avatar/${mentor.avatar}" 
+                                                     onerror="this.src='<%=request.getContextPath()%>/img/avatar/p9.png'" 
+                                                     class="rounded-circle mr-2 avatar"/>
+
+                                                ${mentor.firstName} ${mentor.lastName}
+                                            </div></a>
+                                        </c:if>
+                                        <c:if test="${Account.roleID!=2}">
+                                        <a class="" href=""><div class="mentorCV">
+                                                <img src="<%=request.getContextPath()%>/img/avatar/${mentee.avatar}" 
+                                                     onerror="this.src='<%=request.getContextPath()%>/img/avatar/p9.png'" 
+                                                     class="rounded-circle mr-2 avatar"/>
+                                                ${mentee.firstName} ${mentee.lastName}
+                                            </div></a>
+                                        </c:if>
+                                </span>
+                            </div>
                         </div>
                         <div class="col-12 responseBox">
                             <div class="response ${Account.ID==request.menteeID?"myResponse":"otherResponse"}">
-                               <!--                                request dau tien-->
+                                <!--                                request dau tien-->
                                 <div class="resHead">
                                     <span class="font-weight-bold mr-2">
                                         ${mentee.firstName} ${mentee.lastName}
@@ -138,12 +158,12 @@
                                     <div class="responseContent ${Account.ID==response.userID?"myResponseCnt":"otherResponseCnt"}">
                                         <div class="${Account.ID==response.userID?"text-white":"text-black"}">${response.content}</div>
                                     </div>
-                                    
+
                                 </div>
                             </c:forEach>
                         </div>
                         <div class="card-body">
-                             <h4 style="color: green;">${resAlert2}</h4>
+                            <h4 style="color: green;">${resAlert2}</h4>
                             <form action="singleRequest" method="POST" class="row">
                                 <input type="hidden" name="userID" value="${Account.ID}">
                                 <input type="hidden" name="requestId" value="${request.ID}">
@@ -151,7 +171,7 @@
                                     <textarea name="response" id="editor" class="form-control mb-6" placeholder="Type your response here..."></textarea>
                                 </div>
                                 <div class="col-12">
-                                    <button type="submit" value="send" class="btn btn-primary" style="margin-top: 1%; border-radius: 2%;">Post Response</button>
+                                    <button type="submit" value="send" class="btn btn-primary" style="margin-top: 1%; float: right">Post Response</button>
                                     <p style="color: #ff3333; margin-top: 1%;">${resAlert}</p>
                                 </div>
 
