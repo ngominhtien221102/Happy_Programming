@@ -80,6 +80,7 @@ public class SendRequestController extends HttpServlet {
             nrpp = Integer.parseInt(request.getParameter("nrpp"));
             search = (String) request.getParameter("search");
             page = request.getParameter("page");
+            nrpp = Integer.parseInt(request.getParameter("nrpp"));
         } catch (Exception e) {
 
         }
