@@ -76,7 +76,7 @@ public class MentorService implements IMentorService {
         for (MentorCV m : listMen) {
             for (Skill s : m.getSkillList()) {
                 if(s.getName().toLowerCase().contains(keyword.toLowerCase().trim())){
-                    if(list.contains(m)==false) list.add(m);
+                    if(!list.contains(m)) list.add(m);
                     break;
                 }
             }
