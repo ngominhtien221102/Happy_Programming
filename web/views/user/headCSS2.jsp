@@ -55,7 +55,7 @@
         }
         h2{
             text-align: center;
-            margin-bottom:30px
+            margin-bottom: 45px;
         }
         .text-align-center{
             text-align: center;
@@ -64,5 +64,9 @@
             
             
         }
+        img{
+            object-fit: cover;
+        }
+        
     </style>
 </head>

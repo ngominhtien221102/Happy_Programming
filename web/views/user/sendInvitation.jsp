@@ -100,7 +100,7 @@
                 <section class="section" >
 
                     <div class="container">
-                        <div style="margin-bottom: 20px;margin-top: -10px"><button style="margin-right: 10px" class="cv"><a href="<%=request.getContextPath()%>/views/user/viewInvitationMentee.jsp"><i class="ti-arrow-left"></i></a></button> <a class="text-color" href="<%=request.getContextPath()%>/views/user/viewInvitationMentee.jsp">Back to VIEW INVITATIONS</a></div>
+                        <div style="margin-bottom: 20px;margin-top: -10px"><button style="margin-right: 10px" class="cv"><a href="<%=request.getContextPath()%>/viewAllInvite"><i class="ti-arrow-left"></i></a></button> <a class="text-color" href="<%=request.getContextPath()%>/viewAllInvite">Back to VIEW INVITATIONS</a></div>
                         <h2>Send Invitation</h2>
                         <c:if test="${requestScope.success!=null}">
                             <br><h3 style="color: green">${success}</h3>

@@ -5,12 +5,13 @@
 package service.classimpl;
 
 import dal.InvitationDAO;
+import model.Invitation;
+import service.IInvitationService;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import model.Invitation;
-import service.IInvitationService;
 
 /**
  *
@@ -66,16 +67,21 @@ public class InvitationService implements IInvitationService {
             invitation.setContent(u.getContent());
             return "OK";
         } else {
-            return "Invitation has been expired to update";
+            return "You can only update while the invitation is processing";
         }
     }
     
     @Override
     public String cancel(Invitation u, List<Invitation> list) {
-        Invitation invitation = getInvitationById(u.getID(), list);
-        invitation.setStatusID(3);    
-        InvitationDAO.update(invitation);
+        if (u.getStatusID() == 2) {
+            Invitation invitation = getInvitationById(u.getID(), list);
+            invitation.setStatusID(3);
+            InvitationDAO.update(invitation);
             return "OK";
+        } else {
+            return "You can only cancel while the invitation is processing";
+        }
+
     }
     
     @Override
