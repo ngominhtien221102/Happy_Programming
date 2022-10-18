@@ -10,6 +10,42 @@
 <html>
     <%@include file="headCSS2.jsp" %>
     <style>
+        .search input[type="text"]{
+            border: 1px solid #08080B;
+            border-right: none;
+            border-left: none;
+            border-top: none;
+            font-family: 'Open Sans', sans-serif;
+            outline: none;
+            padding: 0.8em 0;
+            color: #A5A5A5;
+            width: 20%;
+            -moz-transition: width 0.5s ease-out;
+            -webkit-transition: width 0.5s ease-out;
+            transition: width 0.5s ease-out;
+            flex-wrap: unset;
+
+        }
+        .search input[type="text"]:focus {
+            width: 25%;
+            -moz-transition: width 0.5s ease-out;
+            -webkit-transition: width 0.5s ease-out;
+            transition: width 0.5s ease-out;
+        }
+        .search button{
+            margin-top:25px;
+            margin-left:15px;
+            border: 0px;
+            background-color: #fff;
+            width: 35px;
+            height: 35px;
+            border-radius: 5px;
+        }
+        .search button:hover{
+            background-color: #ffbc3b;
+            color: #fff;
+
+        }
         .cv:hover{
             background-color:#e9ecef;
             color: #ffbc3b;
@@ -30,6 +66,20 @@
         .col-9{
             margin: 0 auto;
         }
+        .pagination a{
+            border: #ced4da solid 1px;
+            padding: 10px;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+        .pagination a:hover, .pagination a.active{
+            background-color:#e9ecef;
+            color: #ffbc3b;
+        }
+        .pagination{
+            margin: 30px 0;
+            float: right;
+        }
     </style>
     <body>
         <!-- header -->
@@ -39,9 +89,16 @@
             <%@include file="sidebar.jsp" %>
             <div class="col-10">
                 <section class="section" ">
-                    <h2 style="margin-left:15px">Send Request</h2>
-                    <h3 style="color: green; margin-left:15px;">${message}</h3>
                     <div class="container">
+                        <div style="margin-bottom: 20px;margin-top: -10px"><button style="margin-right: 10px" class="cv"><a href="<%=request.getContextPath()%>/viewAllRequest"><i class="ti-arrow-left"></i></a></button> <a class="text-color" href="<%=request.getContextPath()%>/viewAllRequest">Back to VIEW REQUEST</a></div>
+                        <h2>Send Request</h2>
+                        <h3 style="color: green; margin-left:15px;">${message}</h3>
+                        <div class="search" style="margin-left:15px" > 
+                            <form action="sendRequest" Method="GET" class="row">
+                                <input  type="text" name="search" value="${requestScope.search}" placeholder="Search Your Mentor">
+                                <button type="submit"><i class="ti ti-search" aria-hidden="true"></i></button>
+                            </form>
+                        </div>
                         <br><h3>Invited Mentors</h3>
                         <div class="row">  
                             <div class="col-md-12 table">
@@ -54,7 +111,7 @@
                                             <th>Option</th>         
                                         </tr>
                                     </thead>
-                                    <c:forEach items="${upInvLst}" var="lst" varStatus="loop">
+                                    <c:forEach items="${upInvLst}" var="lst" begin="${pageIf.start}" end="${pageIf.end}" varStatus="loop">
                                         <tbody>
                                             <tr>
                                                 <td>${loop.index+1}</td>
@@ -65,6 +122,17 @@
                                         </tbody>
                                     </c:forEach>
                                 </table>
+                                <div class="pagination">
+                                    <c:if test="${pageIf.cp!=1 && pageIf.end!=null}">
+                                        <a href="<%=request.getContextPath()%>/sendRequest?page=1"><<</a>  
+                                    </c:if>      
+                                    <c:forEach begin="${1}" end="${pageIf.np}" var="i">
+                                        <a class="${i==pageIf.cp?"active":""}" href="<%=request.getContextPath()%>/sendRequest?page=${i}">${i}</a>
+                                    </c:forEach>
+                                    <c:if test="${pageIf.cp!=pageIf.np && pageIf.end!=0}">
+                                        <a href="<%=request.getContextPath()%>/sendRequest?page=${pageIf.np}">>></a>  
+                                    </c:if>  
+                                </div>
                             </div>
                         </div>
                         <!--form-->
@@ -108,3 +176,4 @@
         <!-- /jQuery -->
     </body>
 </html>
+
