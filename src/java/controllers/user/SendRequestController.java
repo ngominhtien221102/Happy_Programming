@@ -72,6 +72,15 @@ public class SendRequestController extends HttpServlet {
         HttpSession session = request.getSession();
         List<UserProfile> upLst = (List<UserProfile>) session.getAttribute("listUserProfile");
         List<UserProfile> upInvLst = (List<UserProfile>) session.getAttribute("upInvLst");
+        String search = "";
+        String page = "";
+        try {
+            search = (String) request.getParameter("search");
+            page = request.getParameter("page");
+        } catch (Exception e) {
+
+        }
+        
         if (upInvLst == null) {
             upInvLst = new ArrayList<>();
             ArrayList<Integer> skillId = new ArrayList<>();
@@ -90,6 +99,35 @@ public class SendRequestController extends HttpServlet {
             session.setAttribute("upInvLst", upInvLst);
             session.setAttribute("skillId", skillId);
         }
+        if (search != null) {
+            upInvLst = new ArrayList<>();
+            ArrayList<Integer> skillId = new ArrayList<>();
+            List<Invitation> invlst = (List<Invitation>) session.getAttribute("listInv");
+            User account = (User) session.getAttribute("Account");
+            for (UserProfile up : upLst) {
+                String name = up.getFirstName() + " " + up.getLastName();
+                for (Invitation inv : invlst) {
+                    if (up.getID() == inv.getMentorID() && account.getID() == inv.getMenteeID()) {
+                        if (inv.getStatusID() == 1) {
+                            if (name.contains(search)) {
+                                upInvLst.add(up);
+                                skillId.add(inv.getSkillID());
+                            }
+                        }
+                    }
+                }
+            }
+            session.setAttribute("upInvLst", upInvLst);
+            session.setAttribute("skillId", skillId);
+        }
+        int cp;
+        if (page == null || page.equals("")) {
+            cp = 1;
+        } else {
+            cp = Integer.parseInt(page);
+        }
+        PageInfor pageIf = new PageInfor(5, upInvLst.size(), cp);
+        request.setAttribute("pageIf", pageIf);
         int mentorId;
         try {
             mentorId = Integer.parseInt(request.getParameter("mentorId"));
@@ -149,6 +187,5 @@ public class SendRequestController extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
 }
 
