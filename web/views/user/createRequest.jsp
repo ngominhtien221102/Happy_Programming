@@ -50,8 +50,11 @@
             background-color:#e9ecef;
             color: #ffbc3b;
         }
-        input,select,textarea,.cv{
+        input,textarea,.cv{
             margin: 16px 0px;
+            border-radius: 5px;
+        }
+        select{
             border-radius: 5px;
         }
         .cv{
@@ -66,11 +69,15 @@
         .col-9{
             margin: 0 auto;
         }
-        .pagination a{
+        .pagination a,.pagination select{
             border: #ced4da solid 1px;
             padding: 10px;
             border-radius: 5px;
             margin-right: 10px;
+        }
+        .pagination select{
+            color: #ffbc3b;
+            background: #f3f3f3;
         }
         .pagination a:hover, .pagination a.active{
             background-color:#e9ecef;
@@ -117,7 +124,7 @@
                                                 <td>${loop.index+1}</td>
                                                 <td>${lst.firstName} ${lst.lastName}</td>
                                                 <td>${HmSkill[skillId.get(loop.index)]}</td>
-                                                <td><a class="text-color" href="<%=request.getContextPath()%>/sendRequest?mentorId=${lst.ID}">send</a></td>
+                                                <td><a class="text-color" href="<%=request.getContextPath()%>/sendRequest?mentorId=${lst.ID}&page=${pageIf.cp}">send</a></td>
                                             </tr>
                                         </tbody>
                                     </c:forEach>
@@ -131,7 +138,14 @@
                                     </c:forEach>
                                     <c:if test="${pageIf.cp!=pageIf.np && pageIf.end!=0}">
                                         <a href="<%=request.getContextPath()%>/sendRequest?page=${pageIf.np}">>></a>  
-                                    </c:if>  
+                                    </c:if>
+                                    <form action="<%=request.getContextPath()%>/sendRequest" method="GET">
+                                        <select name="nrpp" onchange="this.form.submit()">
+                                            <c:forEach items="${pageIf.arrNrpp}" var="i">
+                                                <option <c:if test="${nrpp==i}">selected=""</c:if> value="${i}">${i}</option>
+                                            </c:forEach>
+                                        </select>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -159,19 +173,19 @@
         <%@include file="scriptJS.jsp" %> 
         <script src="https://cdn.ckeditor.com/ckeditor5/34.1.0/classic/ckeditor.js"></script>
         <script>
-            var value;
-            ClassicEditor
-                    .create(document.querySelector('#editor'))
-                    .then(editor => {
-                        value = editor;
-                    })
-                    .catch(error => {
-                        console.error(error);
-                    });
+                                            var value;
+                                            ClassicEditor
+                                                    .create(document.querySelector('#editor'))
+                                                    .then(editor => {
+                                                        value = editor;
+                                                    })
+                                                    .catch(error => {
+                                                        console.error(error);
+                                                    });
 
-            const handleSubmit = () => {
-                document.getElementById('a').innerHTML = value.getData()
-            }
+                                            const handleSubmit = () => {
+                                                document.getElementById('a').innerHTML = value.getData()
+                                            }
         </script>
         <!-- /jQuery -->
     </body>
