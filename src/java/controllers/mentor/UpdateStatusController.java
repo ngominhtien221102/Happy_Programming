@@ -12,14 +12,11 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.util.HashMap;
+
 import java.util.List;
 import model.Invitation;
-import model.Status;
 import service.IInvitationService;
-import service.IStatusService;
 import service.classimpl.InvitationService;
-import service.classimpl.StatusService;
 
 /**
  *

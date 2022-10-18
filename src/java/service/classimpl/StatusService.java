@@ -27,8 +27,7 @@ public class StatusService implements IStatusService {
     public Status getStatusById(int id, HashMap<Integer, String> Hm) {
         for (Map.Entry<Integer, String> entry : Hm.entrySet()) {
             if (id == entry.getKey()) {
-                Status status = new Status(entry.getKey(), entry.getValue());
-                return status;
+                return new Status(entry.getKey(), entry.getValue());
             }
         }
         return null;

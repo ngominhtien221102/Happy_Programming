@@ -15,7 +15,6 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
 import java.util.List;
 import model.User;
-import service.IUserProfileService;
 import service.IUserService;
 import service.classimpl.UserService;
 

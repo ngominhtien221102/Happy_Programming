@@ -8,9 +8,8 @@ import dal.UserProfileDAO;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import model.User;
+
 import model.UserProfile;
-import service.IAddressService;
 import service.IRateService;
 import service.IUserProfileService;
 
@@ -81,31 +80,29 @@ public class UserProfileService implements IUserProfileService {
 
     @Override
     public List<UserProfile> sortName(List<UserProfile> uList) {
-        List<UserProfile> listMentor = uList;
-        for (int i = 0; i < listMentor.size() - 1; i++) {
-                    for (int j = i + 1; j < listMentor.size(); j++) {
-                        if (listMentor.get(i).getFirstName().compareTo(listMentor.get(j).getFirstName()) > 0) {
-                            Collections.swap(listMentor, i, j);
+        for (int i = 0; i < uList.size() - 1; i++) {
+                    for (int j = i + 1; j < uList.size(); j++) {
+                        if (uList.get(i).getFirstName().compareTo(uList.get(j).getFirstName()) > 0) {
+                            Collections.swap(uList, i, j);
                         }
                     }
                 }
-        return listMentor;
+        return uList;
     }
 
     @Override
     public List<UserProfile> sortRate(List<UserProfile> uList) {
-        List<UserProfile> listMentor = uList;
         IRateService iRate = new RateService();
-         for (int i = 0; i < listMentor.size() - 1; i++) {
-                    float rate1 = (float) iRate.getRateByMentorID(listMentor.get(i).getID());
-                    for (int j = i + 1; j < listMentor.size(); j++) {
-                        float rate2 = (float) iRate.getRateByMentorID(listMentor.get(j).getID());
+         for (int i = 0; i < uList.size() - 1; i++) {
+                    float rate1 = (float) iRate.getRateByMentorID(uList.get(i).getID());
+                    for (int j = i + 1; j < uList.size(); j++) {
+                        float rate2 = (float) iRate.getRateByMentorID(uList.get(j).getID());
                         if (rate1 < rate2) {
-                            Collections.swap(listMentor, i, j);
+                            Collections.swap(uList, i, j);
                         }
                     }
                 }
-         return listMentor;
+         return uList;
     }
 
 

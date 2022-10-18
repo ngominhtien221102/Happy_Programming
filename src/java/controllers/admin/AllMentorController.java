@@ -94,7 +94,7 @@ public class AllMentorController extends HttpServlet {
         //
         int mActive = 0;
         for (MentorCV m : mList) {
-            if (iUser.getUserById(m.getID(), uList).isStatus() == true) {
+            if (iUser.getUserById(m.getID(), uList).isStatus()) {
                 mActive++;
             }
         }

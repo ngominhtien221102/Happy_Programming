@@ -8,7 +8,6 @@ import java.util.HashMap;
 import java.util.List;
 import model.MentorCV;
 import model.Rate;
-import model.User;
 
 /**
  *
