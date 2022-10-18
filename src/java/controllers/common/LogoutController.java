@@ -36,6 +36,7 @@ public class LogoutController extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             HttpSession ses = request.getSession();
             ses.removeAttribute("Account");
+            ses.removeAttribute("RoleID");
             response.sendRedirect("views/user/index.jsp");
         }
     }
