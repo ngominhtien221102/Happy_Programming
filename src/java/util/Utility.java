@@ -4,8 +4,14 @@
  */
 package util;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.util.Formatter;
 import java.util.List;
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import model.UserProfile;
@@ -44,16 +50,27 @@ public class Utility {
         }
         return trim.split("\\s+").length;
     }
-    
-    public boolean checkEmailDup(String Email, List<UserProfile> list)
-    {
+
+    public boolean checkEmailDup(String Email, List<UserProfile> list) {
         for (UserProfile u : list) {
-            if(u.getEmail().equals(Email))
-            {
+            if (u.getEmail().equals(Email)) {
                 return true;
             }
         }
         return false;
     }
-    
+
+    public boolean checkDateNow(String dateInString) throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate now = LocalDate.now();
+        Date today = sdf.parse(dtf.format(now));
+        Date date = sdf.parse(dateInString);
+        return date.after(today) || date.equals(today);
+    }
+    public static void main(String[] args) throws ParseException {
+        Utility u = new Utility();
+         System.out.println(u.checkDateNow("10/03/2022"));
+    }
+
 }
