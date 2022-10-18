@@ -75,7 +75,9 @@ public class SendRequestController extends HttpServlet {
         List<UserProfile> upInvLst = (List<UserProfile>) session.getAttribute("upInvLst");
         String search = "";
         String page = "";
+        int nrpp = 0;
         try {
+            nrpp = Integer.parseInt(request.getParameter("nrpp"));
             search = (String) request.getParameter("search");
             page = request.getParameter("page");
         } catch (Exception e) {
@@ -127,8 +129,13 @@ public class SendRequestController extends HttpServlet {
         } else {
             cp = Integer.parseInt(page);
         }
+        
         PageInfor pageIf = new PageInfor(5, upInvLst.size(), cp);
+        if(nrpp != 0){
+            pageIf = new PageInfor(nrpp, upInvLst.size(), cp);
+        }
         request.setAttribute("pageIf", pageIf);
+        request.setAttribute("nrpp", nrpp);
         int mentorId;
         try {
             mentorId = Integer.parseInt(request.getParameter("mentorId"));
