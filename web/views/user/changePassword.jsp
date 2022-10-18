@@ -15,7 +15,7 @@
             <div class="col-10">
                 <section class="section">
                     <div class="container">
-                        <h2 style="margin:30px 0">Change Password</h2>    
+                        <h2>Change Password</h2>    
                         <p style="color: green">${message}</p>
                         <p style="color: red">${error1}</p>
                         <p style="color: red">${error2}</p>

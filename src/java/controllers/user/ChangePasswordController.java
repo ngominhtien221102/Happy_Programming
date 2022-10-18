@@ -22,7 +22,7 @@ import util.Utility;
  *
  * @author Admin
  */
-@WebServlet(name = "ChangePasswordController", urlPatterns = {"/changepass"})
+@WebServlet(name = "ChangePasswordController", urlPatterns = {"/changePass"})
 public class ChangePasswordController extends HttpServlet {
 
     /**

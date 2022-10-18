@@ -36,9 +36,7 @@
         .title{
             color: #ffbc3b;
         }
-        .mentor{
 
-        }
     </style>
     <body>
         <!-- header -->
@@ -71,24 +69,29 @@
                                 <div class="content"><br>${Invitation.content}</div>
                                 <br><br>
                             </div>
-                            <div class="text-align-center">
-                                <a class="signup__link " <c:if test="${Invitation.statusID==2}">href="<%=request.getContextPath()%>/editInvitation?type=1&id=${Invitation.ID}"</c:if><c:if test="${Invitation.statusID!=2}">href=""</c:if>>Update</a>
-                                <a class="signup__link " <c:if test="${Invitation.statusID==2}">href="<%=request.getContextPath()%>/editInvitation?type=2&id=${Invitation.ID}"</c:if><c:if test="${Invitation.statusID!=2}">href=""</c:if>>Cancel</a>
-
-                                </div>
-
+                            <div class="text-align-center ">
+                                <a class="signup__link " href="<%=request.getContextPath()%>/editInvitation?type=1&id=${Invitation.ID}">Update</a>
+                                <a class="signup__link " href="<%=request.getContextPath()%>/editInvitation?type=2&id=${Invitation.ID}">Cancel</a>
+                                <c:if test="${requestScope.success!=null}">
+                                  <br><br><br><h5 style="color: green">${success}</h5>
+                                </c:if>
+                                <c:if test="${requestScope.failed!=null}">
+                                   <br><br><br><h5 style="color: red">${failed}</h5>
+                                </c:if>
                             </div>
+
                         </div>
-                        <!-- border -->
-                        <!-- blog contect -->
+                    </div>
+                    <!-- border -->
+                    <!-- blog contect -->
 
 
 
-                    </section></div>
-            </section>
-        </div>
+                </section></div>
+        </section>
     </div>
-    <!-- footer -->
+</div>
+<!-- footer -->
 <%@include file="footer.jsp" %>
 <!-- /footer -->
 <!-- jQuery -->

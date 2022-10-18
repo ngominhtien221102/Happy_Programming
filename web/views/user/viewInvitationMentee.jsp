@@ -48,7 +48,7 @@
                 <section class="section" >
 
                     <div class="container">
-                        <h2 class="mb-5 mt-5">All Invitation</h2>
+                        <h2>All Invitation</h2>
                         <div class="row">
                             <c:forEach items="${listInv2}" var="inv" varStatus="loop">
                                 <!-- blog post -->
