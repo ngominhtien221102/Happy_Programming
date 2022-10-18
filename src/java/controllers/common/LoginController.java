@@ -53,6 +53,7 @@ public class LoginController extends HttpServlet {
                 request.getRequestDispatcher("views/user/login.jsp").forward(request, response);
             } else {        
                 ses.setAttribute("Account", user);
+                ses.setAttribute("RoleID", user.getRoleID());
                 ses.setMaxInactiveInterval(60000);
                 
                 Cookie cu = new Cookie("user", user.getAccountName());
