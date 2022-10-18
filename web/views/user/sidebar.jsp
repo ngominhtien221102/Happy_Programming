@@ -41,7 +41,7 @@
 
         <!-- Nav Item - Add product -->
         <li class="nav-item">
-            <a class="nav-link collapsed" href="<%=request.getContextPath()%>/addproduct" >
+            <a class="nav-link collapsed" href="<%=request.getContextPath()%>/allNofication.jsp" >
                 <span>All Notification</span>
             </a>
         </li>
@@ -94,12 +94,12 @@
             Mentor
         </div>
 
-        <!-- Nav Item - All user -->
+<!--         Nav Item - All user 
         <li class="nav-item">
             <a class="nav-link collapsed" href="<%=request.getContextPath()%>/views/viewUser.jsp" >
                 <span>Rate mentor</span>
             </a>
-        </li>
+        </li>-->
 
         <!-- Divider -->
         <hr class="sidebar-divider">
@@ -112,6 +112,5 @@
 
 
     </ul>
-    <button class="left" onclick="display1()"><i class="fa fa-solid fa-angle-left"></i></button>
-    <button class="right" onclick="display2()" id="right" style="display: none"><i class="fa fa-solid fa-angle-right"></i></button>
+    
 </div>

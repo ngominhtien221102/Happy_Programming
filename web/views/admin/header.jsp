@@ -74,7 +74,7 @@
                                 <i class="ti ti-user" aria-hidden="true"></i>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="left:-50px">
-                                <a class="dropdown-item" href="<%=request.getContextPath()%>/views/user/profile.jsp">Profile</a>
+                                <a class="dropdown-item" href="<%=request.getContextPath()%>/views/common/viewMentorCV.jsp">Profile</a>
                                 <a class="dropdown-item" href="<%=request.getContextPath()%>/views/user/changePassword.jsp">Change password</a>
                                 <a class="dropdown-item" href="<%=request.getContextPath()%>/views/user/signup.jsp">Register</a>
                                 <a class="dropdown-item" href="<%=request.getContextPath()%>/views/user/login.jsp">Login</a>

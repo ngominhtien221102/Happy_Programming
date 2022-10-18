@@ -20,24 +20,24 @@
 
         <!-- Nav Item - Add product -->
         <li class="nav-item">
-            <a class="nav-link collapsed" href="<%=request.getContextPath()%>/views/common/viewMentorCV.jsp" >
+            <a class="nav-link collapsed" href="<%=request.getContextPath()%>/allMentor" >
                 <span>Mentor</span>
             </a>
         </li>
 
         <!-- Nav Item - Update product -->
         <li class="nav-item">
-            <a class="nav-link collapsed" href="<%=request.getContextPath()%>/views/user/changePassword.jsp" >
+            <a class="nav-link collapsed" href="<%=request.getContextPath()%>/allMentee" >
                 <span>Mentee</span>
             </a>
         </li>
 
-        <!-- Nav Item - Add product -->
+<!--         Nav Item - Add product 
         <li class="nav-item">
             <a class="nav-link collapsed" href="<%=request.getContextPath()%>/views/common/viewMentorCV.jsp" >
                 <span>Static</span>
             </a>
-        </li>
+        </li>-->
         <hr class="sidebar-divider">
 
         <!-- Heading -->
@@ -47,30 +47,30 @@
 
         <!-- Nav Item - Add product -->
         <li class="nav-item">
-            <a class="nav-link collapsed" href="<%=request.getContextPath()%>/addproduct" >
+            <a class="nav-link collapsed" href="<%=request.getContextPath()%>/createSkill" >
                 <span>Create Skill</span>
             </a>
         </li>
 
         <li class="nav-item">
-            <a class="nav-link collapsed" href="<%=request.getContextPath()%>/addproduct" >
-                <span>View Skill</span>
+            <a class="nav-link collapsed" href="<%=request.getContextPath()%>/editSkill" >
+                <span>Edit Skill</span>
             </a>
         </li>
         <!-- Divider -->
-        <hr class="sidebar-divider">
+<!--        <hr class="sidebar-divider">-->
 
-        <!-- Heading -->
+<!--         Heading 
         <div class="sidebar-heading">
             Request
         </div>
 
-        <!-- Nav Item - All transaction -->
+         Nav Item - All transaction 
         <li class="nav-item">
             <a class="nav-link collapsed" href="<%=request.getContextPath()%>/order" >
                 <span>View Request</span>
             </a>
-        </li>    
+        </li>    -->
 
         <!-- Divider -->
         <hr class="sidebar-divider">
@@ -82,7 +82,7 @@
 
         <!-- Nav Item - All Admin -->
         <li class="nav-item">
-            <a class="nav-link collapsed" href="<%=request.getContextPath()%>/views/user/viewInvitationMentor.jsp" >
+            <a class="nav-link collapsed" href="<%=request.getContextPath()%>/allInvitation" >
                 <span>View Invitation</span>
             </a>
         </li>
