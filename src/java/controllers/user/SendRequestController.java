@@ -134,6 +134,7 @@ public class SendRequestController extends HttpServlet {
         if(nrpp != 0){
             pageIf = new PageInfor(nrpp, upInvLst.size(), cp);
         }
+        request.setAttribute("nrpp", nrpp);
         request.setAttribute("pageIf", pageIf);
         int mentorId;
         try {
