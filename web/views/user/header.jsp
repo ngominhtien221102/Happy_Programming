@@ -54,7 +54,7 @@
                         <li class="nav-item dropdown view " style="position: relative">
                             <a class="nav-link " href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                                aria-haspopup="true" aria-expanded="false">
-                                <i class="ti ti-bell" aria-hidden="true"></i><span class="badge bg-danger" style="top: 0px; position: absolute; margin-top: 35px; border-radius: 0.5rem; font-weight: 400; font-size: 60% ">3</span>
+                                <i class="ti ti-bell" aria-hidden="true"></i><span class="badge bg-danger" style="top: 0px; position: absolute; margin-top: 35px; border-radius: 0.5rem; font-weight: 400; font-size: 60% ">${sessionScope.NewNotification}</span>
                             </a>
                             <div class=" dropdown-menu " aria-labelledby="navbarDropdown" style="left:-50px">
                                 <a class="dropdown-item" href="<%=request.getContextPath()%>/views/user/teacher.jsp">Teacher</a>

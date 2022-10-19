@@ -51,7 +51,9 @@ public class InvitationService implements IInvitationService {
         }
         Invitation newInv = InvitationDAO.insert(u);
         list.add(newInv);
-        return "OK";
+        String id;
+        id = newInv.getID()+"";
+        return "OK"+" "+id;
     }
 
     @Override
@@ -130,6 +132,7 @@ public class InvitationService implements IInvitationService {
         return list;
     }
 
+    @Override
     public List<Integer> getListIDSkill() {
         List<Invitation> invList = getList();
         List<Integer> idSkillList = new ArrayList<>();
