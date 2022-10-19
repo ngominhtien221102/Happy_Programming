@@ -14,6 +14,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.util.List;
+import model.Notification;
 import model.User;
 import service.IUserService;
 import service.classimpl.UserService;
@@ -41,8 +42,8 @@ public class LoginController extends HttpServlet {
             HttpSession ses = request.getSession();
 
             List<User> userList;
-        userList = (List<User>) ses.getAttribute("listUser");
-            
+            userList = (List<User>) ses.getAttribute("listUser");
+
             String User = request.getParameter("Username");
             String Password = request.getParameter("Password");
             String remember = request.getParameter("rem");
@@ -51,15 +52,15 @@ public class LoginController extends HttpServlet {
             if (user == null) {
                 request.setAttribute("Alert", "Account is not exist please retype!");
                 request.getRequestDispatcher("views/user/login.jsp").forward(request, response);
-            } else {        
+            } else {
                 ses.setAttribute("Account", user);
                 ses.setAttribute("RoleID", user.getRoleID());
                 ses.setMaxInactiveInterval(60000);
-                
+
                 Cookie cu = new Cookie("user", user.getAccountName());
                 Cookie cp = new Cookie("pass", user.getPassWord());
                 Cookie cr = new Cookie("remember", remember);
-                
+
                 if (remember == null) {
                     cu.setMaxAge(0);    // set thoi gian hoat dong cho cookie = 0
                     cp.setMaxAge(0);
@@ -72,10 +73,34 @@ public class LoginController extends HttpServlet {
                 response.addCookie(cu); //add cookie
                 response.addCookie(cp);
                 response.addCookie(cr);
+                // set cookie thong bao
+                Cookie[] arr = request.getCookies();
+
+                
+                String txt = "";
+                if (arr != null) {
+                    for (Cookie o : arr) {
+                        if (o.getName().equals("notification" + user.getID())) {
+                            txt += o.getValue();
+                        }
+                    }
+                }
+                Notification n = new Notification(txt);
+                ses.setAttribute("Notification", n);
+                int num= 0;
+                if (arr != null) {
+                    for (Cookie o : arr) {
+                        if (o.getName().equals("newNotification"+user.getID())) {
+                            num = Integer.parseInt(o.getValue());
+                        }
+                    }
+                }
+                ses.setAttribute("NewNotification", num);
+                
                 response.sendRedirect("views/user/index.jsp");
-            
+
+            }
         }
-    }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
