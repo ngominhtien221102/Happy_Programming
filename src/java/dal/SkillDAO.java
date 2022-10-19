@@ -18,13 +18,12 @@ import model.Skill;
 public class SkillDAO extends DBContext {
 
     private ArrayList<Skill> skillList;
-    private HashMap<Integer, String> skillHm;
 
     public SkillDAO() {
     }
 
     public HashMap<Integer, String> getSkillHm() {
-        skillHm = new HashMap<>();
+        HashMap<Integer, String> skillHm = new HashMap<>();
         if (skillList == null) {
             load();
         }
