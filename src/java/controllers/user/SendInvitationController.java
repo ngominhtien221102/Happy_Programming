@@ -173,20 +173,15 @@ public class SendInvitationController extends HttpServlet {
                 String content = request.getParameter("content");
                 if (content.equals("")) {
                     msg = "Please enter content to invite this mentor!";
-                    if (search != null) {
-                        response.sendRedirect(request.getContextPath() + "/sendInvitation?search=" + search + "&page=" + cp + "&mentorID=" + mentorID + "&nrpp=" + nrpp);
-                    } else {
-                        response.sendRedirect(request.getContextPath() + "/sendInvitation?page=" + cp + "&mentorID=" + mentorID + "&nrpp=" + nrpp);
-                    }
                 } else {
                     Invitation inv = new Invitation(0, mentorID, menteeID, skill, 2, title, deadline, content);
                     msg = i.insert(inv, list);
                     // du lieu de sendRedirect
-                    if (search != null) {
-                        response.sendRedirect(request.getContextPath() + "/sendInvitation?search=" + search + "&page=" + cp + "&mentorID=" + mentorID + "&nrpp=" + nrpp);
-                    } else {
-                        response.sendRedirect(request.getContextPath() + "/sendInvitation?page=" + cp + "&mentorID=" + mentorID + "&nrpp=" + nrpp);
-                    }
+                }
+                if (search != null) {
+                    response.sendRedirect(request.getContextPath() + "/sendInvitation?search=" + search + "&page=" + cp + "&mentorID=" + mentorID + "&nrpp=" + nrpp);
+                } else {
+                    response.sendRedirect(request.getContextPath() + "/sendInvitation?page=" + cp + "&mentorID=" + mentorID + "&nrpp=" + nrpp);
                 }
             }
         } catch (ParseException ex) {
