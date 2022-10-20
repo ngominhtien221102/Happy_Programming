@@ -150,6 +150,7 @@ public class EditInvitationController extends HttpServlet {
         String title = request.getParameter("title");
         String deadline = request.getParameter("deadline");
         String content = request.getParameter("content");
+        String createdAt = invitation.getCreatedAt();
         try {
             if (!u.checkDateNow(deadline)) {
                 request.setAttribute("failed", "Deadline must be at least equal to the current date!");
@@ -160,7 +161,7 @@ public class EditInvitationController extends HttpServlet {
                     request.setAttribute("failed", msg);
                     request.getRequestDispatcher("/views/user/editInvitation.jsp").forward(request, response);
                 } else {
-                    Invitation iv = new Invitation(id, mentorId, menteeId, skillId, statusId, title, deadline, content);
+                    Invitation iv = new Invitation(id, mentorId, menteeId, skillId, statusId, title, deadline, content,createdAt);
                     msg = i.update(iv, list);
                     if (msg.equals("OK")) {
                         session.setAttribute("invitation", invitation);

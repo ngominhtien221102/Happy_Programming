@@ -8,10 +8,12 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import model.Invitation;
@@ -83,7 +85,7 @@ public class SendRequestController extends HttpServlet {
         } catch (Exception e) {
 
         }
-        
+
         if (upInvLst == null) {
             upInvLst = new ArrayList<>();
             ArrayList<Integer> skillId = new ArrayList<>();
@@ -130,7 +132,7 @@ public class SendRequestController extends HttpServlet {
             cp = Integer.parseInt(page);
         }
         PageInfor pageIf = new PageInfor(5, upInvLst.size(), cp);
-        if(nrpp != 0){
+        if (nrpp != 0) {
             pageIf = new PageInfor(nrpp, upInvLst.size(), cp);
         }
         request.setAttribute("pageIf", pageIf);
@@ -175,9 +177,49 @@ public class SendRequestController extends HttpServlet {
             IRequestService rs = new RequestService();
             User mentee = (User) session.getAttribute("Account");
             Request r = new Request(0, mentor.getID(), mentee.getID(), "", content, title);
-            rs.insert(r, (List<Request>) session.getAttribute("listRequest"));
+            String msg = rs.insert(r, (List<Request>) session.getAttribute("listRequest"));
             request.setAttribute("message", "Request sent!");
             session.removeAttribute("mentor");
+            // notification
+            LocalDate createAt = LocalDate.now();
+            String subMsg[] = msg.split(" ");
+            String reqId = subMsg[1];
+            Cookie[] arr = request.getCookies();
+            String txt = "";
+            String num = "0";
+            String cookieNotifyName = "notification" + mentor.getID();
+            String cookieNewNotifyName = "newNotification" + mentor.getID();
+            if (arr != null) {
+                for (Cookie o : arr) {
+                    if (o.getName().equals(cookieNotifyName)) {
+                        txt += o.getValue();
+                        o.setMaxAge(0);
+                        response.addCookie(o);
+                    }
+                }
+            }
+            if (txt.isEmpty()) {
+                txt = reqId + ":" + "request" + ":" + mentee.getID() + ":" + createAt;
+            } else {
+                txt = txt + "/" + reqId + ":" + "request" + ":" + mentee.getID() + ":" + createAt;
+            }
+            Cookie c = new Cookie(cookieNotifyName, txt);
+            c.setMaxAge(60 * 60 * 24 * 2);
+            response.addCookie(c);
+            // xu ly cookie newNotify
+            if (arr != null) {
+                for (Cookie o : arr) {
+                    if (o.getName().equals(cookieNewNotifyName)) {
+                        num = o.getValue();
+                        o.setMaxAge(0);
+                        response.addCookie(o);
+                    }
+                }
+            }
+            int numNewNotify = Integer.parseInt(num) + 1;
+            Cookie c1 = new Cookie(cookieNewNotifyName, numNewNotify + "");
+            c1.setMaxAge(60 * 60 * 24 * 2);
+            response.addCookie(c1);
         } else {
             request.setAttribute("title", title);
             request.setAttribute("content", content);
@@ -195,4 +237,3 @@ public class SendRequestController extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 }
-

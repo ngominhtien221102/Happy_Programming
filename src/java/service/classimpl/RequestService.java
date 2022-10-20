@@ -36,8 +36,9 @@ public class RequestService implements IRequestService {
     public String insert(Request u, List<Request> list) {
         Request req = reqDAO.insert(u);
         list.add(req);
-        return "OK";
-
+        String id;
+        id = req.getID()+"";
+        return "OK"+" "+id;
     }
 
     @Override

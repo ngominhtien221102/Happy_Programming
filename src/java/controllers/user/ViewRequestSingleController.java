@@ -9,10 +9,12 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import model.Request;
@@ -69,7 +71,7 @@ public class ViewRequestSingleController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-   protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int requestId = 0;
         try {
@@ -88,7 +90,7 @@ public class ViewRequestSingleController extends HttpServlet {
                 isViewAble = true;
                 break;
             }
-            if(req.getMentorID() == u.getID() && requestId == req.getID()) {
+            if (req.getMentorID() == u.getID() && requestId == req.getID()) {
                 isViewAble = true;
                 break;
             }
@@ -100,7 +102,7 @@ public class ViewRequestSingleController extends HttpServlet {
             UserProfile mentee = ups.getUserProfileById(r.getMenteeID(), upLst);
             UserProfile mentor = ups.getUserProfileById(r.getMentorID(), upLst);
             for (Response res : responseLst) {
-                if(res.getRequestID() == r.getID()){
+                if (res.getRequestID() == r.getID()) {
                     rResponse.add(res);
                 }
             }
@@ -126,18 +128,66 @@ public class ViewRequestSingleController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         IResponseService rs = new ResponseService();
+        IRequestService reqs = new RequestService();
         HttpSession session = request.getSession();
-        try{
+        try {
             int requestID = Integer.parseInt(request.getParameter("requestId"));
             int userID = Integer.parseInt(request.getParameter("userID"));
             String resContent = request.getParameter("response").trim();
-            if(resContent.equalsIgnoreCase("")){
+            if (resContent.equalsIgnoreCase("")) {
                 request.setAttribute("resAlert", "Write something to response!");
-            }else{
-                rs.insert(new Response(0, requestID, userID, resContent, ""), (List<Response>) session.getAttribute("listResponse"));
+            } else {
+                String msg = rs.insert(new Response(0, requestID, userID, resContent, ""), (List<Response>) session.getAttribute("listResponse"));
+                // notification
+                LocalDate createAt = LocalDate.now();
+                String subMsg[] = msg.split(" ");
+                int receiveID;
+                Request req = reqs.getRequestById(requestID, (List<Request>) session.getAttribute("listRequest"));
+                if (req.getMenteeID() == userID) {
+                    receiveID = req.getMentorID();
+                } else {
+                    receiveID = req.getMenteeID();
+                }
+                String reqId = subMsg[1];
+                Cookie[] arr = request.getCookies();
+                String txt = "";
+                String num = "0";
+                String cookieNotifyName = "notification" + receiveID;
+                String cookieNewNotifyName = "newNotification" + receiveID;
+                if (arr != null) {
+                    for (Cookie o : arr) {
+                        if (o.getName().equals(cookieNotifyName)) {
+                            txt += o.getValue();
+                            o.setMaxAge(0);
+                            response.addCookie(o);
+                        }
+                    }
+                }
+                if (txt.isEmpty()) {
+                    txt = reqId + ":" + "response" + ":" + userID + ":" + createAt;
+                } else {
+                    txt = txt + "/" + reqId + ":" + "response" + ":" + userID + ":" + createAt;
+                }
+                Cookie c = new Cookie(cookieNotifyName, txt);
+                c.setMaxAge(60 * 60 * 24 * 2);
+                response.addCookie(c);
+                // xu ly cookie newNotify
+                if (arr != null) {
+                    for (Cookie o : arr) {
+                        if (o.getName().equals(cookieNewNotifyName)) {
+                            num = o.getValue();
+                            o.setMaxAge(0);
+                            response.addCookie(o);
+                        }   
+                    }
+                }
+                int numNewNotify = Integer.parseInt(num) + 1;
+                Cookie c1 = new Cookie(cookieNewNotifyName, numNewNotify + "");
+                c1.setMaxAge(60 * 60 * 24 * 2);
+                response.addCookie(c1);
                 request.setAttribute("resAlert2", "Response sent!");
-            }   
-        }catch(Exception e){     
+            }
+        } catch (NumberFormatException e) {
         }
         doGet(request, response);
     }
@@ -153,4 +203,3 @@ public class ViewRequestSingleController extends HttpServlet {
     }// </editor-fold>
 
 }
-

@@ -67,8 +67,7 @@ public class NotificationController extends HttpServlet {
         User u = (User) ses.getAttribute("Account");
         Cookie arr[] = request.getCookies();
         String cookieNewNotifyName = "newNotification"+u.getID();
-        String num = "";
-        
+ 
         if (arr != null) {
             for (Cookie o : arr) {
                 if (o.getName().equals(cookieNewNotifyName)) {

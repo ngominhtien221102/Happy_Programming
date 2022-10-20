@@ -63,6 +63,11 @@
                                                 <ul class="list-inline mb-3">
                                                     <!-- post date -->
                                                     <li class="list-inline-item mr-3 ml-0">
+                                                        <fmt:parseDate value="${inv.createdAt}" pattern="yyyy-MM-dd" var="Date1" />
+                                                        <fmt:formatDate value="${Date1}" var="Date3" pattern="dd/MM/yyyy"/>        
+                                                        Created at: ${Date3}
+                                                    </li><br>
+                                                    <li class="list-inline-item mr-3 ml-0">
                                                         <fmt:parseDate value="${inv.deadlineDate}" pattern="yyyy-MM-dd" var="Date" />
                                                         <fmt:formatDate value="${Date}" var="Date2" pattern="dd/MM/yyyy"/>        
                                                         Deadline: ${Date2}
