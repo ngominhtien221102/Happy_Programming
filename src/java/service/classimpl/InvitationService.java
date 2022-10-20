@@ -5,12 +5,15 @@
 package service.classimpl;
 
 import dal.InvitationDAO;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import model.Invitation;
 import service.IInvitationService;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -20,6 +23,11 @@ import java.util.List;
 public class InvitationService implements IInvitationService {
 
     InvitationDAO InvitationDAO = new InvitationDAO();
+    List<Integer> totalPerMonth = new ArrayList<>();
+    List<Integer> totalProcessingPerMonth = new ArrayList<>();
+    List<Integer> totalCancelPerMonth = new ArrayList<>();
+    List<Integer> totalRejectPerMonth = new ArrayList<>();
+    List<Integer> totalAcceptPerMonth = new ArrayList<>();
 
     @Override
     public Invitation getInvitationById(int id, List<Invitation> list) {
@@ -83,7 +91,6 @@ public class InvitationService implements IInvitationService {
         } else {
             return "You can only cancel while the invitation is processing";
         }
-
     }
     
     @Override
@@ -143,5 +150,10 @@ public class InvitationService implements IInvitationService {
         return idSkillList;
     }
 
+    @Override
+    public void totalInvPerMonth(List<Invitation> list) {
 
+    }
+
+    
 }

@@ -4,6 +4,7 @@
  */
 package service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import model.UserProfile;
@@ -25,5 +26,8 @@ public interface IUserProfileService {
     List<UserProfile> search(String name, List<UserProfile> uList);
     List<UserProfile> sortName(List<UserProfile> uList);
     List<UserProfile> sortRate(List<UserProfile> uList);
+    
+    List<Integer> getMonthlyUser(int roleID, List<UserProfile> uList,HashMap<Integer, Integer> roleHm);
+
    
 }
