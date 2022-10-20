@@ -176,7 +176,9 @@ public class SendInvitationController extends HttpServlet {
                 if (content.equals("")) {
                     msg = "Please enter content to invite this mentor!";
                 } else {
-                    Invitation inv = new Invitation(0, mentorID, menteeID, skill, 2, title, deadline, content);
+                    LocalDate createAt = LocalDate.now();
+                    
+                    Invitation inv = new Invitation(0, mentorID, menteeID, skill, 2, title, deadline, content,"");
                     msg = i.insert(inv, list);
                     // neu add thanh cong dua du lieu len cookie
                     if (msg.startsWith("OK")) {
@@ -184,7 +186,7 @@ public class SendInvitationController extends HttpServlet {
                         String subMsg[] = msg.split(" ");
                         String invId = subMsg[1];
                         Cookie[] arr = request.getCookies();
-                        LocalDate createAt = LocalDate.now();
+                        
                         String txt = "";
                         String num ="0";
                         String cookieNotifyName = "notification"+mentorID;

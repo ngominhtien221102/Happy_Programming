@@ -31,7 +31,7 @@ public class ResponseDAO extends DBContext {
         return responselst;
     }
 
-    public void insert(Response response) {
+    public Response insert(Response response) {
         LocalDate curDate = LocalDate.now();
         String date = curDate.toString();
         String sql = "INSERT INTO [dbo].[Response]\n"
@@ -60,6 +60,7 @@ public class ResponseDAO extends DBContext {
         } catch (SQLException e) {
 
         }
+        return response;
     }
 
     public void update(Response response) {
