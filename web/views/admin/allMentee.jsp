@@ -109,7 +109,7 @@
         <%@include file="header.jsp" %>
         <!-- /header -->
         <div id="content" class="row" style="padding-top: 50px;  min-height: 800px">
-            <%@include file="sidebar.jsp" %>
+            <%@include file="adminSidebar.jsp" %>
             <div class="col-10">
                 <section class="section" >
                     <h2 style="margin-left:15px; text-align: center">Mentee</h2>
