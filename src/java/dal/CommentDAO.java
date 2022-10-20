@@ -50,7 +50,6 @@ public class CommentDAO extends DBContext {
             }
         } catch (Exception e) {
             System.out.println("Error Comment" + e.getMessage());
-
         }
     }
 
