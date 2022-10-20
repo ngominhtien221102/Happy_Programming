@@ -7,14 +7,15 @@ package service.classimpl;
 import dal.MentorCVDAO;
 import dal.UserDAO;
 import dal.UserProfileDAO;
-import java.util.List;
+import java.util.HashMap;
 import model.MentorCV;
 import model.User;
 import model.UserProfile;
 import service.IUserService;
 
+import java.util.List;
+
 /**
- *
  * @author Lenovo
  */
 public class UserService implements IUserService {
@@ -23,7 +24,7 @@ public class UserService implements IUserService {
     UserProfileDAO userProDAO = new UserProfileDAO();
     UserProfileService userProService = new UserProfileService();
     MentorCVDAO mentorCVDAO = new MentorCVDAO();
-    MentorService mentorService = new MentorService();    
+    MentorService mentorService = new MentorService();
 
 
     @Override
@@ -38,13 +39,12 @@ public class UserService implements IUserService {
 
     @Override
     public String insert(User u, List<User> list) {
-        if(getUserById(u.getID(), list) != null)
-        {
+        if (getUserById(u.getID(), list) != null) {
             return "Insert not successful!";
         }
         User i = userDAO.insert(u);
-            list.add(i);
-            return "Insert successful!";
+        list.add(i);
+        return "Insert successful!";
     }
 
     @Override
@@ -55,22 +55,20 @@ public class UserService implements IUserService {
         us.setPassWord(u.getPassWord());
         us.setStatus(u.isStatus());
         return "Update successful!";
-        
+
     }
 
     @Override
     public String delete(int ID, List<User> list, List<UserProfile> userProList, List<MentorCV> mentorList) {
         User u = getUserById(ID, list);
-        if(u.getRoleID() == 2)
-        {
+        if (u.getRoleID() == 2) {
             UserProfile us = userProService.getUserProfileById(u.getID(), userProList);
             userProService.delete(us, userProList);
         }
-        if(u.getRoleID() == 3)
-        {   
+        if (u.getRoleID() == 3) {
 
             MentorCV mentorCV = mentorService.getCVById(u.getID(), mentorList);
-            mentorService.delete(mentorCV.getID(), mentorList);       
+            mentorService.delete(mentorCV.getID(), mentorList);
 
             UserProfile us = userProService.getUserProfileById(u.getID(), userProList);
             userProService.delete(us, userProList);
@@ -83,10 +81,9 @@ public class UserService implements IUserService {
 
     @Override
     public User getUserByAccount(String accountName, String Password, List<User> list) {
-        
+
         for (User user : list) {
-            if(user.getAccountName().equals(accountName) && user.getPassWord().equals(Password))
-            {
+            if (user.getAccountName().equals(accountName) && user.getPassWord().equals(Password)) {
                 return user;
             }
         }
@@ -105,7 +102,7 @@ public class UserService implements IUserService {
                 return user;
             }
         }
-        return null ;
+        return null;
     }
 
     @Override
@@ -118,4 +115,16 @@ public class UserService implements IUserService {
         }
         return null;
     }
+
+    @Override
+    public HashMap<Integer, Integer> getRoleHm(List<User> list) {
+        HashMap<Integer, Integer> roleHm = new HashMap<>();
+        
+        for (User u: list){
+            roleHm.put(u.getID(), u.getRoleID());
+        }
+        return roleHm;
+    }
+    
+    
 }

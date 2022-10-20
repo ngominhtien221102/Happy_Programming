@@ -5,8 +5,12 @@
 package service.classimpl;
 
 import dal.UserProfileDAO;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import model.UserProfile;
@@ -104,6 +108,35 @@ public class UserProfileService implements IUserProfileService {
                 }
          return uList;
     }
+
+    @Override
+    public List<Integer> getMonthlyUser(int roleID, List<UserProfile> uList, HashMap<Integer, Integer> roleHm) {
+        ArrayList<Integer> list = new ArrayList<>();
+        Date date = new Date();
+        LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        int month = localDate.getMonthValue();
+        int year = localDate.getYear();
+        for (int i=1; i<=month; i++){
+            list.add(getUserPerMonth(roleID, i, year, uList, roleHm));
+        }
+        return list;
+    }
+    
+
+    private int getUserPerMonth(int roleID, int month, int year, List<UserProfile> uList, HashMap<Integer, Integer> roleHm) {
+        int total = 0 ;
+        for (UserProfile up : uList){
+            if (roleHm.get(up.getID()) == roleID){
+                String[] s = up.getCreateAt().split("-");
+            int y = Integer.parseInt(s[0]);
+            int m = Integer.parseInt(s[1]);
+            if (y==year && m == month) total++;
+            }
+        }
+        return total;
+    }
+    
+    
 
 
  

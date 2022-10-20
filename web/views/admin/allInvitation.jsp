@@ -170,7 +170,7 @@
                                     </div>
                                 </div>
                             </article>
-                            
+
                             <!--                            cancel invitation -->
                             <article class="col-xl-3 col-md-6">
                                 <div class="card border-bottom hover-shadow" style="border-radius: 5px;background-color: #f3f3f3">
@@ -193,6 +193,19 @@
                             </article>
 
 
+                        </div>
+
+                        <!-- Area Chart -->
+                        <div class="card shadow mb-4" style="margin-top: 50px">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold ">Number of mentors registered in the year</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="chart-area">
+                                    <canvas id="myAreaChart"></canvas>
+                                </div>
+                                <hr>
+                            </div>
                         </div>
                         <div class="card-block" >
                             <h3 style="margin-bottom: 20px" class="">Invitations</h3>
@@ -321,8 +334,12 @@
         <!-- footer -->
         <%@include file="footer.jsp" %>
         <!-- /footer -->
-        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <!-- Page level plugins -->
+        <script src="<%=request.getContextPath()%>/js/vendor/chart.js/Chart.min.js"></script>
 
-        <!-- /jQuery -->
+        <!-- Page level custom scripts -->
+        <script src="<%=request.getContextPath()%>/js/admin/invitation/chart-area-demo.js"></script>
+
     </body>
 </html>
