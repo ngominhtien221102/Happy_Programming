@@ -16,6 +16,7 @@ import java.util.List;
 import model.Contact;
 import service.IContactService;
 import service.classimpl.ContactService;
+import util.Utility;
 
 /**
  *
@@ -69,8 +70,13 @@ public class ContactController extends HttpServlet {
         String message = request.getParameter("message");
         List<Contact> listContact = (List<Contact>) session.getAttribute("listContact");
         IContactService cons = new ContactService();
-        cons.insert(new Contact(0, name, mail, subject, message), listContact);
+        Utility u = new Utility();
+        if(u.countWord(subject) > 20 ){
+            request.setAttribute("subjectAlert", "Subject must have less than 20 letters");
+        }else{
+            cons.insert(new Contact(0, name, mail, subject, message), listContact);
         request.setAttribute("alert", "Send successfully!");
+        }
         request.getRequestDispatcher("/views/user/contact.jsp").forward(request, response);
     }
 
