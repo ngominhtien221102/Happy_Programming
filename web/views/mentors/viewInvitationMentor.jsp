@@ -50,7 +50,6 @@
                                             <th>Mentee</th>
                                             <th>Skill</th>
                                             <th>Title</th> 
-                                            <th>Content</th>         
                                             <th>Deadline date</th>
                                             <th>Status</th>
                                             <th colspan="2" style="text-align: center">Options</th>
@@ -76,7 +75,6 @@
                                                         </c:forEach>
                                                     </td>
                                                     <td>${inv.title}</td>
-                                                    <td>${inv.content}</td>
                                                     <td>${inv.deadlineDate}</td>
                                                     <td>
                                                         <c:forEach items="${listStatus}" var="sta">
@@ -88,14 +86,11 @@
                                                     <c:if test="${inv.statusID == 2}">
                                                         <td><a class="text-color" 
                                                                href="<%=request.getContextPath()%>/updateStatus?id=${inv.ID}&statusID=${inv.statusID}&type=1">
-
                                                                 Accept</a></td>
                                                             </c:if>
 
                                                     <c:if test="${inv.statusID != 2}">
-                                                        <td><a class="text-color" 
-                                                               >
-
+                                                        <td><a class="text-color" >
                                                                 Accept</a></td>
                                                             </c:if>
 
@@ -107,12 +102,9 @@
                                                             </c:if>
 
                                                     <c:if test="${inv.statusID != 2}">
-                                                        <td><a class="text-color" 
-                                                               >
-
+                                                        <td><a class="text-color">
                                                                 Reject</a></td>
                                                             </c:if>
-
                                                 </tr>
                                             </tbody>
                                         </c:if>

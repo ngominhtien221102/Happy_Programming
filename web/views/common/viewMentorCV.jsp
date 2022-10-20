@@ -12,6 +12,59 @@
         img{
             object-fit: cover;
         }
+        .main{
+            margin-top:20px;
+            color: #1a202c;
+            text-align: left;
+            background-color: #a9bfde;
+        }
+        .main-body {
+            padding: 15px;
+        }
+        .card {
+            box-shadow: 0 1px 3px 0 rgba(0,0,0,.1), 0 1px 2px 0 rgba(0,0,0,.06);
+        }
+
+        .card {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+            word-wrap: break-word;
+            background-color: #fff;
+            background-clip: border-box;
+            border: 0 solid rgba(0,0,0,.125);
+            border-radius: .25rem;
+        }
+
+        .card-body {
+            flex: 1 1 auto;
+            min-height: 1px;
+            padding: 1rem;
+        }
+
+        .gutters-sm {
+            margin-right: -8px;
+            margin-left: -8px;
+        }
+
+        .gutters-sm>.col, .gutters-sm>[class*=col-] {
+            padding-right: 8px;
+            padding-left: 8px;
+        }
+        .mb-3, .my-3 {
+            margin-bottom: 1rem!important;
+        }
+
+        .bg-gray-300 {
+            background-color: #e2e8f0;
+        }
+        .h-100 {
+            height: 100%!important;
+        }
+        .shadow-none {
+            box-shadow: none!important;
+        }
     </style>
     <body>
         <!-- header -->
@@ -19,39 +72,131 @@
         <!-- /header -->
         <div>
             <!-- teachers -->
-            <section class="section" style="padding-top: 160px;">
+
+            <section  class="main" style="padding-top: 160px; ">
+                <div class="container">
+                    <div class="main-body">
+                        <div class="row gutters-sm">
+                            <div class="col-md-4 mb-3">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div class="d-flex flex-column align-items-center text-center">
+                                            <img src="<%=request.getContextPath()%>/img/avatar/p1.png" alt="Admin" class="rounded-circle" width="150" height="150">
+                                            <div class="mt-3">
+                                                <h4>${mentorProfile.firstName} ${mentorProfile.lastName}</h4>
+                                                <p class="text-secondary mb-1">Profession: ${mentorCV.profession}</p>
+                                                <a href="<%=request.getContextPath()%>/views/user/createInvitation.jsp">
+                                                    <input type="submit" value="Invite" class="btn btn-primary btn-user btn-block" style="padding: 5px"/></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-md-8">
+                                <div class="card mb-3">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <h6 class="mb-0">Full Name</h6>
+                                            </div>
+                                            <div class="col-sm-9 text-secondary">
+                                                ${mentorProfile.firstName} ${mentorProfile.lastName}
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <h6 class="mb-0">Email</h6>
+                                            </div>
+                                            <div class="col-sm-9 text-secondary">
+                                                ${mentorProfile.email}
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <h6 class="mb-0">DOB</h6>
+                                            </div>
+                                            <div class="col-sm-9 text-secondary">
+                                                ${mentorProfile.getDob()}
+                                            </div>
+                                        </div>
+                                        <hr>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <h6 class="mb-0">Address</h6>
+                                            </div>
+                                            <div class="col-sm-9 text-secondary">
+                                                ${xa} , ${huyen} , ${tinh}
+                                            </div>
+                                        </div>
+                                        <hr>
+
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <h6 class="mb-0">Contact</h6>
+                                            </div>
+                                            <div class="col-sm-9 text-secondary">
+                                                <ul class="list-unstyled">
+                                                    <li class="list-inline-item"><a class="" href="https://www.facebook.com/themefisher"><i class="ti-facebook text-primary"></i></a></li>
+                                                    <li class="list-inline-item"><a class="" href="https://www.twitter.com/themefisher"><i class="ti-twitter-alt text-primary"></i></a></li>
+                                                    <li class="list-inline-item"><a class="" href="#"><i class="ti-instagram text-primary"></i></a></li>
+                                                    <li class="list-inline-item"><a class="" href="https://dribbble.com/themefisher"><i class="ti-dribbble text-primary"></i></a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <hr>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card mt-3">
+                            <h4 class="mb-4" style="margin-top: 30px; margin-left: 30px ">INTRODUCTION</h4>
+                            <p class="text-left" style="margin-left: 30px">As you know that the sole proprietorship and partnership forms of
+                                organisation could not meet the growing needs of huge capital and
+                                managerial skills required for increased scale of business and growing
+                                economic activities. The liability of owner/owners of these organisations
+                                is unlimited. In order to overcome these problems a new form of business
+                                organisation known as company came into existance.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>  
+            <section >
                 <div class="container">
                     <div class="row" >
-                        <div class="col-md-5 ">
-                            <img class="img-fluid w-100" src="<%=request.getContextPath()%>/template1/images/teachers/teacher-1.jpg" alt="teacher">
-                            <br><br>
-                            <a href="<%=request.getContextPath()%>/views/user/createInvitation.jsp">
-                                <input type="submit" value="Invite" class="btn btn-primary btn-user btn-block" /></a>
-                        </div>
-                        <div class="col-md-7 row">
-                            <h4 class="col-md-12 ">${mentorProfile.firstName} ${mentorProfile.lastName}</h4>
-                            <div class="col-md-6 mb-5">
-                                <h6 class="text-color">Gender: ${mentorProfile.getGender()} </h6>
-                            </div >
-                            <div class="col-md-6 mb-5"> 
-                                <h6 class="text-color">DOB: ${mentorProfile.getDob()}</h6>
-                            </div>
-                            <h4 class="col-md-12 ">INTRODUCTION</h4>
-                            <p class="col-md-12"> ${mentorCV.introduction}</p>
-
-                            <div class="col-md-12">
-                                <h4 class="mb-4">CONTACT INFO:</h4>
-                                <ul class="list-unstyled">
-                                    <li class="mb-3"><a class="text-color" href="mailto:${mentorProfile.email}"><i class="ti-email mr-2"></i>${mentorProfile.email}</a></li>
-
-                                    <li class="mb-3"><a class="text-color" href="#"><i class="ti-location-pin mr-2"></i>
-
-                                            Address: ${xa} , ${huyen} , ${tinh}
-                                        </a></li>
-                                </ul>
-                            </div>
-
-                        </div>
+                        <!--                        <div class="col-md-5 ">
+                                                    <img class="img-fluid" src="<%=request.getContextPath()%>/img/avatar/p1.png" alt="teacher" style="height: 300px">
+                                                    <br><br>
+                                                    <a href="<%=request.getContextPath()%>/views/user/createInvitation.jsp">
+                                                        <input type="submit" value="Invite" class="btn btn-primary btn-user btn-block" /></a>
+                                                </div>
+                                                <div class="col-md-7 row">
+                                                    <h4 class="col-md-12 ">${mentorProfile.firstName} ${mentorProfile.lastName}</h4>
+                                                    <div class="col-md-6 mb-5">
+                                                        <h6 class="text-color">Gender: ${mentorProfile.getGender()} </h6>
+                                                    </div >
+                                                    <div class="col-md-6 mb-5"> 
+                                                        <h6 class="text-color">DOB: ${mentorProfile.getDob()}</h6>
+                                                    </div>
+                                                    <h4 class="col-md-12 ">INTRODUCTION</h4>
+                                                    <p class="col-md-12"> ${mentorCV.introduction}</p>
+                        
+                                                    <div class="col-md-12">
+                                                        <h4 class="mb-4">CONTACT INFO:</h4>
+                                                        <ul class="list-unstyled">
+                                                            <li class="mb-3"><a class="text-color" href="mailto:${mentorProfile.email}"><i class="ti-email mr-2"></i>${mentorProfile.email}</a></li>
+                        
+                                                            <li class="mb-3"><a class="text-color" href="#"><i class="ti-location-pin mr-2"></i>
+                        
+                                                                    Address: ${xa} , ${huyen} , ${tinh}
+                                                                </a></li>
+                                                        </ul>
+                                                    </div>
+                        
+                                                </div>-->
                         <div class="col-12" style="padding-top: 5%">
                             <h4 class="mb-4">SERVICE DESCRIPTION</h4>
                             <p class="mb-5">${mentorCV.serviceDescription}</p>
@@ -90,6 +235,7 @@
                     <c:set value="${requestScope.rateHm}" var="rate"/>
                     <div id="rateAndCmt">   
                         <!--Rate-->
+                        <h4 class="mb-4" style="margin-top: 30px">RATING</h4>
                         <div class="well well-sm">
                             <div class="row">
                                 <div class="col-xs-12 col-md-4 text-center">
