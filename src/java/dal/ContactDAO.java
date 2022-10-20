@@ -42,10 +42,10 @@ public class ContactDAO extends DBContext{
     }
     public Contact insert(Contact con) {
         String sql = "INSERT INTO [dbo].[Contact]\n"
-                + "           ([name]\n"
-                + "           ,[mail]\n"
-                + "           ,[subject]\n"
-                + "           ,[message])\n"
+                + "           ([Name]\n"
+                + "           ,[Mail]\n"
+                + "           ,[Subject]\n"
+                + "           ,[Message])\n"
                 + "     VALUES(?,?,?,?)";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
@@ -55,9 +55,9 @@ public class ContactDAO extends DBContext{
             ps.setString(4, con.getMessage());
             ps.execute();
 
-            String sql1 = "SELECT top(1) [contactID]\n"
+            String sql1 = "SELECT top(1) [ContactID]\n"
                     + "  FROM [dbo].[Contact]\n"
-                    + "  order by contactID desc";
+                    + "  order by ContactID desc";
 
             ps = connection.prepareStatement(sql1);
             ResultSet rs = ps.executeQuery();
@@ -71,7 +71,7 @@ public class ContactDAO extends DBContext{
         return con;
     }
      public void delete(int contactID) {
-        String sql = "delete from [dbo].[Contact] where contactID = ?";
+        String sql = "delete from [dbo].[Contact] where ContactID = ?";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, contactID);

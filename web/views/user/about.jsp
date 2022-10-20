@@ -31,6 +31,9 @@
         #box::-webkit-scrollbar-track {
             background: transparent;
         }
+        img{
+          object-fit: cover; 
+        }
     </style>
     <body>
 
@@ -112,8 +115,8 @@
                     </div>
                     <!-- member -->
                     <div class="col-lg-4 col-sm-6 mb-5 mb-lg-0" id="item">
-                        <div class="card border-0 rounded-0 hover-shadow">
-                            <img class="card-img-top rounded-0" src="<%=request.getContextPath()%>/img/avatar/p2.png" style="width: 330px; height: 330px" alt="member">
+                        <div class="card border-0 rounded-0 hover-shadow" >
+                            <img class="card-img-top rounded-0" src="<%=request.getContextPath()%>/img/avatar/p2.png" style=" width:auto; height:330px;" alt="member">
                             <div class="card-body">
                                 <a href="teacher-single.html">
                                     <h4 class="card-title">Ly Hong Ngoc</h4>
@@ -132,7 +135,7 @@
                     <!-- member -->
                     <div class="col-lg-4 col-sm-6 mb-5 mb-lg-0" id="item">
                         <div class="card border-0 rounded-0 hover-shadow">
-                            <img class="card-img-top rounded-0" src="<%=request.getContextPath()%>/img/avatar/p2.png" style="width: 330px; height: 330px" alt="member">
+                            <img class="card-img-top rounded-0" src="<%=request.getContextPath()%>/img/avatar/p2.png" style=" width:auto; height:330px;" alt="member">
                             <div class="card-body">
                                 <a href="teacher-single.html">
                                     <h4 class="card-title">Tran Ngoc Cuong</h4>
