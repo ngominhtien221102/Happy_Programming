@@ -21,7 +21,7 @@
                 <div id="content" class="row" style="padding-top: 50px">
             <!-- Begin Page Content -->
 
-            <%@include file="../user/sidebar.jsp" %>
+            <%@include file="sidebar.jsp" %>
             <div class="col-10">
                 <div class="container" style="padding: 1.5% ;">
                     <div style="padding:5rem">
@@ -49,7 +49,7 @@
                                        placeholder="Date Of Birth" name="dob" value="${dob}"  required>
                             </div>
 
-                            <p style="Color:red">${Error}</p>
+                            <p style="color:red">${Error}</p>
                             <!-- Email -->
                             <div class="form-group row" style="padding-bottom: 20px;" >
                                 <input type="email" class="form-control form-control-user"
@@ -68,7 +68,7 @@
                                 <label for="female">Female</label>
                             </div>
 
-                            <p style="Color:red">${Error1}</p>
+                            <p style="color:red">${Error1}</p>
                             <div class="form-group row" style="padding-bottom: 20px;">
                                 <!--Province--> 
                                 <div class="input-group col-sm-4">

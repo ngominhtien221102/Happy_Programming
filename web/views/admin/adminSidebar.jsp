@@ -57,20 +57,6 @@
                 <span>Edit Skill</span>
             </a>
         </li>
-        <!-- Divider -->
-<!--        <hr class="sidebar-divider">-->
-
-<!--         Heading 
-        <div class="sidebar-heading">
-            Request
-        </div>
-
-         Nav Item - All transaction 
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="<%=request.getContextPath()%>/order" >
-                <span>View Request</span>
-            </a>
-        </li>    -->
 
         <!-- Divider -->
         <hr class="sidebar-divider">

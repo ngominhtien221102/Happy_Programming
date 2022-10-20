@@ -94,13 +94,6 @@
             Mentor
         </div>
 
-<!--         Nav Item - All user 
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="<%=request.getContextPath()%>/views/viewUser.jsp" >
-                <span>Rate mentor</span>
-            </a>
-        </li>-->
-
         <!-- Divider -->
         <hr class="sidebar-divider">
 

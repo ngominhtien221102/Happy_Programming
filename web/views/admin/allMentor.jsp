@@ -108,7 +108,7 @@
         <%@include file="header.jsp" %>
         <!-- /header -->
         <div id="content" class="row" style="padding-top: 50px;  min-height: 800px">
-            <%@include file="sidebar.jsp" %>
+            <%@include file="adminSidebar.jsp" %>
             <div class="col-10">
                 <section class="section" >
                     <h2 style="margin-left:15px; text-align: center">Mentor</h2>
@@ -180,24 +180,6 @@
                                 <hr>
                             </div>
                         </div>
-
-<!--                        <div class="row">
-                            <div class="col-xl col-lg-7">
-                                 Bar Chart 
-                                <div class="card shadow ">
-                                    <div class="card-header ">
-                                        <h6 class="m-0 font-weight-bold text-primary">Monthly Income</h6>
-                                    </div>
-                                    <div class="card-body">
-                                        <div class="chart-bar">
-                                            <canvas id="myBarChart"></canvas>
-                                        </div>
-                                        <hr>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>    -->
 
                         <div class="card-block" style="">
                             <div class="search" style="margin-left:15px" > 

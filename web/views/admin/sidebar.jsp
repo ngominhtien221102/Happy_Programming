@@ -74,6 +74,5 @@
 
 
     </ul>
-<!--    <button class="left" onclick="display1()"><i class="fa fa-solid fa-angle-left"></i></button>-->
-    <!--<button class="right" onclick="display2()" id="right" style="display: none"><i class="fa fa-solid fa-angle-right"></i></button>-->
+
 </div>

@@ -57,21 +57,12 @@ Cường Trần
                     </div>
                     <div class="row justify-content-center">
 
-                        <!-- course item -->
-
-                        <!-- course item -->
-
-                        <!-- course item -->
-
                     </div>
                 </div>
             </section>
         </div>
             <!-- /teachers -->
         </div>
-    
-
-
 
     <!-- footer -->
     <%@include file="footer.jsp" %>
