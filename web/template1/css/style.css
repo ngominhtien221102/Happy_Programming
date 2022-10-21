@@ -837,13 +837,7 @@ link:focus,
   min-height: 300px;
 }
 
-.success-video .play-btn {
-  position: absolute;
-  top: 50%;
-  left: 0;
-  -webkit-transform: translateY(-50%);
-          transform: translateY(-50%);
-}
+
 
 @media (max-width: 767px) {
   .success-video .play-btn {
