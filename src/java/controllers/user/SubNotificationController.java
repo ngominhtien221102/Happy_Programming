@@ -13,11 +13,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.util.ArrayList;
 import java.util.List;
-import model.Invitation;
 import model.Notification;
-import model.NotificationItem;
 import model.User;
 import model.UserProfile;
 import service.IUserProfileService;
@@ -27,8 +24,8 @@ import service.classimpl.UserProfileService;
  *
  * @author ASUS
  */
-@WebServlet(name = "NotificationController", urlPatterns = {"/notification"})
-public class NotificationController extends HttpServlet {
+@WebServlet(name = "SubNotificationController", urlPatterns = {"/subNotification"})
+public class SubNotificationController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -47,10 +44,10 @@ public class NotificationController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet NotificationController</title>");
+            out.println("<title>Servlet SubNotificationController</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet NotificationController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet SubNotificationController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -68,18 +65,13 @@ public class NotificationController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        PrintWriter out = response.getWriter();
         HttpSession ses = request.getSession();
-        Notification n = (Notification) ses.getAttribute("Notification");
-        List<NotificationItem> listNotify = new ArrayList<>();
-        for (int i = n.getItems().size() - 1; i >= 0; i--) {
-            listNotify.add(n.getItems().get(i));
-        }
-        request.setAttribute("listNotify", listNotify);
-        IUserProfileService us = new UserProfileService();
-        request.setAttribute("profileService", us);
-        // set lai so luong =0
+        String href;
         User u = (User) ses.getAttribute("Account");
         int num = 0;
+
+        // set lai so luong =0
         Cookie arr[] = request.getCookies();
         String cookieNewNotifyName = "newNotification" + u.getID();
         if (arr != null) {
@@ -95,8 +87,45 @@ public class NotificationController extends HttpServlet {
         c.setMaxAge(60 * 60 * 24 * 2);
         response.addCookie(c);
         ses.setAttribute("NewNotification", 0);
-        request.setAttribute("num", num);
-        request.getRequestDispatcher("views/user/notification.jsp").forward(request, response);
+
+        List<UserProfile> listUp = (List<UserProfile>) ses.getAttribute("listUserProfile");
+        IUserProfileService ps = new UserProfileService();
+        Notification n = (Notification) ses.getAttribute("Notification");
+        out.println("<div class='notiItem justify-content-center to-all'>"
+                + "<a style='color: #216FDB;' href='" + request.getContextPath() + "/notification" + "'>"
+                + "View all notification" + "</a>"
+                + "</div>");
+        int count = 0;
+        for (int i = n.getItems().size() - 1; i >= 0; i--) {
+            UserProfile profile = ps.getUserProfileById(n.getItems().get(i).getSenderID(), listUp);
+            switch (n.getItems().get(i).getType()) {
+                case "request":
+                    href = "/singleRequest?requestId=";
+                    break;
+                case "response":
+                    href = "/singleRequest?requestId=";
+                    break;
+                case "invite":
+                    href = "";
+                    break;    
+                default:
+                    href = "";
+                    break;
+            }
+            String classStr = count < num ? "unread" : "";
+
+            out.println("<a href='" + request.getContextPath() + href + n.getItems().get(i).getID() + "'>"
+                    + "<div class='notiItem " + classStr + "'>"
+                    + "<div><img class='senderAvar rounded-circle mr-2' "
+                    + "src='" + request.getContextPath()
+                    + "/img/avatar/" + profile.getAvatar() + "'"
+                    + "onerror=\"this.src='"+request.getContextPath()+"/img/avatar/default.png'\"/></div><div>"
+                    + profile.getFirstName() + " " + profile.getLastName()
+                    + " sent " + n.getItems().get(i).getType() + " to you <br><br>"
+                    + n.getItems().get(i).getCreateAt() + "</div></div></a>");
+            count++;
+        }
+
     }
 
     /**
