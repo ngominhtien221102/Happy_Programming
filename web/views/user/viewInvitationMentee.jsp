@@ -86,7 +86,6 @@
                                             </div>
                                             <div class="text-align-center">
                                                 <a href="<%=request.getContextPath()%>/singleInvite?invitationId=${inv.ID}" class="signup__link">View</a>
-                                                <a class="signup__link" href="<%=request.getContextPath()%>/editInvitation?type=0&id=${inv.ID}">Delete</a>
                                             </div>
                                         </div>
                                     </div>

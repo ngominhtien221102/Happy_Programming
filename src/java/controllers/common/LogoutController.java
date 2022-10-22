@@ -37,7 +37,11 @@ public class LogoutController extends HttpServlet {
             HttpSession ses = request.getSession();
             ses.removeAttribute("Account");
             ses.removeAttribute("RoleID");
-            response.sendRedirect("views/user/login.jsp");
+
+            ses.removeAttribute("Notification");
+            ses.removeAttribute("NewNotification");
+            response.sendRedirect("views/user/index.jsp");
+
         }
     }
 
