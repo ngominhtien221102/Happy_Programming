@@ -109,7 +109,7 @@
         <%@include file="header.jsp" %>
         <!-- /header -->
         <div id="content" class="row" style="padding-top: 50px;  min-height: 800px">
-            <%@include file="sidebar.jsp" %>
+            <%@include file="adminSidebar.jsp" %>
             <div class="col-10">
                 <section class="section" >
                     <h2 style="margin-left:15px; text-align: center">Mentee</h2>
@@ -157,17 +157,27 @@
                                          border-bottom-left-radius: 5px;
                                          border-bottom-right-radius: 5px;">
                                         <c:if test="${thisMonth >= lastMonth}" >
-                                            <p style="color: #fff; margin: 0 "><i class="ti-arrow-up m-2"></i>${percent}%</p>
+                                            <p style="color: #fff; margin: 0 "><i class="ti-arrow-up m-2"></i>${percent}</p>
                                         </c:if>
                                         <c:if test="${thisMonth < lastMonth}" >
-                                            <p style="color: #fff; margin: 0 "><i class="ti-arrow-down m-2"></i>${percent}%</p>
+                                            <p style="color: #fff; margin: 0 "><i class="ti-arrow-down m-2"></i>${percent}</p>
                                         </c:if>
-                                        <!--                                        <p style="color: #fff; margin: 0 "><i class="ti-arrow-down m-2"></i>10%</p>-->
                                     </div>
                                 </div>
-
-
                             </article>
+                        </div>
+
+                        <!-- Area Chart -->
+                        <div class="card shadow mb-4" style="margin-top: 50px">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold ">Number of mentees registered in the year</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="chart-area">
+                                    <canvas id="myAreaChart"></canvas>
+                                </div>
+                                <hr>
+                            </div>
                         </div>
 
                         <div class="card-block" style="">
@@ -242,8 +252,11 @@
 <!-- footer -->
 <%@include file="footer.jsp" %>
 <!-- /footer -->
-<!-- jQuery -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<!-- Page level plugins -->
+<script src="<%=request.getContextPath()%>/js/vendor/chart.js/Chart.min.js"></script>
 
-<!-- /jQuery -->
+<!-- Page level custom scripts -->
+<script src="<%=request.getContextPath()%>/js/admin/mentee/chart-area-demo.js"></script>
 </body>
 </html>

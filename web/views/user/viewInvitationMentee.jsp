@@ -115,8 +115,8 @@
                     });
 
             const handleSubmit = () => {
-                document.getElementById('a').innerHTML = value.getData()
-            }
+                document.getElementById('a').innerHTML = value.getData();
+            };
         </script>
     </body>
 

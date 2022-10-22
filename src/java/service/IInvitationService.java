@@ -32,5 +32,7 @@ public interface IInvitationService {
     List<Invitation> searchInv (String keyword, List<Invitation> invList);    
 
     String cancel(Invitation u, List<Invitation> list);
+    
+    void totalInvPerMonth(List<Invitation> list);
 
 }

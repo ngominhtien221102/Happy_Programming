@@ -15,7 +15,7 @@
             <%--<%@include file="headtop.jsp" %>--%>
 
             <div class="page-wrap">
-                <%@include file="sidebar.jsp" %>
+                <%@include file="adminSidebar.jsp" %>
                 <div class="main-content">
                     <div class="container-fluid">
                         <div class="page-header">

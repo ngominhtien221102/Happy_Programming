@@ -132,17 +132,19 @@ public class AllMentorController extends HttpServlet {
         }
         request.setAttribute("lastMonth", nMentorLastMonth);
         float perGrowth = 0;
-        if(nMentorLastMonth <= nMentorThisMonth)
-        {
-             perGrowth = (float) ((nMentorThisMonth - nMentorLastMonth) * 100) / nMentorLastMonth;
+        if (nMentorLastMonth != 0) {
+            if (nMentorLastMonth<= nMentorThisMonth) {
+                perGrowth = (float) ((nMentorThisMonth - nMentorLastMonth) * 100) / nMentorLastMonth;
+            } else {
+                perGrowth = (float) ((nMentorLastMonth - nMentorThisMonth) * 100) / nMentorLastMonth;
+            }
+            String percent = String.format("%.01f", perGrowth);
+            request.setAttribute("percent", percent + "%");
+        } else {
+            if (nMentorThisMonth == 0) {
+                request.setAttribute("percent", 0 + "%");
+            }
         }
-        else
-        {
-            perGrowth = (float) ((nMentorLastMonth - nMentorThisMonth) * 100) / nMentorLastMonth;
-        }
-        String percent = String.format("%.01f", perGrowth);
-        
-        request.setAttribute("percent", percent);
 
         //Ban or open account
         String mentorID = request.getParameter("mentorID");

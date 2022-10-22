@@ -8,99 +8,41 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="zxx">
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
     <%@include file="headCSS.jsp" %>
     <body>
-        <!-- header -->
         <%@include file="header.jsp" %>
-        <!-- /header -->
-        <!-- Modal -->
 
-
-        <!-- hero slider -->
-        <section class="hero-section overlay bg-cover" data-background="">
-            <div class="container">
-                <div class="hero-slider">
-                    <!-- slider item -->
-                    <div class="hero-slider-item">
-                        <div class="row">
-                            <div class="col-md-8">
-                                <h1 class="text-white" data-animation-out="fadeOutRight" data-delay-out="5" data-duration-in=".3" data-animation-in="fadeInLeft" data-delay-in=".1">Your bright future is our mission</h1>
-                                <p class="text-muted mb-4" data-animation-out="fadeOutRight" data-delay-out="5" data-duration-in=".3" data-animation-in="fadeInLeft" data-delay-in=".4">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                    tempor
-                                    incididunt ut labore et
-                                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exer</p>
-                                <a href="contact.jsp" class="btn btn-primary" data-animation-out="fadeOutRight" data-delay-out="5" data-duration-in=".3" data-animation-in="fadeInLeft" data-delay-in=".7">Apply now</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- slider item -->
-                    <div class="hero-slider-item">
-                        <div class="row">
-                            <div class="col-md-8">
-                                <h1 class="text-white" data-animation-out="fadeOutUp" data-delay-out="5" data-duration-in=".3" data-animation-in="fadeInDown" data-delay-in=".1">Your bright future is our mission</h1>
-                                <p class="text-muted mb-4" data-animation-out="fadeOutUp" data-delay-out="5" data-duration-in=".3" data-animation-in="fadeInDown" data-delay-in=".4">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                    tempor
-                                    incididunt ut labore et
-                                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exer</p>
-                                <a href="contact.jsp" class="btn btn-primary" data-animation-out="fadeOutUp" data-delay-out="5" data-duration-in=".3" data-animation-in="fadeInDown" data-delay-in=".7">Apply now</a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- slider item -->
-                    <div class="hero-slider-item">
-                        <div class="row">
-                            <div class="col-md-8">
-                                <h1 class="text-white" data-animation-out="fadeOutDown" data-delay-out="5" data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".1">Your bright future is our mission</h1>
-                                <p class="text-muted mb-4" data-animation-out="fadeOutDown" data-delay-out="5" data-duration-in=".3" data-animation-in="fadeInUp" data-delay-in=".4">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                    tempor
-                                    incididunt ut labore et
-                                    dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exer</p>
-                                <a href="contact.jsp" class="btn btn-primary" data-animation-out="fadeOutDown" data-delay-out="5" data-duration-in=".3" data-animation-in="zoomIn" data-delay-in=".7">Apply now</a>
-                            </div>
-                        </div>
-                    </div>
+        <!--Slider-->
+        <div id="demo" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#demo" data-bs-slide-to="0"  class="active"></button>
+                <button type="button" data-bs-target="#demo" data-bs-slide-to="1" ></button>
+                <button type="button" data-bs-target="#demo" data-bs-slide-to="2" ></button>
+            </div>
+            <div style="background-color: #ffbc3b; padding-top: 1% " class="carousel-inner">
+                <div  class="carousel-item active">
+                    <img src="<%=request.getContextPath()%>/img/slider/slider1.png" alt="slider1" class="d-block" style="width:100%; height: auto">
+                </div>
+                <div class="carousel-item">
+                    <img src="<%=request.getContextPath()%>/img/slider/slider2.png" alt="slider2" class="d-block" style="width:100%; height: auto">
+                </div>
+                <div class="carousel-item">
+                    <img src="<%=request.getContextPath()%>/img/slider/slider3.png" alt="slider3" class="d-block" style="width:100%; height: auto">
                 </div>
             </div>
-        </section>
-        <!-- /hero slider -->
 
-        <!-- banner-feature -->
-        <section class="bg-gray">
-            <div class="container-fluid p-0">
-                <div class="row no-gutters">
-                    <div class="col-xl col-lg">
-                        <div class="row feature-blocks bg-gray justify-content-between">
-                            <div class="col-sm-6 col-xl-5 mb-xl-5 mb-lg-3 mb-4 text-center text-sm-left">
-                                <i class="ti-book mb-xl-4 mb-lg-3 mb-4 feature-icon"></i>
-                                <h3 class="mb-xl-4 mb-lg-3 mb-4">Scholorship News</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
-                                    et dolore magna aliqua. Ut enim ad</p>
-                            </div>
-                            <div class="col-sm-6 col-xl-5 mb-xl-5 mb-lg-3 mb-4 text-center text-sm-left">
-                                <i class="ti-blackboard mb-xl-4 mb-lg-3 mb-4 feature-icon"></i>
-                                <h3 class="mb-xl-4 mb-lg-3 mb-4">Our Notice Board</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
-                                    et dolore magna aliqua. Ut enim ad</p>
-                            </div>
-                            <div class="col-sm-6 col-xl-5 mb-xl-5 mb-lg-3 mb-4 text-center text-sm-left">
-                                <i class="ti-agenda mb-xl-4 mb-lg-3 mb-4 feature-icon"></i>
-                                <h3 class="mb-xl-4 mb-lg-3 mb-4">Our Achievements</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
-                                    et dolore magna aliqua. Ut enim ad</p>
-                            </div>
-                            <div class="col-sm-6 col-xl-5 mb-xl-5 mb-lg-3 mb-4 text-center text-sm-left">
-                                <i class="ti-write mb-xl-4 mb-lg-3 mb-4 feature-icon"></i>
-                                <h3 class="mb-xl-4 mb-lg-3 mb-4">Admission Now</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore
-                                    et dolore magna aliqua. Ut enim ad</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- /banner-feature -->
+            <button class="carousel-control-prev" type="button" data-bs-target="#demo" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon"></span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#demo" data-bs-slide="next">
+                <span class="carousel-control-next-icon"></span>
+            </button>
+        </div>
+        <!-- slider -->
+
+
 
         <!-- about us -->
         <section class="section">
@@ -270,96 +212,9 @@
         </section>
         <!-- /cta -->
 
-        <!-- success story -->
-        <section class="section bg-cover" data-background="images/backgrounds/success-story.jpg">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-6 col-sm-4 position-relative success-video">
-                        <a class="play-btn venobox" href="https://youtu.be/nA1Aqp0sPQo" data-vbtype="video">
-                            <i class="ti-control-play"></i>
-                        </a>
-                    </div>
-                    <div class="col-lg-6 col-sm-8">
-                        <div class="bg-white p-5">
-                            <h2 class="section-title">Success Stories</h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat.</p>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- /success story -->
 
-        <!-- events -->
-        <section class="section bg-gray">
-            <div class="container">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="d-flex align-items-center section-title justify-content-between">
-                            <h2 class="mb-0 text-nowrap mr-3">Upcoming Events</h2>
-                            <div class="border-top w-100 border-primary d-none d-sm-block"></div>
-                            <div>
-                                <a href="events.jsp" class="btn btn-sm btn-primary-outline ml-sm-3 d-none d-sm-block">see all</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row justify-content-center">
-                    <!-- event -->
-                    <div class="col-lg-4 col-sm-6 mb-5 mb-lg-0">
-                        <div class="card border-0 rounded-0 hover-shadow">
-                            <div class="card-img position-relative">
-                                <img class="card-img-top rounded-0" src="images/events/event-1.jpg" alt="event thumb">
-                                <div class="card-date"><span>18</span><br>December</div>
-                            </div>
-                            <div class="card-body">
-                                <!-- location -->
-                                <p><i class="ti-location-pin text-primary mr-2"></i>Harvard, Usa</p>
-                                <a href="event-single.jsp"><h4 class="card-title">Toward a public philosophy of justice</h4></a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- event -->
-                    <div class="col-lg-4 col-sm-6 mb-5 mb-lg-0">
-                        <div class="card border-0 rounded-0 hover-shadow">
-                            <div class="card-img position-relative">
-                                <img class="card-img-top rounded-0" src="images/events/event-2.jpg" alt="event thumb">
-                                <div class="card-date"><span>21</span><br>December</div>
-                            </div>
-                            <div class="card-body">
-                                <!-- location -->
-                                <p><i class="ti-location-pin text-primary mr-2"></i>Cambridge, USA</p>
-                                <a href="event-single.jsp"><h4 class="card-title">Research seminar in clinical science.</h4></a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- event -->
-                    <div class="col-lg-4 col-sm-6 mb-5 mb-lg-0">
-                        <div class="card border-0 rounded-0 hover-shadow">
-                            <div class="card-img position-relative">
-                                <img class="card-img-top rounded-0" src="images/events/event-3.jpg" alt="event thumb">
-                                <div class="card-date"><span>23</span><br>December</div>
-                            </div>
-                            <div class="card-body">
-                                <!-- location -->
-                                <p><i class="ti-location-pin text-primary mr-2"></i>Dhanmondi Lake, Dhaka</p>
-                                <a href="event-single.jsp"><h4 class="card-title">Firefly training in trauma-informed yoga</h4></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- mobile see all button -->
-                <div class="row">
-                    <div class="col-12 text-center">
-                        <a href="course.jsp" class="btn btn-sm btn-primary-outline d-sm-none d-inline-block">sell all</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- /events -->
 
-        <!-- teachers -->
+        <!-- Mentors -->
         <section class="section">
             <div class="container">
                 <div class="row justify-content-center">
@@ -423,7 +278,7 @@
                 </div>
             </div>
         </section>
-        <!-- /teachers -->
+        <!-- /Mentors -->
 
         <!-- blog -->
         <section class="section pt-0">

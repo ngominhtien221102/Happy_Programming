@@ -2,7 +2,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controllers.common;
+
+package controllers.admin;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,43 +13,49 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.util.HashMap;
+import java.util.List;
+import model.User;
+import model.UserProfile;
+import service.IUserProfileService;
+import service.IUserService;
+import service.classimpl.UserProfileService;
+import service.classimpl.UserService;
 
 /**
  *
- * @author Lenovo
+ * @author Admin
  */
-@WebServlet(name = "LogoutController", urlPatterns = {"/logout"})
-public class LogoutController extends HttpServlet {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
+@WebServlet(name="MentorChartController", urlPatterns={"/mentorChart"})
+public class MentorChartController extends HttpServlet {
+   
+    /** 
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
+        try (PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
-            HttpSession ses = request.getSession();
-            ses.removeAttribute("Account");
-            ses.removeAttribute("RoleID");
-
-            ses.removeAttribute("Notification");
-            ses.removeAttribute("NewNotification");
-            response.sendRedirect("views/user/index.jsp");
-
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet MentorChartController</title>");  
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet MentorChartController at " + request.getContextPath () + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
-    }
+    } 
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
+    /** 
      * Handles the HTTP <code>GET</code> method.
-     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -56,13 +63,27 @@ public class LogoutController extends HttpServlet {
      */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
+    throws ServletException, IOException {
+        HttpSession ses = request.getSession();
+        IUserProfileService upSer = new UserProfileService();
+        IUserService uSer = new UserService();
+        
+        List<UserProfile> upList = (List<UserProfile>) ses.getAttribute("listUserProfile");
+        List<User> uList = (List<User>) ses.getAttribute("listUser");
+        HashMap<Integer, Integer> roleHm = uSer.getRoleHm(uList);
+        
+        List<Integer> list = upSer.getMonthlyUser(3, upList, roleHm);
+        String list_raw = "";
+        for (Integer i : list) {
+            list_raw = list_raw + i + "-";
+        }
+        list_raw = list_raw.substring(0, list_raw.length() - 1);
+        PrintWriter out = response.getWriter();
+        out.println(list_raw);
+    } 
 
-    /**
+    /** 
      * Handles the HTTP <code>POST</code> method.
-     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -70,13 +91,12 @@ public class LogoutController extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+    throws ServletException, IOException {
         processRequest(request, response);
     }
 
-    /**
+    /** 
      * Returns a short description of the servlet.
-     *
      * @return a String containing servlet description
      */
     @Override

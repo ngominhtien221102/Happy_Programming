@@ -16,7 +16,7 @@
         <div id="wrapper" class="row">
 
             <!-- Sidebar -->
-            <%@include file="sidebar.jsp" %>
+            <%@include file="adminSidebar.jsp" %>
             <!-- End of Sidebar -->
 
             <!-- Content Wrapper -->
