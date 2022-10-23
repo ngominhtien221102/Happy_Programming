@@ -15,6 +15,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
+import model.PageInfor;
 import model.Request;
 import model.Response;
 import model.User;
@@ -111,11 +112,34 @@ public class ViewAllRequestController extends HttpServlet {
                 }
             }
         }
+        int cp;
+        int nrpp = 0;
+        String page = request.getParameter("page");
+        try {
+            nrpp = Integer.parseInt(request.getParameter("nrpp"));
+        } catch (Exception e) {
+        }
+
+        if (page == null || page.equals("")) {
+            cp = 1;
+        } else {
+            cp = Integer.parseInt(page);
+        }
+        PageInfor pageIf = new PageInfor(6, LstRequest.size(), cp);
+        int[] a = {6, 9, 12, 15, 18};
+        pageIf.setArrNrpp(a);
+        if (nrpp != 0) {
+            pageIf = new PageInfor(nrpp, LstRequest.size(), cp);
+            pageIf.setArrNrpp(a);
+        }
+        request.setAttribute("pageIf", pageIf);
+        request.setAttribute("nrpp", nrpp);
         request.setAttribute("urLst", urLst);
         request.setAttribute("LstRequest", LstRequest);
         request.setAttribute("resCount", resCount);
         request.getRequestDispatcher("views/user/viewRequest.jsp").forward(request, response);
     }
+
     /**
      * Handles the HTTP <code>POST</code> method.
      *
