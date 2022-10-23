@@ -6,7 +6,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
-    <%@include file="headCSS2.jsp" %>
+    <%@include file="../user/headCSS2.jsp" %>
     <style>
         .search input[type="text"]{
             border: 1px solid #08080B;
@@ -56,9 +56,6 @@
             border-color: #ced4da;
             background-color: #fff;
             padding: 10px;
-        }
-        .table{
-
         }
         .col-9{
             margin: 0 auto;
@@ -110,7 +107,7 @@
                                 </form>
                             </article>
 
-                            <div class="col-6 table">
+                            <div class="col-6">
                                 <div class="search" style="margin-left:15px" > 
                                     <form action="<%=request.getContextPath()%>/editSkill" class="row">
                                         <input  type="text" name="search" value="${requestScope.search}" placeholder="Search Skill">
@@ -127,14 +124,13 @@
                                     </thead>
                                     <tbody>
                                         <c:forEach items="${requestScope.listSearch}" var="s" varStatus="loop" begin="${pageIf.start}" end="${pageIf.end}"> 
-                                        <tbody>
+
                                             <tr>
                                                 <td>${loop.index+1}</td>
                                                 <td>${s.name}</td>
                                                 <td><a class="text-color" href="<%=request.getContextPath()%>/editSkill?search=${search}&page=${pageIf.cp}&skillID=${s.ID}&type=1">update</a></td>
                                                 <td><a class="text-color" href="<%=request.getContextPath()%>/editSkill?search=${search}&page=${pageIf.cp}&skillID=${s.ID}&type=0">delete</a></td>
                                             </tr>
-                                        </tbody>
                                     </c:forEach>
                                     </tbody>
 

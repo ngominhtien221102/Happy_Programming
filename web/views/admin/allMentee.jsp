@@ -6,7 +6,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
-    <%@include file="headCSS2.jsp" %>
+    <%@include file="../user/headCSS2.jsp" %>
     <style>
         .card-title,.list-inline-item{
             white-space: nowrap;
@@ -20,7 +20,7 @@
         }
         .card-block{
             margin-top: 50px;
-            background-color: #f3f3f3;
+            background-color: rgba(0,0,0,.03);
             padding: 50px;
             border-radius: 5px;
         }
@@ -98,7 +98,7 @@
             margin: 30px 0;
             float: right;
         }
-        .pagination a,.pagination select{
+        .pagination a{
             border: #ced4da solid 1px;
             padding: 10px;
             border-radius: 5px;
@@ -108,6 +108,10 @@
         .pagination select{
             color: #ffbc3b;
             background: #f3f3f3;
+            border: #ced4da solid 1px;
+            padding: 10px;
+            border-radius: 5px;
+            height: 40px;
         }
         .pagination a:hover, .pagination a.active{
             background-color:#e9ecef;
@@ -120,11 +124,14 @@
         .ti-arrow-down{
             width: 20%;
         }
+        .bgr-white{
+            background: #fff;
+        }
     </style>
     <body>
         <!-- header -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <%@include file="header.jsp" %>
+        <%@include file="../user/header.jsp" %>
         <!-- /header -->
         <div id="content" class="row" style="padding-top: 50px;  min-height: 800px">
             <%@include file="adminSidebar.jsp" %>
@@ -205,8 +212,7 @@
                                     <button type="submit"><i class="ti ti-search" aria-hidden="true"></i></button>
                                 </form>
                             </div>
-                        </div>
-                        <br><h3>Mentees</h3>
+                                    <br><h3>Mentees</h3>
                         <div class="row">  
                             <div class="col-md-12 table">
 
@@ -214,7 +220,7 @@
                                     <thead>
                                         <tr>
                                             <th>STT</th> 
-                                            <th>Name<a style="float: right;color: #000" 
+                                            <th>Name<a style="float: right;color: #fff" 
                                                        href="<%=request.getContextPath()%>/allMentee?sort=${sort}&nrpp=${nrpp}<c:if test="${search != null}">&search=${search}</c:if>"><i class="ti-arrow-down"></i><i class="ti-arrow-up"></i></a></th>
                                                 <th>Gender</th>
                                                 <th style="width: 25%">Address</th>
@@ -225,7 +231,7 @@
                                             </tr>
                                         </thead>
 
-                                        <tbody>
+                                        <tbody class="bgr-white">
                                         <c:forEach items="${listMentee}" var="m" varStatus="loop" begin="${pageIf.start}" end="${pageIf.end}">
                                             <tr>
                                                 <td>${loop.index + 1}</td>
@@ -264,9 +270,9 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-            </div>
-        </section>
+                        </div>
+                        
+                    </div></div></section>
     </div>
 </div>
 <!-- footer -->
