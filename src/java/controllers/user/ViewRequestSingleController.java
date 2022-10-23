@@ -137,10 +137,10 @@ public class ViewRequestSingleController extends HttpServlet {
             if (resContent.equalsIgnoreCase("")) {
                 request.setAttribute("resAlert", "Write something to response!");
             } else {
-                String msg = rs.insert(new Response(0, requestID, userID, resContent, ""), (List<Response>) session.getAttribute("listResponse"));
+                rs.insert(new Response(0, requestID, userID, resContent, ""), (List<Response>) session.getAttribute("listResponse"));
                 // notification
                 LocalDate createAt = LocalDate.now();
-                String subMsg[] = msg.split(" ");
+                
                 int receiveID;
                 Request req = reqs.getRequestById(requestID, (List<Request>) session.getAttribute("listRequest"));
                 if (req.getMenteeID() == userID) {
@@ -148,7 +148,7 @@ public class ViewRequestSingleController extends HttpServlet {
                 } else {
                     receiveID = req.getMenteeID();
                 }
-                String reqId = subMsg[1];
+                
                 Cookie[] arr = request.getCookies();
                 String txt = "";
                 String num = "0";
@@ -164,9 +164,9 @@ public class ViewRequestSingleController extends HttpServlet {
                     }
                 }
                 if (txt.isEmpty()) {
-                    txt = reqId + ":" + "response" + ":" + userID + ":" + createAt;
+                    txt = requestID + ":" + "response" + ":" + userID + ":" + createAt;
                 } else {
-                    txt = txt + "/" + reqId + ":" + "response" + ":" + userID + ":" + createAt;
+                    txt = txt + "/" + requestID + ":" + "response" + ":" + userID + ":" + createAt;
                 }
                 Cookie c = new Cookie(cookieNotifyName, txt);
                 c.setMaxAge(60 * 60 * 24 * 2);

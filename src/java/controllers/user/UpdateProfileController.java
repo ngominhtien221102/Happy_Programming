@@ -137,6 +137,7 @@ public class UpdateProfileController extends HttpServlet {
             request.setAttribute("u", us);
             request.getRequestDispatcher("views/user/updateMenteeProfile.jsp").forward(request, response);
         }
+
 //        String uploadFolder = request.getServletContext().getRealPath("/img/avatar");
 //        Path uploadPath = Paths.get(uploadFolder);
 //        if (!Files.exists(uploadPath)) {
@@ -151,7 +152,10 @@ public class UpdateProfileController extends HttpServlet {
 //            imgname = "p" + u.getID() + ".png";
 //        }
 
-        String uploadFolder = "D:\\Project_SE1628\\Happy_Programming\\web\\img\\avatar";
+//        String uploadFolder = "D:\\Project_SE1628\\Happy_Programming\\web\\img\\avatar";
+
+        String uploadFolder = "C:\\Users\\ASUS\\Desktop\\SWP-Project\\Happy_Programming\\web\\img\\avatar";
+
         Path uploadPath = Paths.get(uploadFolder);
         if (!Files.exists(uploadPath)) {
             Files.createDirectory(uploadPath);
