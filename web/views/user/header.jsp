@@ -86,7 +86,7 @@
     <div class="fixed-top navigation w-100" style="margin-top: 0px;
          background: #ffbc3b">
 
-        <div class="container">
+        <div class="container" style="margin: 0% 2% 0 2% 0%;">
             <nav class="navbar navbar-expand-lg navbar-light p-0">
                 <a class="navbar-brand" href="<%=request.getContextPath()%>/views/user/index.jsp"><img src="<%=request.getContextPath()%>/template1/images/logo.png" alt="logo"></a>
                 <button class="navbar-toggler rounded-0" type="button" data-toggle="collapse" data-target="#navigation"
