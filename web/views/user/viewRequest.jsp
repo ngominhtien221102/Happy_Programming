@@ -35,19 +35,23 @@
             color: #ffbc3b;
             background: rgba(9,30,66,0.08);
         }
-        .pagination a,.pagination select{
+       .pagination a{
             border: #ced4da solid 1px;
             padding: 10px;
             border-radius: 5px;
-            margin-right: 10px;
+           
         }
         .pagination select{
             color: #ffbc3b;
             background: #f3f3f3;
+            border: #ced4da solid 1px;
+            padding: 10px;
+            border-radius: 5px;
         }
-        .pagination a:hover, .pagination a.active{
+        .pagination a:hover,.pagination a.active{
             background-color:#e9ecef;
             color: #ffbc3b;
+            margin: 0px;
         }
         .pagination{
             margin: 30px 0;
@@ -110,13 +114,15 @@
                             </c:forEach>          
                         </div>
                         <div class="pagination">
-                            <c:if test="${pageIf.cp!=1 && pageIf.end!=null}">
-                                <a href="<%=request.getContextPath()%>/viewAllRequest?page=1&nrpp=${nrpp}"><<</a>  
+                            <c:if test="${pageIf.cp!=1 && pageIf.end!=null}">                             
+                                <a href="<%=request.getContextPath()%>/viewAllRequest?page=1&nrpp=${nrpp}"><<</a>
+                                <a href="<%=request.getContextPath()%>/viewAllRequest?page=${pageIf.cp-1}&nrpp=${nrpp}"><</a>
                             </c:if>      
-                            <c:forEach begin="${pageIf.cp>3?pageIf.cp-3:1}" end="${pageIf.cp+3>pageIf.np?pageIf.np:pageIf.cp+3}" var="i">
+                            <c:forEach begin="${pageIf.cp>2?pageIf.cp-2:1}" end="${pageIf.cp+2>pageIf.np?pageIf.np:pageIf.cp+2}" var="i">
                                 <a class="${i==pageIf.cp?"active":""}" href="<%=request.getContextPath()%>/viewAllRequest?page=${i}&nrpp=${nrpp}">${i}</a>
                             </c:forEach>
                             <c:if test="${pageIf.cp!=pageIf.np && pageIf.end!=0}">
+                                <a href="<%=request.getContextPath()%>/viewAllRequest?page=${pageIf.cp+1}&nrpp=${nrpp}">></a>
                                 <a href="<%=request.getContextPath()%>/viewAllRequest?page=${pageIf.np}&nrpp=${nrpp}">>></a>  
                             </c:if>
                             <form action="<%=request.getContextPath()%>/viewAllRequest" method="GET">
