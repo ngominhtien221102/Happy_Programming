@@ -79,6 +79,24 @@
         }
         .col-9{
             margin: 0 auto;
+        }.pagination a,.pagination select{
+            border: #ced4da solid 1px;
+            padding: 10px;
+            border-radius: 5px;
+            margin-right: 10px;
+            height: 40px;
+        }
+        .pagination select{
+            color: #ffbc3b;
+            background: #f3f3f3;
+        }
+        .pagination a:hover, .pagination a.active{
+            background-color:#e9ecef;
+            color: #ffbc3b;
+        }
+        .pagination{
+            margin: 30px 0;
+            float: right;
         }
         .pagination a,.pagination select{
             border: #ced4da solid 1px;
@@ -246,7 +264,9 @@
                                 </div>
                             </div>
                         </div>
-                    </div></div></section>
+                    </div>
+            </div>
+        </section>
     </div>
 </div>
 <!-- footer -->

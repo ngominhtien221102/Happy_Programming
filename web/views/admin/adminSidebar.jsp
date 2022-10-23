@@ -32,12 +32,6 @@
             </a>
         </li>
 
-<!--         Nav Item - Add product 
-        <li class="nav-item">
-            <a class="nav-link collapsed" href="<%=request.getContextPath()%>/views/common/viewMentorCV.jsp" >
-                <span>Static</span>
-            </a>
-        </li>-->
         <hr class="sidebar-divider">
 
         <!-- Heading -->
