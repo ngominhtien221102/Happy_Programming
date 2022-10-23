@@ -80,12 +80,14 @@ public class AllInvitationController extends HttpServlet {
         int reject = invS.countInv(4, invList);
         int process = invS.countInv(2, invList);
         int cancel = invS.countInv(3, invList);
+        int close = invS.countInv(5, invList);
         //set sang jsp
         request.setAttribute("totalInv", totalInv);
         request.setAttribute("acpt", acpt);
         request.setAttribute("reject", reject);
         request.setAttribute("process", process);
         request.setAttribute("cancel", cancel);
+        request.setAttribute("close", close);
 
         String url = request.getParameter("urltext");
         try {

@@ -343,7 +343,7 @@
                                             <c:forEach items="${listUserProfile}" var="user">
                                                 <c:if test="${user.ID == cmt.menteeID}">
                                                     <p>
-                                                        <a class="float-left"><strong>${user.lastName} ${user.firstName}</strong></a>
+                                                        <a class="float-left"><strong>${user.firstName} ${user.lastName} </strong></a>
                                                     </p>
                                                 </c:if>
                                             </c:forEach>

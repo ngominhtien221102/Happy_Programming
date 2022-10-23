@@ -77,6 +77,7 @@ public class InvitationDAO extends DBContext {
             ResultSet rs = ps.executeQuery();
             if(rs.next()){
                 i.setID(rs.getInt(1));
+                i.setCreatedAt(date);
             }
             
         } catch (Exception e) {

@@ -180,6 +180,8 @@ public class SendInvitationController extends HttpServlet {
                     
                     Invitation inv = new Invitation(0, mentorID, menteeID, skill, 2, title, deadline, content,"");
                     msg = i.insert(inv, list);
+                    
+                    session.removeAttribute("upInvLst");
                     // neu add thanh cong dua du lieu len cookie
                     if (msg.startsWith("OK")) {
                         //Luu thong tin invitation vao cookie
@@ -201,9 +203,9 @@ public class SendInvitationController extends HttpServlet {
                             }
                         }
                         if (txt.isEmpty()) {
-                            txt = invId+":"+"invite"+":"+menteeID+":"+createAt;
+                            txt = invId+":"+"invitation"+":"+menteeID+":"+createAt;
                         } else {
-                            txt = txt + "/" + invId+":"+"invite"+":"+menteeID+":"+createAt;
+                            txt = txt + "/" + invId+":"+"invitation"+":"+menteeID+":"+createAt;
                         }
                         Cookie c = new Cookie(cookieNotifyName, txt);
                         c.setMaxAge(60 * 60 * 24 * 2);

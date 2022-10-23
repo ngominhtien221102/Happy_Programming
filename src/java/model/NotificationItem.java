@@ -13,7 +13,7 @@ public class NotificationItem {
     private int ID;
     // kieu notification, vd: invitation, request, response
     private String type;
-    private int menteeID;
+    private int senderID;
     private String createAt;
 
     public NotificationItem() {
@@ -22,7 +22,7 @@ public class NotificationItem {
     public NotificationItem(int ID, String type, int menteeID, String createAt) {
         this.ID = ID;
         this.type = type;
-        this.menteeID = menteeID;
+        this.senderID = menteeID;
         this.createAt = createAt;
     }
 
@@ -44,12 +44,12 @@ public class NotificationItem {
         this.type = type;
     }
 
-    public int getMenteeID() {
-        return menteeID;
+    public int getSenderID() {
+        return senderID;
     }
 
-    public void setMenteeID(int menteeID) {
-        this.menteeID = menteeID;
+    public void setSenderID(int senderID) {
+        this.senderID = senderID;
     }
 
     public String getCreateAt() {

@@ -155,10 +155,10 @@
                                          border-bottom-left-radius: 5px;
                                          border-bottom-right-radius: 5px;">
                                         <c:if test="${thisMonth >= lastMonth}" >
-                                            <p style="color: #fff; margin: 0 "><i class="ti-arrow-up m-2"></i>${percent}%</p>
+                                            <p style="color: #fff; margin: 0 "><i class="ti-arrow-up m-2"></i>${percent}</p>
                                         </c:if>
                                         <c:if test="${thisMonth < lastMonth}" >
-                                            <p style="color: #fff; margin: 0 "><i class="ti-arrow-down m-2"></i>${percent}%</p>
+                                            <p style="color: #fff; margin: 0 "><i class="ti-arrow-down m-2"></i>${percent}</p>
                                         </c:if>  
                                         <!--                                        <p style="color: #fff; margin: 0 "><i class="ti-arrow-down m-2"></i>10%</p>-->
                                     </div>

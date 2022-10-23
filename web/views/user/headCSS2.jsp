@@ -60,13 +60,38 @@
         .text-align-center{
             text-align: center;
         }
-        table{
-            
-            
+        table {
+            width: 100%;
+            font-family: arial, sans-serif;
+            border: 5px solid rgba(0,0,0,.125) ;
+            border-collapse: collapse;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        th, td {
+            padding: 16px;
+            text-align: left;
+            border: 1px solid rgba(0,0,0,.125);
+
+        }
+        th{
+            background-color: #36304a;
+            color: #fff;
+        }
+        tbody tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        tbody tr:hover {
+            color: #555;
+            background-color: #f5f5f5;
+            cursor: pointer;
+        }
+        tbody{
+            border-bottom: 10px solid #f2f2f2;
         }
         img{
             object-fit: cover;
         }
-        
+
     </style>
 </head>

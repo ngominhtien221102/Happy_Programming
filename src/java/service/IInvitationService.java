@@ -34,6 +34,18 @@ public interface IInvitationService {
     String cancel(Invitation u, List<Invitation> list);
     
     void totalInvPerMonth(List<Invitation> list);
+    
+    List<Integer> getTotalPerMonth();
+
+    List<Integer> getTotalProcessingPerMonth();
+
+    List<Integer> getTotalCancelPerMonth();
+
+    List<Integer> getTotalRejectPerMonth();
+
+    List<Integer> getTotalAcceptPerMonth();
+
+    List<Integer> getTotalClosedPerMonth();
 
     List<Invitation> getInvitationByMentorId(int mentorId, List<Invitation> list);
 }

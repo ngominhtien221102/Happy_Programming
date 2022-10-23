@@ -13,10 +13,15 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 import model.Invitation;
 import model.Notification;
+import model.NotificationItem;
 import model.User;
+import model.UserProfile;
+import service.IUserProfileService;
+import service.classimpl.UserProfileService;
 
 /**
  *
@@ -64,23 +69,33 @@ public class NotificationController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession ses = request.getSession();
+        Notification n = (Notification) ses.getAttribute("Notification");
+        List<NotificationItem> listNotify = new ArrayList<>();
+        for (int i = n.getItems().size() - 1; i >= 0; i--) {
+            listNotify.add(n.getItems().get(i));
+        }
+        request.setAttribute("listNotify", listNotify);
+        IUserProfileService us = new UserProfileService();
+        request.setAttribute("profileService", us);
+        // set lai so luong =0
         User u = (User) ses.getAttribute("Account");
+        int num = 0;
         Cookie arr[] = request.getCookies();
-        String cookieNewNotifyName = "newNotification"+u.getID();
- 
+        String cookieNewNotifyName = "newNotification" + u.getID();
         if (arr != null) {
             for (Cookie o : arr) {
                 if (o.getName().equals(cookieNewNotifyName)) {
+                    num = Integer.parseInt(o.getValue());
                     o.setMaxAge(0);
                     response.addCookie(o);
                 }
             }
         }
-        // set lai so luong =0
         Cookie c = new Cookie(cookieNewNotifyName, "0");
         c.setMaxAge(60 * 60 * 24 * 2);
         response.addCookie(c);
         ses.setAttribute("NewNotification", 0);
+        request.setAttribute("num", num);
         request.getRequestDispatcher("views/user/notification.jsp").forward(request, response);
     }
 
