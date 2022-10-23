@@ -71,7 +71,7 @@
         .col-9{
             margin: 0 auto;
         }
-        .pagination a,.pagination select{
+        .pagination a{
             border: #ced4da solid 1px;
             padding: 10px;
             border-radius: 5px;
@@ -80,6 +80,9 @@
         .pagination select{
             color: #ffbc3b;
             background: #f3f3f3;
+            border: #ced4da solid 1px;
+            padding: 10px;
+            border-radius: 5px;
         }
         .pagination a:hover, .pagination a.active{
             background-color:#e9ecef;

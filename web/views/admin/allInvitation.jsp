@@ -6,7 +6,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
-    <%@include file="headCSS2.jsp" %>
+    <%@include file="../user/headCSS2.jsp" %>
     <style>
         .card-title,.list-inline-item{
             white-space: nowrap;
@@ -20,7 +20,7 @@
         }
         .card-block{
             margin-top: 50px;
-            background-color: #f3f3f3;
+            background-color: rgba(0,0,0,.03);
             padding: 50px;
             border-radius: 5px;
         }
@@ -97,7 +97,7 @@
     </style>
     <body>
         <!-- header -->
-        <%@include file="header.jsp" %>
+        <%@include file="../user/header.jsp" %>
         <!-- /header -->
         <div id="content" class="row" style="padding-top: 50px;  min-height: 800px">
             <%@include file="adminSidebar.jsp" %>
@@ -170,9 +170,10 @@
                                     </div>
                                 </div>
                             </article>
-
+                        </div>
+                        <div class="row mt-4">
                             <!--   cancel invitation -->
-                            <article class="col-4">
+                            <article class="col-6">
                                 <div class="card border-bottom hover-shadow" style="border-radius: 5px;background-color: #f3f3f3">
                                     <div class="card-body row align-items-center" >
                                         <div class="col-8">
@@ -193,7 +194,7 @@
                             </article>
 
                             <!--   closed invitation -->
-                            <article class="col-4">
+                            <article class="col-6">
                                 <div class="card border-bottom hover-shadow" style="border-radius: 5px;background-color: #f3f3f3">
                                     <div class="card-body row align-items-center" >
                                         <div class="col-8">
@@ -212,9 +213,11 @@
                                 </div>
 
                             </article>
-
-
                         </div>
+
+
+
+
                         <!-- Bar Chart -->
                         <div class="card shadow mb-4" style="margin-top: 50px">
                             <div class="card-header py-3">
@@ -312,10 +315,10 @@
                                                 <!--sap xep theo tittle-->
                                                 <th>
                                                     Title
-                                                    <a style="float: right;color: #000" href="<%=request.getContextPath()%>/allInvitation?Type=down&urltext=<%=request.getRequestURL().toString()%>">
+                                                    <a style="float: right;color: #fff" href="<%=request.getContextPath()%>/allInvitation?Type=down&urltext=<%=request.getRequestURL().toString()%>">
                                                         <i class="ti-arrow-down" ></i>
                                                     </a>
-                                                    <a style="float: right;color: #000" href="<%=request.getContextPath()%>/allInvitation?Type=up&urltext=<%=request.getRequestURL().toString()%>">
+                                                    <a style="float: right;color: #fff" href="<%=request.getContextPath()%>/allInvitation?Type=up&urltext=<%=request.getRequestURL().toString()%>">
                                                         <i class="ti-arrow-up"></i>
                                                     </a>
                                                 </th> 

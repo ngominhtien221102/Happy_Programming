@@ -10,10 +10,18 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <style>
+            .footer{
+                margin-top: 100px;
+                position: relative;
+                width: 100%;
+                top: 100%;
+                z-index: 1;
+            }
+        </style>
     </head>
     <body>
-        <footer>
-
+        <footer class="">
             <!-- footer content -->
             <div class="footer bg-footer section border-bottom">
                 <div class="container">
