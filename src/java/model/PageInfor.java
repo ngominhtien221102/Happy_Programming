@@ -17,6 +17,7 @@ public class PageInfor {
     private int start;
     private int end;
     private int [] arrNrpp = {5,10,15,20};
+    private int [] arrNrpp1 = {1,3,6,9,12};
 
     public int[] getArrNrpp() {
         return arrNrpp;
@@ -24,6 +25,13 @@ public class PageInfor {
 
     public void setArrNrpp(int[] arrNrpp) {
         this.arrNrpp = arrNrpp;
+    }
+    public int[] getArrNrpp1() {
+        return arrNrpp1;
+    }
+
+    public void setArrNrpp1(int[] arrNrpp1) {
+        this.arrNrpp1 = arrNrpp1;
     }
  
     public PageInfor(int npp, int size, int cp) {

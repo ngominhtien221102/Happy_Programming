@@ -49,7 +49,7 @@
 
         <!-- Nav Item - Add product -->
         <li class="nav-item">
-            <a class="nav-link collapsed" href="<%=request.getContextPath()%>/allNofication.jsp" >
+            <a class="nav-link collapsed" href="<%=request.getContextPath()%>/notification" >
                 <span>All Notification</span>
             </a>
         </li>

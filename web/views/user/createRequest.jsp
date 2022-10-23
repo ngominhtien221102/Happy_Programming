@@ -138,13 +138,15 @@
                                 </table>
                                 <div class="pagination">
                                     <c:if test="${pageIf.cp!=1 && pageIf.end!=null}">
-                                        <a href="<%=request.getContextPath()%>/sendRequest?page=1"><<</a>  
+                                        <a href="<%=request.getContextPath()%>/sendRequest?page=1&nrpp=${nrpp}"><<</a>
+                                        <a href="<%=request.getContextPath()%>/sendRequest?page=${pageIf.cp-1}&nrpp=${nrpp}"><</a>
                                     </c:if>      
-                                    <c:forEach begin="${1}" end="${pageIf.np}" var="i">
-                                        <a class="${i==pageIf.cp?"active":""}" href="<%=request.getContextPath()%>/sendRequest?page=${i}">${i}</a>
+                                    <c:forEach begin="${pageIf.cp>2?pageIf.cp-2:1}" end="${pageIf.cp+2>pageIf.np?pageIf.np:pageIf.cp+2}" var="i">
+                                        <a class="${i==pageIf.cp?"active":""}" href="<%=request.getContextPath()%>/sendRequest?page=${i}&nrpp=${nrpp}">${i}</a>
                                     </c:forEach>
                                     <c:if test="${pageIf.cp!=pageIf.np && pageIf.end!=0}">
-                                        <a href="<%=request.getContextPath()%>/sendRequest?page=${pageIf.np}">>></a>  
+                                         <a href="<%=request.getContextPath()%>/sendRequest?page=${pageIf.cp+1}&nrpp=${nrpp}">></a>
+                                        <a href="<%=request.getContextPath()%>/sendRequest?page=${pageIf.np}&nrpp=${nrpp}">>></a>  
                                     </c:if>
                                     <form action="<%=request.getContextPath()%>/sendRequest" method="GET">
                                         <select name="nrpp" onchange="this.form.submit()">

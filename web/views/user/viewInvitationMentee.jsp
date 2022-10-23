@@ -36,7 +36,25 @@
             background-color: #f3f3f3;
             border-radius: 5px;
         }
-
+        .pagination a,.pagination select{
+            border: #ced4da solid 1px;
+            padding: 10px;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+        .pagination select{
+            color: #ffbc3b;
+            background: #f3f3f3;
+        }
+        .pagination a:hover, .pagination a.active{
+            background-color:#e9ecef;
+            color: #ffbc3b;
+        }
+        .pagination{
+            margin: 30px 0;
+            clear: both;
+            justify-content: center;
+        }
     </style>
     <body>
         <!-- header -->
@@ -50,7 +68,7 @@
                     <div class="container">
                         <h2>All Invitation</h2>
                         <div class="row">
-                            <c:forEach items="${listInv2}" var="inv" varStatus="loop">
+                            <c:forEach items="${listInv2}" var="inv" begin="${pageIf.start}" end="${pageIf.end}" varStatus="loop">
                                 <!-- blog post -->
                                 <article class="col-lg-4 col-sm-6 mb-5">
                                     <div class="card border-bottom border-primary hover-shadow invite">
@@ -92,6 +110,26 @@
                                 </article>
                             </c:forEach>
                         </div>
+                        <div class="pagination">
+                            <c:if test="${pageIf.cp!=1 && pageIf.end!=null}">
+                                <a href="<%=request.getContextPath()%>/viewAllInvite?page=1&nrpp=${nrpp}"><<</a> 
+                                <a href="<%=request.getContextPath()%>/viewAllInvite?page=${pageIf.cp-1}&nrpp=${nrpp}"><</a>
+                            </c:if>      
+                            <c:forEach begin="${pageIf.cp>2?pageIf.cp-2:1}" end="${pageIf.cp+2>pageIf.np?pageIf.np:pageIf.cp+2}" var="i">
+                                <a class="${i==pageIf.cp?"active":""}" href="<%=request.getContextPath()%>/viewAllInvite?page=${i}&nrpp=${nrpp}">${i}</a>
+                            </c:forEach>
+                            <c:if test="${pageIf.cp!=pageIf.np && pageIf.end!=0}">
+                                <a href="<%=request.getContextPath()%>/viewAllInvite?page=${pageIf.cp+1}&nrpp=${nrpp}">></a>
+                                <a href="<%=request.getContextPath()%>/viewAllInvite?page=${pageIf.np}&nrpp=${nrpp}">>></a>  
+                            </c:if>
+                            <form action="<%=request.getContextPath()%>/viewAllInvite" method="GET">
+                                <select name="nrpp" onchange="this.form.submit()">
+                                    <c:forEach items="${pageIf.arrNrpp}" var="i">
+                                        <option <c:if test="${nrpp==i}">selected=""</c:if> value="${i}">${i}</option>
+                                    </c:forEach>
+                                </select>
+                            </form>
+                        </div>
                     </div>
                 </section>    
             </div>
@@ -104,19 +142,20 @@
         <%@include file="scriptJS.jsp" %>
         <script src="https://cdn.ckeditor.com/ckeditor5/34.1.0/classic/ckeditor.js"></script>
         <script>
-            var value;
-            ClassicEditor
-                    .create(document.querySelector('#editor'))
-                    .then(editor => {
-                        value = editor;
-                    })
-                    .catch(error => {
-                        console.error(error);
-                    });
+                                    var value;
+                                    ClassicEditor
+                                            .create(document.querySelector('#editor'))
+                                            .then(editor => {
+                                                value = editor;
+                                            })
+                                            .catch(error => {
+                                                console.error(error);
+                                            });
 
-            const handleSubmit = () => {
-                document.getElementById('a').innerHTML = value.getData();
-            };
+                                    const handleSubmit = () => {
+                                        document.getElementById('a').innerHTML = value.getData()
+                                    }
+
         </script>
     </body>
 
