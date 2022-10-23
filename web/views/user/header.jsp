@@ -81,7 +81,7 @@
         #notification{
             color: #fff;
         }
-       
+
     </style>
     <div class="fixed-top navigation w-100" style="margin-top: 0px;
          background: #ffbc3b">
@@ -107,28 +107,28 @@
                                 <a class="nav-link" href="<%=request.getContextPath()%>/views/user/mentorSuggest.jsp">SUGGEST MENTOR</a>
                             </li>
                         </c:if>
-                        <li class="nav-item dropdown view">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                               aria-haspopup="true" aria-expanded="false">
-                                Options
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="left:-50px">
-                                <c:if test="${sessionScope.Account.getRoleID() == 2}">
-                                    <a class="dropdown-item" href="<%=request.getContextPath()%>/views/user/updateMenteeProfile.jsp">Update Profile</a>
-                                    <a class="dropdown-item" href="<%=request.getContextPath()%>/sendRequest">Create Request</a> 
-                                    <a class="dropdown-item" href="<%=request.getContextPath()%>/viewAllRequest">Sent Request</a>
-                                    <a class="dropdown-item" href="<%=request.getContextPath()%>/sendInvitation">Create Invitation</a>      
-                                    <a class="dropdown-item" href="<%=request.getContextPath()%>/viewAllInvite">Sent invitation</a> 
-                                    <a class="dropdown-item" href="<%=request.getContextPath()%>/views/viewUser.jsp">Rate mentor</a> 
-                                </c:if>
-                                <c:if test="${sessionScope.Account.getRoleID() == 3}">
-                                    <a class="dropdown-item" href="<%=request.getContextPath()%>/viewAllRequest">Requests</a>
-                                    <a class="dropdown-item" href="<%=request.getContextPath()%>/viewAllInvite">Invitations</a> 
-                                </c:if>
-                            </div>                           
-                        </li>
-
-
+                        <c:if test="${sessionScope.Account != null}">
+                            <li class="nav-item dropdown view">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                                   aria-haspopup="true" aria-expanded="false">
+                                    Options
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="left:-50px">
+                                    <c:if test="${sessionScope.Account.getRoleID() == 2}">
+                                        <a class="dropdown-item" href="<%=request.getContextPath()%>/views/user/updateMenteeProfile.jsp">Update Profile</a>
+                                        <a class="dropdown-item" href="<%=request.getContextPath()%>/sendRequest">Create Request</a> 
+                                        <a class="dropdown-item" href="<%=request.getContextPath()%>/viewAllRequest">Sent Request</a>
+                                        <a class="dropdown-item" href="<%=request.getContextPath()%>/sendInvitation">Create Invitation</a>      
+                                        <a class="dropdown-item" href="<%=request.getContextPath()%>/viewAllInvite">Sent invitation</a> 
+                                        <a class="dropdown-item" href="<%=request.getContextPath()%>/views/viewUser.jsp">Rate mentor</a> 
+                                    </c:if>
+                                    <c:if test="${sessionScope.Account.getRoleID() == 3}">
+                                        <a class="dropdown-item" href="<%=request.getContextPath()%>/viewAllRequest">Requests</a>
+                                        <a class="dropdown-item" href="<%=request.getContextPath()%>/viewAllInvite">Invitations</a> 
+                                    </c:if>
+                                </div>                           
+                            </li>
+                        </c:if>
                         <li class="nav-item">
                             <a class="nav-link" href="<%=request.getContextPath()%>/views/user/contact.jsp">CONTACT</a>
                         </li>  
@@ -156,25 +156,25 @@
                             </a>
                         </c:if>
                         <c:if test="${sessionScope.Account == null || sessionScope.Account.roleID == 4}">
-                        </li>                 
-                        <li class="notiIcon dropdown view">
-                            <a onclick="Show()" class="nav-link " href="#" id="notification">
-                                <i class="ti ti-bell"></i><span id="amountNew" class="badge bg-danger" style="color: #fff">${sessionScope.NewNotification}</span>
-                            </a>
-                            <div id="someNotify" style="">
-                                
-                            </div>
-                            
-                        </li>
+                            </li>                 
+                            <li class="notiIcon dropdown view">
+                                <a onclick="Show()" class="nav-link " href="#" id="notification">
+                                    <i class="ti ti-bell"></i><span id="amountNew" class="badge bg-danger" style="color: #fff">${sessionScope.NewNotification}</span>
+                                </a>
+                                <div id="someNotify" style="">
+
+                                </div>
+
+                            </li>
 
 
 
 
-                        <li class="nav-item dropdown view ">
-                            <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown"
-                               aria-haspopup="true" aria-expanded="false">
-                                <i class="ti ti-user" aria-hidden="true"></i>
-                            </a>
+                            <li class="nav-item dropdown view ">
+                                <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown"
+                                   aria-haspopup="true" aria-expanded="false">
+                                    <i class="ti ti-user" aria-hidden="true"></i>
+                                </a>
                         </c:if>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="left:-50px">
                             <c:if test="${sessionScope.Account != null}">
@@ -189,7 +189,7 @@
                                 <a class="dropdown-item" href="<%=request.getContextPath()%>/views/user/changePassword.jsp">Change password</a>
                             </c:if>  
                             <c:if test="${sessionScope.Account == null}">
-                                <a class="dropdown-item" href="<%=request.getContextPath()%>/views/user/login.jsp">Login</a>r
+                                <a class="dropdown-item" href="<%=request.getContextPath()%>/views/user/login.jsp">Login</a>
                                 <a class="dropdown-item" href="<%=request.getContextPath()%>/views/user/signup.jsp">Register</a>
                             </c:if>
                             <c:if test="${sessionScope.Account != null}">
@@ -205,37 +205,37 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
 
-                                $(document).ready(function () {
-                                    $('#notification').click(function (e) {
-                                        e.preventDefault();
-                                        $.ajax({
-                                            url: '/Happy_Programming/subNotification',
-                                            type: 'GET',
+                                    $(document).ready(function () {
+                                        $('#notification').click(function (e) {
+                                            e.preventDefault();
+                                            $.ajax({
+                                                url: '/Happy_Programming/subNotification',
+                                                type: 'GET',
 
-                                            data: {
+                                                data: {
 
-                                            }
-                                        }).done(function (data) {
+                                                }
+                                            }).done(function (data) {
 
-                                            var row = document.getElementById("someNotify");
-                                            row.innerHTML = data;
+                                                var row = document.getElementById("someNotify");
+                                                row.innerHTML = data;
 
-                                            var row1 = document.getElementById("amountNew");
-                                            row1.innerHTML = 0;
+                                                var row1 = document.getElementById("amountNew");
+                                                row1.innerHTML = 0;
 
+
+                                            });
 
                                         });
-
                                     });
-                                });
 
-                                function Show() {
+                                    function Show() {
 
-                                    if (document.getElementById('someNotify').style.display === "block")
-                                        document.getElementById('someNotify').style.display = "none";
-                                    else
-                                        document.getElementById('someNotify').style.display = "block";
-                                }
+                                        if (document.getElementById('someNotify').style.display === "block")
+                                            document.getElementById('someNotify').style.display = "none";
+                                        else
+                                            document.getElementById('someNotify').style.display = "block";
+                                    }
 
 
 
