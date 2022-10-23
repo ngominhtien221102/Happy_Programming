@@ -109,9 +109,9 @@ public class UpdateProfileController extends HttpServlet {
         uList = (List<UserProfile>) ses.getAttribute("listUserProfile");
         List<Address> aList;
         aList = (List<Address>) ses.getAttribute("listAddress");
-      
+
         UserProfile uP = iU.getUserProfileById(u.getID(), uList);
-          Address aOld = ia.getAddressById(uP.getAddressID(), aList);
+        Address aOld = ia.getAddressById(uP.getAddressID(), aList);
         String lastName = request.getParameter("lastName");
         String firstName = request.getParameter("firstName");
         String dob = request.getParameter("dob");
@@ -123,34 +123,48 @@ public class UpdateProfileController extends HttpServlet {
         }
         String province = request.getParameter("province");
         String district = request.getParameter("district");
-        if(district == null)
-        {
+        if (district == null) {
             district = aOld.getHuyen();
         }
-        
+
         String ward = request.getParameter("ward");
-        if(ward == null)
-        {
+        if (ward == null) {
             ward = aOld.getXa();
         }
         if (ia.getIDAddress(province, district, ward, aList) == 0) {
             request.setAttribute("Error1", "This address could not be found, please check the address again");
-            UserProfile us = new UserProfile(u.getID(), firstName, lastName, uP.getAvatar() , uP.getEmail(), dob, uP.getAddressID(), gender, uP.getCreateAt());
+            UserProfile us = new UserProfile(u.getID(), firstName, lastName, uP.getAvatar(), uP.getEmail(), dob, uP.getAddressID(), gender, uP.getCreateAt());
             request.setAttribute("u", us);
             request.getRequestDispatcher("views/user/updateMenteeProfile.jsp").forward(request, response);
         }
+
+//        String uploadFolder = request.getServletContext().getRealPath("/img/avatar");
+//        Path uploadPath = Paths.get(uploadFolder);
+//        if (!Files.exists(uploadPath)) {
+//            Files.createDirectory(uploadPath); // neu chua ton tai foder postimg thi tao
+//        }
+//        Part imagePart = request.getPart("img"); // tra ve doi tuong file 'image'
+//        String imgname = Paths.get(imagePart.getSubmittedFileName()).getFileName().toString(); // lay ra ten cua file moi chon
+//        if (!imgname.isEmpty()) {
+//            imgname = "p" + u.getID() + ".png";
+//            imagePart.write(Paths.get(uploadPath.toString(), imgname).toString()); //save to foder 
+//        } else {
+//            imgname = "p" + u.getID() + ".png";
+//        }
+
+//        String uploadFolder = "D:\\Project_SE1628\\Happy_Programming\\web\\img\\avatar";
+
         String uploadFolder = "C:\\Users\\ASUS\\Desktop\\SWP-Project\\Happy_Programming\\web\\img\\avatar";
+
         Path uploadPath = Paths.get(uploadFolder);
         if (!Files.exists(uploadPath)) {
             Files.createDirectory(uploadPath);
         }
         Part imagePart = request.getPart("img");
-        String imgname = "";
-        if (imagePart == null) {
-            imgname = "p" + u.getID() + ".png";
+        String imgname = "p" + u.getID() + ".png";
+        if (imagePart != null) {
+            imagePart.write(uploadFolder + "/" + imgname);
         }
-        imgname = "p" + u.getID() + ".png";
-        imagePart.write(uploadFolder + "/" + imgname);
         int addressID = ia.getIDAddress(province, district, ward, aList);
         UserProfile userProfile = new UserProfile(u.getID(), firstName, lastName, imgname, uP.getEmail(), dob, addressID, gender, uP.getCreateAt());
         String s = iU.update(userProfile, uList);
