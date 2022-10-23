@@ -8,12 +8,17 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.text.ParseException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.Invitation;
 import model.MentorCV;
 import model.PageInfor;
@@ -28,6 +33,7 @@ import service.classimpl.InvitationService;
 import service.classimpl.MentorService;
 
 import service.classimpl.UserProfileService;
+import util.Utility;
 
 /**
  *
@@ -121,12 +127,12 @@ public class SendInvitationController extends HttpServlet {
             MentorCV mentorCV = m.getCVById(mentorID, listCV);
             List<Skill> mentorSkill = mentorCV.getSkillList();
             request.setAttribute("listSkill", mentorSkill);
-        } catch (Exception e) {
+        } catch (NumberFormatException e) {
 
         }
         // gui thanh cong or that bai
         if (msg != null) {
-            if (msg.equals("OK")) {
+            if (msg.startsWith("OK")) {
                 request.setAttribute("success", "Send invitation success");
             } else {
                 request.setAttribute("failed", msg);
@@ -148,6 +154,7 @@ public class SendInvitationController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // Send invitation 
+        Utility u = new Utility();
         HttpSession session = request.getSession();
         List<Invitation> list = (List<Invitation>) session.getAttribute("listInv");
         User mentee = (User) session.getAttribute("Account");
@@ -155,25 +162,81 @@ public class SendInvitationController extends HttpServlet {
         int menteeID = mentee.getID();
         int skill = Integer.parseInt(request.getParameter("skill"));
         String deadline = request.getParameter("deadline");
-        String title = request.getParameter("title");
-        String content = request.getParameter("content");
-        if (content.equals("")) {
-            msg = "Please enter content to invite this mentor!";
-            if (search != null) {
-                response.sendRedirect(request.getContextPath() + "/sendInvitation?search=" + search + "&page=" + cp + "&mentorID=" + mentorID + "&nrpp=" + nrpp);
+        try {
+            if (!u.checkDateNow(deadline)) {
+                msg = "Deadline must be at least equal to the current date!";
+                if (search != null) {
+                    response.sendRedirect(request.getContextPath() + "/sendInvitation?search=" + search + "&page=" + cp + "&mentorID=" + mentorID + "&nrpp=" + nrpp);
+                } else {
+                    response.sendRedirect(request.getContextPath() + "/sendInvitation?page=" + cp + "&mentorID=" + mentorID + "&nrpp=" + nrpp);
+                }
             } else {
-                response.sendRedirect(request.getContextPath() + "/sendInvitation?page=" + cp + "&mentorID=" + mentorID + "&nrpp=" + nrpp);
+                String title = request.getParameter("title");
+                String content = request.getParameter("content");
+                if (content.equals("")) {
+                    msg = "Please enter content to invite this mentor!";
+                } else {
+                    LocalDate createAt = LocalDate.now();
+                    
+                    Invitation inv = new Invitation(0, mentorID, menteeID, skill, 2, title, deadline, content,"");
+                    msg = i.insert(inv, list);
+                    
+                    session.removeAttribute("upInvLst");
+                    // neu add thanh cong dua du lieu len cookie
+                    if (msg.startsWith("OK")) {
+                        //Luu thong tin invitation vao cookie
+                        String subMsg[] = msg.split(" ");
+                        String invId = subMsg[1];
+                        Cookie[] arr = request.getCookies();
+                        
+                        String txt = "";
+                        String num ="0";
+                        String cookieNotifyName = "notification"+mentorID;
+                        String cookieNewNotifyName = "newNotification"+mentorID;
+                        if (arr != null) {
+                            for (Cookie o : arr) {
+                                if (o.getName().equals(cookieNotifyName)) {
+                                    txt += o.getValue();
+                                    o.setMaxAge(0);
+                                    response.addCookie(o);
+                                }
+                            }
+                        }
+                        if (txt.isEmpty()) {
+                            txt = invId+":"+"invitation"+":"+menteeID+":"+createAt;
+                        } else {
+                            txt = txt + "/" + invId+":"+"invitation"+":"+menteeID+":"+createAt;
+                        }
+                        Cookie c = new Cookie(cookieNotifyName, txt);
+                        c.setMaxAge(60 * 60 * 24 * 2);
+                        response.addCookie(c);
+                        // xu ly cookie newNotify
+                        if(arr!=null){
+                            for (Cookie o : arr) {
+                                if (o.getName().equals(cookieNewNotifyName)) {
+                                    num = o.getValue();
+                                    o.setMaxAge(0);
+                                    response.addCookie(o);
+                                }
+                            }
+                        }
+                        int numNewNotify = Integer.parseInt(num)+1;
+                        Cookie c1 = new Cookie(cookieNewNotifyName, numNewNotify+"");
+                        c1.setMaxAge(60 * 60 * 24 * 2);
+                        response.addCookie(c1);
+                    }
+                }
+                // du lieu de sendRedirect
+                if (search != null) {
+                    response.sendRedirect(request.getContextPath() + "/sendInvitation?search=" + search + "&page=" + cp + "&mentorID=" + mentorID + "&nrpp=" + nrpp);
+                } else {
+                    response.sendRedirect(request.getContextPath() + "/sendInvitation?page=" + cp + "&mentorID=" + mentorID + "&nrpp=" + nrpp);
+                }
             }
-        } else {
-            Invitation inv = new Invitation(0, mentorID, menteeID, skill, 2, title, deadline, content);
-            msg = i.insert(inv, list);
-            // du lieu de sendRedirect
-            if (search != null) {
-                response.sendRedirect(request.getContextPath() + "/sendInvitation?search=" + search + "&page=" + cp + "&mentorID=" + mentorID + "&nrpp=" + nrpp);
-            } else {
-                response.sendRedirect(request.getContextPath() + "/sendInvitation?page=" + cp + "&mentorID=" + mentorID + "&nrpp=" + nrpp);
-            }
+        } catch (ParseException ex) {
+            Logger.getLogger(SendInvitationController.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }
 
     /**

@@ -123,18 +123,19 @@ public class AllMenteeController extends HttpServlet {
         }
         request.setAttribute("lastMonth", nMenteeLastMonth);
         float perGrowth = 0;
-        if(nMenteeLastMonth <= nMenteeThisMonth)
-        {
-             perGrowth = (float) ((nMenteeThisMonth - nMenteeLastMonth) * 100) / nMenteeLastMonth;
+        if (nMenteeLastMonth != 0) {
+            if (nMenteeLastMonth <= nMenteeThisMonth) {
+                perGrowth = (float) ((nMenteeThisMonth - nMenteeLastMonth) * 100) / nMenteeLastMonth;
+            } else {
+                perGrowth = (float) ((nMenteeLastMonth - nMenteeThisMonth) * 100) / nMenteeLastMonth;
+            }
+            String percent = String.format("%.01f", perGrowth);
+            request.setAttribute("percent", percent + "%");
+        } else {
+            if (nMenteeThisMonth == 0) {
+                request.setAttribute("percent", 0 + "%");
+            }
         }
-        else
-        {
-            perGrowth = (float) ((nMenteeLastMonth - nMenteeThisMonth) * 100) / nMenteeLastMonth;
-        }
-        
-        
-        String percent = String.format("%.01f", perGrowth);
-        request.setAttribute("percent", percent);
 
         //Ban or open
         String menteeID = request.getParameter("menteeID");

@@ -12,14 +12,11 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.util.HashMap;
+
 import java.util.List;
 import model.Invitation;
-import model.Status;
 import service.IInvitationService;
-import service.IStatusService;
 import service.classimpl.InvitationService;
-import service.classimpl.StatusService;
 
 /**
  *
@@ -86,18 +83,18 @@ public class UpdateStatusController extends HttpServlet {
                     inv.setStatusID(4);
                     in.update(inv, inlist);
                     session.setAttribute("listInv", inlist);
-                    response.sendRedirect(request.getContextPath() + "/views/mentors/viewInvitationMentor.jsp");
+                    response.sendRedirect(request.getContextPath() + "/invitationMentor");
                 }
                 if (type.equals("1")) {
                     inv.setStatusID(1);
                     in.update(inv, inlist);
                     session.setAttribute("listInv", inlist);
-                    response.sendRedirect(request.getContextPath() + "/views/mentors/viewInvitationMentor.jsp");
+                    response.sendRedirect(request.getContextPath() + "/invitationMentor");
                 }
             } catch (Exception e) {
             }
         } else {
-            response.sendRedirect(request.getContextPath() + "/views/mentors/viewInvitationMentor.jsp");
+            response.sendRedirect(request.getContextPath() + "/invitationMentor");
         }
     }
 

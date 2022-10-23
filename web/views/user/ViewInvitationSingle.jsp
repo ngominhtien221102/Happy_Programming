@@ -57,10 +57,14 @@
                                         </c:if>
                                     </c:forEach>
                                 </h5><br>
+                                <fmt:parseDate value="${Invitation.createdAt}" pattern="yyyy-MM-dd" var="Date1" />
+                                <fmt:formatDate value="${Date1}" var="Date3" pattern="dd/MM/yyyy"/>        
+                                <span class="font-weight-bold mr-2">Created at:</span> ${Date3}<br><br>
                                 <fmt:parseDate value="${Invitation.deadlineDate}" pattern="yyyy-MM-dd" var="Date" />
                                 <fmt:formatDate value="${Date}" var="Date2" pattern="dd/MM/yyyy"/>        
                                 <span class="font-weight-bold mr-2">Deadline:</span> ${Date2}
                                 <br><br>
+                                
                                 <span class="font-weight-bold mr-2">Skill: </span>${HmSkill[Invitation.skillID]}
                                 <br><br>
 

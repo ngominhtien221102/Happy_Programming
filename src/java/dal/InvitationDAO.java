@@ -6,11 +6,10 @@ package dal;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
+
 import model.Invitation;
-import model.MentorCV;
-import model.Skill;
 
 /**
  *
@@ -34,7 +33,6 @@ public class InvitationDAO extends DBContext {
         Invitation = new ArrayList<>();
         String sql = "select * from Invitation";
         try {
-
             PreparedStatement ps = connection.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
@@ -46,7 +44,8 @@ public class InvitationDAO extends DBContext {
                 String title = rs.getString(6);
                 String deadlineDate = rs.getString(7);
                 String content = rs.getString(8);
-                Invitation.add(new Invitation(id, mentorId, menteeId, skillId, statusId, title, deadlineDate, content));
+                String createdAt = rs.getString(9);
+                Invitation.add(new Invitation(id, mentorId, menteeId, skillId, statusId, title, deadlineDate, content,createdAt));
             }
 
         } catch (Exception e) {
@@ -56,7 +55,9 @@ public class InvitationDAO extends DBContext {
 
     // Insert Invitation
     public Invitation insert(Invitation i) {
-        String sql = "insert into Invitation values(?,?,?,?,?,?,?)";
+        String sql = "insert into Invitation values(?,?,?,?,?,?,?,?)";
+        LocalDate curDate = LocalDate.now();
+        String date = curDate.toString();
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, i.getMentorID());
@@ -66,6 +67,7 @@ public class InvitationDAO extends DBContext {
             ps.setString(5, i.getTitle());
             ps.setString(6, i.getDeadlineDate());
             ps.setString(7, i.getContent());
+            ps.setString(8, date);
             ps.executeUpdate();
 
             sql = "SELECT top(1) [Invitation_ID]\n"
@@ -75,6 +77,7 @@ public class InvitationDAO extends DBContext {
             ResultSet rs = ps.executeQuery();
             if(rs.next()){
                 i.setID(rs.getInt(1));
+                i.setCreatedAt(date);
             }
             
         } catch (Exception e) {

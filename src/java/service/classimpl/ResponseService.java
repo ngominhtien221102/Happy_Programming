@@ -34,10 +34,11 @@ public class ResponseService implements IResponseService {
 
     @Override
     public String insert(Response u, List<Response> list) {
-        responseDAO.insert(u);
-        list.add(u);
-        return "Insert successful!";
-        
+        Response res = responseDAO.insert(u);
+        list.add(res);
+        String id;
+        id = res.getRequestID()+"";
+        return "OK"+" "+id;
     }
 
     @Override

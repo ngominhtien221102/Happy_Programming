@@ -23,7 +23,11 @@ import service.classimpl.UserProfileService;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import util.Utility;
 
 /**
  *
@@ -84,39 +88,35 @@ public class EditInvitationController extends HttpServlet {
         String type = request.getParameter("type");
         if (ID != null && type != null) {
             id = Integer.parseInt(ID.trim());
-            if (type.equals("0")) { // delete xong van ve view
-                i.delete(id, list);
-                session.setAttribute("listInv", list);
-                response.sendRedirect(request.getContextPath() + "/viewAllInvite");
-            } else {
-                //cancel
-                if (type.equals("2")) {
+
+            //cancel
+            if (type.equals("2")) {
+                Invitation invitation = i.getInvitationById(id, list);
+                msg = i.cancel(invitation, list);
+                if (msg.equals("OK")) {
+                    session.setAttribute("listInv", list);
+                    request.setAttribute("success", "Cancel success");
+                } else {
+                    request.setAttribute("failed", msg);
+                }
+                request.getRequestDispatcher("/singleInvite?invitationId=" + id).forward(request, response);
+            } else { // update goi den trang update
+                if (i.getInvitationById(id, list).getStatusID() == 2) {
                     Invitation invitation = i.getInvitationById(id, list);
-                    msg = i.cancel(invitation, list);
-                    if (msg.equals("OK")) {
-                        session.setAttribute("listInv", list);
-                        request.setAttribute("success", "Cancel success");
-                    } else {
-                        request.setAttribute("failed", msg);
-                    }
+                    session.setAttribute("invitation", invitation);
+                    UserProfile mentorProfile = up.getUserProfileById(invitation.getMentorID(), listUp);
+                    String mentorName = mentorProfile.getFirstName() + " " + mentorProfile.getLastName();
+                    MentorCV mentorCV = m.getCVById(invitation.getMentorID(), listCV);
+                    List<Skill> mentorSkill = mentorCV.getSkillList();
+                    session.setAttribute("mentorSkill", mentorSkill);
+                    session.setAttribute("mentorName", mentorName);
+                    request.getRequestDispatcher("/views/user/editInvitation.jsp").forward(request, response);
+                } else {
+                    request.setAttribute("failed", "You can only update while the invitation is processing");
                     request.getRequestDispatcher("/singleInvite?invitationId=" + id).forward(request, response);
-                } else { // update goi den trang update
-                    if (i.getInvitationById(id, list).getStatusID() == 2) {
-                        Invitation invitation = i.getInvitationById(id, list);
-                        session.setAttribute("invitation", invitation);
-                        UserProfile mentorProfile = up.getUserProfileById(invitation.getMentorID(), listUp);
-                        String mentorName = mentorProfile.getFirstName() + " " + mentorProfile.getLastName();
-                        MentorCV mentorCV = m.getCVById(invitation.getMentorID(), listCV);
-                        List<Skill> mentorSkill = mentorCV.getSkillList();
-                        session.setAttribute("mentorSkill", mentorSkill);
-                        session.setAttribute("mentorName", mentorName);
-                        request.getRequestDispatcher("/views/user/editInvitation.jsp").forward(request, response);
-                    } else {
-                        request.setAttribute("failed", "You can only update while the invitation is processing");
-                        request.getRequestDispatcher("/singleInvite?invitationId=" + id).forward(request, response);
-                    }
                 }
             }
+
         } else {
             response.sendRedirect(request.getContextPath() + "/views/user/viewInvitationMentee.jsp");
         }
@@ -134,6 +134,7 @@ public class EditInvitationController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        Utility u = new Utility();
         HttpSession session = request.getSession();
         List<Invitation> list = (List<Invitation>) session.getAttribute("listInv");
         Invitation invitation = (Invitation) session.getAttribute("invitation");
@@ -145,22 +146,32 @@ public class EditInvitationController extends HttpServlet {
         String title = request.getParameter("title");
         String deadline = request.getParameter("deadline");
         String content = request.getParameter("content");
-
-        if (content.equals("")) {
-            msg = "Please enter content to update this invitation!";
-            request.setAttribute("failed", msg);
-            request.getRequestDispatcher("/views/user/editInvitation.jsp").forward(request, response);
-        } else {
-            Invitation iv = new Invitation(id, mentorId, menteeId, skillId, statusId, title, deadline, content);
-            msg = i.update(iv, list);
-            if (msg.equals("OK")) {
-                session.setAttribute("invitation", invitation);
-                request.setAttribute("success", "Update success");
+        String createdAt = invitation.getCreatedAt();
+        try {
+            if (!u.checkDateNow(deadline)) {
+                request.setAttribute("failed", "Deadline must be at least equal to the current date!");
+                request.getRequestDispatcher("/views/user/editInvitation.jsp").forward(request, response);
             } else {
-                request.setAttribute("failed", msg);
+                if (content.equals("")) {
+                    msg = "Please enter content to update this invitation!";
+                    request.setAttribute("failed", msg);
+                    request.getRequestDispatcher("/views/user/editInvitation.jsp").forward(request, response);
+                } else {
+                    Invitation iv = new Invitation(id, mentorId, menteeId, skillId, statusId, title, deadline, content, createdAt);
+                    msg = i.update(iv, list);
+                    if (msg.equals("OK")) {
+                        session.setAttribute("invitation", invitation);
+                        request.setAttribute("success", "Update success");
+                    } else {
+                        request.setAttribute("failed", msg);
+                    }
+                    request.getRequestDispatcher("/views/user/editInvitation.jsp").forward(request, response);
+                }
             }
-            request.getRequestDispatcher("/views/user/editInvitation.jsp").forward(request, response);
+        } catch (ParseException ex) {
+            Logger.getLogger(SendInvitationController.class.getName()).log(Level.SEVERE, null, ex);
         }
+
     }
 
     /**

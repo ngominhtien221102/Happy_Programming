@@ -15,7 +15,7 @@ import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+
 import model.Address;
 import model.Invitation;
 import model.MentorCV;
@@ -100,17 +100,20 @@ public class ViewCVController extends HttpServlet {
 
         try {
             int id = Integer.parseInt(id_raw);
-            int menteeId = u.getID();
+
+            if (u != null) {
+                int menteeId = u.getID();
+                List<Invitation> invListAcept = new ArrayList<>();
+                for (Invitation invitation : invList) {
+                    if (invitation.getStatusID() == 1 && invitation.getMentorID() == id && invitation.getMenteeID() == menteeId) {
+                        invListAcept.add(invitation);
+                    }
+                }
+                request.setAttribute("invListAcept", invListAcept);
+            }
+
             UserProfile mentorProfile = uSer.getUserProfileById(id, profiles);
             MentorCV mentorCV = mentorSer.getCVById(id, listCV);
-
-            List<Invitation> invListAcept = new ArrayList<>();
-            for (Invitation invitation : invList) {
-                if (invitation.getStatusID() == 1 && invitation.getMentorID() == id && invitation.getMenteeID() == menteeId) {
-                    invListAcept.add(invitation);
-                }
-            }
-            request.setAttribute("invListAcept", invListAcept);
 
             Address a = ia.getAddressById(mentorProfile.getAddressID(), addList);
             String tinh = a.getTinh();
@@ -133,6 +136,14 @@ public class ViewCVController extends HttpServlet {
             int two = ra.countRate(2, rList);
             int one = ra.countRate(1, rList);
             HashMap<Integer, Float> rateHm = ra.getHmAvgRate();
+            
+            if (rateHm.get(id) == 0) {
+                request.setAttribute("five", 0);
+                request.setAttribute("four", 0);
+                request.setAttribute("three", 0);
+                request.setAttribute("two", 0);
+                request.setAttribute("one", 0);
+            }
 
             request.setAttribute("rateHm", rateHm);
             request.setAttribute("five", five * 100 / rateTotal);
@@ -143,7 +154,7 @@ public class ViewCVController extends HttpServlet {
 
             request.getRequestDispatcher("views/common/viewMentorCV.jsp").forward(request, response);
 
-        } catch (ServletException | IOException | NumberFormatException e) { //id mentor truyền vào không hợp lệ => home
+        } catch (Exception e) { //id mentor truyền vào không hợp lệ => home
             response.sendRedirect("views/user/index.jsp");
         }
     }

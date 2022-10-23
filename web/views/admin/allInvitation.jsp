@@ -100,7 +100,7 @@
         <%@include file="header.jsp" %>
         <!-- /header -->
         <div id="content" class="row" style="padding-top: 50px;  min-height: 800px">
-            <%@include file="sidebar.jsp" %>
+            <%@include file="adminSidebar.jsp" %>
             <div class="col-10">
                 <section class="section" >
                     <h2 style="margin-left:15px; text-align: center">Invitation</h2>
@@ -110,7 +110,7 @@
 
                             <!--number of invitations accepted-->
 
-                            <article class="col-xl-3 col-md-6">
+                            <article class="col-4">
                                 <div class="card border-bottom hover-shadow" style="border-radius: 5px;background-color: #f3f3f3">
                                     <div class="card-body row align-items-center" >
                                         <div class="col-8">
@@ -130,7 +130,7 @@
                             </article>
 
                             <!--Invitation rejected-->
-                            <article class="col-xl-3 col-md-6">
+                            <article class="col-4">
                                 <div class="card border-bottom hover-shadow" style="border-radius: 5px;background-color: #f3f3f3">
                                     <div class="card-body row align-items-center" >
                                         <div class="col-8">
@@ -152,7 +152,7 @@
                             </article>
 
                             <!--Invitation processing-->
-                            <article class="col-xl-3 col-md-6">
+                            <article class="col-4">
                                 <div class="card border-bottom hover-shadow" style="border-radius: 5px;background-color: #f3f3f3">
                                     <div class="card-body row align-items-center" >
                                         <div class="col-8">
@@ -170,9 +170,9 @@
                                     </div>
                                 </div>
                             </article>
-                            
-                            <!--                            cancel invitation -->
-                            <article class="col-xl-3 col-md-6">
+
+                            <!--   cancel invitation -->
+                            <article class="col-4">
                                 <div class="card border-bottom hover-shadow" style="border-radius: 5px;background-color: #f3f3f3">
                                     <div class="card-body row align-items-center" >
                                         <div class="col-8">
@@ -192,7 +192,53 @@
 
                             </article>
 
+                            <!--   closed invitation -->
+                            <article class="col-4">
+                                <div class="card border-bottom hover-shadow" style="border-radius: 5px;background-color: #f3f3f3">
+                                    <div class="card-body row align-items-center" >
+                                        <div class="col-8">
+                                            <h4 style="color: #fe9365;">${close}</h4>
+                                            <h6 class="text-muted">Close</h6>
+                                        </div>
+                                        <div class="col-4 text-right">
+                                            <i class="ti-user" style="color: #fe9365;"></i>
+                                        </div>
+                                    </div>
+                                    <div style="background: linear-gradient(to right,#e66465, #9198e5); text-align: center; align-items: center; padding: 20px;
+                                         border-bottom-left-radius: 5px;
+                                         border-bottom-right-radius: 5px;">
+                                        <p style="color: #fff; margin: 0 ">Invitation Closed</p>
+                                    </div>
+                                </div>
 
+                            </article>
+
+
+                        </div>
+                        <!-- Bar Chart -->
+                        <div class="card shadow mb-4" style="margin-top: 50px">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold ">Number of invitations in the year</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="chart-area" style="height: 400px">
+                                    <canvas id="myBarChart"></canvas>
+                                </div>
+                                <hr>
+                            </div>
+                        </div>
+
+                        <!-- Area Chart -->
+                        <div class="card shadow mb-4" style="margin-top: 50px">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold ">Number of invitations in the year</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="chart-area" style="height: 400px">
+                                    <canvas id="myAreaChart"></canvas>
+                                </div>
+                                <hr>
+                            </div>
                         </div>
                         <div class="card-block" >
                             <h3 style="margin-bottom: 20px" class="">Invitations</h3>
@@ -201,7 +247,7 @@
                             <!--accepted-->
                             <div style="margin: 20px 0">
                                 <h5 class="">${acpt}</h5>
-                                <p class="text-muted">Accepted<span style="float: right">${acpt*100/totalInv}%</span></p>
+                                <p class="text-muted">Accepted<span style="float: right">${Math.round(acpt*100/totalInv) }%</span></p>
 
                                 <div class="progress">
                                     <div class="progress-bar" style="width: ${acpt*100/totalInv}%;background: linear-gradient(to right,#0ac282,#0df3a3); "></div>
@@ -210,7 +256,7 @@
                             <!--rejected-->
                             <div style="margin: 20px 0">
                                 <h5 class="">${reject}</h5>
-                                <p class="text-muted">Rejected<span style="float: right">${reject*100/totalInv}%</span></p>
+                                <p class="text-muted">Rejected<span style="float: right">${Math.round(reject*100/totalInv)}%</span></p>
 
                                 <div class="progress">
                                     <div class="progress-bar" style="width: ${reject*100/totalInv}%;background: linear-gradient(to right,#fe5d70,#fe909d); "></div>
@@ -219,7 +265,7 @@
                             <!--progress-->
                             <div style="margin: 20px 0">
                                 <h5 class="">${process}</h5>
-                                <p class="text-muted">Processing<span style="float: right">${process*100/totalInv}%</span></p>
+                                <p class="text-muted">Processing<span style="float: right">${Math.round(process*100/totalInv)}%</span></p>
                                 <div class="progress">
                                     <div class="progress-bar" style="width: ${process*100/totalInv}%; background: linear-gradient(to right,#01a9ac,#01dbdf); "></div>
                                 </div>
@@ -228,9 +274,18 @@
                             <!--Cancel-->
                             <div style="margin: 20px 0">
                                 <h5 class="">${cancel}</h5>
-                                <p class="text-muted">Cancel<span style="float: right">${cancel*100/totalInv}%</span></p>
+                                <p class="text-muted">Cancel<span style="float: right">${Math.round(cancel*100/totalInv)}%</span></p>
                                 <div class="progress">
-                                    <div class="progress-bar" style="width: ${cancel*100/totalInv}%; background: linear-gradient(to right,#fe9365,#feb798); "></div>
+                                    <div class="progress-bar" style="width: ${cancel*100/totalInv}%; background: linear-gradient(to right, #fe9365,#feb798); "></div>
+                                </div>
+                            </div>
+
+                            <!--Close-->
+                            <div style="margin: 20px 0">
+                                <h5 class="">${close}</h5>
+                                <p class="text-muted">Close<span style="float: right">${Math.round(close*100/totalInv)}%</span></p>
+                                <div class="progress">
+                                    <div class="progress-bar" style="width: ${cancel*100/totalInv}%; background: linear-gradient(to right,#e66465, #9198e5); "></div>
                                 </div>
                             </div>
                         </div>
@@ -321,8 +376,13 @@
         <!-- footer -->
         <%@include file="footer.jsp" %>
         <!-- /footer -->
-        <!-- jQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <!-- Page level plugins -->
+        <script src="<%=request.getContextPath()%>/js/vendor/chart.js/Chart.min.js"></script>
 
-        <!-- /jQuery -->
+        <!-- Page level custom scripts -->
+        <script src="<%=request.getContextPath()%>/js/admin/invitation/chart-area-demo.js"></script>
+        <!--<script src="<%=request.getContextPath()%>/js/admin/invitation/chart-bar-demo.js"></script>-->
+
     </body>
 </html>

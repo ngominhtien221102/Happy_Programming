@@ -17,7 +17,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.mail.MessagingException;
 import model.User;
-import service.IUserProfileService;
 import service.IUserService;
 import service.classimpl.UserService;
 import util.Mail;

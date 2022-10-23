@@ -47,10 +47,7 @@ public class CreateProfileController extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-
-        }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -125,7 +122,7 @@ public class CreateProfileController extends HttpServlet {
         }
 
         //Moi nguoi nho doi duong dan tren may moi nguoi nhe
-            String uploadFolder = "D:\\Project_SE1628\\Happy_Programming\\web\\img\\avatar";
+            String uploadFolder = "C:\\Users\\Admin\\Documents\\PRJ301\\HP\\Happy_Programming\\web\\img\\avatar";
             Path uploadPath = Paths.get(uploadFolder);
             if (!Files.exists(uploadPath)) {
                 Files.createDirectory(uploadPath);
@@ -139,7 +136,7 @@ public class CreateProfileController extends HttpServlet {
             String date = curDate.toString();
             UserProfile newProfile = new UserProfile(u.getID(), firstName, lastName, imgname, Email, dob, addressID, gender, date);
             String message = iU.insert(newProfile, uList);
-            response.sendRedirect( request.getContextPath() + "/verifyControl");
+            //response.sendRedirect( request.getContextPath() + "/verifyControl");
             
     }
 

@@ -23,7 +23,7 @@ import jakarta.servlet.http.HttpSession;
  *
  * @author Admin
  */
-@WebFilter(filterName = "MenteeAcceptFitlter", urlPatterns = {"/viewAllInvite", "/views/user/viewInvitationMentee.jsp", "/views/user/editInvitation.jsp", "/editInvitation", "/suggestMentor", "/views/user/mentorSuggest.jsp", "/rate", "/comment", "/views/user/createRequest.jsp", "/sendRequest", "/views/user/createMenteeProfile.jsp", "/createProfile"})
+@WebFilter(filterName = "MenteeAcceptFitlter", urlPatterns = {"/viewAllInvite", "/views/user/viewInvitationMentee.jsp", "/views/user/editInvitation.jsp", "/editInvitation", "/suggestMentor", "/views/user/mentorSuggest.jsp", "/rate", "/comment", "/views/user/createRequest.jsp", "/sendRequest", "/views/user/createMenteeProfile.jsp", "/createProfile", "/sendInvitation", "/views/user/sendInvitation.jsp"})
 public class MenteeAcceptFitlter implements Filter {
     
     private static final boolean debug = true;

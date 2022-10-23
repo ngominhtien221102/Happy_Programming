@@ -4,13 +4,12 @@
  */
 package model;
 
-
-
 /**
  *
  * @author ASUS
  */
 public class Invitation {
+
     private int ID;
     private int mentorID;
     private int menteeID;
@@ -19,19 +18,29 @@ public class Invitation {
     private String title;
     private String deadlineDate;
     private String content;
+    private String createdAt;
 
     public Invitation() {
     }
 
-    public Invitation(int id, int mentorId, int menteeId, int skillId, int status, String title, String deadlineDate, String content) {
-        this.ID = id;
-        this.mentorID = mentorId;
-        this.menteeID = menteeId;
-        this.skillID = skillId;
-        this.statusID = status;
+    public Invitation(int ID, int mentorID, int menteeID, int skillID, int statusID, String title, String deadlineDate, String content, String createdAt) {
+        this.ID = ID;
+        this.mentorID = mentorID;
+        this.menteeID = menteeID;
+        this.skillID = skillID;
+        this.statusID = statusID;
         this.title = title;
         this.deadlineDate = deadlineDate;
         this.content = content;
+        this.createdAt = createdAt;
+    }
+
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
     }
 
     public int getID() {
@@ -103,8 +112,4 @@ public class Invitation {
         return "Invitation{" + "id=" + ID + ", mentorId=" + mentorID + ", menteeId=" + menteeID + ", skillId=" + skillID + ", status=" + statusID + ", title=" + title + ", deadlineDate=" + deadlineDate + ", content=" + content + '}';
     }
 
-    
-
-    
-    
 }

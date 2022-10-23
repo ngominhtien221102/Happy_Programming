@@ -20,14 +20,14 @@
         <div id="content" class="row" style="padding-top: 50px">
             <!-- Begin Page Content -->
 
-            <%@include file="../user/sidebar.jsp" %>
+            <%@include file="sidebar.jsp" %>
 
             <div class="col-10">
                 <div class="container" style="padding: 5% ;">
 
                     <div style="padding:5rem">
                         <div class="text-center" >
-                            <p style="Color:green">${alert}</p>
+                            <p style="color:green">${alert}</p>
                             <h3>
                                 Update Profile
                             </h3>
@@ -67,7 +67,7 @@
                                        name="gender" value='False' ${u.isGender() ? "":"checked"} required style="height: 20px;width: 10%">
                                 <label for="female">Female</label>
                             </div>
-                            <p style="Color:red">${Error1}</p>   
+                            <p style="color:red">${Error1}</p>   
                             <!--Adress-->
                             <div class="form-group row" style="padding-bottom: 20px;">
                                 <!--Province--> 

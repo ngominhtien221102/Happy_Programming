@@ -89,6 +89,9 @@
             margin: 30px 0;
             float: right;
         }
+        .invite{
+            font-weight: 700;
+        }
     </style>
     <body>
         <%@include file= "header.jsp" %>
@@ -116,19 +119,20 @@
                         </div>
                         <br><h3>Mentors</h3>
                         <div class="row">  
-                            <div class="col-md-12 table">
+                            <div class="col-md-12">
 
-                                <table border="2" style="width: 100%">
+                                <table>
                                     <thead>
                                         <tr>
-                                            <th>STT</th> 
+                                            <th>#</th> 
                                             <th>Name</th>
                                             <th>Skills</th>
-                                            <th>Option</th>         
+                                            <th colspan="2" class="text-align-center">Option</th>         
                                         </tr>
                                     </thead>
-                                    <c:forEach items="${requestScope.listSearch}" var="m" varStatus="loop" begin="${pageIf.start}" end="${pageIf.end}"> 
-                                        <tbody>
+                                    <tbody>
+                                        <c:forEach items="${requestScope.listSearch}" var="m" varStatus="loop" begin="${pageIf.start}" end="${pageIf.end}"> 
+
                                             <tr>
                                                 <td>${loop.index+1}</td>
                                                 <td><c:forEach items="${sessionScope.listUserProfile}" var="u">
@@ -137,10 +141,12 @@
                                                 <td><c:forEach items="${m.skillList}" var="s">
                                                         ${s.name}
                                                     </c:forEach></td>
-                                                <td><a class="text-color" href="<%=request.getContextPath()%>/sendInvitation?mentorID=${m.ID}&nrpp=${nrpp}<c:if test="${search!=null}">&search=${search}</c:if>&page=${pageIf.cp}">invite</a></td>
-                                                </tr>
-                                            </tbody>
-                                    </c:forEach>
+                                                <td><a class="text-color invite" href="<%=request.getContextPath()%>/sendInvitation?mentorID=${m.ID}&nrpp=${nrpp}<c:if test="${search!=null}">&search=${search}</c:if>&page=${pageIf.cp}">Invite</a></td>
+                                                <td><a class="text-color invite" href="<%=request.getContextPath()%>/viewCV?mentorID=${m.ID}">View CV</a></td>
+                                            </tr>
+
+                                        </c:forEach>
+                                    </tbody>
                                 </table>
                                 <!--phan trang-->
 
@@ -195,19 +201,21 @@
         <%@include file="scriptJS.jsp" %>
         <script src="https://cdn.ckeditor.com/ckeditor5/34.1.0/classic/ckeditor.js"></script>
         <script>
-                                                    var value;
-                                                    ClassicEditor
-                                                            .create(document.querySelector('#editor'))
-                                                            .then(editor => {
-                                                                value = editor;
-                                                            })
-                                                            .catch(error => {
-                                                                console.error(error);
-                                                            });
 
-                                                    const handleSubmit = () => {
-                                                        document.getElementById('a').innerHTML = value.getData()
-                                                    }
+                                            var value;
+                                            ClassicEditor
+                                                    .create(document.querySelector('#editor'))
+                                                    .then(editor => {
+                                                        value = editor;
+                                                    })
+                                                    .catch(error => {
+                                                        console.error(error);
+                                                    });
+
+                                            const handleSubmit = () => {
+                                                document.getElementById('a').innerHTML = value.getData()
+                                            }
+
 
 
         </script>

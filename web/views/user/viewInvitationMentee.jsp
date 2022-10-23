@@ -81,6 +81,11 @@
                                                 <ul class="list-inline mb-3">
                                                     <!-- post date -->
                                                     <li class="list-inline-item mr-3 ml-0">
+                                                        <fmt:parseDate value="${inv.createdAt}" pattern="yyyy-MM-dd" var="Date1" />
+                                                        <fmt:formatDate value="${Date1}" var="Date3" pattern="dd/MM/yyyy"/>        
+                                                        Created at: ${Date3}
+                                                    </li><br>
+                                                    <li class="list-inline-item mr-3 ml-0">
                                                         <fmt:parseDate value="${inv.deadlineDate}" pattern="yyyy-MM-dd" var="Date" />
                                                         <fmt:formatDate value="${Date}" var="Date2" pattern="dd/MM/yyyy"/>        
                                                         Deadline: ${Date2}
@@ -99,7 +104,6 @@
                                             </div>
                                             <div class="text-align-center">
                                                 <a href="<%=request.getContextPath()%>/singleInvite?invitationId=${inv.ID}" class="signup__link">View</a>
-                                                <a class="signup__link" href="<%=request.getContextPath()%>/editInvitation?type=0&id=${inv.ID}">Delete</a>
                                             </div>
                                         </div>
                                     </div>
@@ -149,6 +153,7 @@
                                     const handleSubmit = () => {
                                         document.getElementById('a').innerHTML = value.getData()
                                     }
+
         </script>
     </body>
 

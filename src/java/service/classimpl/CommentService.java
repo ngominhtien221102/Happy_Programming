@@ -5,7 +5,7 @@
 package service.classimpl;
 
 import dal.CommentDAO;
-import jakarta.servlet.jsp.jstl.core.Config;
+
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -64,7 +64,6 @@ public class CommentService implements ICommentService {
         cmt.setContent(u.getContent());
         return "OK";
 
-
     }
 
     @Override
@@ -74,7 +73,14 @@ public class CommentService implements ICommentService {
         return "OK";
     }
 
-    
-
-
 }
+
+//class Main{
+//    public static void main(String[] args) {
+//        ICommentService ser = new CommentService();
+//        List<Comment> listCmt = ser.getList();
+//        for (Comment comment : listCmt) {
+//            System.out.println("comment" + comment.getCreatedAt());
+//        }
+//    }
+//}

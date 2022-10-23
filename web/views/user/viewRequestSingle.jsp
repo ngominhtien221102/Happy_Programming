@@ -23,7 +23,7 @@
             background: #f3f3f3;
             display: flex;
             flex-direction: column;
-            padding: 5%;
+            padding: 5px 28px;
             border-radius: 0 15px 15px 15px;
         }
         .responseContent{
@@ -57,7 +57,7 @@
             position: relative;
         }
         .resHead{
-            margin: 1%;
+            margin: 1% 0;
         }
         .text-black p{
             color: #050505;
@@ -104,7 +104,7 @@
                                     <c:if test="${Account.roleID==2}">
                                         <a class="" href="viewCV?mentorID=${mentor.ID}"><div class="mentorCV">
                                                 <img src="<%=request.getContextPath()%>/img/avatar/${mentor.avatar}" 
-                                                     onerror="this.src='<%=request.getContextPath()%>/img/avatar/p9.png'" 
+                                                     onerror="this.src='<%=request.getContextPath()%>/img/avatar/default.png'" 
                                                      class="rounded-circle mr-2 avatar"/>
 
                                                 ${mentor.firstName} ${mentor.lastName}
@@ -113,7 +113,7 @@
                                         <c:if test="${Account.roleID!=2}">
                                         <a class="" href=""><div class="mentorCV">
                                                 <img src="<%=request.getContextPath()%>/img/avatar/${mentee.avatar}" 
-                                                     onerror="this.src='<%=request.getContextPath()%>/img/avatar/p9.png'" 
+                                                     onerror="this.src='<%=request.getContextPath()%>/img/avatar/default.png'" 
                                                      class="rounded-circle mr-2 avatar"/>
                                                 ${mentee.firstName} ${mentee.lastName}
                                             </div></a>
@@ -126,6 +126,9 @@
                                 <!--                                request dau tien-->
                                 <div class="resHead">
                                     <span class="font-weight-bold mr-2">
+                                        <img src="<%=request.getContextPath()%>/img/avatar/${mentee.avatar}" 
+                                             onerror="this.src='<%=request.getContextPath()%>/img/avatar/default.png'" 
+                                             class="rounded-circle mr-2 avatar"/>
                                         ${mentee.firstName} ${mentee.lastName}
                                     </span>
                                     <span>
@@ -143,9 +146,15 @@
                                     <div class="resHead">
                                         <span class="font-weight-bold mr-2">
                                             <c:if test="${mentor.ID == response.userID}">
+                                                <img src="<%=request.getContextPath()%>/img/avatar/${mentor.avatar}" 
+                                                     onerror="this.src='<%=request.getContextPath()%>/img/avatar/${mentor.avatar}'" 
+                                                     class="rounded-circle mr-2 avatar"/>
                                                 ${mentor.firstName} ${mentor.lastName}
                                             </c:if>
                                             <c:if test="${mentee.ID == response.userID}">
+                                                <img src="<%=request.getContextPath()%>/img/avatar/${mentee.avatar}" 
+                                                     onerror="this.src='<%=request.getContextPath()%>/img/avatar/default.png'" 
+                                                     class="rounded-circle mr-2 avatar"/>
                                                 ${mentee.firstName} ${mentee.lastName}
                                             </c:if>
                                         </span>
@@ -204,8 +213,8 @@
                     });
 
             const handleSubmit = () => {
-                document.getElementById('a').innerHTML = value.getData()
-            }
+                document.getElementById('a').innerHTML = value.getData();
+            };
 
 
         </script>

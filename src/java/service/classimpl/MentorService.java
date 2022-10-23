@@ -7,7 +7,6 @@ package service.classimpl;
 import dal.MentorCVDAO;
 import java.util.ArrayList;
 import java.util.List;
-import model.Invitation;
 import model.MentorCV;
 import model.Skill;
 import model.UserProfile;
@@ -77,7 +76,7 @@ public class MentorService implements IMentorService {
         for (MentorCV m : listMen) {
             for (Skill s : m.getSkillList()) {
                 if(s.getName().toLowerCase().contains(keyword.toLowerCase().trim())){
-                    if(list.contains(m)==false) list.add(m);
+                    if(!list.contains(m)) list.add(m);
                     break;
                 }
             }

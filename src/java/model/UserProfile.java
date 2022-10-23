@@ -8,7 +8,6 @@ package model;
  *
  * @author Lenovo
  */
-import java.time.LocalDate;
 import java.util.List;
 
 /**

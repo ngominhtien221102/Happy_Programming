@@ -4,10 +4,10 @@
  */
 package service.classimpl;
 
+import com.sun.javafx.scene.control.skin.VirtualFlow;
 import dal.InvitationDAO;
 import model.Invitation;
 import service.IInvitationService;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -20,6 +20,12 @@ import java.util.List;
 public class InvitationService implements IInvitationService {
 
     InvitationDAO InvitationDAO = new InvitationDAO();
+    List<Integer> totalPerMonth = new ArrayList<>();
+    List<Integer> totalProcessingPerMonth = new ArrayList<>();
+    List<Integer> totalCancelPerMonth = new ArrayList<>();
+    List<Integer> totalRejectPerMonth = new ArrayList<>();
+    List<Integer> totalAcceptPerMonth = new ArrayList<>();
+    List<Integer> totalClosedPerMonth = new ArrayList<>();
 
     @Override
     public Invitation getInvitationById(int id, List<Invitation> list) {
@@ -51,7 +57,9 @@ public class InvitationService implements IInvitationService {
         }
         Invitation newInv = InvitationDAO.insert(u);
         list.add(newInv);
-        return "OK";
+        String id;
+        id = newInv.getID()+"";
+        return "OK"+" "+id;
     }
 
     @Override
@@ -81,7 +89,6 @@ public class InvitationService implements IInvitationService {
         } else {
             return "You can only cancel while the invitation is processing";
         }
-
     }
     
     @Override
@@ -130,6 +137,7 @@ public class InvitationService implements IInvitationService {
         return list;
     }
 
+    @Override
     public List<Integer> getListIDSkill() {
         List<Invitation> invList = getList();
         List<Integer> idSkillList = new ArrayList<>();
@@ -140,5 +148,78 @@ public class InvitationService implements IInvitationService {
         return idSkillList;
     }
 
+    @Override
+    public void totalInvPerMonth(List<Invitation> list) {
+        Date date = new Date();
+        LocalDate localDate = date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        int month = localDate.getMonthValue();
+        int year = localDate.getYear();
+        
+        for (int i=1; i<=month; i++){
+            getInvPerMonth(i, year, list);
+        }
+    }
 
+    private void getInvPerMonth(int month, int year, List<Invitation> list) {
+        int total=0, total1 = 0, total2 = 0, total3 = 0, total4 = 0, total5 = 0;
+        for (Invitation i : list){
+            String[] s = i.getCreatedAt().split("-");
+            int y = Integer.parseInt(s[0]);
+            int m = Integer.parseInt(s[1]);
+            if (y==year && m == month){
+                total++;
+                switch (i.getStatusID()) {
+                    case 1:
+                        total1++;
+                        break;
+                    case 2:
+                        total2++;
+                        break;
+                    case 3:
+                        total3++;
+                        break;
+                    case 4:
+                        total4++;
+                        break;
+                    case 5:
+                        total5++;
+                        break;
+                }
+            }
+        }
+        totalPerMonth.add(total);
+        totalAcceptPerMonth.add(total1);
+        totalProcessingPerMonth.add(total2);
+        totalCancelPerMonth.add(total3);
+        totalRejectPerMonth.add(total4);
+        totalClosedPerMonth.add(total5);
+    }
+
+    public List<Integer> getTotalPerMonth() {
+        return totalPerMonth;
+    }
+
+    public List<Integer> getTotalProcessingPerMonth() {
+        return totalProcessingPerMonth;
+    }
+
+    public List<Integer> getTotalCancelPerMonth() {
+        return totalCancelPerMonth;
+    }
+
+    public List<Integer> getTotalRejectPerMonth() {
+        return totalRejectPerMonth;
+    }
+
+    public List<Integer> getTotalAcceptPerMonth() {
+        return totalAcceptPerMonth;
+    }
+
+    public List<Integer> getTotalClosedPerMonth() {
+        return totalClosedPerMonth;
+    }
+    
+    
+    
 }
+
