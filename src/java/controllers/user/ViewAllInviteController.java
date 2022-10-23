@@ -15,6 +15,7 @@ import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 import model.Invitation;
+import model.PageInfor;
 import model.User;
 import model.UserProfile;
 
@@ -78,8 +79,29 @@ public class ViewAllInviteController extends HttpServlet {
                     }
                 }
             }
-
+        }       
+        int cp;
+        int nrpp = 0;
+        String page = request.getParameter("page");
+        try {
+            nrpp = Integer.parseInt(request.getParameter("nrpp"));
+        } catch (Exception e) {
         }
+
+        if (page == null || page.equals("")) {
+            cp = 1;
+        } else {
+            cp = Integer.parseInt(page);
+        }
+        PageInfor pageIf = new PageInfor(6, listInv2.size(), cp);
+        int[] a = {6, 9, 12, 15, 18};
+        pageIf.setArrNrpp(a);
+        if (nrpp != 0) {
+            pageIf = new PageInfor(nrpp, listInv2.size(), cp);
+            pageIf.setArrNrpp(a);
+        }
+        request.setAttribute("pageIf", pageIf);
+        request.setAttribute("nrpp", nrpp);
         request.setAttribute("listInv2", listInv2);
         request.setAttribute("name", name);
         request.getRequestDispatcher("views/user/viewInvitationMentee.jsp").forward(request, response);
