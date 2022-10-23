@@ -16,7 +16,7 @@
             margin-top:20px;
             color: #1a202c;
             text-align: left;
-            background-color: #a9bfde;
+            background-color: #fff;
         }
         .main-body {
             padding: 15px;
@@ -72,30 +72,32 @@
         <!-- /header -->
         <div>
             <!-- teachers -->
+            <c:if test="${Account.roleID == 3}">
+                <%@include file="../mentors/mentorSidebar.jsp" %>
+            </c:if>
+            <c:if test="${Account.roleID == 2}">
+                <%@include file="../user/sidebar.jsp" %>
+            </c:if>
 
-            <section  class="main" style="padding-top: 160px; ">
-                <div class="container">
+            <section  class="main" style="padding-top: 80px; ">
+                <div class="">
                     <div class="main-body">
                         <div class="row gutters-sm">
                             <div class="col-md-4 mb-3">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="d-flex flex-column align-items-center text-center">
-                                            <img src="<%=request.getContextPath()%>/img/avatar/p1.png" alt="Admin" class="rounded-circle" width="150" height="150">
-                                            <div class="mt-3">
-                                                <h4>${mentorProfile.firstName} ${mentorProfile.lastName}</h4>
-                                                <p class="text-secondary mb-1">Profession: ${mentorCV.profession}</p>
-                                                <a href="<%=request.getContextPath()%>/views/user/createInvitation.jsp">
-                                                    <input type="submit" value="Invite" class="btn btn-primary btn-user btn-block" style="padding: 5px"/></a>
-                                            </div>
-                                        </div>
+                                <div class="d-flex flex-column align-items-center text-center">
+                                    <img src="<%=request.getContextPath()%>/img/avatar/p1.png" alt="Admin" width="300" height="290">
+                                    <div class="mt-3">
+                                        <h4>${mentorProfile.firstName} ${mentorProfile.lastName}</h4>
                                     </div>
+                                    <a href="<%=request.getContextPath()%>/views/user/createInvitation.jsp">
+                                        <input type="submit" value="Invite" class="btn btn-primary btn-user btn-block" style="padding: 10px 130px"/></a>
                                 </div>
 
                             </div>
                             <div class="col-md-8">
                                 <div class="card mb-3">
                                     <div class="card-body">
+                                        <hr>
                                         <div class="row">
                                             <div class="col-sm-3">
                                                 <h6 class="mb-0">Full Name</h6>
@@ -104,7 +106,9 @@
                                                 ${mentorProfile.firstName} ${mentorProfile.lastName}
                                             </div>
                                         </div>
+
                                         <hr>
+
                                         <div class="row">
                                             <div class="col-sm-3">
                                                 <h6 class="mb-0">Email</h6>
@@ -113,6 +117,7 @@
                                                 ${mentorProfile.email}
                                             </div>
                                         </div>
+
                                         <hr>
                                         <div class="row">
                                             <div class="col-sm-3">
@@ -122,6 +127,7 @@
                                                 ${mentorProfile.getDob()}
                                             </div>
                                         </div>
+
                                         <hr>
                                         <div class="row">
                                             <div class="col-sm-3">
@@ -131,6 +137,18 @@
                                                 ${xa} , ${huyen} , ${tinh}
                                             </div>
                                         </div>
+
+                                        <hr>
+
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <h6 class="mb-0">Profession </h6>
+                                            </div>
+                                            <div class="col-sm-9 text-secondary">
+                                                ${mentorCV.profession}
+                                            </div>
+                                        </div>
+
                                         <hr>
 
                                         <div class="row">
@@ -146,13 +164,14 @@
                                                 </ul>
                                             </div>
                                         </div>
+
                                         <hr>
 
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="card mt-3">
+                        <div class=" mt-3" style="margin-left: 35px">
                             <h4 class="mb-4" style="margin-top: 30px; margin-left: 30px ">INTRODUCTION</h4>
                             <p class="text-left" style="margin-left: 30px">As you know that the sole proprietorship and partnership forms of
                                 organisation could not meet the growing needs of huge capital and
@@ -165,39 +184,10 @@
                 </div>
             </section>  
             <section >
-                <div class="container">
+                <div class="" style="padding:0 15px 0 80px">
                     <div class="row" >
-                        <!--                        <div class="col-md-5 ">
-                                                    <img class="img-fluid" src="<%=request.getContextPath()%>/img/avatar/p1.png" alt="teacher" style="height: 300px">
-                                                    <br><br>
-                                                    <a href="<%=request.getContextPath()%>/views/user/createInvitation.jsp">
-                                                        <input type="submit" value="Invite" class="btn btn-primary btn-user btn-block" /></a>
-                                                </div>
-                                                <div class="col-md-7 row">
-                                                    <h4 class="col-md-12 ">${mentorProfile.firstName} ${mentorProfile.lastName}</h4>
-                                                    <div class="col-md-6 mb-5">
-                                                        <h6 class="text-color">Gender: ${mentorProfile.getGender()} </h6>
-                                                    </div >
-                                                    <div class="col-md-6 mb-5"> 
-                                                        <h6 class="text-color">DOB: ${mentorProfile.getDob()}</h6>
-                                                    </div>
-                                                    <h4 class="col-md-12 ">INTRODUCTION</h4>
-                                                    <p class="col-md-12"> ${mentorCV.introduction}</p>
-                        
-                                                    <div class="col-md-12">
-                                                        <h4 class="mb-4">CONTACT INFO:</h4>
-                                                        <ul class="list-unstyled">
-                                                            <li class="mb-3"><a class="text-color" href="mailto:${mentorProfile.email}"><i class="ti-email mr-2"></i>${mentorProfile.email}</a></li>
-                        
-                                                            <li class="mb-3"><a class="text-color" href="#"><i class="ti-location-pin mr-2"></i>
-                        
-                                                                    Address: ${xa} , ${huyen} , ${tinh}
-                                                                </a></li>
-                                                        </ul>
-                                                    </div>
-                        
-                                                </div>-->
-                        <div class="col-12" style="padding-top: 5%">
+
+                        <div class="col-12" >
                             <h4 class="mb-4">SERVICE DESCRIPTION</h4>
                             <p class="mb-5">${mentorCV.serviceDescription}</p>
                         </div>
@@ -219,7 +209,7 @@
                                                 <input style="" name="mentorID" value="${mentorCV.ID}">
 
                                                 <input type="radio" name="rate" value="5" id="5${s.ID}"><label for="5${s.ID}">☆</label>
-                                                <input type="radio" name="rate" value="4" id="4${s.ID}"><label for="4${s.ID}">☆</label>
+                                                <input class="checked" type="radio" name="rate" value="4" id="4${s.ID}"><label for="4${s.ID}">☆</label>
                                                 <input type="radio" name="rate" value="3" id="3${s.ID}"><label for="3${s.ID}">☆</label>
                                                 <input type="radio" name="rate" value="2" id="2${s.ID}"><label for="2${s.ID}">☆</label>
                                                 <input type="radio" name="rate" value="1" id="1${s.ID}"><label for="1${s.ID}">☆</label>
@@ -315,40 +305,41 @@
                         <!--comment-->
                         <h4 class="mb-4" style="margin-top: 30px">COMMENT</h4>
                         <form action="<%=request.getContextPath()%>/comment" id="usrform" method="">
-
                             <div class="d-flex flex-row add-comment-section mt-4 mb-4">
-
                                 <c:forEach items="${listUserProfile}" var="user">
                                     <c:if test="${Account.ID == user.ID}">
                                         <img class=" rounded-circle mr-2" onerror="this.src='<%=request.getContextPath()%>/img/avatar/default.png'" src="<%=request.getContextPath()%>/img/avatar/p.png"  style="height: 55px;
                                              width: 73px; margin-left: 20px;">
                                         <input name="content" type="text" class="form-control mr-3"  placeholder="Add comment">
-                                        <input style="display: none" name="mentorID" value="${mentorCV.ID}">
-                                        <button class="btn btn-primary" type="submit">Comment</button>
+                                        <button class="btn btn-primary text-center" style="width: 200px" type="submit" >Comment</button>
                                     </c:if>
                                 </c:forEach>
-
                             </div>
                         </form>
                         <!--show comment-->
+
+
 
                         <c:forEach items="${sessionScope.listComment}" var="cmt">
                             <c:if test="${mentorCV.ID == cmt.mentorID}">
                                 <div class="card-body">
                                     <div class="row">
-                                        <div class="col-md-2 row">
-                                            <div class="col-md-8">
-                                                <img src="<%=request.getContextPath()%>/img/avatar/p9.png" onerror="this.src='<%=request.getContextPath()%>/img/avatar/default.png'" style="height: 55px;
-                                                     width: 55px;" class="rounded-circle mr-2 "/>
+                                        <div class="col-md-2 row" >
+                                            <div class="col-md-8"style="margin-left: 10px">
                                                 <c:forEach items="${listUserProfile}" var="user">
                                                     <c:if test="${user.ID == cmt.menteeID}">
-
+                                                        <img src="<%=request.getContextPath()%>/img/avatar/p9.png" onerror="this.src='<%=request.getContextPath()%>/img/avatar/default.png'" style="height: 55px;
+                                                             width: 55px;" class="rounded-circle mr-2 "/>
                                                     </c:if>
                                                 </c:forEach>
+                                                <fmt:parseDate value="${cmt.createdAt}" pattern="yyyy-MM-dd" var="Date" />
+                                                <fmt:formatDate value="${Date}" var="Date1" pattern="dd/MM/yyyy"/> 
+                                                <span style="font-size: 12px" class="text-center">
+                                                    ${cmt.createdAt}
+                                                </span>
                                             </div>
-                                            <p class="text-secondary text-center">15 Minutes Ago</p>
                                         </div>
-                                        <div class="col-md-10">
+                                        <div class="col-md-10" style="border-radius: 10px; background-color: #f0ede4">
                                             <c:forEach items="${listUserProfile}" var="user">
                                                 <c:if test="${user.ID == cmt.menteeID}">
                                                     <p>

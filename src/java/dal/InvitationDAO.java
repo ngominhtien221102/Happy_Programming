@@ -33,7 +33,6 @@ public class InvitationDAO extends DBContext {
         Invitation = new ArrayList<>();
         String sql = "select * from Invitation";
         try {
-
             PreparedStatement ps = connection.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {

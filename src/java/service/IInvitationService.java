@@ -35,4 +35,5 @@ public interface IInvitationService {
     
     void totalInvPerMonth(List<Invitation> list);
 
+    List<Invitation> getInvitationByMentorId(int mentorId, List<Invitation> list);
 }
