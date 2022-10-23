@@ -135,7 +135,7 @@
             </div>
         </div>
         <!-- footer -->
-        <%@include file="footer.jsp" %>
+
         <!-- /footer -->
 
         <!-- jQuery -->

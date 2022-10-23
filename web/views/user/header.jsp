@@ -136,14 +136,14 @@
                             <a class="nav-link" href="<%=request.getContextPath()%>/views/user/contact.jsp">CONTACT</a>
                         </li>  
                         <c:if test="${sessionScope.Account != null}">
-                            <li class="nav-item dropdown view " style="position: relative">
-                                <a class="nav-link " href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                                   aria-haspopup="true" aria-expanded="false">
-                                    <i class="ti ti-bell" aria-hidden="true"></i><span class="badge bg-danger" style="top: 0px; position: absolute; margin-top: 35px; border-radius: 0.5rem; font-weight: 400; font-size: 60% ">3</span>
+                            <li class="notiIcon dropdown view">
+                                <a onclick="Show()" class="nav-link " href="#" id="notification">
+                                    <i class="ti ti-bell"></i><span id="amountNew" class="badge bg-danger" style="color: #fff">${sessionScope.NewNotification}</span>
                                 </a>
-                                <div class=" dropdown-menu " aria-labelledby="navbarDropdown" style="left:-50px">
+                                <div id="someNotify" style="">
 
                                 </div>
+
                             </li>
                         </c:if>
                         <li class="nav-item dropdown view ">
@@ -160,19 +160,6 @@
                         </c:if>
                         <c:if test="${sessionScope.Account == null || sessionScope.Account.roleID == 4}">
                             </li>                 
-                            <li class="notiIcon dropdown view">
-                                <a onclick="Show()" class="nav-link " href="#" id="notification">
-                                    <i class="ti ti-bell"></i><span id="amountNew" class="badge bg-danger" style="color: #fff">${sessionScope.NewNotification}</span>
-                                </a>
-                                <div id="someNotify" style="">
-
-                                </div>
-
-                            </li>
-
-
-
-
                             <li class="nav-item dropdown view ">
                                 <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown"
                                    aria-haspopup="true" aria-expanded="false">
