@@ -6,11 +6,14 @@ package service.classimpl;
 
 import com.sun.javafx.scene.control.skin.VirtualFlow;
 import dal.InvitationDAO;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import model.Invitation;
 import service.IInvitationService;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -217,6 +220,11 @@ public class InvitationService implements IInvitationService {
 
     public List<Integer> getTotalClosedPerMonth() {
         return totalClosedPerMonth;
+    }
+
+    @Override
+    public List<Invitation> getInvitationByMentorId(int mentorId, List<Invitation> list) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
     

@@ -176,7 +176,7 @@
             </div>
         </div>
         <!-- footer -->
-        <%@include file="footer.jsp" %>
+
         <!-- /footer -->
         <!-- jQuery -->
         <%@include file="scriptJS.jsp" %> 
