@@ -112,8 +112,8 @@
                         </div>
                         <div class="pagination">
                             <c:if test="${pageIf.cp!=1 && pageIf.end!=null}">
+                                <a href="<%=request.getContextPath()%>/viewAllInvite?page=1&nrpp=${nrpp}"><<</a> 
                                 <a href="<%=request.getContextPath()%>/viewAllInvite?page=${pageIf.cp-1}&nrpp=${nrpp}"><</a>
-                                <a href="<%=request.getContextPath()%>/viewAllInvite?page=1&nrpp=${nrpp}"><<</a>  
                             </c:if>      
                             <c:forEach begin="${pageIf.cp>2?pageIf.cp-2:1}" end="${pageIf.cp+2>pageIf.np?pageIf.np:pageIf.cp+2}" var="i">
                                 <a class="${i==pageIf.cp?"active":""}" href="<%=request.getContextPath()%>/viewAllInvite?page=${i}&nrpp=${nrpp}">${i}</a>
