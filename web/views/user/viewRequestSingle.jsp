@@ -147,7 +147,7 @@
                                         <span class="font-weight-bold mr-2">
                                             <c:if test="${mentor.ID == response.userID}">
                                                 <img src="<%=request.getContextPath()%>/img/avatar/${mentor.avatar}" 
-                                                     onerror="this.src='<%=request.getContextPath()%>/img/avatar/p9.png'" 
+                                                     onerror="this.src='<%=request.getContextPath()%>/img/avatar/${mentor.avatar}'" 
                                                      class="rounded-circle mr-2 avatar"/>
                                                 ${mentor.firstName} ${mentor.lastName}
                                             </c:if>

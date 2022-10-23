@@ -196,7 +196,7 @@
                                                      width: 55px;" class="rounded-circle mr-2 "/>
                                                 <c:forEach items="${listUserProfile}" var="user">
                                                     <c:if test="${user.ID == cmt.menteeID}">
-
+                                                        
                                                     </c:if>
                                                 </c:forEach>
                                             </div>
@@ -206,7 +206,7 @@
                                             <c:forEach items="${listUserProfile}" var="user">
                                                 <c:if test="${user.ID == cmt.menteeID}">
                                                     <p>
-                                                        <a class="float-left"><strong>${user.lastName} ${user.firstName}</strong></a>
+                                                        <a class="float-left"><strong>${user.firstName} ${user.lastName} </strong></a>
                                                     </p>
                                                 </c:if>
                                             </c:forEach>
