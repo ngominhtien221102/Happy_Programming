@@ -15,7 +15,6 @@
             width: 80%;
         }
         .responseBox{
-            padding: 0;
             margin-bottom:20px;
             height: fit-content;
             max-height: 500px;
@@ -23,7 +22,7 @@
             background: #f3f3f3;
             display: flex;
             flex-direction: column;
-            padding: 5px 28px;
+            padding: 15px 28px;
             border-radius: 0 15px 15px 15px;
         }
         .responseContent{
