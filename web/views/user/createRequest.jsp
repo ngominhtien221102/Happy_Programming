@@ -121,7 +121,7 @@
                                             <th>#</th> 
                                             <th>Name</th>
                                             <th>Skills</th>
-                                            <th colspan="2" class="text-align-center">Option</th>         
+                                            <th colspan="2" class="text-align-center"></th>         
                                         </tr>
                                     </thead>
                                     <tbody>
