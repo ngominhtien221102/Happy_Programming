@@ -106,6 +106,9 @@
             flex-flow: column;
             position: relative
         }
+        td p{
+            margin-bottom: 0;
+        }
         /*phan trang*/
     </style>
     <body>
@@ -134,16 +137,25 @@
                                         <p style="color: #fff; margin: 0">Total Skill</p>
                                     </div>
                                 </div>
+                                <c:if test="${requestScope.success!=null}">
+                                    <br><h3 style="color: green">${success}</h3>
+                                </c:if>
+                                <c:if test="${requestScope.failed!=null}">
+                                    <br><h3 style="color: red">${failed}</h3>
+                                </c:if>
                                 <form class="mt-3" action="<%=request.getContextPath()%>/editSkill" method="post">
                                     <h5>Skill's name:</h5> <input class="form-control" type="text" name="name" value="${name}">
-                                    <label style="margin-bottom: 16px" for="">Content:</label><textarea id="editor"  class="form-control" name="content" rows="4" cols="50"></textarea>
-                                    <button type="submit" class="btn btn-primary float-right mt-3">Create</button>
-                                </form>
-                            </article>
+                                    <label style="margin-bottom: 16px" for="">Description:</label><textarea id="editor" class="form-control" name="description" rows="4" cols="50">${description}</textarea>
+                                    <button type="submit" class="btn btn-primary float-right mt-3">
+                                        <c:if test="${type.equals('1')}">Update</c:if>
+                                        <c:if test="${type==null}">Create</c:if>
+                                        </button>
+                                    </form>
+                                </article>
 
-                            <div class="col-6">
-                                <div class="search" style="margin-left:15px" > 
-                                    <form action="<%=request.getContextPath()%>/editSkill" class="row">
+                                <div class="col-6">
+                                    <div class="search" style="margin-left:15px" > 
+                                        <form action="<%=request.getContextPath()%>/editSkill" class="row">
                                         <input  type="text" name="search" value="${requestScope.search}" placeholder="Search Skill">
                                         <button type="submit"><i class="ti ti-search" aria-hidden="true"></i></button>
                                     </form>
@@ -153,6 +165,7 @@
                                         <tr>
                                             <th>STT</th> 
                                             <th>Name</th>
+                                            <th>Description</th>
                                             <th colspan="2" class="text-lg-center">Action</th>
                                         </tr>
                                     </thead>
@@ -162,9 +175,13 @@
                                             <tr>
                                                 <td>${loop.index+1}</td>
                                                 <td>${s.name}</td>
+                                                <td ><div style="    white-space: nowrap;
+                                                          overflow: hidden;
+                                                          width: 100px;
+                                                          text-overflow: ellipsis;">${s.description}</div></td>
                                                 <td><a class="text-color" href="<%=request.getContextPath()%>/editSkill?skillID=${s.ID}&type=1&nrpp=${nrpp}<c:if test="${search!=null}">&search=${search}</c:if>&page=${pageIf.cp}">update</a></td>
                                                 <td><a class="text-color" href="<%=request.getContextPath()%>/editSkill?skillID=${s.ID}&type=0&nrpp=${nrpp}<c:if test="${search!=null}">&search=${search}</c:if>&page=${pageIf.cp}">delete</a></td>
-                                            </tr>
+                                                </tr>
                                         </c:forEach>
                                     </tbody>
 
