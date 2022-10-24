@@ -3,9 +3,6 @@
     Created on : Sep 21, 2022, 3:05:36 PM
     Author     : Lenovo
 --%>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="zxx">
 
@@ -53,7 +50,7 @@
                             <input type="email" class="form-control mb-3" id="mail" name="mail" placeholder="Your Email" required>
                             <input type="text" class="form-control mb-3" id="subject" name="subject" placeholder="Subject" required>
                             <p style="color: red">${subjectAlert}</p>
-                            <textarea name="message" class="form-control mb-3 ck-editor__editable ck-editor__editable_inline" placeholder="Your Message" id="editor" rows="4" required></textarea>
+                            <textarea name="message" class="form-control mb-3 ck-editor__editable ck-editor__editable_inline" placeholder="Your Message" id="editor" rows="4"></textarea>
                             <button type="submit" value="send" class="btn btn-primary" style="margin-top: 1%; width: 100%;">SEND MESSAGE</button>
                         </form>
                     </div>

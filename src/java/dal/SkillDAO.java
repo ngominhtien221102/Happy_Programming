@@ -44,12 +44,13 @@ public class SkillDAO extends DBContext {
 
     public Skill insert(Skill skill) {
         String sql = "INSERT INTO [dbo].[Skill]\n"
-                + "           ([Name])\n"
+                + "           ([Name],[Description])\n"
                 + "     VALUES\n"
-                + "           (?)\n";
+                + "           (?,?)\n";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setString(1, skill.getName());
+            ps.setString(2, skill.getDescription());
             ps.execute();
 
             String sql1 = "SELECT top(1) [Skill_ID]\n"
@@ -69,12 +70,14 @@ public class SkillDAO extends DBContext {
 
     public void update(Skill skill) {
         String sql = "UPDATE [dbo].[Skill]\n"
-                + "   SET [Name] = ?\n"
+                + "   SET [Name] = ?,\n"
+                + "       [Description] = ?"
                 + " WHERE Skill_ID=?";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setInt(2, skill.getID());
+            ps.setInt(3, skill.getID());
             ps.setString(1, skill.getName());
+            ps.setString(2, skill.getDescription());
             ps.execute();
         } catch (SQLException e) {
         }
@@ -90,6 +93,7 @@ public class SkillDAO extends DBContext {
                 Skill skill = new Skill();
                 skill.setID(rs.getInt(1));
                 skill.setName(rs.getString(2));
+                skill.setDescription(rs.getString(3));
                 skillList.add(skill);
             }
         } catch (SQLException e) {

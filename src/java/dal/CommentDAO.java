@@ -41,11 +41,9 @@ public class CommentDAO extends DBContext {
                 int Comment_ID = rs.getInt(1);
                 int Mentor_ID = rs.getInt(2);
                 int Mentee_ID = rs.getInt(3);
-                int Skill_ID = rs.getInt(4);
-                String Date = rs.getString(5);
-                String Content = rs.getString(6);
-
-                cmList.add(new Comment(Comment_ID, Mentor_ID, Mentee_ID, Skill_ID, Date, Content));
+                String Date = rs.getString(4);
+                String Content = rs.getString(5);
+                cmList.add(new Comment(Comment_ID, Mentor_ID, Mentee_ID, Date, Content));
             }
         } catch (Exception e) {
             System.out.println("Error Comment" + e.getMessage());
@@ -59,17 +57,15 @@ public class CommentDAO extends DBContext {
         String sql = "INSERT INTO [dbo].[Comment]\n"
                 + "           ([Mentor_ID]\n"
                 + "           ,[Mentee_ID]\n"
-                + "           ,[Skill_ID]\n"
                 + "           ,[Created_at]\n"
                 + "           ,[Content])\n"
-                + "     VALUES(?,?,?,?,?)";
+                + "     VALUES(?,?,?,?)";
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, cmt.getMentorID());
             ps.setInt(2, cmt.getMenteeID());
-            ps.setInt(3, cmt.getSkillID());
-            ps.setString(4, date);
-            ps.setString(5, cmt.getContent());
+            ps.setString(3, date);
+            ps.setString(4, cmt.getContent());
             ps.execute();
 
             String sql1 = "SELECT top(1) [Comment_ID]\n"
@@ -104,7 +100,6 @@ public class CommentDAO extends DBContext {
         String sql = "UPDATE [dbo].[Comment]\n"
                 + "   SET [Mentor_ID] = ?\n"
                 + "      ,[Mentee_ID] = ?\n"
-                + "      ,[Skill_ID] = ?\n"
                 + "      ,[Created_at] = ?\n"
                 + "      ,[Content] = ?\n"
                 + " WHERE Comment_ID = ?";
@@ -112,10 +107,9 @@ public class CommentDAO extends DBContext {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, cmt.getMentorID());
             ps.setInt(2, cmt.getMenteeID());
-            ps.setInt(3, cmt.getSkillID());
-            ps.setString(4, cmt.getCreatedAt());
-            ps.setString(5, cmt.getContent());
-            ps.setInt(6, cmt.getID());
+            ps.setString(3, cmt.getCreatedAt());
+            ps.setString(4, cmt.getContent());
+            ps.setInt(5, cmt.getID());
             ps.execute();
 
         } catch (Exception e) {
