@@ -73,8 +73,9 @@ public class LoadHomeController extends HttpServlet {
         IInvitationService iS = new InvitationService();
         ICommentService cS = new CommentService();
         IAddressService aS = new AddressService();
-        
+        IContactService conS = new ContactService();
         ses.setAttribute("RoleID", 1);
+        ses.setAttribute("listContact", conS.getList());
         ses.setAttribute("HmSkill", sS.getHm());
         ses.setAttribute("listSkill", sS.getList());
         ses.setAttribute("listUser", uS.getList());
