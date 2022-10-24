@@ -59,7 +59,6 @@ public class CommentService implements ICommentService {
         Comment cmt = getCommentById(u.getID(), list);
         cmt.setMentorID(u.getMentorID());
         cmt.setMenteeID(u.getMenteeID());
-        cmt.setSkillID(u.getSkillID());
         cmt.setCreatedAt(u.getCreatedAt());
         cmt.setContent(u.getContent());
         return "OK";
