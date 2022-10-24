@@ -11,7 +11,9 @@
     <%@include file="headCSS2.jsp" %>
 
     <style>
-
+        .container{
+            margin-bottom: 144px;
+        }
         .search input[type="text"]{
             border: 1px solid #08080B;
             border-right: none;
@@ -156,13 +158,13 @@
                                 <div class="pagination">
                                     <c:if test="${pageIf.cp!=1 && pageIf.end!=null}">
                                         <a href="<%=request.getContextPath()%>/sendInvitation?page=1&nrpp=${nrpp}<c:if test="${search!=null}">&search=${search}</c:if>"><<</a> 
-                                        <a href="<%=request.getContextPath()%>/sendInvitation?page=${pageIf.cp-1}&nrpp=${nrpp}"><</a>
+                                        <a href="<%=request.getContextPath()%>/sendInvitation?page=${pageIf.cp-1}&nrpp=${nrpp}<c:if test="${search!=null}">&search=${search}</c:if>"><</a>
                                     </c:if>      
                                     <c:forEach begin="${pageIf.cp>2?pageIf.cp-2:1}" end="${pageIf.cp+2>pageIf.np?pageIf.np:pageIf.cp+2}" var="i">
                                         <a class="${i==pageIf.cp?"active":""}" href="<%=request.getContextPath()%>/sendInvitation?page=${i}&nrpp=${nrpp}<c:if test="${search!=null}">&search=${search}</c:if>">${i}</a>
                                     </c:forEach>
                                     <c:if test="${pageIf.cp!=pageIf.np && pageIf.end!=0}">
-                                        <a href="<%=request.getContextPath()%>/sendInvitation?page=${pageIf.cp+1}&nrpp=${nrpp}">></a>
+                                        <a href="<%=request.getContextPath()%>/sendInvitation?page=${pageIf.cp+1}&nrpp=${nrpp}<c:if test="${search!=null}">&search=${search}</c:if>">></a>
                                         <a href="<%=request.getContextPath()%>/sendInvitation?page=${pageIf.np}&nrpp=${nrpp}<c:if test="${search!=null}">&search=${search}</c:if>">>></a>  
                                     </c:if>  
                                     <form action="<%=request.getContextPath()%>/sendInvitation" method="GET">
