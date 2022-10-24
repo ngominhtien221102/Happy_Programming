@@ -28,9 +28,9 @@
                     <div style="padding:5rem">
                         <div class="text-center" >
                             <p style="color:green">${alert}</p>
-                            <h3>
+                            <h2>
                                 Update Profile
-                            </h3>
+                            </h2>
                         </div>
                         <form class="user" action="<%=request.getContextPath()%>/updateProfile" method="POST" enctype="multipart/form-data">      
                             <!-- Full Name -->
@@ -97,12 +97,12 @@
 
                             <!--upload img-->
                             <div style="margin-bottom: 3%">
-                                  <h5 style="padding-right: 5%">Avatar:</h5>
+                                <h5 style="padding-right: 5%">Avatar:</h5>
                                 <img class="" style="height: 200px" src="<%=request.getContextPath()%>/img/avatar/${u.getAvatar()}" alt="Mentee">
                             </div>
                             <div class="form-group row" style="padding-bottom: 20px;">
 
-                              
+
                                 <input type="file" id="img" name="img" accept="image/*" multiple="" style="height: 60px">
                             </div>
 
