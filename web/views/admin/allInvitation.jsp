@@ -330,13 +330,14 @@
                                         <c:if test="${requestScope.pageIf.cp!=requestScope.pageIf.np && requestScope.pageIf.end!=0}">
                                             <a href="<%=request.getContextPath()%>/allInvitation?page=${requestScope.pageIf.np}&nrpp=${nrpp}<c:if test="${status != null}">&sort=${status}</c:if><c:if test="${search != null}">&search=${search}</c:if>">>></a>  
                                         </c:if>  
-                                        <form action="<%=request.getContextPath()%>/allInvitation" method="GET">
-                                            <select name="nrpp" id="selectElementId" onchange="this.form.submit()" style="margin: 0">
-                                                <c:forEach items="${requestScope.pageIf.arrNrpp}" var="i">
-                                                    <option <c:if test="${nrpp == i}">selected=""</c:if>value="${i}">${i}</option>
+                                        <div class="select-nrpp" style="">
+                                            <div class="nrpp" onclick="showNrpp()">${nrpp}<i class="ti ti-angle-down ml-1"></i></div>
+                                            <div id="nrpp">
+                                                <c:forEach items="${pageIf.arrNrpp}" var="i">
+                                                    <a class="<c:if test="${nrpp==i}">selected</c:if>" href="<%=request.getContextPath()%>/allInvitation?nrpp=${i}<c:if test="${search!=null}">&search=${search}</c:if><c:if test="${status != null}">&sort=${status}</c:if>">${i}</a>
                                                 </c:forEach>
-                                            </select>
-                                        </form>
+                                            </div>
+                                        </div>
                                     </div>
 
                                 </div>
@@ -352,7 +353,14 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <!-- Page level plugins -->
         <script src="<%=request.getContextPath()%>/js/vendor/chart.js/Chart.min.js"></script>
-
+        <script>
+                                                function showNrpp() {
+                                                    if (document.getElementById('nrpp').style.display === "flex")
+                                                        document.getElementById('nrpp').style.display = "none";
+                                                    else
+                                                        document.getElementById('nrpp').style.display = "flex";
+                                                }
+</script>
         <!-- Page level custom scripts -->
         <script src="<%=request.getContextPath()%>/js/admin/invitation/chart-area-demo.js"></script>
 
