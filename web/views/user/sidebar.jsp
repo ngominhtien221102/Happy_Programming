@@ -99,10 +99,7 @@
         <hr class="sidebar-divider">
 
         <!-- Heading -->
-        <div class="sidebar-heading">
-            Mentor
-        </div>
-
+        
         <!-- Divider -->
         <hr class="sidebar-divider">
 

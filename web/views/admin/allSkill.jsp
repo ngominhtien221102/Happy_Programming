@@ -222,7 +222,7 @@
             </div>
         </div>
         <!-- footer -->
-        <%@include file="footer.jsp" %>
+        
         <!-- /footer -->
         <!-- jQuery -->
         <script src="https://cdn.ckeditor.com/ckeditor5/34.1.0/classic/ckeditor.js"></script>
