@@ -98,11 +98,6 @@
         <!-- Divider -->
         <hr class="sidebar-divider">
 
-        <!-- Heading -->
-        
-        <!-- Divider -->
-        <hr class="sidebar-divider">
-
         <li class="nav-item">
             <a class="nav-link collapsed" href="<%=request.getContextPath()%>/logout" >
                 <span>Log Out</span>
