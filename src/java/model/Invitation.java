@@ -4,13 +4,12 @@
  */
 package model;
 
-
-
 /**
  *
  * @author ASUS
  */
 public class Invitation {
+
     private int ID;
     private int mentorID;
     private int menteeID;
@@ -19,8 +18,8 @@ public class Invitation {
     private String title;
     private String deadlineDate;
     private String content;
-     private String createdAt;
-    
+    private String createdAt;
+
     public Invitation() {
     }
 
@@ -43,8 +42,6 @@ public class Invitation {
     public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
     }
-
-    
 
     public int getID() {
         return ID;
@@ -122,8 +119,4 @@ public class Invitation {
         return "Invitation{" + "id=" + ID + ", mentorId=" + mentorID + ", menteeId=" + menteeID + ", skillId=" + skillID + ", status=" + statusID + ", title=" + title + ", deadlineDate=" + deadlineDate + ", content=" + content + '}';
     }
 
-    
-
-    
-    
 }

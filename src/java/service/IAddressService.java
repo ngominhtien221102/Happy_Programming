@@ -18,10 +18,10 @@ public interface IAddressService {
     String update(Address u,List<Address> list);
 
     @Override
-    public boolean equals(Object obj);
+    boolean equals(Object obj);
     List<String> getListProvince();
     List<String> getListDistTrict(String province );
     List<String> getListWard(String Province, String District);
     int getIDAddress(String Province, String District, String Ward, List<Address> list);
-
+    
 }

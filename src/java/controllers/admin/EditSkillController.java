@@ -62,7 +62,7 @@ public class EditSkillController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     ISkillService s = new SkillService();
-    int cp, skillID;
+    int cp, skillID, nrpp;
     String type, search, msg;
 
     @Override
@@ -72,38 +72,59 @@ public class EditSkillController extends HttpServlet {
         search = request.getParameter("search");
         request.setAttribute("search", search);
         List<Skill> lstSkill = (List<Skill>) ses.getAttribute("listSkill");
-        List<Skill> listSearch = new ArrayList<>();
+        List<Skill> listSkillSearch = new ArrayList<>();
         if (search != null) {
-            listSearch = s.search(search, lstSkill);
+            listSkillSearch = s.search(search, lstSkill);
         } else {
-            listSearch = lstSkill;
+            listSkillSearch = lstSkill;
         }
         // phân trang
+        String getNrpp = request.getParameter("nrpp");
+        nrpp = 5;
+        if (getNrpp != null) {
+            nrpp = Integer.parseInt(getNrpp);
+        }
+        request.setAttribute("nrpp", nrpp);
         String page = request.getParameter("page");
         if (page == null || page.equals("")) { // trang = null => page =1  
             cp = 1;
         } else {
             cp = Integer.parseInt(page);
         }
-        PageInfor pageIf = new PageInfor(5, listSearch.size(), cp);
-        request.setAttribute("listSearch", listSearch);
+        PageInfor pageIf = new PageInfor(nrpp, listSkillSearch.size(), cp);
+
+        ses.setAttribute("listSkillSearch", listSkillSearch);
         request.setAttribute("pageIf", pageIf);
 
+        if (msg != null) {
+            if (msg.equals("Update skill success") || msg.equals("Create new skill success")) {
+                request.setAttribute("success", msg);
+            } else {
+                request.setAttribute("failed", msg);
+            }
+            msg = "";
+        }
+
         type = request.getParameter("type");
+        request.setAttribute("type", type);
         String sSkillID = request.getParameter("skillID");
         if (sSkillID != null && type != null) {
             skillID = Integer.parseInt(sSkillID);
             if (type.equals("0")) {
                 s.delete(skillID, lstSkill);
+                ses.setAttribute("listSkill", lstSkill);
+                
                 if (search != null) {
-                    response.sendRedirect(request.getContextPath() + "/editSkill?page=" + cp + "&search=" + search);
+                    response.sendRedirect(request.getContextPath() + "/editSkill?page=" + cp + "&search=" + search + "&nrpp=" + nrpp);
                 } else {
-                    response.sendRedirect(request.getContextPath() + "/editSkill?page=" + cp);
+                    response.sendRedirect(request.getContextPath() + "/editSkill?page=" + cp + "&nrpp=" + nrpp);
                 }
             } else {
                 Skill skillUd = s.getSkillById(skillID, lstSkill);
                 String name = skillUd.getName();
+                String description = skillUd.getDescription();
                 request.setAttribute("name", name);
+                request.setAttribute("description", description);
                 request.getRequestDispatcher("views/admin/allSkill.jsp").forward(request, response);
             }
         } else {
@@ -123,18 +144,48 @@ public class EditSkillController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession ses = request.getSession();
-        List<Skill> lstSkill = (List<Skill>) ses.getAttribute("listSkill");
+        List<Skill> listSkill = (List<Skill>) ses.getAttribute("listSkill");
         if (type != null) {
             if (type.equals("1")) {
                 // update
+                String name = request.getParameter("name");
+                String description = request.getParameter("description");
+                if (!description.equals("")) {
+                    msg = s.update(new Skill(skillID, name, description), listSkill);
+                    if (msg.equals("OK")) {
+                        msg = "Update skill success";
+                    }
+                    ses.setAttribute("listSkill", listSkill);
+                    ses.setAttribute("listSkillSearch", listSkill);
+                } else {
+                    msg = "Please enter description";
+                }
             }
         } else {
-            // create
+            // create OK
             String name = request.getParameter("name");
-            msg = s.insert(new Skill(0, name), lstSkill);
+            String description = request.getParameter("description");
+            if (!description.equals("")) {
+                msg = s.insert(new Skill(0, name, description), listSkill);
 
+                ses.setAttribute("listSkill", listSkill);
+                ses.setAttribute("listSkillSearch", listSkill);
+                PageInfor pageIf = new PageInfor(nrpp, listSkill.size(), cp);
+                int np = pageIf.getNp();
+                if (msg.equals("OK")) {
+                    msg = "Create new skill success";
+                    response.sendRedirect(request.getContextPath() + "/editSkill?page=" + np + "&nrpp=" + nrpp);
+                }
+            } else {
+                msg = "Please enter description";
+            }
         }
-        response.sendRedirect("");
+        if (search != null) {
+            response.sendRedirect(request.getContextPath() + "/editSkill?page=" + cp + "&search=" + search + "&nrpp=" + nrpp);
+        } else {
+            response.sendRedirect(request.getContextPath() + "/editSkill?page=" + cp + "&nrpp=" + nrpp);
+        }
+
     }
 
     /**

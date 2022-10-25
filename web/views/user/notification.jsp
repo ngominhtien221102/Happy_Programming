@@ -11,83 +11,33 @@
     <%@include file="headCSS2.jsp" %>
 
     <style>
-
-        .search input[type="text"]{
-            border: 1px solid #08080B;
-            border-right: none;
-            border-left: none;
-            border-top: none;
-            font-family: 'Open Sans', sans-serif;
-            outline: none;
-            padding: 0.8em 0;
-            color: #A5A5A5;
-            width: 20%;
-            -moz-transition: width 0.5s ease-out;
-            -webkit-transition: width 0.5s ease-out;
-            transition: width 0.5s ease-out;
-            flex-wrap: unset;
-
+        .noti-detail{
+            display: flex;
+            color: #5c5c77;
+            justify-content:space-between;
+            padding: 4px;
         }
-        .search input[type="text"]:focus {
-            width: 25%;
-            -moz-transition: width 0.5s ease-out;
-            -webkit-transition: width 0.5s ease-out;
-            transition: width 0.5s ease-out;
+        .unread-note{
+            background: hsl(214, 89%, 52%);
+            width: 12px;
+            height: 12px
         }
-        .search button{
-            margin-top:25px;
-            margin-left:15px;
-            border: 0px;
-            background-color: #fff;
-            width: 35px;
-            height: 35px;
-            border-radius: 5px;
+        .readed-note{
+            width: 12px;
+            height: 12px
         }
-        .search button:hover{
-            background-color: #ffbc3b;
-            color: #fff;
-
+        .createAt{
+            justify-content: flex-end;
+            display: flex;
+            align-items: center
         }
-        .cv:hover{
-            background-color:#e9ecef;
-            color: #ffbc3b;
+        .unread-table{
+            color: hsl(214, 89%, 52%);
+            font-weight: 600;
         }
-        input,textarea,.cv{
-            margin: 16px 0px;
-            border-radius: 5px;
-        }
-        select{
-            border-radius: 5px;
-        }
-        .cv{
-            color: black;
-            border-color: #ced4da;
-            background-color: #fff;
-            padding: 10px;
-        }
-        table{
-            margin-top: 30px;
-        }
-        .col-9{
-            margin: 0 auto;
-        }
-        .pagination a,.pagination select{
-            border: #ced4da solid 1px;
-            padding: 10px;
-            border-radius: 5px;
-            margin-right: 10px;
-        }
-        .pagination select{
-            color: #ffbc3b;
-            background: #f3f3f3;
-        }
-        .pagination a:hover, .pagination a.active{
-            background-color:#e9ecef;
-            color: #ffbc3b;
-        }
-        .pagination{
-            margin: 30px 0;
-            float: right;
+        .avatar{
+            width: 40px;
+            height: 40px;
         }
     </style>
     <body>
@@ -103,42 +53,109 @@
 
             <div class="col-10">
                 <section class="section" >
-
                     <div class="container">
-                        <c:forEach items="${sessionScope.Notification.items}" var="n">
-                            <a href=""></a>
-                            ${n.ID}
-                            ${n.type}
-                            ${n.menteeID}
-                            ${n.createAt}
-                        </c:forEach>
-                        ${sessionScope.NewNotification}
-                    </div>
-                </section>
+                        <h2>Notification</h2>
+                        <table class="table">
+
+                            <tbody>
+                                <c:if test="${num>0}">
+                                <th>New</th>
+                                    <c:forEach items="${listNotify}" begin="${0}" end="${num-1}"  var="n">
+                                    <tr>
+                                        <c:forEach items = "${sessionScope.listUserProfile}" var="u">
+                                            <c:if test="${u.ID==n.senderID}">
+                                                <td>
+                                                    <a  href="<c:if test="${n.type.equals('request')||n.type.equals('response')}"><%=request.getContextPath()%>/singleRequest?requestId=${n.ID}</c:if><c:if test="${n.type.equals('invite')}"><%=request.getContextPath()%>/</c:if>">
+                                                            <div class="noti-detail ">
+                                                                <div>
+                                                                        <img src="<%=request.getContextPath()%>/img/avatar/${u.avatar}" 
+                                                                     onerror="this.src='<%=request.getContextPath()%>/img/avatar/default.png'" 
+                                                                     class="rounded-circle mr-2 avatar"/>
+                                                                ${u.firstName} ${u.lastName} sent ${n.type} to you
+                                                            </div>
+                                                            <div class="createAt unread-table">
+                                                                ${n.createAt}
+                                                                <div class="rounded-circle ml-2 unread-note"></div>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                </td>
+                                            </c:if>
+                                        </c:forEach>
+                                    </tr>
+                                </c:forEach>
+                                <th>Before</th>
+                                    <c:forEach items="${listNotify}" begin="${num}" end="${listNotify.size()-1}"  var="n">
+                                    <tr>
+                                        <c:forEach items = "${sessionScope.listUserProfile}" var="u">
+                                            <c:if test="${u.ID==n.senderID}">
+                                                <td>
+                                                    <a  href="<c:if test="${n.type.equals('request')||n.type.equals('response')}"><%=request.getContextPath()%>/singleRequest?requestId=${n.ID}</c:if><c:if test="${n.type.equals('invite')}"><%=request.getContextPath()%>/</c:if>">
+                                                            <div class="noti-detail">
+                                                                <div>
+                                                                        <img src="<%=request.getContextPath()%>/img/avatar/${u.avatar}" 
+                                                                     onerror="this.src='<%=request.getContextPath()%>/img/avatar/default.png'" 
+                                                                     class="rounded-circle mr-2 avatar"/>
+                                                                ${u.firstName} ${u.lastName} sent ${n.type} to you
+                                                            </div>
+
+                                                            <div class="createAt">
+                                                                ${n.createAt}
+                                                                <div class="rounded-circle ml-2 readed-note"></div>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                </td>
+                                            </c:if>
+                                        </c:forEach>
+                                    </tr>
+                                </c:forEach>
+                            </c:if>
+                            <c:if test="${num==0}">
+                                <th>All</th>
+                                    <c:forEach items="${listNotify}" var="n" varStatus="loop">
+                                    <tr>
+                                        <c:forEach items = "${sessionScope.listUserProfile}" var="u">
+                                            <c:if test="${u.ID==n.senderID}">
+                                                <td>
+                                                    <a  href="<c:if test="${n.type.equals('request')||n.type.equals('response')}"><%=request.getContextPath()%>/singleRequest?requestId=${n.ID}</c:if><c:if test="${n.type.equals('invite')}"><%=request.getContextPath()%>/</c:if>">
+                                                            <div class="noti-detail">
+                                                                <div>
+                                                                        <img src="<%=request.getContextPath()%>/img/avatar/${u.avatar}" 
+                                                                     onerror="this.src='<%=request.getContextPath()%>/img/avatar/default.png'" 
+                                                                     class="rounded-circle mr-2 avatar"/>
+                                                                ${u.firstName} ${u.lastName} sent ${n.type} to you
+                                                            </div>
+                                                            <div class="createAt">
+                                                                ${n.createAt}
+                                                                <div class="rounded-circle ml-2 readed-note"></div>
+                                                            </div>
+                                                        </div>
+                                                    </a>
+                                                </td>
+                                            </c:if>
+
+                                        </c:forEach>
+                                    </tr>
+
+                                </c:forEach>
+                            </c:if>
+                                    <c:if test="${listNotify.size()==0}"><tr><td class="">You don't have any notifications</td></tr></c:if>
+                                    </tbody>
+                            </table>
+                        </div>
+                    </section>
+                </div>
             </div>
-        </div>
 
-        <!-- footer -->
-        <%@include file="footer.jsp" %>
-        <!-- /footer -->
 
-        <!-- jQuery -->
+            <!-- /footer -->
+
+            <!-- jQuery -->
         <%@include file="scriptJS.jsp" %>
         <script src="https://cdn.ckeditor.com/ckeditor5/34.1.0/classic/ckeditor.js"></script>
         <script>
-                                                    var value;
-                                                    ClassicEditor
-                                                            .create(document.querySelector('#editor'))
-                                                            .then(editor => {
-                                                                value = editor;
-                                                            })
-                                                            .catch(error => {
-                                                                console.error(error);
-                                                            });
 
-                                                    const handleSubmit = () => {
-                                                        document.getElementById('a').innerHTML = value.getData();
-                                                    };
 
 
         </script>

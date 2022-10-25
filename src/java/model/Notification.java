@@ -47,7 +47,7 @@ public class Notification {
               System.out.println(item.getID());
               System.out.println(item.getCreateAt());
               System.out.println(item.getType());
-              System.out.println(item.getMenteeID());
+              System.out.println(item.getSenderID());
 
         }
     }

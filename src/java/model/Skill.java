@@ -11,13 +11,23 @@ package model;
 public class Skill {
     private int ID;
     private String name;
+    private String description;
 
     public Skill() {
     }
 
-    public Skill(int id, String name) {
+    public Skill(int id, String name, String description) {
         this.ID = id;
         this.name = name;
+        this.description = description;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public int getID() {

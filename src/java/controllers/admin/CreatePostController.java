@@ -12,18 +12,17 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import jakarta.websocket.Session;
 import java.util.List;
-import model.Skill;
-import service.ISkillService;
-import service.classimpl.SkillService;
+import model.Post;
+import service.IPostService;
+import service.classimpl.PostService;
 
 /**
  *
- * @author ASUS
+ * @author Lenovo
  */
-@WebServlet(name = "UpdateSkillController", urlPatterns = {"/updateSkill"})
-public class UpdateSkillController extends HttpServlet {
+@WebServlet(name = "CreatePostController", urlPatterns = {"/createPost"})
+public class CreatePostController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -42,10 +41,10 @@ public class UpdateSkillController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet UpdateSkillService</title>");
+            out.println("<title>Servlet CreatePostController</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet UpdateSkillService at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet CreatePostController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -60,36 +59,10 @@ public class UpdateSkillController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    ISkillService s = new SkillService();
-    int id;
-  
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        List<Skill> list = (List<Skill>) session.getAttribute("listSkill");
-        String Id = request.getParameter("id");
-        String type = request.getParameter("type");
-        if (Id != null && type != null) {
-            id = Integer.parseInt(Id.trim());
-            if (type.equals("0")) {
-                s.delete(id, list);
-                session.setAttribute("listSkill", list);
-                response.sendRedirect(request.getContextPath() + "/views/user/skills.jsp");
-            } else {
-                if(s.getSkillById(id, list)!=null){
-                    request.setAttribute("oldName", s.getSkillById(id, list).getName());
-                    request.getRequestDispatcher("views/admin/updateSkill.jsp").forward(request, response);
-                }
-                else{
-                    response.sendRedirect(request.getContextPath() + "/views/user/skills.jsp");
-                }
-            }
-        } else {
-            response.sendRedirect(request.getContextPath() + "/views/user/skills.jsp");
-        }
-
+        processRequest(request, response);
     }
 
     /**
@@ -103,17 +76,21 @@ public class UpdateSkillController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        List<Skill> list = (List<Skill>) session.getAttribute("listSkill");
-        String name = request.getParameter("name");
-        Skill skill = new Skill(id, name);
-        String message = s.update(skill, list);
-        if(message.equals("OK")){
-            request.setAttribute("success", "Update skill success");
-        }else{
-            request.setAttribute("failed", message);            
+        HttpSession ses = request.getSession();
+        List<Post> listPost;
+        listPost = (List<Post>) ses.getAttribute("listPost");
+        String title = request.getParameter("Title");
+        String content = request.getParameter("Content");
+        if (title.length() > 100) {
+            request.setAttribute("Error", "The length of title must be less than 100 characters!");
+            request.setAttribute("Content", content);
+        } else {
+            IPostService ips = new PostService();
+            Post p = new Post(0, title, content);
+            ips.insert(p, listPost);
+            request.setAttribute("message", "Create post succesfull!");
         }
-        request.getRequestDispatcher("views/admin/updateSkill.jsp").forward(request, response);
+        request.getRequestDispatcher("views/admin/createPost.jsp").forward(request, response);
     }
 
     /**

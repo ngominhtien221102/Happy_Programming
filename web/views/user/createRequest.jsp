@@ -87,6 +87,12 @@
             margin: 30px 0;
             float: right;
         }
+        .request{
+            font-weight: 700;
+        }
+        .container{
+            margin-bottom: 144px;
+        }
     </style>
     <body>
         <!-- header -->
@@ -108,36 +114,42 @@
                         </div>
                         <br><h3>Invited Mentors</h3>
                         <div class="row">  
-                            <div class="col-md-12 table">
-                                <table border="2" style="width: 100%">
+                            <div class="col-md-12">
+                                <table>
                                     <thead>
                                         <tr>
-                                            <th>.NO</th> 
+                                            <th>#</th> 
                                             <th>Name</th>
                                             <th>Skills</th>
-                                            <th>Option</th>         
+                                            <th colspan="2" class="text-align-center"></th>         
                                         </tr>
                                     </thead>
-                                    <c:forEach items="${upInvLst}" var="lst" begin="${pageIf.start}" end="${pageIf.end}" varStatus="loop">
-                                        <tbody>
+                                    <tbody>
+                                        <c:forEach items="${upInvLst}" var="lst" begin="${pageIf.start}" end="${pageIf.end}" varStatus="loop">
+
                                             <tr>
                                                 <td>${loop.index+1}</td>
                                                 <td>${lst.firstName} ${lst.lastName}</td>
                                                 <td>${HmSkill[skillId.get(loop.index)]}</td>
-                                                <td><a class="text-color" href="<%=request.getContextPath()%>/sendRequest?mentorId=${lst.ID}&page=${pageIf.cp}">send</a></td>
+                                                <td class="text-align-center"><a class="text-color request" href="<%=request.getContextPath()%>/sendRequest?mentorId=${lst.ID}&page=${pageIf.cp}">Send</a></td>
+                                                <td class="text-align-center"><a class="text-color request" href="<%=request.getContextPath()%>/viewCV?mentorID=${lst.ID}">View CV</a></td>
+
                                             </tr>
-                                        </tbody>
-                                    </c:forEach>
+
+                                        </c:forEach>
+                                    </tbody>
                                 </table>
                                 <div class="pagination">
                                     <c:if test="${pageIf.cp!=1 && pageIf.end!=null}">
-                                        <a href="<%=request.getContextPath()%>/sendRequest?page=1"><<</a>  
+                                        <a href="<%=request.getContextPath()%>/sendRequest?page=1&nrpp=${nrpp}"><<</a>
+                                        <a href="<%=request.getContextPath()%>/sendRequest?page=${pageIf.cp-1}&nrpp=${nrpp}"><</a>
                                     </c:if>      
-                                    <c:forEach begin="${1}" end="${pageIf.np}" var="i">
-                                        <a class="${i==pageIf.cp?"active":""}" href="<%=request.getContextPath()%>/sendRequest?page=${i}">${i}</a>
+                                    <c:forEach begin="${pageIf.cp>2?pageIf.cp-2:1}" end="${pageIf.cp+2>pageIf.np?pageIf.np:pageIf.cp+2}" var="i">
+                                        <a class="${i==pageIf.cp?"active":""}" href="<%=request.getContextPath()%>/sendRequest?page=${i}&nrpp=${nrpp}">${i}</a>
                                     </c:forEach>
                                     <c:if test="${pageIf.cp!=pageIf.np && pageIf.end!=0}">
-                                        <a href="<%=request.getContextPath()%>/sendRequest?page=${pageIf.np}">>></a>  
+                                         <a href="<%=request.getContextPath()%>/sendRequest?page=${pageIf.cp+1}&nrpp=${nrpp}">></a>
+                                        <a href="<%=request.getContextPath()%>/sendRequest?page=${pageIf.np}&nrpp=${nrpp}">>></a>  
                                     </c:if>
                                     <form action="<%=request.getContextPath()%>/sendRequest" method="GET">
                                         <select name="nrpp" onchange="this.form.submit()">
@@ -160,14 +172,13 @@
                             <p style="color: red">${content_alert}</p>
                             <input type="hidden" name="mentor" value="${mentor.ID}" >
                             <button type="submit" style="float:right; margin-top: 16px;" class="btn btn-primary">SEND</button>
-
                         </form>
                     </div>
                 </section>
             </div>
         </div>
         <!-- footer -->
-        <%@include file="footer.jsp" %>
+
         <!-- /footer -->
         <!-- jQuery -->
         <%@include file="scriptJS.jsp" %> 

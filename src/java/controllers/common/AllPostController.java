@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controllers.admin;
+package controllers.common;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,17 +12,19 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
-import model.Skill;
-import service.ISkillService;
-import service.classimpl.SkillService;
+import model.PageInfor;
+import model.Post;
+import service.IPostService;
+import service.classimpl.PostService;
 
 /**
  *
- * @author ASUS
+ * @author Lenovo
  */
-@WebServlet(name = "CreateSkillController", urlPatterns = {"/createSkill"})
-public class CreateSkillController extends HttpServlet {
+@WebServlet(name = "AllPostController", urlPatterns = {"/allPost"})
+public class AllPostController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -41,10 +43,10 @@ public class CreateSkillController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet CreateSkillController</title>");
+            out.println("<title>Servlet AllPostController</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet CreateSkillController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet AllPostController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -62,7 +64,39 @@ public class CreateSkillController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.sendRedirect("views/admin/allSkill.jsp");
+        HttpSession ses =request.getSession();
+        IPostService ips = new PostService();
+        List<Post> postList = (List<Post>) ses.getAttribute("listPost");
+        List<Post> listPost = new ArrayList<>();
+        String search = request.getParameter("search");
+        request.setAttribute("search", search);
+        if (search == null) {
+            listPost = postList;
+        } else {
+            listPost = ips.searchList(search);
+        }
+        
+        //Phan trang
+        String getNrpp = request.getParameter("nrpp");
+        int nrpp = 3;
+        if (getNrpp != null) {
+            nrpp = Integer.parseInt(getNrpp);
+        }
+        request.setAttribute("nrpp", nrpp);
+
+        int cp;
+
+        String page = request.getParameter("page");
+        if (page == null || page.equals("")) { // trang = null => page =1  
+            cp = 1;
+        } else {
+            cp = Integer.parseInt(page);
+        }
+        PageInfor pageIf = new PageInfor(nrpp, listPost.size(), cp);
+        request.setAttribute("pageIf", pageIf);
+        
+        request.setAttribute("postList", listPost);
+         request.getRequestDispatcher("views/common/blog.jsp").forward(request, response);
     }
 
     /**
@@ -73,23 +107,10 @@ public class CreateSkillController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    ISkillService s = new SkillService();
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String skillName = request.getParameter("name");
-        HttpSession session = request.getSession();
-        Skill skill = new Skill(0, skillName);
-        List<Skill> list = (List<Skill>) session.getAttribute("listSkill");
-        String message = s.insert(skill, list);
-        if (message.equals("OK")) {
-            request.setAttribute("success", "Create skill success");
-        } else {
-            request.setAttribute("failed", message);
-        }
-        session.setAttribute("listSkill", list);
-        request.getRequestDispatcher("views/admin/allSkill.jsp").forward(request, response);
+        processRequest(request, response);
     }
 
     /**

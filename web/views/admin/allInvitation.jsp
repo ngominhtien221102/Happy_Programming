@@ -6,7 +6,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
-    <%@include file="headCSS2.jsp" %>
+    <%@include file="../user/headCSS2.jsp" %>
     <style>
         .card-title,.list-inline-item{
             white-space: nowrap;
@@ -16,11 +16,11 @@
             max-height: 150px;
         }
         .progress{
-            margin: 20px 0;
+            margin: 40px 0;
         }
         .card-block{
             margin-top: 50px;
-            background-color: #f3f3f3;
+            background-color: rgba(0,0,0,.03);
             padding: 50px;
             border-radius: 5px;
         }
@@ -94,10 +94,14 @@
             margin: 30px 0;
             float: right;
         }
+        .static-number{
+            margin-top: 39px;
+        }
+        
     </style>
     <body>
         <!-- header -->
-        <%@include file="header.jsp" %>
+        <%@include file="../user/header.jsp" %>
         <!-- /header -->
         <div id="content" class="row" style="padding-top: 50px;  min-height: 800px">
             <%@include file="adminSidebar.jsp" %>
@@ -105,148 +109,195 @@
                 <section class="section" >
                     <h2 style="margin-left:15px; text-align: center">Invitation</h2>
                     <div class="container">
-                        <div class="row" style="margin-top: 50px">
+                        <div class="row" style="">
+                        </div>
+                        <div class="">
+                            <div class="row justify-content-between">
+                                <div class="col-7 card-block">
+                                    <h3 style="margin-bottom: 20px" class="">Invitations</h3>
+                                    <h4>${totalInv}</h4>
+                                    <p class="text-muted">All invitation</p>
+                                    <!--accepted-->
+                                    <div style="margin: 20px 0">
+                                        <h5 class="">${acpt}</h5>
+                                        <p class="text-muted">Accepted<span style="float: right">${Math.round(acpt*100/totalInv) }%</span></p>
 
-
-                            <!--number of invitations accepted-->
-
-                            <article class="col-xl-3 col-md-6">
-                                <div class="card border-bottom hover-shadow" style="border-radius: 5px;background-color: #f3f3f3">
-                                    <div class="card-body row align-items-center" >
-                                        <div class="col-8">
-                                            <h4 style="color: #0ac282;">${acpt}</h4>
-                                            <h6 class="text-muted">Accepted</h6>
-                                        </div>
-                                        <div class="col-4 text-right" style="color: #0ac282;" >
-                                            <i class="ti-user"></i>
+                                        <div class="progress">
+                                            <div class="progress-bar" style="width: ${acpt*100/totalInv}%;background: linear-gradient(to right,#0ac282,#0df3a3); "></div>
                                         </div>
                                     </div>
-                                    <div style="background: linear-gradient(to right,#0ac282,#0df3a3); text-align: center; align-items: center; padding: 20px;
-                                         border-bottom-left-radius: 5px;
-                                         border-bottom-right-radius: 5px;">
-                                        <p style="color: #fff; margin: 0 ">Invitations accepted</p>
+                                    <!--rejected-->
+                                    <div style="margin: 20px 0">
+                                        <h5 class="">${reject}</h5>
+                                        <p class="text-muted">Rejected<span style="float: right">${Math.round(reject*100/totalInv)}%</span></p>
+
+                                        <div class="progress">
+                                            <div class="progress-bar" style="width: ${reject*100/totalInv}%;background: linear-gradient(to right,#fe5d70,#fe909d); "></div>
+                                        </div>
+                                    </div>
+                                    <!--progress-->
+                                    <div style="margin: 20px 0">
+                                        <h5 class="">${process}</h5>
+                                        <p class="text-muted">Processing<span style="float: right">${Math.round(process*100/totalInv)}%</span></p>
+                                        <div class="progress">
+                                            <div class="progress-bar" style="width: ${process*100/totalInv}%; background: linear-gradient(to right,#01a9ac,#01dbdf); "></div>
+                                        </div>
+                                    </div>
+
+                                    <!--Cancel-->
+                                    <div style="margin: 20px 0">
+                                        <h5 class="">${cancel}</h5>
+                                        <p class="text-muted">Cancel<span style="float: right">${Math.round(cancel*100/totalInv)}%</span></p>
+                                        <div class="progress">
+                                            <div class="progress-bar" style="width: ${cancel*100/totalInv}%; background: linear-gradient(to right, #fe9365,#feb798); "></div>
+                                        </div>
+                                    </div>
+
+                                    <!--Close-->
+                                    <div style="margin: 20px 0">
+                                        <h5 class="">${close}</h5>
+                                        <p class="text-muted">Close<span style="float: right">${Math.round(close*100/totalInv)}%</span></p>
+                                        <div class="progress">
+                                            <div class="progress-bar" style="width: ${cancel*100/totalInv}%; background: linear-gradient(to right,#e66465, #9198e5); "></div>
+                                        </div>
                                     </div>
                                 </div>
-                            </article>
+                                        <div class="col-4" style="margin-top: 10px">
+                                    <article class="static-number">
+                                        <div class="card border-bottom hover-shadow" style="border-radius: 5px;">
+                                            <div class="card-body row align-items-center" >
+                                                <div class="col-8">
+                                                    <h4 style="color: #0ac282;">${acpt}</h4>
+                                                    <h6 class="text-muted">Accepted</h6>
+                                                </div>
+                                                <div class="col-4 text-right" style="color: #0ac282;" >
+                                                    <i class="ti-user"></i>
+                                                </div>
+                                            </div>
+                                            <div style="background: linear-gradient(to right,#0ac282,#0df3a3); text-align: center; align-items: center; padding: 20px;
+                                                 border-bottom-left-radius: 5px;
+                                                 border-bottom-right-radius: 5px;">
+                                                <p style="color: #fff; margin: 0 ">Invitations accepted</p>
+                                            </div>
+                                        </div>
+                                    </article>
 
-                            <!--Invitation rejected-->
-                            <article class="col-xl-3 col-md-6">
-                                <div class="card border-bottom hover-shadow" style="border-radius: 5px;background-color: #f3f3f3">
-                                    <div class="card-body row align-items-center" >
-                                        <div class="col-8">
-                                            <h4 style="color: #fe5d70;">${reject}</h4>
-                                            <h6 class="text-muted">Rejected</h6>
+                                    <!--Invitation rejected-->
+                                    <article class="static-number">
+                                        <div class="card border-bottom hover-shadow" style="border-radius: 5px">
+                                            <div class="card-body row align-items-center" >
+                                                <div class="col-8">
+                                                    <h4 style="color: #fe5d70;">${reject}</h4>
+                                                    <h6 class="text-muted">Rejected</h6>
+                                                </div>
+                                                <div class="col-4 text-right" style="color: #fe5d70;">
+                                                    <i class="ti-user"></i>
+                                                </div>
+                                            </div>
+                                            <div style="background: linear-gradient(to right,#fe5d70,#fe909d); text-align: center; align-items: center; padding: 20px;
+                                                 border-bottom-left-radius: 5px;
+                                                 border-bottom-right-radius: 5px;">
+                                                <p style="color: #fff; margin: 0 ">Invitation rejected</p>
+                                            </div>
                                         </div>
-                                        <div class="col-4 text-right" style="color: #fe5d70;">
-                                            <i class="ti-user"></i>
+
+                                        <!--Invitation in progress-->
+                                    </article>
+
+                                    <!--Invitation processing-->
+                                    <article class="static-number">
+                                        <div class="card border-bottom hover-shadow" style="border-radius: 5px">
+                                            <div class="card-body row align-items-center" >
+                                                <div class="col-8">
+                                                    <h4 style="color: #01a9ac;">${process}</h4>
+                                                    <h6 class="text-muted">Processing</h6>
+                                                </div>
+                                                <div class="col-4 text-right" style="color: #01a9ac;">
+                                                    <i class="ti-user"></i>
+                                                </div>
+                                            </div>
+                                            <div style="background: linear-gradient(to right,#01a9ac,#01dbdf); text-align: center; align-items: center; padding: 20px;
+                                                 border-bottom-left-radius: 5px;
+                                                 border-bottom-right-radius: 5px;">
+                                                <p style="color: #fff; margin: 0 ">Invitation in progress</p>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div style="background: linear-gradient(to right,#fe5d70,#fe909d); text-align: center; align-items: center; padding: 20px;
-                                         border-bottom-left-radius: 5px;
-                                         border-bottom-right-radius: 5px;">
-                                        <p style="color: #fff; margin: 0 ">Invitation rejected</p>
-                                    </div>
+                                    </article>
+                                    <!--   cancel invitation -->
+                                    <article class="static-number">
+                                        <div class="card border-bottom hover-shadow" style="border-radius: 5px">
+                                            <div class="card-body row align-items-center" >
+                                                <div class="col-8">
+                                                    <h4 style="color: #fe9365;">${cancel}</h4>
+                                                    <h6 class="text-muted">Cancel</h6>
+                                                </div>
+                                                <div class="col-4 text-right">
+                                                    <i class="ti-user" style="color: #fe9365;"></i>
+                                                </div>
+                                            </div>
+                                            <div style="background: linear-gradient(to right,#fe9365,#feb798); text-align: center; align-items: center; padding: 20px;
+                                                 border-bottom-left-radius: 5px;
+                                                 border-bottom-right-radius: 5px;">
+                                                <p style="color: #fff; margin: 0 ">Invitation Canceled</p>
+                                            </div>
+                                        </div>
+
+                                    </article>
+
+                                    <!--   closed invitation -->
+                                    <article class="static-number">
+                                        <div class="card border-bottom hover-shadow" style="border-radius: 5px">
+                                            <div class="card-body row align-items-center" >
+                                                <div class="col-8">
+                                                    <h4 style="color: #fe9365;">${close}</h4>
+                                                    <h6 class="text-muted">Close</h6>
+                                                </div>
+                                                <div class="col-4 text-right">
+                                                    <i class="ti-user" style="color: #fe9365;"></i>
+                                                </div>
+                                            </div>
+                                            <div style="background: linear-gradient(to right,#e66465, #9198e5); text-align: center; align-items: center; padding: 20px;
+                                                 border-bottom-left-radius: 5px;
+                                                 border-bottom-right-radius: 5px;">
+                                                <p style="color: #fff; margin: 0 ">Invitation Closed</p>
+                                            </div>
+                                        </div>
+
+                                    </article>
                                 </div>
+                            </div>
 
-                                <!--Invitation in progress-->
-                            </article>
 
-                            <!--Invitation processing-->
-                            <article class="col-xl-3 col-md-6">
-                                <div class="card border-bottom hover-shadow" style="border-radius: 5px;background-color: #f3f3f3">
-                                    <div class="card-body row align-items-center" >
-                                        <div class="col-8">
-                                            <h4 style="color: #01a9ac;">${process}</h4>
-                                            <h6 class="text-muted">Processing</h6>
-                                        </div>
-                                        <div class="col-4 text-right" style="color: #01a9ac;">
-                                            <i class="ti-user"></i>
-                                        </div>
-                                    </div>
-                                    <div style="background: linear-gradient(to right,#01a9ac,#01dbdf); text-align: center; align-items: center; padding: 20px;
-                                         border-bottom-left-radius: 5px;
-                                         border-bottom-right-radius: 5px;">
-                                        <p style="color: #fff; margin: 0 ">Invitation in progress</p>
-                                    </div>
+
+
+
+                        </div>
+                        <!-- Bar Chart -->
+                        <div class="card shadow mb-4" style="margin-top: 50px">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold ">Number of invitations in the year</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="chart-area" style="height: 400px">
+                                    <canvas id="myBarChart"></canvas>
                                 </div>
-                            </article>
-
-                            <!--                            cancel invitation -->
-                            <article class="col-xl-3 col-md-6">
-                                <div class="card border-bottom hover-shadow" style="border-radius: 5px;background-color: #f3f3f3">
-                                    <div class="card-body row align-items-center" >
-                                        <div class="col-8">
-                                            <h4 style="color: #fe9365;">${cancel}</h4>
-                                            <h6 class="text-muted">Cancel</h6>
-                                        </div>
-                                        <div class="col-4 text-right">
-                                            <i class="ti-user" style="color: #fe9365;"></i>
-                                        </div>
-                                    </div>
-                                    <div style="background: linear-gradient(to right,#fe9365,#feb798); text-align: center; align-items: center; padding: 20px;
-                                         border-bottom-left-radius: 5px;
-                                         border-bottom-right-radius: 5px;">
-                                        <p style="color: #fff; margin: 0 ">Invitation Canceled</p>
-                                    </div>
-                                </div>
-
-                            </article>
-
-
+                                <hr>
+                            </div>
                         </div>
 
                         <!-- Area Chart -->
                         <div class="card shadow mb-4" style="margin-top: 50px">
                             <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold ">Number of mentors registered in the year</h6>
+                                <h6 class="m-0 font-weight-bold ">Number of invitations in the year</h6>
                             </div>
                             <div class="card-body">
-                                <div class="chart-area">
+                                <div class="chart-area" style="height: 400px">
                                     <canvas id="myAreaChart"></canvas>
                                 </div>
                                 <hr>
                             </div>
                         </div>
-                        <div class="card-block" >
-                            <h3 style="margin-bottom: 20px" class="">Invitations</h3>
-                            <h4>${totalInv}</h4>
-                            <p class="text-muted">All invitation</p>
-                            <!--accepted-->
-                            <div style="margin: 20px 0">
-                                <h5 class="">${acpt}</h5>
-                                <p class="text-muted">Accepted<span style="float: right">${Math.round(acpt*100/totalInv) }%</span></p>
 
-                                <div class="progress">
-                                    <div class="progress-bar" style="width: ${acpt*100/totalInv}%;background: linear-gradient(to right,#0ac282,#0df3a3); "></div>
-                                </div>
-                            </div>
-                            <!--rejected-->
-                            <div style="margin: 20px 0">
-                                <h5 class="">${reject}</h5>
-                                <p class="text-muted">Rejected<span style="float: right">${Math.round(reject*100/totalInv)}%</span></p>
-
-                                <div class="progress">
-                                    <div class="progress-bar" style="width: ${reject*100/totalInv}%;background: linear-gradient(to right,#fe5d70,#fe909d); "></div>
-                                </div>
-                            </div>
-                            <!--progress-->
-                            <div style="margin: 20px 0">
-                                <h5 class="">${process}</h5>
-                                <p class="text-muted">Processing<span style="float: right">${Math.round(process*100/totalInv)}%</span></p>
-                                <div class="progress">
-                                    <div class="progress-bar" style="width: ${process*100/totalInv}%; background: linear-gradient(to right,#01a9ac,#01dbdf); "></div>
-                                </div>
-                            </div>
-
-                            <!--Cancel-->
-                            <div style="margin: 20px 0">
-                                <h5 class="">${cancel}</h5>
-                                <p class="text-muted">Cancel<span style="float: right">${Math.round(cancel*100/totalInv)}%</span></p>
-                                <div class="progress">
-                                    <div class="progress-bar" style="width: ${cancel*100/totalInv}%; background: linear-gradient(to right,#fe9365,#feb798); "></div>
-                                </div>
-                            </div>
-                        </div>
 
                         <div class="card-block" style="">
                             <div class="search" style="margin-left:15px" > 
@@ -270,10 +321,10 @@
                                                 <!--sap xep theo tittle-->
                                                 <th>
                                                     Title
-                                                    <a style="float: right;color: #000" href="<%=request.getContextPath()%>/allInvitation?Type=down&urltext=<%=request.getRequestURL().toString()%>">
+                                                    <a style="float: right;color: #fff" href="<%=request.getContextPath()%>/allInvitation?Type=down&urltext=<%=request.getRequestURL().toString()%>">
                                                         <i class="ti-arrow-down" ></i>
                                                     </a>
-                                                    <a style="float: right;color: #000" href="<%=request.getContextPath()%>/allInvitation?Type=up&urltext=<%=request.getRequestURL().toString()%>">
+                                                    <a style="float: right;color: #fff" href="<%=request.getContextPath()%>/allInvitation?Type=up&urltext=<%=request.getRequestURL().toString()%>">
                                                         <i class="ti-arrow-up"></i>
                                                     </a>
                                                 </th> 
@@ -340,6 +391,7 @@
 
         <!-- Page level custom scripts -->
         <script src="<%=request.getContextPath()%>/js/admin/invitation/chart-area-demo.js"></script>
+        <!--<script src="<%=request.getContextPath()%>/js/admin/invitation/chart-bar-demo.js"></script>-->
 
     </body>
 </html>

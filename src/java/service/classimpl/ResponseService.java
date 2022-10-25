@@ -37,7 +37,7 @@ public class ResponseService implements IResponseService {
         Response res = responseDAO.insert(u);
         list.add(res);
         String id;
-        id = res.getID()+"";
+        id = res.getRequestID()+"";
         return "OK"+" "+id;
     }
 

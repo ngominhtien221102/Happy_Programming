@@ -17,7 +17,7 @@ import service.ISkillService;
  */
 public class SkillService implements ISkillService {
 
-    private SkillDAO skillDAO;
+    private final SkillDAO skillDAO;
 
     public SkillService() {
         skillDAO = new SkillDAO();
@@ -58,15 +58,15 @@ public class SkillService implements ISkillService {
     @Override
     public String update(Skill u, List<Skill> list) {
         for (Skill skill : list) {
-            if (skill.getName().toLowerCase().equals(u.getName().toLowerCase())) {
+            if (skill.getName().toLowerCase().equals(u.getName().toLowerCase()) && skill.getID()!= u.getID()) {
                 return "Skill Existed";
             }
         }
         skillDAO.update(u);
         Skill skill = getSkillById(u.getID(), list);
         skill.setName(u.getName());
+        skill.setDescription(u.getDescription());
         return "OK";
-
     }
     @Override
     public List<Skill> search(String name, List<Skill> list) {

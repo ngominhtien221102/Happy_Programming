@@ -309,6 +309,7 @@
                                                     </c:if>
                                                 </c:forEach>
                                             </div>
+<<<<<<< Hung6
                                         </c:if>
                                     </form>
                                     <!--show comment-->
@@ -356,6 +357,7 @@
                         </div>
 
                     </div>
+
                 </div>
             </section>
 

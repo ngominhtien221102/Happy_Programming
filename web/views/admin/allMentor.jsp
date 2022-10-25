@@ -6,7 +6,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
-    <%@include file="headCSS2.jsp" %>
+    <%@include file="../user/headCSS2.jsp" %>
     <style>
         .card-title,.list-inline-item{
             white-space: nowrap;
@@ -20,7 +20,7 @@
         }
         .card-block{
             margin-top: 50px;
-            background-color: #f3f3f3;
+            background-color: rgba(0,0,0,.03);
             padding: 50px;
             border-radius: 5px;
         }
@@ -80,7 +80,7 @@
         .col-9{
             margin: 0 auto;
         }
-        .pagination a,.pagination select{
+        .pagination a{
             border: #ced4da solid 1px;
             padding: 10px;
             border-radius: 5px;
@@ -90,6 +90,10 @@
         .pagination select{
             color: #ffbc3b;
             background: #f3f3f3;
+            border: #ced4da solid 1px;
+            padding: 10px;
+            border-radius: 5px;
+            height: 40px;
         }
         .pagination a:hover, .pagination a.active{
             background-color:#e9ecef;
@@ -102,10 +106,61 @@
         .ti-arrow-down{
             width: 20%;
         }
+        .top1,.top2,.top3{
+            border: 4px solid;
+            text-align: center;
+            border-radius: 10px;
+            font-weight: 600;
+            height: 320px;
+        }
+        .top1{
+            background: linear-gradient(to bottom,gold,#fff954);
+            color: #fff;
+            border: #fff;
+        }
+        .top1:hover{
+            color: #fff;
+        }
+        .top1 p,.top2 p,.top3 p,.rate,.name{
+            color: #fff;
+            font-size: xx-large;
+        }
+        .top2:hover{
+            color: #fff;
+        }
+        .top3:hover{
+            color: #fff;
+        }
+
+        .top2{
+            margin-top: 30px;
+            background: linear-gradient(to bottom,silver,#d6d6d6);
+            color: #fff;
+            border: #fff;
+        }
+
+        .top3{
+            margin-top: 50px;
+            background: linear-gradient(to bottom,burlywood,#e6bc9d);
+            border: #fff;
+        }
+
+        .mentor-avar{
+            width: 80px;
+            height: 80px;
+        }
+
+        .name{
+            font-size: x-large;
+            margin-top: 60px;
+        }
+        .rate{
+            margin-top: 16px;
+        }
     </style>
     <body>
         <!-- header -->
-        <%@include file="header.jsp" %>
+        <%@include file="../user/header.jsp" %>
         <!-- /header -->
         <div id="content" class="row" style="padding-top: 50px;  min-height: 800px">
             <%@include file="adminSidebar.jsp" %>
@@ -114,7 +169,6 @@
                     <h2 style="margin-left:15px; text-align: center">Mentor</h2>
                     <div class="container">
                         <div class="row" style="margin-top: 50px">
-
                             <!--   total mentor -->
                             <article class="col-6">
                                 <div class="card border-bottom hover-shadow" style="border-radius: 5px;background-color: #f3f3f3">
@@ -155,11 +209,11 @@
                                          border-bottom-left-radius: 5px;
                                          border-bottom-right-radius: 5px;">
                                         <c:if test="${thisMonth >= lastMonth}" >
-                                            <p style="color: #fff; margin: 0 "><i class="ti-arrow-up m-2"></i>${percent}%</p>
-                                        </c:if>
-                                        <c:if test="${thisMonth < lastMonth}" >
-                                            <p style="color: #fff; margin: 0 "><i class="ti-arrow-down m-2"></i>${percent}%</p>
-                                        </c:if>  
+                                            <p style="color: #fff; margin: 0 "><i class="ti-arrow-up m-2"></i>${percent}</p>
+                                            </c:if>
+                                            <c:if test="${thisMonth < lastMonth}" >
+                                            <p style="color: #fff; margin: 0 "><i class="ti-arrow-down m-2"></i>${percent}</p>
+                                            </c:if>  
                                         <!--                                        <p style="color: #fff; margin: 0 "><i class="ti-arrow-down m-2"></i>10%</p>-->
                                     </div>
                                 </div>
@@ -167,7 +221,43 @@
 
                             </article>
                         </div>
-                                            <h1 id="testChart"></h1>
+
+                        <!--top 1 2 3-->
+                        <div class="card shadow mb-4" style="margin-top: 50px">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold ">Top 3 Mentors</h6>
+                            </div>
+                            <div class="card-body justify-content-around" style="display: flex;margin-top: 24px">
+                                <a class="col-3 top2 hover-shadow" href=""><div >
+                                        <p>2ⁿᵈ</p>
+                                        <img src="<%=request.getContextPath()%>/img/avatar/${u.avatar}" 
+                                             onerror="this.src='<%=request.getContextPath()%>/img/avatar/default.png'" 
+                                             class="rounded-circle mentor-avar"/>
+                                        <div class="rate">Rate 7/10</div>
+                                        <div class="name">Tran Ngoc Cuong</div>
+                                    </div></a>
+                                <a class="col-3 top1 hover-shadow" href=""><div >
+                                        <p>1ˢᵗ</p>
+                                        <img src="<%=request.getContextPath()%>/img/avatar/${u.avatar}" 
+                                             onerror="this.src='<%=request.getContextPath()%>/img/avatar/default.png'" 
+                                             class="rounded-circle mentor-avar"/>
+                                        <div class="rate">Rate 7/10</div>
+                                        <div class="name">Tran Ngoc Cuong</div>
+
+                                    </div></a>
+                                <a class="col-3 top3 hover-shadow" href=""><div >
+                                        <p>3ʳᵈ</p>
+                                        <img src="<%=request.getContextPath()%>/img/avatar/${u.avatar}" 
+                                             onerror="this.src='<%=request.getContextPath()%>/img/avatar/default.png'" 
+                                             class="rounded-circle mentor-avar"/>
+                                        <div class="rate">Rate 7/10</div>
+                                        <div class="name">Tran Ngoc Cuong</div>
+
+                                    </div></a>
+                            </div>
+                            <hr>
+                        </div>
+                        <h1 id="testChart"></h1>
                         <!-- Area Chart -->
                         <div class="card shadow mb-4" style="margin-top: 50px">
                             <div class="card-header py-3">
@@ -181,6 +271,9 @@
                             </div>
                         </div>
 
+
+
+
                         <div class="card-block" style="">
                             <div class="search" style="margin-left:15px" > 
                                 <form action="<%=request.getContextPath()%>/allMentor" class="row">
@@ -190,23 +283,23 @@
                             </div>
                             <br><h3>Mentors</h3>
                             <div class="row">  
-                                <div class="col-md-12 table">
+                                <div class="col-md-12 ">
 
-                                    <table border="2" style="width: 100%">
+                                    <table class="" border="2" style="width: 100%">
                                         <thead>
                                             <tr>
                                                 <th>STT</th> 
-                                                <th>Name<a style="float: right;color: #000" href="<%=request.getContextPath()%>/allMentor?sortName=${sortName}&nrpp=${nrpp}<c:if test="${search != null}">&search=${search}</c:if>"><i class="ti-arrow-down"></i><i class="ti-arrow-up"></i></a></th>
+                                                <th>Name<a style="float: right;color: #fff" href="<%=request.getContextPath()%>/allMentor?sortName=${sortName}&nrpp=${nrpp}<c:if test="${search != null}">&search=${search}</c:if>"><i class="ti-arrow-down"></i><i class="ti-arrow-up"></i></a></th>
                                                     <th>Gender</th>
                                                     <th style="width: 25%">Address</th>
                                                     <th>DOB</th>
                                                     <th>Active</th>
-                                                    <th style="width: 10%">Rate<a style="float: right;color: #000" href="<%=request.getContextPath()%>/allMentor?sortRate=${sortRate}&nrpp=${nrpp}<c:if test="${search != null}">&search=${search}</c:if>"><i class="ti-arrow-down"></i><i class="ti-arrow-up"></i></a></th>
+                                                    <th style="width: 10%">Rate<a style="float: right;color: #fff" href="<%=request.getContextPath()%>/allMentor?sortRate=${sortRate}&nrpp=${nrpp}<c:if test="${search != null}">&search=${search}</c:if>"><i class="ti-arrow-down"></i><i class="ti-arrow-up"></i></a></th>
                                                     <th colspan="2" style="text-align: center">Action</th>
                                                 </tr>
                                             </thead>
 
-                                            <tbody>
+                                            <tbody class="bgr-white">
 
                                             <c:forEach items="${listMentor}" var="m" varStatus="loop" begin="${pageIf.start}" end="${pageIf.end}">
                                                 <tr>
@@ -252,7 +345,7 @@
             </div>
         </div>
         <%@include file="footer.jsp" %>
-        
+
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <!-- Page level plugins -->
         <script src="<%=request.getContextPath()%>/js/vendor/chart.js/Chart.min.js"></script>

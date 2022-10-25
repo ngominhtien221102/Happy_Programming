@@ -15,7 +15,6 @@
             width: 80%;
         }
         .responseBox{
-            padding: 0;
             margin-bottom:20px;
             height: fit-content;
             max-height: 500px;
@@ -23,7 +22,7 @@
             background: #f3f3f3;
             display: flex;
             flex-direction: column;
-            padding: 5px 28px;
+            padding: 15px 28px;
             border-radius: 0 15px 15px 15px;
         }
         .responseContent{
@@ -104,7 +103,7 @@
                                     <c:if test="${Account.roleID==2}">
                                         <a class="" href="viewCV?mentorID=${mentor.ID}"><div class="mentorCV">
                                                 <img src="<%=request.getContextPath()%>/img/avatar/${mentor.avatar}" 
-                                                     onerror="this.src='<%=request.getContextPath()%>/img/avatar/p9.png'" 
+                                                     onerror="this.src='<%=request.getContextPath()%>/img/avatar/default.png'" 
                                                      class="rounded-circle mr-2 avatar"/>
 
                                                 ${mentor.firstName} ${mentor.lastName}
@@ -113,7 +112,7 @@
                                         <c:if test="${Account.roleID!=2}">
                                         <a class="" href=""><div class="mentorCV">
                                                 <img src="<%=request.getContextPath()%>/img/avatar/${mentee.avatar}" 
-                                                     onerror="this.src='<%=request.getContextPath()%>/img/avatar/p9.png'" 
+                                                     onerror="this.src='<%=request.getContextPath()%>/img/avatar/default.png'" 
                                                      class="rounded-circle mr-2 avatar"/>
                                                 ${mentee.firstName} ${mentee.lastName}
                                             </div></a>
@@ -127,7 +126,7 @@
                                 <div class="resHead">
                                     <span class="font-weight-bold mr-2">
                                         <img src="<%=request.getContextPath()%>/img/avatar/${mentee.avatar}" 
-                                             onerror="this.src='<%=request.getContextPath()%>/img/avatar/p9.png'" 
+                                             onerror="this.src='<%=request.getContextPath()%>/img/avatar/default.png'" 
                                              class="rounded-circle mr-2 avatar"/>
                                         ${mentee.firstName} ${mentee.lastName}
                                     </span>
@@ -147,13 +146,13 @@
                                         <span class="font-weight-bold mr-2">
                                             <c:if test="${mentor.ID == response.userID}">
                                                 <img src="<%=request.getContextPath()%>/img/avatar/${mentor.avatar}" 
-                                                     onerror="this.src='<%=request.getContextPath()%>/img/avatar/p9.png'" 
+                                                     onerror="this.src='<%=request.getContextPath()%>/img/avatar/default.png'" 
                                                      class="rounded-circle mr-2 avatar"/>
                                                 ${mentor.firstName} ${mentor.lastName}
                                             </c:if>
                                             <c:if test="${mentee.ID == response.userID}">
                                                 <img src="<%=request.getContextPath()%>/img/avatar/${mentee.avatar}" 
-                                                     onerror="this.src='<%=request.getContextPath()%>/img/avatar/p9.png'" 
+                                                     onerror="this.src='<%=request.getContextPath()%>/img/avatar/default.png'" 
                                                      class="rounded-circle mr-2 avatar"/>
                                                 ${mentee.firstName} ${mentee.lastName}
                                             </c:if>
@@ -196,7 +195,7 @@
 
 
         <!-- footer -->
-        <%@include file="footer.jsp" %>
+
         <!-- /footer -->
         <!-- jQuery -->
         <%@include file="scriptJS.jsp" %>
