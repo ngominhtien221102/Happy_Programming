@@ -69,34 +69,36 @@ public class InvitationMentorController extends HttpServlet {
         List<Invitation> listInv = (List<Invitation>) ses.getAttribute("listInv");
         User u = (User) ses.getAttribute("Account");
 
+        //Phan trang
+        String getNrpp = request.getParameter("nrpp");
+        int nrpp = 3;
+        if (getNrpp != null) {
+            nrpp = Integer.parseInt(getNrpp);
+        }
+        request.setAttribute("nrpp", nrpp);
+
+        int cp;
+
+        String page = request.getParameter("page");
+        if (page == null || page.equals("")) { // trang = null => page =1  
+            cp = 1;
+        } else {
+            cp = Integer.parseInt(page);
+        }
+        IInvitationService ser = new InvitationService();
+
         try {
             int mentorId = u.getID();
-            //Phan trang
-            String getNrpp = request.getParameter("nrpp");
-            int nrpp = 3;
-            if (getNrpp != null) {
-                nrpp = Integer.parseInt(getNrpp);
-            }
-            request.setAttribute("nrpp", nrpp);
-
-            int cp;
-
-            String page = request.getParameter("page");
-            if (page == null || page.equals("")) { // trang = null => page =1  
-                cp = 1;
-            } else {
-                cp = Integer.parseInt(page);
-            }
-            IInvitationService ser = new InvitationService();
             List<Invitation> invList = ser.getInvitationByMentorId(mentorId, listInv);
             request.setAttribute("invList", invList);
             PageInfor pageIf = new PageInfor(nrpp, invList.size(), cp);
             request.setAttribute("pageIf", pageIf);
             request.getRequestDispatcher("views/mentors/viewInvitationMentor.jsp").forward(request, response);
+
         } catch (Exception e) {
             response.sendRedirect("views/user/index.jsp");
         }
-        
+
     }
 
     /**
