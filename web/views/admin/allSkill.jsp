@@ -138,10 +138,10 @@
                                     </div>
                                 </div>
                                 <c:if test="${requestScope.success!=null}">
-                                    <br><h3 style="color: green">${success}</h3>
+                                    <br><h5 style="color: green">${success}</h5>
                                 </c:if>
                                 <c:if test="${requestScope.failed!=null}">
-                                    <br><h3 style="color: red">${failed}</h3>
+                                    <br><h5 style="color: red">${failed}</h5>
                                 </c:if>
                                 <form class="mt-3" action="<%=request.getContextPath()%>/editSkill" method="post">
                                     <h5>Skill's name:</h5> <input class="form-control" type="text" name="name" value="${name}">

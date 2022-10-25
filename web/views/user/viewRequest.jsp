@@ -35,11 +35,11 @@
             color: #ffbc3b;
             background: rgba(9,30,66,0.08);
         }
-       .pagination a{
+        .pagination a{
+            margin-right: 10px;
             border: #ced4da solid 1px;
             padding: 10px;
             border-radius: 5px;
-           
         }
         .pagination select{
             color: #ffbc3b;
@@ -51,14 +51,13 @@
         .pagination a:hover,.pagination a.active{
             background-color:#e9ecef;
             color: #ffbc3b;
-            margin: 0px;
         }
         .pagination{
             margin: 30px 0;
             clear: both;
             justify-content: center;
         }
-      
+
     </style>
     <body>
         <!-- header -->
@@ -71,7 +70,7 @@
             <c:if test="${Account.roleID == 2}">
                 <%@include file="sidebar.jsp" %>
             </c:if>
-            
+
             <div class="col-10">
                 <section class="section">
                     <div class="container">

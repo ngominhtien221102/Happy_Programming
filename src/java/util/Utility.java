@@ -57,7 +57,7 @@ public class Utility {
         }
         return false;
     }
-
+   
     public boolean checkDateNow(String dateInString) throws ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -66,9 +66,6 @@ public class Utility {
         Date date = sdf.parse(dateInString);
         return date.after(today) || date.equals(today);
     }
-    public static void main(String[] args) throws ParseException {
-        Utility u = new Utility();
-         System.out.println(u.checkDateNow("10/03/2022"));
-    }
+    
 
 }

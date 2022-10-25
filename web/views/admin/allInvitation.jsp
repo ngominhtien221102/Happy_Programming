@@ -97,7 +97,7 @@
         .static-number{
             margin-top: 39px;
         }
-        
+
     </style>
     <body>
         <!-- header -->
@@ -162,7 +162,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                        <div class="col-4" style="margin-top: 10px">
+                                <div class="col-4" style="margin-top: 10px">
                                     <article class="static-number">
                                         <div class="card border-bottom hover-shadow" style="border-radius: 5px;">
                                             <div class="card-body row align-items-center" >
@@ -330,6 +330,7 @@
                                                 </th> 
 
                                                 <th>Deadline Date</th>
+                                                <th></th>
                                             </tr>
                                         </thead>
 
