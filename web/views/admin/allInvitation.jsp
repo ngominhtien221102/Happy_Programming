@@ -147,29 +147,11 @@
                                         <div class="col-8">
                                             <h4 style="color: #fe5d70;">${reject}</h4>
                                             <h6 class="text-muted">Rejected</h6>
-
-                                <div class="col-4" style="margin-top: 10px">
-                                    <article class="static-number">
-                                        <div class="card border-bottom hover-shadow" style="border-radius: 5px;">
-                                            <div class="card-body row align-items-center" >
-                                                <div class="col-8">
-                                                    <h4 style="color: #0ac282;">${acpt}</h4>
-                                                    <h6 class="text-muted">Accepted</h6>
-                                                </div>
-                                                <div class="col-4 text-right" style="color: #0ac282;" >
-                                                    <i class="ti-user"></i>
-                                                </div>
-                                            </div>
-                                            <div style="background: linear-gradient(to right,#0ac282,#0df3a3); text-align: center; align-items: center; padding: 20px;
-                                                 border-bottom-left-radius: 5px;
-                                                 border-bottom-right-radius: 5px;">
-                                                <p style="color: #fff; margin: 0 ">Invitations accepted</p>
-                                            </div>
-
                                         </div>
                                         <div class="col-4 text-right" style="color: #fe5d70;">
                                             <i class="ti-user"></i>
                                         </div>
+
                                     </div>
                                     <div style="background: linear-gradient(to right,#fe5d70,#fe909d); text-align: center; align-items: center; padding: 20px;
                                          border-bottom-left-radius: 5px;
@@ -177,7 +159,6 @@
                                         <p style="color: #fff; margin: 0 ">Invitation rejected</p>
                                     </div>
                                 </div>
-
                                 <!--Invitation in progress-->
                             </article>
 
