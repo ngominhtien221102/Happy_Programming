@@ -22,7 +22,7 @@
             background: #f3f3f3;
             display: flex;
             flex-direction: column;
-            padding: 15px 28px;
+            padding: 20px 28px;
             border-radius: 0 15px 15px 15px;
         }
         .responseContent{
