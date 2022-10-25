@@ -12,6 +12,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.util.ArrayList;
 
 import java.util.Collections;
 import java.util.List;
@@ -80,62 +81,70 @@ public class AllInvitationController extends HttpServlet {
         int reject = invS.countInv(4, invList);
         int process = invS.countInv(2, invList);
         int cancel = invS.countInv(3, invList);
-        int close = invS.countInv(5, invList);
         //set sang jsp
         request.setAttribute("totalInv", totalInv);
         request.setAttribute("acpt", acpt);
         request.setAttribute("reject", reject);
         request.setAttribute("process", process);
         request.setAttribute("cancel", cancel);
-        request.setAttribute("close", close);
 
-        String url = request.getParameter("urltext");
-        try {
-            //list theo tim kiem de sort
-            List<Invitation> searchList = (List<Invitation>) ses.getAttribute("searchList");
-            String type = request.getParameter("Type");
-
-            if (!searchList.isEmpty()) {
-                //sort list theo title 
-                List<Invitation> invList1 = invS.sortList(searchList);
-
-                if (type.equals("down")) {
-                    ses.setAttribute("searchList", searchList);
-                }
-                if (type.equals("up")) {
-                    Collections.reverse(invList1);
-                    ses.setAttribute("searchList", searchList);
-                }
-                if (url != null && url.contains("allInvitaion.jsp")) {
-                    response.sendRedirect(url + "#" + type);
-                }
-
-            }
-        } catch (Exception e) {
-        }
-
-        //search 
-        //Lay key search tu jsp
+        //search
+        List<Invitation> invitationList = new ArrayList<>();
         search = request.getParameter("search");
-        request.setAttribute("search", search);
+        if (search == null) {
+            invitationList = invList;
+        } else {
+            invitationList = invS.searchInv(search, invList);
+            request.setAttribute("search",search);
+        }
+        //Phan trang
+        String getNrpp = request.getParameter("nrpp");
+        int nrpp = 5;
+        if (getNrpp != null) {
+            nrpp = Integer.parseInt(getNrpp);
+        }
+        request.setAttribute("nrpp", nrpp);
 
-        if (search != null) {
-            if (!"".equals(search.trim())) {
-                // phân trang
-                String page = request.getParameter("page");
-                if (page == null || page.equals("")) { // trang = null => page =1  
-                    cp = 1;
-                } else {
-                    cp = Integer.parseInt(page);
-                }
+        int cp;
 
-                List<Invitation> searchList = invS.searchInv(search, invList);
-                PageInfor pageIf = new PageInfor(5, searchList.size(), cp);
-                ses.setAttribute("searchList", searchList);
-                request.setAttribute("pageIf", pageIf);
+        String page = request.getParameter("page");
+        if (page == null || page.equals("")) { // trang = null => page =1  
+            cp = 1;
+        } else {
+            cp = Integer.parseInt(page);
+        }
+        PageInfor pageIf = new PageInfor(nrpp, invitationList.size(), cp);
+        request.setAttribute("pageIf", pageIf);
+        // sort
+
+        int sort = 1;
+        request.setAttribute("sort", sort);
+        String getSort = request.getParameter("sort");
+        int sortGet = 0;
+        if (getSort != null) {
+            try {
+                sortGet = Integer.parseInt(getSort);
+
+            } catch (NumberFormatException e) {
+            }
+
+            if (sortGet == 1) {
+                sort = 2;
+                request.setAttribute("sort", sort);
+                request.setAttribute("invitationList", invS.sortList(invitationList));
+                int status = 1;
+                request.setAttribute("status", status);
+            }
+            if (sortGet == 2) {
+                sort = 1;
+                request.setAttribute("invitationList", invitationList);
+                request.setAttribute("sort", sort);
+                int status = 2;
+                request.setAttribute("status", status);
             }
         }
 
+        request.setAttribute("invitationList", invitationList);
         request.getRequestDispatcher("views/admin/allInvitation.jsp").forward(request, response);
 
     }
