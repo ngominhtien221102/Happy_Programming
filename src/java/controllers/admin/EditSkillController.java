@@ -113,7 +113,7 @@ public class EditSkillController extends HttpServlet {
             if (type.equals("0")) {
                 s.delete(skillID, lstSkill);
                 ses.setAttribute("listSkill", lstSkill);
-                
+
                 if (search != null) {
                     response.sendRedirect(request.getContextPath() + "/editSkill?page=" + cp + "&search=" + search + "&nrpp=" + nrpp);
                 } else {
@@ -151,12 +151,17 @@ public class EditSkillController extends HttpServlet {
                 String name = request.getParameter("name");
                 String description = request.getParameter("description");
                 if (!description.equals("")) {
-                    msg = s.update(new Skill(skillID, name, description), listSkill);
-                    if (msg.equals("OK")) {
-                        msg = "Update skill success";
+                    if (description.length() <= 200) {
+                        msg = s.update(new Skill(skillID, name, description), listSkill);
+                        if (msg.equals("OK")) {
+                            msg = "Update skill success";
+                        }
+                        ses.setAttribute("listSkill", listSkill);
+                        ses.setAttribute("listSkillSearch", listSkill);
+                    } else {
+                        msg = "Description is limited to 200 characters";
                     }
-                    ses.setAttribute("listSkill", listSkill);
-                    ses.setAttribute("listSkillSearch", listSkill);
+
                 } else {
                     msg = "Please enter description";
                 }
@@ -166,15 +171,19 @@ public class EditSkillController extends HttpServlet {
             String name = request.getParameter("name");
             String description = request.getParameter("description");
             if (!description.equals("")) {
-                msg = s.insert(new Skill(0, name, description), listSkill);
+                if (description.length() <= 200) {
+                    msg = s.insert(new Skill(0, name, description), listSkill);
 
-                ses.setAttribute("listSkill", listSkill);
-                ses.setAttribute("listSkillSearch", listSkill);
-                PageInfor pageIf = new PageInfor(nrpp, listSkill.size(), cp);
-                int np = pageIf.getNp();
-                if (msg.equals("OK")) {
-                    msg = "Create new skill success";
-                    response.sendRedirect(request.getContextPath() + "/editSkill?page=" + np + "&nrpp=" + nrpp);
+                    ses.setAttribute("listSkill", listSkill);
+                    ses.setAttribute("listSkillSearch", listSkill);
+                    PageInfor pageIf = new PageInfor(nrpp, listSkill.size(), cp);
+                    int np = pageIf.getNp();
+                    if (msg.equals("OK")) {
+                        msg = "Create new skill success";
+                        response.sendRedirect(request.getContextPath() + "/editSkill?page=" + np + "&nrpp=" + nrpp);
+                    }
+                } else {
+                    msg = "Description is limited to 200 characters";
                 }
             } else {
                 msg = "Please enter description";
@@ -185,7 +194,6 @@ public class EditSkillController extends HttpServlet {
         } else {
             response.sendRedirect(request.getContextPath() + "/editSkill?page=" + cp + "&nrpp=" + nrpp);
         }
-
     }
 
     /**
