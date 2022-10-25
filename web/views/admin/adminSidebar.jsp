@@ -38,13 +38,13 @@
         <div class="sidebar-heading">
             Skill
         </div>
-
-        <!-- Nav Item - Add product -->
+<!--
+         Nav Item - Add product 
         <li class="nav-item">
-            <a class="nav-link collapsed" href="<%=request.getContextPath()%>/createSkill" >
+            <a class="nav-link collapsed" href="<%=request.getContextPath()%>/editSkill" >
                 <span>Create Skill</span>
             </a>
-        </li>
+        </li>-->
 
         <li class="nav-item">
             <a class="nav-link collapsed" href="<%=request.getContextPath()%>/editSkill" >

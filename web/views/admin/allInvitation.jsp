@@ -312,7 +312,6 @@
                                                     <td>Processing</td>
                                                     <td>${inv.title}</td>
                                                     <td>${inv.deadlineDate}</td>
-                                                    <td><a href="<%=request.getContextPath()%>/">Detail</a></td>
                                                 </tr>
                                             </c:forEach>
 
@@ -326,7 +325,7 @@
                                             <a href="<%=request.getContextPath()%>/allInvitation?page=1&nrpp=${nrpp}<c:if test="${status != null}">&sort=${status}</c:if><c:if test="${search != null}">&search=${search}</c:if>"><<</a>  
                                         </c:if>      
                                         <c:forEach begin="${pageIf.cp>2?pageIf.cp-2:1}" end="${pageIf.cp+2>pageIf.np?pageIf.np:pageIf.cp+2}" var="i">
-                                            <a class="${i==pageIf.cp?"active":""}" href="<%=request.getContextPath()%>/allMentee?page=${i}&nrpp=${nrpp}<c:if test="${status != null}">&sort=${status}</c:if><c:if test="${search != null}">&search=${search}</c:if>">${i}</a>
+                                            <a class="${i==pageIf.cp?"active":""}" href="<%=request.getContextPath()%>/allInvitation?page=${i}&nrpp=${nrpp}<c:if test="${status != null}">&sort=${status}</c:if><c:if test="${search != null}">&search=${search}</c:if>">${i}</a>
                                         </c:forEach>
                                         <c:if test="${requestScope.pageIf.cp!=requestScope.pageIf.np && requestScope.pageIf.end!=0}">
                                             <a href="<%=request.getContextPath()%>/allInvitation?page=${requestScope.pageIf.np}&nrpp=${nrpp}<c:if test="${status != null}">&sort=${status}</c:if><c:if test="${search != null}">&search=${search}</c:if>">>></a>  
