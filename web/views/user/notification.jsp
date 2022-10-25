@@ -98,7 +98,7 @@
                                                                      class="rounded-circle mr-2 avatar"/>
                                                                 ${u.firstName} ${u.lastName} sent ${n.type} to you
                                                             </div>
-                                                            
+
                                                             <div class="createAt">
                                                                 ${n.createAt}
                                                                 <div class="rounded-circle ml-2 readed-note"></div>
@@ -113,7 +113,7 @@
                             </c:if>
                             <c:if test="${num==0}">
                                 <th>All</th>
-                                    <c:forEach items="${listNotify}" var="n">
+                                    <c:forEach items="${listNotify}" var="n" varStatus="loop">
                                     <tr>
                                         <c:forEach items = "${sessionScope.listUserProfile}" var="u">
                                             <c:if test="${u.ID==n.senderID}">
@@ -134,21 +134,24 @@
                                                     </a>
                                                 </td>
                                             </c:if>
+
                                         </c:forEach>
                                     </tr>
+
                                 </c:forEach>
                             </c:if>
-                            </tbody>
-                        </table>
-                    </div>
-                </section>
+                                    <c:if test="${listNotify.size()==0}"><tr><td class="">You don't have any notifications</td></tr></c:if>
+                                    </tbody>
+                            </table>
+                        </div>
+                    </section>
+                </div>
             </div>
-        </div>
 
 
-        <!-- /footer -->
+            <!-- /footer -->
 
-        <!-- jQuery -->
+            <!-- jQuery -->
         <%@include file="scriptJS.jsp" %>
         <script src="https://cdn.ckeditor.com/ckeditor5/34.1.0/classic/ckeditor.js"></script>
         <script>
