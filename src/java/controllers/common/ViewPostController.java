@@ -14,20 +14,17 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
-import model.MentorCV;
-import model.User;
-import model.UserProfile;
-
-import service.*;
-
-import service.classimpl.*;
+import java.util.concurrent.ThreadLocalRandom;
+import model.Post;
+import service.IPostService;
+import service.classimpl.PostService;
 
 /**
  *
- * @author Admin
+ * @author Lenovo
  */
-@WebServlet(name = "LoadHomeController", urlPatterns = {"/home"})
-public class LoadHomeController extends HttpServlet {
+@WebServlet(name = "ViewPostController", urlPatterns = {"/viewPost"})
+public class ViewPostController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -46,10 +43,10 @@ public class LoadHomeController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet LoadHomeController</title>");
+            out.println("<title>Servlet ViewPostController</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet LoadHomeController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ViewPostController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -68,43 +65,25 @@ public class LoadHomeController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession ses = request.getSession();
-        IUserService uS = new UserService();
-        IUserProfileService upS = new UserProfileService();
-        ISkillService sS = new SkillService();
-        IRequestService reqS = new RequestService();
-        IResponseService resS = new ResponseService();
-        IStatusService staS = new StatusService();
-        IRateService rS = new RateService();
-        IMentorService mS = new MentorService();
-        IInvitationService iS = new InvitationService();
-        ICommentService cS = new CommentService();
-        IAddressService aS = new AddressService();
+        List<Post> list = (List<Post>) ses.getAttribute("listPost");
+        int ID = Integer.parseInt(request.getParameter("postID"));
         IPostService ips = new PostService();
+        Post post = ips.getPostById(ID, list);
+        List<Integer> listRdPost = new ArrayList<>();
+        for (int i = 0; i < 3; i++) {
 
-        ses.setAttribute("RoleID", 1);
-        ses.setAttribute("HmSkill", sS.getHm());
-        ses.setAttribute("listSkill", sS.getList());
-        ses.setAttribute("listUser", uS.getList());
-        ses.setAttribute("listUserProfile", upS.getList());
-        ses.setAttribute("listRequest", reqS.getList());
-        ses.setAttribute("listResponse", resS.getList());
-        ses.setAttribute("listStatus", staS.getHm());
-        ses.setAttribute("listRate", rS.getList());
-        ses.setAttribute("listMentorCV", mS.getListCV());
-        ses.setAttribute("listInv", iS.getList());
-        ses.setAttribute("listAddress", aS.getList());
-        ses.setAttribute("listProvince", aS.getListProvince());
-        ses.setAttribute("listComment", cS.getList());
-        ses.setAttribute("listPost", ips.getList());
-        
-        List<UserProfile> uList;
-        uList = (List<UserProfile>) ses.getAttribute("listUserProfile");
-        List<MentorCV> mList;
-        mList = (List<MentorCV>) ses.getAttribute("listMentorCV");
-        List<UserProfile> listMentor = getProfileOfMentor(mList, uList);
-        ses.setAttribute("listTeacher", listMentor);
-
-        response.sendRedirect("views/user/index.jsp");
+            int ranNum = ThreadLocalRandom.current().nextInt(1, list.size()+1);
+            listRdPost.add(ranNum);
+        }
+        List<Post> recommendPost = new ArrayList<>();
+        for (Post p : list) {
+            if (listRdPost.contains(p.getID())) {
+                recommendPost.add(p);
+            }
+        }
+        request.setAttribute("rcPost", recommendPost);
+        request.setAttribute("post", post);
+        request.getRequestDispatcher("/views/common/viewPost.jsp").forward(request, response);
     }
 
     /**
@@ -131,17 +110,4 @@ public class LoadHomeController extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private List<UserProfile> getProfileOfMentor(List<MentorCV> mList, List<UserProfile> uList) {
-        List<UserProfile> mentorProfile = new ArrayList<>();
-        ArrayList<Integer> listID = new ArrayList<>();
-        for (MentorCV mentorCV : mList) {
-            listID.add(mentorCV.getID());
-        }
-        for (UserProfile userProfile : uList) {
-            if (listID.contains(userProfile.getID())) {
-                mentorProfile.add(userProfile);
-            }
-        }
-        return mentorProfile;
-    }
 }

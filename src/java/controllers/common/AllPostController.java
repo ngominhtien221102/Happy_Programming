@@ -14,20 +14,17 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
-import model.MentorCV;
-import model.User;
-import model.UserProfile;
-
-import service.*;
-
-import service.classimpl.*;
+import model.PageInfor;
+import model.Post;
+import service.IPostService;
+import service.classimpl.PostService;
 
 /**
  *
- * @author Admin
+ * @author Lenovo
  */
-@WebServlet(name = "LoadHomeController", urlPatterns = {"/home"})
-public class LoadHomeController extends HttpServlet {
+@WebServlet(name = "AllPostController", urlPatterns = {"/allPost"})
+public class AllPostController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -46,10 +43,10 @@ public class LoadHomeController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet LoadHomeController</title>");
+            out.println("<title>Servlet AllPostController</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet LoadHomeController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet AllPostController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -67,44 +64,39 @@ public class LoadHomeController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession ses = request.getSession();
-        IUserService uS = new UserService();
-        IUserProfileService upS = new UserProfileService();
-        ISkillService sS = new SkillService();
-        IRequestService reqS = new RequestService();
-        IResponseService resS = new ResponseService();
-        IStatusService staS = new StatusService();
-        IRateService rS = new RateService();
-        IMentorService mS = new MentorService();
-        IInvitationService iS = new InvitationService();
-        ICommentService cS = new CommentService();
-        IAddressService aS = new AddressService();
+        HttpSession ses =request.getSession();
         IPostService ips = new PostService();
-
-        ses.setAttribute("RoleID", 1);
-        ses.setAttribute("HmSkill", sS.getHm());
-        ses.setAttribute("listSkill", sS.getList());
-        ses.setAttribute("listUser", uS.getList());
-        ses.setAttribute("listUserProfile", upS.getList());
-        ses.setAttribute("listRequest", reqS.getList());
-        ses.setAttribute("listResponse", resS.getList());
-        ses.setAttribute("listStatus", staS.getHm());
-        ses.setAttribute("listRate", rS.getList());
-        ses.setAttribute("listMentorCV", mS.getListCV());
-        ses.setAttribute("listInv", iS.getList());
-        ses.setAttribute("listAddress", aS.getList());
-        ses.setAttribute("listProvince", aS.getListProvince());
-        ses.setAttribute("listComment", cS.getList());
-        ses.setAttribute("listPost", ips.getList());
+        List<Post> postList = (List<Post>) ses.getAttribute("listPost");
+        List<Post> listPost = new ArrayList<>();
+        String search = request.getParameter("search");
+        request.setAttribute("search", search);
+        if (search == null) {
+            listPost = postList;
+        } else {
+            listPost = ips.searchList(search);
+        }
         
-        List<UserProfile> uList;
-        uList = (List<UserProfile>) ses.getAttribute("listUserProfile");
-        List<MentorCV> mList;
-        mList = (List<MentorCV>) ses.getAttribute("listMentorCV");
-        List<UserProfile> listMentor = getProfileOfMentor(mList, uList);
-        ses.setAttribute("listTeacher", listMentor);
+        //Phan trang
+        String getNrpp = request.getParameter("nrpp");
+        int nrpp = 3;
+        if (getNrpp != null) {
+            nrpp = Integer.parseInt(getNrpp);
+        }
+        request.setAttribute("nrpp", nrpp);
 
-        response.sendRedirect("views/user/index.jsp");
+        int cp;
+
+        String page = request.getParameter("page");
+        if (page == null || page.equals("")) { // trang = null => page =1  
+            cp = 1;
+        } else {
+            cp = Integer.parseInt(page);
+        }
+        PageInfor pageIf = new PageInfor(nrpp, listPost.size(), cp);
+        request.setAttribute("pageIf", pageIf);
+        
+        request.setAttribute("postList", listPost);
+         request.getRequestDispatcher("views/common/blog.jsp").forward(request, response);
     }
 
     /**
@@ -131,17 +123,4 @@ public class LoadHomeController extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private List<UserProfile> getProfileOfMentor(List<MentorCV> mList, List<UserProfile> uList) {
-        List<UserProfile> mentorProfile = new ArrayList<>();
-        ArrayList<Integer> listID = new ArrayList<>();
-        for (MentorCV mentorCV : mList) {
-            listID.add(mentorCV.getID());
-        }
-        for (UserProfile userProfile : uList) {
-            if (listID.contains(userProfile.getID())) {
-                mentorProfile.add(userProfile);
-            }
-        }
-        return mentorProfile;
-    }
 }

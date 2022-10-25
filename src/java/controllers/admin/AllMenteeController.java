@@ -161,7 +161,7 @@ public class AllMenteeController extends HttpServlet {
         }
         //Phan trang
         String getNrpp = request.getParameter("nrpp");
-        int nrpp = 5;
+        int nrpp = 6;
         if (getNrpp != null) {
             nrpp = Integer.parseInt(getNrpp);
         }

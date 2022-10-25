@@ -16,10 +16,10 @@
             margin-top:20px;
             color: #1a202c;
             text-align: left;
-            background-color: #e2e8f0;
+            background-color: #ffff;
         }
         .main-body {
-            padding: 12%;
+            margin-top: 11%;
         }
         .card {
             box-shadow: 0 1px 3px 0 rgba(0,0,0,.1), 0 1px 2px 0 rgba(0,0,0,.06);
@@ -41,8 +41,7 @@
         .card-body {
             flex: 1 1 auto;
             min-height: 1px;
-            padding: 1rem;
-            min-height: 325px;
+            min-height: 330px;
         }
 
         .gutters-sm {
@@ -76,21 +75,17 @@
         <!-- Modal -->
         <div id="content" class="row" style="padding-top: 30px">
             <%@include file="sidebar.jsp" %>
-            <div class="container">
+            <div style="" class="container">
                 <div class="main-body">
 
                     <div class="row gutters-sm">
-                        <div class="col-md-4 mb-3">
+                        <div style="" class="col-md-4 mb-3">
                             <div class="card">
-                                <div class="card-body">
-                                    <div class="d-flex flex-column align-items-center text-center">
-                                        <img height="190px" src="<%=request.getContextPath()%>/img/avatar/${us.getAvatar()}" alt="Admin" class="rounded-circle" width="150">
-                                        <div class="mt-3">
-                                            <h4>${us.getFirstName()}</h4>
-                                            <a href="<%=request.getContextPath()%>/updateProfile" class="btn btn-primary" >Update</a>
-                                        </div>
-                                    </div>
-                                </div>                                     
+
+                                <div class="d-flex flex-column align-items-center text-center">
+                                    <img style="height: 409px; width: 370px" src="<%=request.getContextPath()%>/img/avatar/${us.getAvatar()}" alt="Avatar" >
+                                </div>
+
                             </div>            
                         </div>
                         <div class="col-md-8">
@@ -147,6 +142,14 @@
                                         </div>
                                         <div class="col-sm-9 text-secondary">
                                             ${xa} , ${huyen} , ${tinh}
+                                        </div>
+                                    </div> 
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="d-flex flex-column align-items-center text-center">
+                                            <a href="<%=request.getContextPath()%>/updateProfile" class="btn btn-primary" >Update</a>
+                                            </div>
                                         </div>
                                     </div> 
                                 </div>

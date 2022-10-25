@@ -6,6 +6,7 @@ package dal;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -46,7 +47,7 @@ public class RequestDAO extends DBContext {
                 String Title = rs.getString(6);
                 reqList.add(new Request(Request_ID, Mentor_ID, Mentee_ID, Date, Content, Title));
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println("Error Request" + e.getMessage());
         }
     }
@@ -81,7 +82,7 @@ public class RequestDAO extends DBContext {
                 req.setID(rs.getInt(1));
             }
 
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println("Error Request" + e.getMessage());
         }
         return req;
@@ -93,7 +94,7 @@ public class RequestDAO extends DBContext {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, Request_ID);
             ps.execute();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println("Error Request" + e.getMessage());
         }
     }
@@ -116,7 +117,7 @@ public class RequestDAO extends DBContext {
             ps.setInt(6, req.getID());
             ps.execute();
 
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println("Error Request" + e.getMessage());
         }
     }

@@ -167,7 +167,6 @@
                             <p style="color: red">${content_alert}</p>
                             <input type="hidden" name="mentor" value="${mentor.ID}" >
                             <button type="submit" style="float:right; margin-top: 16px;" class="btn btn-primary">SEND</button>
-
                         </form>
                     </div>
                 </section>

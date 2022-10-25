@@ -17,9 +17,18 @@ public class PageInfor {
     private int start;
     private int end;
     private int [] arrNrpp = {5,10,15,20};
+    private int [] arrNrpp1 = {3,6,9,12};
 
     public int[] getArrNrpp() {
         return arrNrpp;
+    }
+
+    public void setArrNrpp1(int[] arrNrpp1) {
+        this.arrNrpp1 = arrNrpp1;
+    }
+
+    public int[] getArrNrpp1() {
+        return arrNrpp1;
     }
 
     public void setArrNrpp(int[] arrNrpp) {

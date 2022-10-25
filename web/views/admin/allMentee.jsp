@@ -1,12 +1,9 @@
-
-
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
-    <%@include file="headCSS2.jsp" %>
+    <%@include file="../user/headCSS2.jsp" %>
     <style>
         .card-title,.list-inline-item{
             white-space: nowrap;
@@ -20,7 +17,7 @@
         }
         .card-block{
             margin-top: 50px;
-            background-color: #f3f3f3;
+            background-color: rgba(0,0,0,.03);
             padding: 50px;
             border-radius: 5px;
         }
@@ -38,7 +35,6 @@
             -webkit-transition: width 0.5s ease-out;
             transition: width 0.5s ease-out;
             flex-wrap: unset;
-
         }
         .search input[type="text"]:focus {
             width: 25%;
@@ -58,7 +54,6 @@
         .search button:hover{
             background-color: #ffbc3b;
             color: #fff;
-
         }
         .cv:hover{
             background-color:#e9ecef;
@@ -80,16 +75,19 @@
         .col-9{
             margin: 0 auto;
         }
-        .pagination a,.pagination select{
+           .pagination a{
             border: #ced4da solid 1px;
             padding: 10px;
             border-radius: 5px;
             margin-right: 10px;
-            height: 40px;
         }
-        .pagination select{
+        .pagination .nrpp{
             color: #ffbc3b;
             background: #f3f3f3;
+            border: #ced4da solid 1px;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
         }
         .pagination a:hover, .pagination a.active{
             background-color:#e9ecef;
@@ -99,14 +97,41 @@
             margin: 30px 0;
             float: right;
         }
+        #nrpp{
+            display: none;
+            flex-flow: column;
+            position: absolute;
+            top:40px;
+            background: #fff;
+            width: 100%;
+            border: 1px solid;
+        }
+        #nrpp a{
+            padding: 5px;
+            margin-right: 0;
+            border: 0;
+            border-radius: 0;
+        }
+        #nrpp a:hover, .selected{
+            background:hsl(214, 100%, 59%) ;
+            color: #fff ;
+        }
+        .select-nrpp{
+            display: flex;
+            flex-flow: column;
+            position: relative
+        }
         .ti-arrow-down{
             width: 20%;
+        }
+        .bgr-white{
+            background: #fff;
         }
     </style>
     <body>
         <!-- header -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <%@include file="header.jsp" %>
+        <%@include file="../user/header.jsp" %>
         <!-- /header -->
         <div id="content" class="row" style="padding-top: 50px;  min-height: 800px">
             <%@include file="adminSidebar.jsp" %>
@@ -158,10 +183,10 @@
                                          border-bottom-right-radius: 5px;">
                                         <c:if test="${thisMonth >= lastMonth}" >
                                             <p style="color: #fff; margin: 0 "><i class="ti-arrow-up m-2"></i>${percent}</p>
-                                        </c:if>
-                                        <c:if test="${thisMonth < lastMonth}" >
+                                            </c:if>
+                                            <c:if test="${thisMonth < lastMonth}" >
                                             <p style="color: #fff; margin: 0 "><i class="ti-arrow-down m-2"></i>${percent}</p>
-                                        </c:if>
+                                            </c:if>
                                     </div>
                                 </div>
                             </article>
@@ -187,67 +212,78 @@
                                     <button type="submit"><i class="ti ti-search" aria-hidden="true"></i></button>
                                 </form>
                             </div>
-                        </div>
-                        <br><h3>Mentees</h3>
-                        <div class="row">  
-                            <div class="col-md-12 table">
+                            <br><h3>Mentees</h3>
+                            <div class="row">  
+                                <div class="col-md-12 table">
 
-                                <table border="2" style="width: 100%">
-                                    <thead>
-                                        <tr>
-                                            <th>STT</th> 
-                                            <th>Name<a style="float: right;color: #000" 
-                                                       href="<%=request.getContextPath()%>/allMentee?sort=${sort}&nrpp=${nrpp}<c:if test="${search != null}">&search=${search}</c:if>"><i class="ti-arrow-down"></i><i class="ti-arrow-up"></i></a></th>
-                                                <th>Gender</th>
-                                                <th style="width: 25%">Address</th>
-                                                <th>DOB</th>
-                                                <th>Email</th>
-                                                <th>Active</th>
-                                                <th>Action</th>
-                                            </tr>
-                                        </thead>
-
-                                        <tbody>
-                                        <c:forEach items="${listMentee}" var="m" varStatus="loop" begin="${pageIf.start}" end="${pageIf.end}">
+                                    <table border="2" style="width: 100%">
+                                        <thead>
                                             <tr>
-                                                <td>${loop.index + 1}</td>
-                                                <td>${m.getFirstName()} ${m.getLastName()}</td>
-                                                <td>${m.getGender()}</td>
-                                                <td>${m.getAddress(m.getID(), listAddress)}</td>
-                                                <td>${m.getDob()}</td>
-                                                <td>${m.getEmail()}</td>
-                                                <td>${iUser.getUserById(m.getID(), listUser).isStatus()}</td>
-                                                <td><a style="${iUser.getUserById(m.getID(), listUser).isStatus()?'color:red':'color:green'}"
-                                                       href="<%=request.getContextPath()%>/allMentee?menteeID=${m.getID()}&nrpp=${nrpp}&page=${pageIf.cp}<c:if test="${search != null}">&search=${search}</c:if><c:if test="${status != null}">&sort=${status}</c:if>">
-                                                        ${iUser.getUserById(m.getID(), listUser).isStatus()?'Ban':'Open'}</a></td>
-                                            </tr>
-                                        </c:forEach>
-                                    </tbody>
+                                                <th>STT</th> 
+                                                <th>Name<a style="float: right;color: #fff" 
+                                                           href="<%=request.getContextPath()%>/allMentee?sort=${sort}&nrpp=${nrpp}<c:if test="${search != null}">&search=${search}</c:if>"><i class="ti-arrow-down"></i><i class="ti-arrow-up"></i></a></th>
+                                                    <th>Gender</th>
+                                                    <th style="width: 25%">Address</th>
+                                                    <th>DOB</th>
+                                                    <th>Email</th>
+                                                    <th>Active</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
 
-                                </table>
-                                <!--phan trang-->
-                                <div class="pagination">
-                                    <c:if test="${pageIf.cp!=1 && pageIf.end!=null}">
-                                        <a href="<%=request.getContextPath()%>/allMentee?page=1&nrpp=${nrpp}<c:if test="${status != null}">&sort=${status}</c:if><c:if test="${search != null}">&search=${search}</c:if>"><<</a>  
-                                    </c:if>      
-                                    <c:forEach begin="${1}" end="${pageIf.np}" var="i">
-                                        <a class="${i==pageIf.cp?"active":""}" href="<%=request.getContextPath()%>/allMentee?page=${i}&nrpp=${nrpp}<c:if test="${status != null}">&sort=${status}</c:if><c:if test="${search != null}">&search=${search}</c:if>">${i}</a>
-                                    </c:forEach>
-                                    <c:if test="${pageIf.cp!=pageIf.np && pageIf.end!=0}">
-                                        <a href="<%=request.getContextPath()%>/allMentee?page=${pageIf.np}&nrpp=${nrpp}<c:if test="${status != null}">&sort=${status}</c:if><c:if test="${search != null}">&search=${search}</c:if>">>></a>  
-                                    </c:if>  
-                                    <form action="<%=request.getContextPath()%>/allMentee" method="GET">
-                                        <select name="nrpp" id="selectElementId" onchange="this.form.submit()">
-                                            <c:forEach items="${pageIf.arrNrpp}" var="i">
-                                                <option <c:if test="${nrpp == i}">selected=""</c:if>value="${i}">${i}</option>
+                                            <tbody class="bgr-white">
+                                            <c:forEach items="${listMentee}" var="m" varStatus="loop" begin="${pageIf.start}" end="${pageIf.end}">
+                                                <tr>
+                                                    <td>${loop.index + 1}</td>
+                                                    <td>${m.getFirstName()} ${m.getLastName()}</td>
+                                                    <td>${m.getGender()}</td>
+                                                    <td>${m.getAddress(m.getID(), listAddress)}</td>
+                                                    <td>${m.getDob()}</td>
+                                                    <td>${m.getEmail()}</td>
+                                                    <td>${iUser.getUserById(m.getID(), listUser).isStatus()}</td>
+                                                    <td><a style="${iUser.getUserById(m.getID(), listUser).isStatus()?'color:red':'color:green'}"
+                                                           href="<%=request.getContextPath()%>/allMentee?menteeID=${m.getID()}&nrpp=${nrpp}&page=${pageIf.cp}<c:if test="${search != null}">&search=${search}</c:if><c:if test="${status != null}">&sort=${status}</c:if>">
+                                                            ${iUser.getUserById(m.getID(), listUser).isStatus()?'Ban':'Open'}</a></td>
+                                                </tr>
                                             </c:forEach>
-                                        </select>
-                                    </form>
-                                </div>
+                                        </tbody>
+
+                                    </table>
+                                    <!--phan trang-->
+
+                                    <div class="pagination">
+                                        <c:if test="${pageIf.cp!=1 && pageIf.end!=null}">
+                                            <a href="<%=request.getContextPath()%>/allMentee?page=1&nrpp=${nrpp}<c:if test="${status != null}">&sort=${status}</c:if><c:if test="${search != null}">&search=${search}</c:if>"><<</a>  
+                                        </c:if>      
+                                        <c:forEach begin="${1}" end="${pageIf.np}" var="i">
+                                            <a class="${i==pageIf.cp?"active":""}" href="<%=request.getContextPath()%>/allMentee?page=${i}&nrpp=${nrpp}<c:if test="${status != null}">&sort=${status}</c:if><c:if test="${search != null}">&search=${search}</c:if>">${i}</a>
+                                        </c:forEach>
+                                        <c:if test="${pageIf.cp!=pageIf.np && pageIf.end!=0}">
+                                            <a href="<%=request.getContextPath()%>/allMentee?page=${pageIf.np}&nrpp=${nrpp}<c:if test="${status != null}">&sort=${status}</c:if><c:if test="${search != null}">&search=${search}</c:if>">>></a>  
+                                        </c:if>  
+                                        <div class="select-nrpp" style="">
+                                            <div class="nrpp" onclick="showNrpp()">${nrpp}<i class="ti ti-angle-down ml-1"></i></div>
+                                            <div id="nrpp">
+                                                <c:forEach items="${pageIf.arrNrpp}" var="i">
+                                                    <a class="<c:if test="${nrpp==i}">selected</c:if>" href="<%=request.getContextPath()%>/allMentee?nrpp=${i}<c:if test="${search!=null}">&search=${search}</c:if><c:if test="${status != null}">&sort=${status}</c:if>">${i}</a>
+                                                </c:forEach>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+
+                                    <!--nrpp-->
+
+
+                                </div>        
                             </div>
                         </div>
-                    </div></div></section>
-    </div>
+                    </div>
+
+            </div></div></section>
+</div>
 </div>
 <!-- footer -->
 <%@include file="footer.jsp" %>
@@ -255,6 +291,15 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <!-- Page level plugins -->
 <script src="<%=request.getContextPath()%>/js/vendor/chart.js/Chart.min.js"></script>
+<script>
+                                                function showNrpp() {
+                                                    if (document.getElementById('nrpp').style.display === "flex")
+                                                        document.getElementById('nrpp').style.display = "none";
+                                                    else
+                                                        document.getElementById('nrpp').style.display = "flex";
+                                                }
+</script>
+
 
 <!-- Page level custom scripts -->
 <script src="<%=request.getContextPath()%>/js/admin/mentee/chart-area-demo.js"></script>
