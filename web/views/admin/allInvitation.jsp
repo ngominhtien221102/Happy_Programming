@@ -333,7 +333,7 @@
                                         <form action="<%=request.getContextPath()%>/allInvitation" method="GET">
                                             <select name="nrpp" id="selectElementId" onchange="this.form.submit()" style="margin: 0">
                                                 <c:forEach items="${requestScope.pageIf.arrNrpp}" var="i">
-                                                    <option <c:if test="${nrpp == i}">selected=""</c:if>value="${i}">${i}</option>
+                                                    <a class="<c:if test="${nrpp==i}">selected</c:if>" href="<%=request.getContextPath()%>/allInvitation?nrpp=${i}<c:if test="${search!=null}">&search=${search}</c:if><c:if test="${status != null}">&sort=${status}</c:if>">${i}</a>
                                                 </c:forEach>
                                             </select>
                                         </form>
