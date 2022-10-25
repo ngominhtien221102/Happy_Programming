@@ -69,7 +69,7 @@
     </style>
     <body>
         <!-- header -->
-        <%@include file="../mentors/header.jsp" %>
+        <%@include file="../user/header.jsp" %>
         <!-- /header -->
         <div>
             <!-- teachers -->
