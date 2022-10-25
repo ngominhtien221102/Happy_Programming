@@ -89,7 +89,7 @@
     <div class="fixed-top navigation w-100" style="margin-top: 0px;
          background: #ffbc3b">
 
-        <div class="container" style="margin: 0% 2% 0 2% 0%;">
+        <div class="container" style="margin-left: 7%">
             <nav class="navbar navbar-expand-lg navbar-light p-0">
                 <a class="navbar-brand" href="<%=request.getContextPath()%>/views/user/index.jsp"><img src="<%=request.getContextPath()%>/template1/images/logo.png" alt="logo"></a>
                 <button class="navbar-toggler rounded-0" type="button" data-toggle="collapse" data-target="#navigation"
@@ -102,7 +102,7 @@
                         <li class="nav-item ">
                             <a class="nav-link" href="<%=request.getContextPath()%>/views/user/index.jsp">Home</a>
                         </li>
-                        <c:if test="${sessionScope.Account.getRoleID() != 3}">
+                        <c:if test="${sessionScope.Account.getRoleID() != 3 && Account.getRoleID() != 4}">
                             <li class="nav-item ">
                                 <a class="nav-link" href="<%=request.getContextPath()%>/views/user/skills.jsp">SKILLS</a>
                             </li>
@@ -110,7 +110,7 @@
                                 <a class="nav-link" href="<%=request.getContextPath()%>/views/user/mentorSuggest.jsp">SUGGEST MENTOR</a>
                             </li>
                         </c:if>
-                        <c:if test="${sessionScope.Account != null}">
+                        <c:if test="${sessionScope.Account != null && Account.getRoleID() != 4}">
                             <li class="nav-item dropdown view">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
                                    aria-haspopup="true" aria-expanded="false">
@@ -132,10 +132,28 @@
                                 </div>                           
                             </li>
                         </c:if>
-                        <li class="nav-item">
-                            <a class="nav-link" href="<%=request.getContextPath()%>/views/user/contact.jsp">CONTACT</a>
-                        </li>  
-                        <c:if test="${sessionScope.Account != null}">
+                        <c:if test="${sessionScope.Account != null && Account.getRoleID() == 4}">
+                            <li class="nav-item ">
+                                <a class="nav-link" href="<%=request.getContextPath()%>/editSkill">EDIT SKILLS</a>
+                            </li>
+                            <li class="nav-item dropdown view">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                                   aria-haspopup="true" aria-expanded="false">
+                                    Views
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="left:-50px">
+                                    <a class="dropdown-item" href="<%=request.getContextPath()%>/allMentor">All Mentor</a>
+                                    <a class="dropdown-item" href="<%=request.getContextPath()%>/allMentee">All Mentee</a> 
+                                    <a class="dropdown-item" href="<%=request.getContextPath()%>/allInvitation">Invitations</a>
+                                </div>                           
+                            </li>
+                        </c:if>
+                        <c:if test="${sessionScope.Account.roleID != 4}">
+                            <li class="nav-item">
+                                <a class="nav-link" href="<%=request.getContextPath()%>/views/user/contact.jsp">CONTACT</a>
+                            </li>  
+                        </c:if>
+                        <c:if test="${sessionScope.Account != null&& Account.roleID != 4}">
                             <li class="notiIcon dropdown view">
                                 <a onclick="Show()" class="nav-link " href="#" id="notification">
                                     <i class="ti ti-bell"></i><span id="amountNew" class="badge bg-danger" style="color: #fff">${sessionScope.NewNotification}</span>
@@ -175,7 +193,7 @@
                                     <a class="dropdown-item" href="<%=request.getContextPath()%>/mentorViewCV">Profile</a>
                                 </c:if>   
                             </c:if>  
-                            <c:if test="${sessionScope.Account != null}">
+                            <c:if test="${sessionScope.Account != null && Account.getRoleID() != 4}">
                                 <a class="dropdown-item" href="<%=request.getContextPath()%>/views/user/changePassword.jsp">Change password</a>
                             </c:if>  
                             <c:if test="${sessionScope.Account == null}">
