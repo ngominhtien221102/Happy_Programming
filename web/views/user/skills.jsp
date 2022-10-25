@@ -87,8 +87,8 @@
                                                         <h4 class="card-title">${lst.name}</h4>
                                                     </a>
                                                 </div>
-                                                    <div class="skill-des">
-                                                    <p class="card-text mb-4">JavaScript is used to manage the behavior of web pages. With it, coders can create dynamic web elements such as animated qweeeeeeeqw qw eqw eqw eqw qweqwe qwe qwe qqwe qwe qweq qwe qwe qwe qwe qwe wqw</p>
+                                                <div class="skill-des">
+                                                    <p class="card-text mb-4">${lst.description}</p>
                                                 </div>
                                                 <a href="course-single.jsp" class="btn btn-primary btn-sm">Apply now</a>
                                             </div>

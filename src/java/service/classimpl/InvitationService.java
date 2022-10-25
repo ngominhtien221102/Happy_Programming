@@ -47,7 +47,7 @@ public class InvitationService implements IInvitationService {
         // Neu la accepted,processing (1,2) thi ko cho send
         for (int i = list.size() - 1; i >= 0; i--) {
             if (list.get(i).getMenteeID() == u.getMenteeID() && list.get(i).getMentorID() == u.getMentorID() && list.get(i).getSkillID() == u.getSkillID()) {
-                if (list.get(i).getStatusID() == 3 || list.get(i).getStatusID() == 4) {
+                if (list.get(i).getStatusID() == 3 || list.get(i).getStatusID() == 4 || list.get(i).getStatusID() == 5) {
                     break;
                 } else {
                     if (list.get(i).getStatusID() == 1) {

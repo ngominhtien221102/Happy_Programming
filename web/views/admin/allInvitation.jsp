@@ -347,7 +347,7 @@
             </div>
         </div>
         <!-- footer -->
-        <%@include file="footer.jsp" %>
+        
         <!-- /footer -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <!-- Page level plugins -->

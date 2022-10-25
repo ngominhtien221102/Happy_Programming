@@ -344,7 +344,7 @@
                         </div></div></section>
             </div>
         </div>
-        <%@include file="footer.jsp" %>
+        
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <!-- Page level plugins -->

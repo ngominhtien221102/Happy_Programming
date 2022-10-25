@@ -3,11 +3,19 @@
     Created on : Sep 29, 2022, 6:02:01 PM
     Author     : Admin
 --%>
-
+<style>
+    .sidebar-fixed{
+        position: fixed;
+        top: 98px;
+        bottom: 349px;
+        height:  100%;
+    }
+</style>
 
 <div class="col-2" style="padding-top: 5%; background-color: #1a1a37;">
+    <div></div>
     <!-- Sidebar -->
-    <ul class="navbar-nav"  style="background-color: #1a1a37; margin-top: 10px; padding: 20px 10px 0px 30px">
+    <div class="col-2 navbar-nav sidebar-fixed"  style="background-color: #1a1a37; padding: 20px 10px 0px 30px">
         <!-- Nav Item - Dashboard -->
         <!-- Divider -->
 
@@ -86,5 +94,5 @@
         </li>
 
 
-    </ul>
-</div>
+
+    </div></div>
