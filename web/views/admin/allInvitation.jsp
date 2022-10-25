@@ -95,8 +95,9 @@
             float: right;
         }
         .static-number{
-            margin-top: 10px;
+            margin-top: 39px;
         }
+        
     </style>
     <body>
         <!-- header -->
@@ -110,9 +111,9 @@
                     <div class="container">
                         <div class="row" style="">
                         </div>
-                        <div class="card-block">
+                        <div class="">
                             <div class="row justify-content-between">
-                                <div class="col-7">
+                                <div class="col-7 card-block">
                                     <h3 style="margin-bottom: 20px" class="">Invitations</h3>
                                     <h4>${totalInv}</h4>
                                     <p class="text-muted">All invitation</p>
@@ -161,7 +162,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-4 ">
+                                        <div class="col-4" style="margin-top: 10px">
                                     <article class="static-number">
                                         <div class="card border-bottom hover-shadow" style="border-radius: 5px;">
                                             <div class="card-body row align-items-center" >
