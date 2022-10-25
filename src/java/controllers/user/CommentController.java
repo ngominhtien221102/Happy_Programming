@@ -77,7 +77,7 @@ public class CommentController extends HttpServlet {
 
         try {
             int mentorId = Integer.parseInt(mentorId_raw);
-            cmt.insert(new Comment(0, mentorId, menteeId, 1, createAt, content), cmtList);
+            cmt.insert(new Comment(0, mentorId, menteeId, createAt, content), cmtList);
             cmtList = cmt.getList();
             ses.setAttribute("listComment", cmtList);
             request.getRequestDispatcher("/viewCV?mentorID=" + mentorId).forward(request, response);
