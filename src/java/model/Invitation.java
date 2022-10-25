@@ -106,6 +106,13 @@ public class Invitation {
     public void setContent(String content) {
         this.content = content;
     }
+    
+    public String getTitleLimit(){
+        if (title.length()>26){
+            return title.substring(0, 26);
+        }
+        return title;
+    }
 
     @Override
     public String toString() {

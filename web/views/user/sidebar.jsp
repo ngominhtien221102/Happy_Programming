@@ -13,6 +13,7 @@
     }
 </style>
 <div class="col-2"  style=" background-color: #1a1a37;height: 100%">
+
     <!-- Sidebar -->
     <div></div>
     <div class="col-2 navbar-nav sidebar-fixed"  style="background-color: #1a1a37; padding: 20px 10px 0px 30px">

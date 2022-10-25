@@ -20,7 +20,7 @@
 
         <!-- Nav Item - Add product -->
         <li class="nav-item">
-            <a class="nav-link collapsed" href="<%=request.getContextPath()%>/viewCV?mentorID=${Account.ID}" >
+            <a class="nav-link collapsed" href="<%=request.getContextPath()%>/mentorViewCV" >
                 <span>Profile</span>
             </a>
         </li>
@@ -56,7 +56,7 @@
 
         <!-- Nav Item - All transaction -->
         <li class="nav-item">
-            <a class="nav-link collapsed" href="<%=request.getContextPath()%>/views/mentors/viewRequest.jsp" >
+            <a class="nav-link collapsed" href="<%=request.getContextPath()%>/viewAllRequest" >
                 <span>View Request</span>
             </a>
         </li>    

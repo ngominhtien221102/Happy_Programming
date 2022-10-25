@@ -71,8 +71,16 @@ public class UpdateStatusController extends HttpServlet {
         List<Invitation> inlist = (List<Invitation>) session.getAttribute("listInv");
 
         //lay info tu jsp
+        String page = request.getParameter("page");
         String invIdRaw = request.getParameter("id");
         String type = request.getParameter("type");
+        String getNrpp = request.getParameter("nrpp");
+        int nrpp;
+        if (getNrpp != null || "".equals(getNrpp)) {
+            nrpp = Integer.parseInt(getNrpp);
+        }else{
+            nrpp = 3;
+        }
 
         if (invIdRaw != null && type != null) {
             try {
@@ -83,13 +91,31 @@ public class UpdateStatusController extends HttpServlet {
                     inv.setStatusID(4);
                     in.update(inv, inlist);
                     session.setAttribute("listInv", inlist);
-                    response.sendRedirect(request.getContextPath() + "/invitationMentor");
+                    if (page != null ) {
+                        response.sendRedirect(request.getContextPath() + "/invSingle?id=" + invID);
+                    }else{
+                        response.sendRedirect(request.getContextPath() + "/invitationMentor?nrpp=" + nrpp);
+                    }
                 }
                 if (type.equals("1")) {
                     inv.setStatusID(1);
                     in.update(inv, inlist);
                     session.setAttribute("listInv", inlist);
-                    response.sendRedirect(request.getContextPath() + "/invitationMentor");
+                    if (page != null ) {
+                        response.sendRedirect(request.getContextPath() + "/invSingle?id=" + invID);
+                    }else{
+                        response.sendRedirect(request.getContextPath() + "/invitationMentor?nrpp=" + nrpp);
+                    }
+                }
+                if (type.equals("2")) {
+                    inv.setStatusID(5);
+                    in.update(inv, inlist);
+                    session.setAttribute("listInv", inlist);
+                    if (page != null ) {
+                        response.sendRedirect(request.getContextPath() + "/invSingle?id=" + invID);
+                    }else{
+                        response.sendRedirect(request.getContextPath() + "/invitationMentor?nrpp=" + nrpp);
+                    }
                 }
             } catch (Exception e) {
             }

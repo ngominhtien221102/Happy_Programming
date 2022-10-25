@@ -60,8 +60,6 @@
                                 <fmt:formatDate value="${Date}" var="Date2" pattern="dd/MM/yyyy"/>        
                                 <span class="font-weight-bold mr-2">Deadline:</span> ${Date2}
                                 <br><br>
-                                <span class="font-weight-bold mr-2">Deadline:</span> ${Invitation.deadlineDate}
-                                <br><br>
                                 <span class="font-weight-bold mr-2">Skill: </span>${HmSkill[Invitation.skillID]}
                                 <br><br>
                                 <span class="font-weight-bold mr-2">Status: </span>${listStatus[Invitation.statusID]}<br><br>
@@ -69,36 +67,46 @@
                                 <div class="content"><br>${Invitation.content}</div>
                                 <br><br>
                             </div>
-                            <c:set value="${requestScope.Invitaion}" var="inv"/>
+                            <c:set value="${requestScope.Invitation}" var="inv"/>
                             <div class="text-align-center row">
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <c:if test="${inv.statusID == 2}">
-
                                         <a class="text-color" 
-                                           href="<%=request.getContextPath()%>/updateStatus?id=${inv.ID}&statusID=${inv.statusID}&type=1">
-                                            <input type="button" value="Accept" class="btn btn-primary btn-user btn-block">
+                                           href="<%=request.getContextPath()%>/updateStatus?id=${inv.ID}&statusID=${inv.statusID}&type=1&page=single">
+                                            <input type="submit" value="Accept" class="btn btn-primary btn-user btn-block"/>
                                         </a>
-
                                     </c:if>
                                     <c:if test="${inv.statusID != 2}">
                                         <a class="text-color" >
-                                            <input type="button" value="Accept" class="btn btn-primary btn-user btn-block">
+                                            <input type="submit" value="Accept" class="btn btn-primary btn-user btn-block"/>
                                         </a>
                                     </c:if>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <c:if test="${inv.statusID == 2}">
                                         <a class="text-color" 
-                                           href="<%=request.getContextPath()%>/updateStatus?id=${inv.ID}&statusID=${inv.statusID}&type=0">
-                                            <input type="button" value="Reject" class="btn btn-primary btn-user btn-block">
+                                           href="<%=request.getContextPath()%>/updateStatus?id=${inv.ID}&statusID=${inv.statusID}&type=0&page=single">
+                                            <input type="submit" value="Reject" class="btn btn-primary btn-user btn-block"/>
                                         </a>
                                     </c:if>
                                     <c:if test="${inv.statusID != 2}">
                                         <a class="text-color">
-                                            <input type="button" value="Reject" class="btn btn-primary btn-user btn-block">
+                                            <input type="submit" value="Reject" class="btn btn-primary btn-user btn-block"/>
                                         </a>
                                     </c:if>
                                 </div>
+                                <div class="col-md-4" >
+                                    <c:if test="${inv.statusID == 1}">
+                                        <a class="text-color " 
+                                           href="<%=request.getContextPath()%>/updateStatus?id=${inv.ID}&statusID=${inv.statusID}&type=2&page=single">
+                                            <input type="submit" value="Close" class="btn btn-primary btn-user btn-block"/>
+                                        </a>
+                                    </c:if>
+                                    <c:if test="${inv.statusID != 1}">
+                                        <a class="text-color" ><input type="submit" value="Close" class="btn btn-primary btn-user btn-block"/></a>
+                                    </c:if>
+
+                                </div>    
                             </div>
                         </div>
                     </div>

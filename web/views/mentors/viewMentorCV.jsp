@@ -69,13 +69,16 @@
     </style>
     <body>
         <!-- header -->
-        <%@include file="../user/header.jsp" %>
+        <%@include file="../mentors/header.jsp" %>
         <!-- /header -->
         <div>
             <!-- teachers -->
             <section  class="main" ">
                 <div id="content" class="row" >
-                    <div  style="padding-top: 90px; ">
+
+                    <%@include file="mentorSidebar.jsp" %>
+
+                    <div class="col-10 " style="padding-top: 90px; ">
                         <div class="main-body">
                             <div class="row gutters-sm">
                                 <div class="col-md-4 mb-3">
@@ -84,14 +87,10 @@
                                         <div class="mt-3">
                                             <h4>${mentorProfile.firstName} ${mentorProfile.lastName}</h4>
                                         </div>
-                                        <c:if test="${Account.roleID == 3}">
-                                            <a href="<%=request.getContextPath()%>/updateCV">
-                                                <input type="submit" value="Update" class="btn btn-primary btn-user btn-block" style="padding: 10px 120px"/></a>
-                                            </c:if>
-                                            <c:if test="${Account.roleID == 2}">
-                                            <a href="<%=request.getContextPath()%>/views/user/createInvitation.jsp">
-                                                <input type="submit" value="Invite" class="btn btn-primary btn-user btn-block" style="padding: 10px 130px"/></a>
-                                            </c:if>
+
+                                        <a href="<%=request.getContextPath()%>/updateCV">
+                                            <input type="submit" value="Update" class="btn btn-primary btn-user btn-block" style="padding: 10px 120px"/></a>
+
                                     </div>
                                 </div>
                                 <div class="col-md-8">
@@ -172,7 +171,7 @@
                                 </div>
                             </div>
 
-                            <div style="padding-left: 65px">
+                            <div style="padding-left: 25px">
                                 <div class="row mt-4" >
                                     <div class="col-12" >
                                         <h4 class="mb-4">SERVICE DESCRIPTION</h4>
@@ -194,22 +193,7 @@
                                                 <p>
                                                     ${s.name}
                                                 </p>
-                                                <c:forEach items="${requestScope.invListAcept}" var="i" varStatus="loop">
-                                                    <c:if test="${s.ID == i.skillID}">
-                                                        <div class="rating">
-                                                            <button class=" btn-primary" type="submit"  style="border-color:#ffbc3b">Rate</button>
-                                                            <input style="" name="skillID" value="${s.ID}">
-                                                            <input style="" name="mentorID" value="${mentorCV.ID}">
 
-                                                            <input type="radio" name="rate" value="5" id="5${s.ID}"><label for="5${s.ID}">☆</label>
-                                                            <input class="checked" type="radio" name="rate" value="4" id="4${s.ID}"><label for="4${s.ID}">☆</label>
-                                                            <input type="radio" name="rate" value="3" id="3${s.ID}"><label for="3${s.ID}">☆</label>
-                                                            <input type="radio" name="rate" value="2" id="2${s.ID}"><label for="2${s.ID}">☆</label>
-                                                            <input type="radio" name="rate" value="1" id="1${s.ID}"><label for="1${s.ID}">☆</label>
-
-                                                        </div>
-                                                    </c:if>
-                                                </c:forEach>
                                             </c:forEach>
                                         </form>
 
@@ -297,25 +281,8 @@
 
                                     <!--comment-->
                                     <h4 class="mb-4" style="margin-top: 30px">COMMENT</h4>
-                                    <form action="<%=request.getContextPath()%>/comment" id="usrform" method="">
-                                        <c:if test="${Account.roleID == 2}">
-                                            <div class="d-flex flex-row add-comment-section mt-4 mb-4">
-                                                <c:forEach items="${listUserProfile}" var="user">
-                                                    <c:if test="${Account.ID == user.ID}">
-                                                        <img class=" rounded-circle mr-2" onerror="this.src='<%=request.getContextPath()%>/img/avatar/default.png'" src="<%=request.getContextPath()%>/img/avatar/p${Account.ID}.png"  style="height: 55px;
-                                                             width: 73px; margin-left: 20px;">
-                                                        <input name="content" type="text" class="form-control mr-3"  placeholder="Add comment">
-                                                        <button class="btn btn-primary text-center" style="width: 200px" type="submit" >Comment</button>
-                                                    </c:if>
-                                                </c:forEach>
-                                            </div>
-<<<<<<< Hung6
-                                        </c:if>
-                                    </form>
                                     <!--show comment-->
-
-
-
+                                    
                                     <c:forEach items="${sessionScope.listComment}" var="cmt">
                                         <c:if test="${mentorCV.ID == cmt.mentorID}">
                                             <div class="card-body">
@@ -357,7 +324,6 @@
                         </div>
 
                     </div>
-
                 </div>
             </section>
 

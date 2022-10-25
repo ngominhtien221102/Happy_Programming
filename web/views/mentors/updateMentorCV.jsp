@@ -38,18 +38,21 @@
                         <form class="user" action="<%=request.getContextPath()%>/updateCV" method="post">      
 
                             <div class="form-group row" style="padding-bottom: 20px;" >
+                                <h4>Profession</h4>
                                 <input type="text" class="form-control form-control-user" value="${CV.profession}"
                                        placeholder="Profession" name="profession" required>
                             </div>
 
 
                             <div class="form-group row" style="padding-bottom: 20px;" >
+                                <h4>Service Description</h4>
                                 <input type="text" class="form-control form-control-user" value="${CV.serviceDescription}"
                                        placeholder="Service Description" name="serviceDes" required>
                             </div>
 
 
                             <div class="form-group row" style="padding-bottom: 20px;" >
+                                <h4>Achivements</h4>
                                 <input type="text" class="form-control form-control-user" value="${CV.achivements}"
                                        placeholder="Achivements" name="achivements" required>
                             </div>
@@ -59,23 +62,25 @@
                             <div class=" row checkbox-group required" style="padding-bottom: 20px;" >
 
                                 <c:forEach items="${sessionScope.listSkill}" var="s">
-                                    <input type="checkbox" class="skill" required="" 
+                                    <div class="col-md-3">
+                                        <input type="checkbox" class="skill " required="" 
                                            <c:forEach items="${CV.skillList}" var="skillMentor">
                                                <c:if test="${s.ID==skillMentor.ID}">
                                                    checked=""
                                                </c:if>
                                            </c:forEach>
 
-
                                            onclick="deRequireCb('skill')"
                                            name="skill${s.ID}" style="height: 20px; width: 10%">${s.name}
+                                    </div>
+                                    
                                 </c:forEach>
 
                             </div>
 
                             <!--introduction-->
                             <div class="form-group row flex-column" style="padding-bottom: 20px;">
-                                <div>Introduction</div>
+                                <h4>Introduction</h4>
                                 </br>
                                 <textarea value="" name="introduction" id="editor" cols="75" rows="10" placeholder="Introduction" required>
                                     ${CV.introduction}
@@ -107,8 +112,8 @@
                                                        });
 
                                                const handleSubmit = () => {
-                                                   document.getElementById('a').innerHTML = value.getData()
-                                               }
+                                                   document.getElementById('a').innerHTML = value.getData();
+                                               };
         </script>
         <script>
             function deRequireCb(elClass) {
