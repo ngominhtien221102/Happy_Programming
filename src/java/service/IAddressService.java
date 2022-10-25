@@ -23,5 +23,5 @@ public interface IAddressService {
     List<String> getListDistTrict(String province );
     List<String> getListWard(String Province, String District);
     int getIDAddress(String Province, String District, String Ward, List<Address> list);
-
+    
 }

@@ -111,5 +111,9 @@ public class SkillDAO extends DBContext {
         } catch (SQLException e) {
         }
     }
+    public static void main(String[] args) {
+        SkillDAO s = new SkillDAO();
+        System.out.println(s.getSkillHm());
+    }
 
 }

@@ -151,11 +151,9 @@ public class UpdateProfileController extends HttpServlet {
 //        } else {
 //            imgname = "p" + u.getID() + ".png";
 //        }
+        String uploadFolder = "D:\\Project_SE1628\\Happy_Programming\\web\\img\\avatar";
 
-//        String uploadFolder = "D:\\Project_SE1628\\Happy_Programming\\web\\img\\avatar";
-
-        String uploadFolder = "C:\\Users\\ASUS\\Desktop\\SWP-Project\\Happy_Programming\\web\\img\\avatar";
-
+        //       String uploadFolder = "C:\\Users\\ASUS\\Desktop\\SWP-Project\\Happy_Programming\\web\\img\\avatar";
         Path uploadPath = Paths.get(uploadFolder);
         if (!Files.exists(uploadPath)) {
             Files.createDirectory(uploadPath);

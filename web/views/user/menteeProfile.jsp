@@ -13,8 +13,15 @@
     <style>
 
 
+        body{
+            margin-top:20px;
+            color: #1a202c;
+            text-align: left;
+            background-color: #ffff;
+        }
+
         .main-body {
-            padding: 12%;
+            margin-top: 11%;
         }
         .card {
             box-shadow: 0 1px 3px 0 rgba(0,0,0,.1), 0 1px 2px 0 rgba(0,0,0,.06);
@@ -36,8 +43,7 @@
         .card-body {
             flex: 1 1 auto;
             min-height: 1px;
-            padding: 1rem;
-            min-height: 325px;
+            min-height: 330px;
         }
 
         .gutters-sm {
@@ -74,12 +80,19 @@
         <!-- Modal -->
         <div id="content" class="row" style="padding-top: 30px">
             <%@include file="sidebar.jsp" %>
-            <div class="container">
+            <div style="" class="container">
                 <div class="main-body">
 
                     <div class="row gutters-sm">
-                        <div class="col-md-4 mb-3">
+                        <div style="" class="col-md-4 mb-3">
                             <div class="card">
+
+
+                                <div class="d-flex flex-column align-items-center text-center">
+                                    <img style="height: 409px; width: 370px" src="<%=request.getContextPath()%>/img/avatar/${us.getAvatar()}" alt="Avatar" >
+                                </div>
+
+
                                 <div class="card-body">
                                     <div class="d-flex flex-column align-items-center text-center">
                                         <img src="<%=request.getContextPath()%>/img/avatar/${us.avatar}" 
@@ -90,7 +103,7 @@
                                             <a href="<%=request.getContextPath()%>/updateProfile" class="btn btn-primary" >Update</a>
                                         </div>
                                     </div>
-                                </div>                                     
+                 
                             </div>            
                         </div>
                         <div class="col-md-8">
@@ -147,6 +160,14 @@
                                         </div>
                                         <div class="col-sm-9 text-secondary">
                                             ${xa} , ${huyen} , ${tinh}
+                                        </div>
+                                    </div> 
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="d-flex flex-column align-items-center text-center">
+                                            <a href="<%=request.getContextPath()%>/updateProfile" class="btn btn-primary" >Update</a>
+                                            </div>
                                         </div>
                                     </div> 
                                 </div>
