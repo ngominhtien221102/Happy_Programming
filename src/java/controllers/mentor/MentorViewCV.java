@@ -57,7 +57,7 @@ public class MentorViewCV extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ViewCV</title>");            
+            out.println("<title>Servlet ViewCV</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet ViewCV at " + request.getContextPath() + "</h1>");
@@ -75,12 +75,12 @@ public class MentorViewCV extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    
     IRateService ra = new RateService();
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       HttpSession ses = request.getSession();
+        HttpSession ses = request.getSession();
         List<MentorCV> listCV = (List<MentorCV>) ses.getAttribute("listMentorCV");
         List<UserProfile> profiles = (List<UserProfile>) ses.getAttribute("listUserProfile");
         List<Address> addList = (List<Address>) ses.getAttribute("listAddress");
@@ -120,7 +120,7 @@ public class MentorViewCV extends HttpServlet {
             int two = ra.countRate(2, rList);
             int one = ra.countRate(1, rList);
             HashMap<Integer, Float> rateHm = ra.getHmAvgRate();
-            
+
             if (rateHm.get(id) == 0 && rateHm.get(id) != null) {
                 request.setAttribute("five", 0);
                 request.setAttribute("four", 0);
@@ -129,19 +129,20 @@ public class MentorViewCV extends HttpServlet {
                 request.setAttribute("one", 0);
             }
 
-            if(rateTotal==0){
+            if (rateTotal == 0) {
                 request.setAttribute("five", 0);
                 request.setAttribute("four", 0);
                 request.setAttribute("three", 0);
                 request.setAttribute("two", 0);
                 request.setAttribute("one", 0);
+            } else {
+                request.setAttribute("rateHm", rateHm);
+                request.setAttribute("five", five * 100 / rateTotal);
+                request.setAttribute("four", four * 100 / rateTotal);
+                request.setAttribute("three", three * 100 / rateTotal);
+                request.setAttribute("two", two * 100 / rateTotal);
+                request.setAttribute("one", one * 100 / rateTotal);
             }
-            request.setAttribute("rateHm", rateHm);
-            request.setAttribute("five", five * 100 / rateTotal);
-            request.setAttribute("four", four * 100 / rateTotal);
-            request.setAttribute("three", three * 100 / rateTotal);
-            request.setAttribute("two", two * 100 / rateTotal);
-            request.setAttribute("one", one * 100 / rateTotal);
 
             request.getRequestDispatcher("views/mentors/viewMentorCV.jsp").forward(request, response);
 
@@ -149,7 +150,6 @@ public class MentorViewCV extends HttpServlet {
             response.sendRedirect("views/user/index.jsp");
         }
     }
-    
 
     /**
      * Handles the HTTP <code>POST</code> method.

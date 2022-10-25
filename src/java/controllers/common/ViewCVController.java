@@ -136,7 +136,7 @@ public class ViewCVController extends HttpServlet {
             int two = ra.countRate(2, rList);
             int one = ra.countRate(1, rList);
             HashMap<Integer, Float> rateHm = ra.getHmAvgRate();
-            
+
             if (rateHm.get(id) == 0 && rateHm.get(id) != null) {
                 request.setAttribute("five", 0);
                 request.setAttribute("four", 0);
@@ -145,12 +145,20 @@ public class ViewCVController extends HttpServlet {
                 request.setAttribute("one", 0);
             }
 
-            request.setAttribute("rateHm", rateHm);
-            request.setAttribute("five", five * 100 / rateTotal);
-            request.setAttribute("four", four * 100 / rateTotal);
-            request.setAttribute("three", three * 100 / rateTotal);
-            request.setAttribute("two", two * 100 / rateTotal);
-            request.setAttribute("one", one * 100 / rateTotal);
+            if (rateTotal == 0) {
+                request.setAttribute("five", 0);
+                request.setAttribute("four", 0);
+                request.setAttribute("three", 0);
+                request.setAttribute("two", 0);
+                request.setAttribute("one", 0);
+            } else {
+                request.setAttribute("rateHm", rateHm);
+                request.setAttribute("five", five * 100 / rateTotal);
+                request.setAttribute("four", four * 100 / rateTotal);
+                request.setAttribute("three", three * 100 / rateTotal);
+                request.setAttribute("two", two * 100 / rateTotal);
+                request.setAttribute("one", one * 100 / rateTotal);
+            }
 
             request.getRequestDispatcher("views/common/viewMentorCV.jsp").forward(request, response);
 
