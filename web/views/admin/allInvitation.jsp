@@ -156,7 +156,7 @@
     </style>
     <body>
         <!-- header -->
-        <%@include file="header.jsp" %>
+        <%@include file="../user/header.jsp" %>
         <!-- /header -->
         <div id="content" class="row" style="padding-top: 50px;  min-height: 800px">
             <%@include file="adminSidebar.jsp" %>
