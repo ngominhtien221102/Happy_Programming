@@ -123,7 +123,6 @@
                                         <a class="dropdown-item" href="<%=request.getContextPath()%>/viewAllRequest">Sent Request</a>
                                         <a class="dropdown-item" href="<%=request.getContextPath()%>/sendInvitation">Create Invitation</a>      
                                         <a class="dropdown-item" href="<%=request.getContextPath()%>/viewAllInvite">Sent invitation</a> 
-                                        <a class="dropdown-item" href="<%=request.getContextPath()%>/views/viewUser.jsp">Rate mentor</a> 
                                     </c:if>
                                     <c:if test="${sessionScope.Account.getRoleID() == 3}">
                                         <a class="dropdown-item" href="<%=request.getContextPath()%>/viewAllRequest">Requests</a>

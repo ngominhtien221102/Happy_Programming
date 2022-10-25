@@ -114,7 +114,7 @@
     <body>
         <!-- header -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <%@include file="header.jsp" %>
+        <%@include file="../user/header.jsp" %>
         <!-- /header -->
         <div id="content" class="row" style="padding-top: 50px;  min-height: 800px">
             <%@include file="adminSidebar.jsp" %>
