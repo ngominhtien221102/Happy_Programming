@@ -62,7 +62,6 @@
 
             <div class="col-10">
                 <section class="section" >
-
                     <div class="container">
                         <h2>All Invitation</h2>
                         <div class="row">

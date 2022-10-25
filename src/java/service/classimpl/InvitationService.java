@@ -224,7 +224,13 @@ public class InvitationService implements IInvitationService {
 
     @Override
     public List<Invitation> getInvitationByMentorId(int mentorId, List<Invitation> list) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+       List<Invitation> invList = new ArrayList<>();
+        for (Invitation invitation : list) {
+            if (invitation.getMentorID() == mentorId) {
+                invList.add(invitation);
+            }
+        }
+        return invList;
     }
     
     
