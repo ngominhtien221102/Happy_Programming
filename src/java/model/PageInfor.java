@@ -36,13 +36,6 @@ public class PageInfor {
     public void setArrNrpp(int[] arrNrpp) {
         this.arrNrpp = arrNrpp;
     }
-    public int[] getArrNrpp1() {
-        return arrNrpp1;
-    }
-
-    public void setArrNrpp1(int[] arrNrpp1) {
-        this.arrNrpp1 = arrNrpp1;
-    }
  
     public PageInfor(int npp, int size, int cp) {
         this.npp = npp;
