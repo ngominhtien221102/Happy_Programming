@@ -68,10 +68,7 @@
         .shadow-none {
             box-shadow: none!important;
         }
-        .profile-avar{
-            height: 190px;
-            width: 190px;
-        }
+
     </style>
     <body>
         <!-- header -->
