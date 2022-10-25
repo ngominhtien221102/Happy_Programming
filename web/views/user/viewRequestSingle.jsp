@@ -85,6 +85,9 @@
             width: 40px;
             height: 40px;
         }
+        .request-title{
+            margin-bottom: 45px;
+        }
     </style>
     <body>
         <!-- header -->
@@ -95,7 +98,7 @@
             <div class="col-10">
                 <section class="section">
                     <div class="container">
-                        <h2>${request.title}</h2>
+                        <h3 class="request-title">${request.title}</h3>
 
                         <div class="request" style="width: 100%;">
                             <div class="">

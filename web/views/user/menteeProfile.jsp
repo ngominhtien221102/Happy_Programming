@@ -73,8 +73,8 @@
                 <section class="section" >
                     <div style="" class="container">
                         <div class="main-body">
-                            <div class="row gutters-sm">
-                                <div style="" class="col-md-4 mb-3">
+                            <div class="row gutters-sm" >
+                                <div style="margin-left: 55px" class="col-md-4 mb-3 mr-2" >
                                     <div class="card">
 
                                         <div class="d-flex flex-column align-items-center text-center">
@@ -83,9 +83,9 @@
 
                                     </div>            
                                 </div>
-                                <div class="col-md-8">
+                                <div class="col-md-7 ml-3">
                                     <div class="card mb-3">
-                                        <div class="card-body">
+                                        <div class="card-body ">
                                             <div class="row">
                                                 <div class="col-sm-3">
                                                     <h6 class="mb-0">Full Name:</h6>
