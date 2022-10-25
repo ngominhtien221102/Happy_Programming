@@ -99,6 +99,11 @@
             margin: 30px 0;
             float: right;
         }
+
+        .static-number{
+            margin-top: 39px;
+        }
+
     </style>
     <body>
         <!-- header -->
@@ -132,6 +137,7 @@
                                         <p style="color: #fff; margin: 0 ">Invitations accepted</p>
                                     </div>
                                 </div>
+
                             </article>
 
                             <!--Invitation rejected-->
@@ -141,6 +147,25 @@
                                         <div class="col-8">
                                             <h4 style="color: #fe5d70;">${reject}</h4>
                                             <h6 class="text-muted">Rejected</h6>
+
+                                <div class="col-4" style="margin-top: 10px">
+                                    <article class="static-number">
+                                        <div class="card border-bottom hover-shadow" style="border-radius: 5px;">
+                                            <div class="card-body row align-items-center" >
+                                                <div class="col-8">
+                                                    <h4 style="color: #0ac282;">${acpt}</h4>
+                                                    <h6 class="text-muted">Accepted</h6>
+                                                </div>
+                                                <div class="col-4 text-right" style="color: #0ac282;" >
+                                                    <i class="ti-user"></i>
+                                                </div>
+                                            </div>
+                                            <div style="background: linear-gradient(to right,#0ac282,#0df3a3); text-align: center; align-items: center; padding: 20px;
+                                                 border-bottom-left-radius: 5px;
+                                                 border-bottom-right-radius: 5px;">
+                                                <p style="color: #fff; margin: 0 ">Invitations accepted</p>
+                                            </div>
+
                                         </div>
                                         <div class="col-4 text-right" style="color: #fe5d70;">
                                             <i class="ti-user"></i>
@@ -283,6 +308,7 @@
                                                     <th>Deadline Date</th>
                                                 </tr>
                                             </thead>
+
 
                                             <tbody>
                                             <c:forEach items="${invitationList}" var="inv" varStatus="loop" begin="${pageIf.start}" end="${pageIf.end}" >

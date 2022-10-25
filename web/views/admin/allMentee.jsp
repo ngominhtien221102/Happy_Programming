@@ -253,22 +253,7 @@
                                             </tr>
                                         </thead>
 
-                                        <tbody class="bgr-white">
-                                        <c:forEach items="${listMentee}" var="m" varStatus="loop" begin="${pageIf.start}" end="${pageIf.end}">
-
-                                            <tr>
-                                                <th>STT</th> 
-                                                <th>Name<a style="float: right;color: #fff" 
-                                                           href="<%=request.getContextPath()%>/allMentee?sort=${sort}&nrpp=${nrpp}<c:if test="${search != null}">&search=${search}</c:if>"><i class="ti-arrow-down"></i><i class="ti-arrow-up"></i></a></th>
-                                                    <th>Gender</th>
-                                                    <th style="width: 25%">Address</th>
-                                                    <th>DOB</th>
-                                                    <th>Email</th>
-                                                    <th>Active</th>
-                                                    <th>Action</th>
-                                                </tr>
-                                            </thead>
-
+                                       
                                             <tbody class="bgr-white">
                                             <c:forEach items="${listMentee}" var="m" varStatus="loop" begin="${pageIf.start}" end="${pageIf.end}">
                                                 <tr>
@@ -308,22 +293,16 @@
                                             </div>
                                         </div>
                                     </div>
-
-
-
-
                                     <!--nrpp-->
-
-
                                 </div>        
                             </div>
                         </div>
                         </div>
                         
-                    </div></div></section>
-    </div>
+                    </section></div></div>
+  
 
-</div>
+
 <!-- footer -->
 <%@include file="footer.jsp" %>
 <!-- /footer -->

@@ -36,7 +36,12 @@
         .option:hover{
             display: block;
         }
-
+        .skill-title{
+            height: 40px;
+        }
+        .skill-des{
+            height: 210px
+        }
     </style>
     <body>
         <!-- header -->
@@ -77,18 +82,21 @@
                                     <div class="col-lg-4 col-sm-6 mb-5">
                                         <div class="card p-0 border-primary rounded-0 hover-shadow">
                                             <div class="card-body">
-
-                                                <a href="course-single.jsp">
-                                                    <h4 class="card-title">${lst.name}</h4>
-                                                </a>
-                                                <p class="card-text mb-4"> Our skills offer a good compromise between the continuous assessment favoured by some universities and the emphasis placed on final exams by others.</p>
+                                                <div class="skill-title">
+                                                    <a href="course-single.jsp">
+                                                        <h4 class="card-title">${lst.name}</h4>
+                                                    </a>
+                                                </div>
+                                                    <div class="skill-des">
+                                                    <p class="card-text mb-4">JavaScript is used to manage the behavior of web pages. With it, coders can create dynamic web elements such as animated qweeeeeeeqw qw eqw eqw eqw qweqwe qwe qwe qqwe qwe qweq qwe qwe qwe qwe qwe wqw</p>
+                                                </div>
                                                 <a href="course-single.jsp" class="btn btn-primary btn-sm">Apply now</a>
                                             </div>
                                         </div>
                                     </div>
                                 </c:forEach>
-
                             </div>
+                        </div>
                     </section></div>
             </div>
         </div>
