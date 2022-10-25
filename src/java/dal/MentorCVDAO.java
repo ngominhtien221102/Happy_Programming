@@ -32,7 +32,7 @@ public class MentorCVDAO extends DBContext {
         mentorCVList = new ArrayList<>();
 
         String sql = "select * from Mentor_CV";
-        String sql1 = "select Skill.Skill_ID,Skill.Name from Skill,Mentor_Skills "
+        String sql1 = "select Skill.Skill_ID,Skill.Name,Skill.Description from Skill,Mentor_Skills "
                 + "where Skill.Skill_ID = Mentor_Skills.Skill_ID and Mentor_ID = ?";
         try {
             PreparedStatement ps1 = connection.prepareStatement(sql);
@@ -49,7 +49,7 @@ public class MentorCVDAO extends DBContext {
                 ps2.setInt(1, id);
                 ResultSet rs2 = ps2.executeQuery();
                 while (rs2.next()) {
-                    skillList.add(new Skill(rs2.getInt(1), rs2.getString(2)));
+                    skillList.add(new Skill(rs2.getInt(1), rs2.getString(2),rs2.getString(3)));
                 }
                 mentorCVList.add(new MentorCV(id, profession, introduction, serviceDescription, achivements, skillList));
             }

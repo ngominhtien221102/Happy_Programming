@@ -79,9 +79,12 @@ public class LoadHomeController extends HttpServlet {
         IInvitationService iS = new InvitationService();
         ICommentService cS = new CommentService();
         IAddressService aS = new AddressService();
+
         IPostService ips = new PostService();
 
+        IContactService conS = new ContactService();
         ses.setAttribute("RoleID", 1);
+        ses.setAttribute("listContact", conS.getList());
         ses.setAttribute("HmSkill", sS.getHm());
         ses.setAttribute("listSkill", sS.getList());
         ses.setAttribute("listUser", uS.getList());
@@ -95,7 +98,9 @@ public class LoadHomeController extends HttpServlet {
         ses.setAttribute("listAddress", aS.getList());
         ses.setAttribute("listProvince", aS.getListProvince());
         ses.setAttribute("listComment", cS.getList());
+
         ses.setAttribute("listPost", ips.getList());
+
         
         List<UserProfile> uList;
         uList = (List<UserProfile>) ses.getAttribute("listUserProfile");

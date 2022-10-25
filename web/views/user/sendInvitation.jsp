@@ -11,7 +11,9 @@
     <%@include file="headCSS2.jsp" %>
 
     <style>
-
+        .container{
+            margin-bottom: 144px;
+        }
         .search input[type="text"]{
             border: 1px solid #08080B;
             border-right: none;
@@ -71,15 +73,20 @@
         .col-9{
             margin: 0 auto;
         }
-        .pagination a,.pagination select{
+        /*phan trang*/
+        .pagination a{
             border: #ced4da solid 1px;
             padding: 10px;
             border-radius: 5px;
             margin-right: 10px;
         }
-        .pagination select{
+        .pagination .nrpp{
             color: #ffbc3b;
             background: #f3f3f3;
+            border: #ced4da solid 1px;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
         }
         .pagination a:hover, .pagination a.active{
             background-color:#e9ecef;
@@ -89,9 +96,36 @@
             margin: 30px 0;
             float: right;
         }
+        #nrpp{
+            display: none;
+            flex-flow: column;
+            position: absolute;
+            top:40px;
+            background: #fff;
+            width: 100%;
+            border: 1px solid;
+        }
+        #nrpp a{
+            padding: 5px;
+            margin-right: 0;
+            border: 0;
+            border-radius: 0;
+        }
+        #nrpp a:hover, .selected{
+            background:hsl(214, 100%, 59%) ;
+            color: #fff ;
+        }
+        .select-nrpp{
+            display: flex;
+            flex-flow: column;
+            position: relative
+        }
+        /*phan trang*/
+        
         .invite{
             font-weight: 700;
         }
+
     </style>
     <body>
         <%@include file= "header.jsp" %>
@@ -127,7 +161,7 @@
                                             <th>#</th> 
                                             <th>Name</th>
                                             <th>Skills</th>
-                                            <th colspan="2" class="text-align-center">Option</th>         
+                                            <th colspan="2" class="text-align-center"></th>         
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -152,22 +186,29 @@
 
                                 <div class="pagination">
                                     <c:if test="${pageIf.cp!=1 && pageIf.end!=null}">
-                                        <a href="<%=request.getContextPath()%>/sendInvitation?page=1&nrpp=${nrpp}<c:if test="${search!=null}">&search=${search}</c:if>"><<</a>  
+                                        <a href="<%=request.getContextPath()%>/sendInvitation?page=1&nrpp=${nrpp}<c:if test="${search!=null}">&search=${search}</c:if>"><<</a> 
+                                        <a href="<%=request.getContextPath()%>/sendInvitation?page=${pageIf.cp-1}&nrpp=${nrpp}<c:if test="${search!=null}">&search=${search}</c:if>"><</a>
                                     </c:if>      
-                                    <c:forEach begin="${1}" end="${pageIf.np}" var="i">
+                                    <c:forEach begin="${pageIf.cp>2?pageIf.cp-2:1}" end="${pageIf.cp+2>pageIf.np?pageIf.np:pageIf.cp+2}" var="i">
                                         <a class="${i==pageIf.cp?"active":""}" href="<%=request.getContextPath()%>/sendInvitation?page=${i}&nrpp=${nrpp}<c:if test="${search!=null}">&search=${search}</c:if>">${i}</a>
                                     </c:forEach>
                                     <c:if test="${pageIf.cp!=pageIf.np && pageIf.end!=0}">
+                                        <a href="<%=request.getContextPath()%>/sendInvitation?page=${pageIf.cp+1}&nrpp=${nrpp}<c:if test="${search!=null}">&search=${search}</c:if>">></a>
                                         <a href="<%=request.getContextPath()%>/sendInvitation?page=${pageIf.np}&nrpp=${nrpp}<c:if test="${search!=null}">&search=${search}</c:if>">>></a>  
                                     </c:if>  
-                                    <form action="<%=request.getContextPath()%>/sendInvitation" method="GET">
-                                        <select name="nrpp" onchange="this.form.submit()">
+
+                                    <!--nrpp-->
+                                    <div class="select-nrpp" style="">
+                                        <div class="nrpp" onclick="showNrpp()">${nrpp}<i class="ti ti-angle-down ml-1"></i></div>
+                                        <div id="nrpp">
                                             <c:forEach items="${pageIf.arrNrpp}" var="i">
-                                                <option <c:if test="${nrpp==i}">selected=""</c:if> value="${i}">${i}</option>
+                                                <a class="<c:if test="${nrpp==i}">selected</c:if>" href="<%=request.getContextPath()%>/sendInvitation?nrpp=${i}<c:if test="${search!=null}">&search=${search}</c:if>">${i}</a>
                                             </c:forEach>
-                                        </select>
-                                    </form>
+                                        </div>
+                                    </div>
+
                                 </div>
+                                        <!--phan trang-->
                             </div>
                         </div>          
                         <!--form-->
@@ -194,7 +235,7 @@
         </div>
 
         <!-- footer -->
-        <%@include file="footer.jsp" %>
+
         <!-- /footer -->
 
         <!-- jQuery -->
@@ -215,9 +256,14 @@
                                             const handleSubmit = () => {
                                                 document.getElementById('a').innerHTML = value.getData()
                                             }
-
-
-
+                                            
+//                                            phan trang
+                                            function showNrpp() {
+                                                if (document.getElementById('nrpp').style.display === "flex")
+                                                    document.getElementById('nrpp').style.display = "none";
+                                                else
+                                                    document.getElementById('nrpp').style.display = "flex";
+                                            }
         </script>
 
 

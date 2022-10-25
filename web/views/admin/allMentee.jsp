@@ -74,8 +74,27 @@
         }
         .col-9{
             margin: 0 auto;
+        }.pagination a,.pagination select{
+            border: #ced4da solid 1px;
+            padding: 10px;
+            border-radius: 5px;
+            margin-right: 10px;
+            height: 40px;
         }
-           .pagination a{
+        .pagination select{
+            color: #ffbc3b;
+            background: #f3f3f3;
+        }
+        .pagination a:hover, .pagination a.active{
+            background-color:#e9ecef;
+            color: #ffbc3b;
+        }
+        .pagination{
+            margin: 30px 0;
+            float: right;
+        }
+
+        .pagination a{
             border: #ced4da solid 1px;
             padding: 10px;
             border-radius: 5px;
@@ -88,6 +107,8 @@
             padding: 10px;
             border-radius: 5px;
             cursor: pointer;
+            height: 40px;
+
         }
         .pagination a:hover, .pagination a.active{
             background-color:#e9ecef;
@@ -212,12 +233,29 @@
                                     <button type="submit"><i class="ti ti-search" aria-hidden="true"></i></button>
                                 </form>
                             </div>
-                            <br><h3>Mentees</h3>
-                            <div class="row">  
-                                <div class="col-md-12 table">
 
-                                    <table border="2" style="width: 100%">
-                                        <thead>
+                                    <br><h3>Mentees</h3>
+                        <div class="row">  
+                            <div class="col-md-12 table">
+
+                                <table border="2" style="width: 100%">
+                                    <thead>
+                                        <tr>
+                                            <th>STT</th> 
+                                            <th>Name<a style="float: right;color: #fff" 
+                                                       href="<%=request.getContextPath()%>/allMentee?sort=${sort}&nrpp=${nrpp}<c:if test="${search != null}">&search=${search}</c:if>"><i class="ti-arrow-down"></i><i class="ti-arrow-up"></i></a></th>
+                                                <th>Gender</th>
+                                                <th style="width: 25%">Address</th>
+                                                <th>DOB</th>
+                                                <th>Email</th>
+                                                <th>Active</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody class="bgr-white">
+                                        <c:forEach items="${listMentee}" var="m" varStatus="loop" begin="${pageIf.start}" end="${pageIf.end}">
+
                                             <tr>
                                                 <th>STT</th> 
                                                 <th>Name<a style="float: right;color: #fff" 
@@ -280,10 +318,11 @@
                                 </div>        
                             </div>
                         </div>
-                    </div>
+                        </div>
+                        
+                    </div></div></section>
+    </div>
 
-            </div></div></section>
-</div>
 </div>
 <!-- footer -->
 <%@include file="footer.jsp" %>

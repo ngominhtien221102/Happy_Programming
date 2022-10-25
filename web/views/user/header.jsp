@@ -5,8 +5,12 @@
 --%>
 
 
+
 <header class="header">
     <style>
+        .navigation{
+            height: 98px;
+        }
         #someNotify{
             position: absolute;
             box-shadow: 0px 3px 9px 0px rgba(0, 0, 0, 0.12);
@@ -80,12 +84,12 @@
         #notification{
             color: #fff;
         }
-       
+
     </style>
     <div class="fixed-top navigation w-100" style="margin-top: 0px;
          background: #ffbc3b">
 
-        <div class="container">
+        <div class="container" style="margin: 0% 2% 0 2% 0%;">
             <nav class="navbar navbar-expand-lg navbar-light p-0">
                 <a class="navbar-brand" href="<%=request.getContextPath()%>/views/user/index.jsp"><img src="<%=request.getContextPath()%>/template1/images/logo.png" alt="logo"></a>
                 <button class="navbar-toggler rounded-0" type="button" data-toggle="collapse" data-target="#navigation"
@@ -98,81 +102,90 @@
                         <li class="nav-item ">
                             <a class="nav-link" href="<%=request.getContextPath()%>/views/user/index.jsp">Home</a>
                         </li>
-                        <li class="nav-item ">
-                            <a class="nav-link" href="<%=request.getContextPath()%>/views/user/skills.jsp">SKILLS</a>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link" href="<%=request.getContextPath()%>/views/user/mentorSuggest.jsp">SUGGEST</a>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link" href="<%=request.getContextPath()%>/views/user/blog.jsp">BLOG</a>
-                        </li>
-                        <li class="nav-item dropdown view">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                               aria-haspopup="true" aria-expanded="false">
-                                Pages
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="left:-50px">
-                                <a class="dropdown-item" href="<%=request.getContextPath()%>/views/user/teacher.jsp">Teacher</a>
-                                <a class="dropdown-item" href="<%=request.getContextPath()%>/views/user/teacher-single.jsp">Teacher Single</a>
-                                <a class="dropdown-item" href="<%=request.getContextPath()%>/views/user/notice.jsp">Notice</a>
-                                <a class="dropdown-item" href="<%=request.getContextPath()%>/views/user/notice-single.jsp">Notice Details</a>
-                                <a class="dropdown-item" href="<%=request.getContextPath()%>/views/user/research.jsp">Research</a>
-                                <a class="dropdown-item" href="<%=request.getContextPath()%>/views/user/scholarship.jsp">Scholarship</a>
-                                <a class="dropdown-item" href="<%=request.getContextPath()%>/views/user/course-single.jsp">Course Details</a>
-                                <a class="dropdown-item" href="<%=request.getContextPath()%>/views/user/event-single.jsp">Event Details</a>
-                                <a class="dropdown-item" href="<%=request.getContextPath()%>/views/user/blog-single.jsp">Blog Details</a>
-                            </div>
-                        </li>
-
-
+                        <c:if test="${sessionScope.Account.getRoleID() != 3}">
+                            <li class="nav-item ">
+                                <a class="nav-link" href="<%=request.getContextPath()%>/views/user/skills.jsp">SKILLS</a>
+                            </li>
+                            <li class="nav-item ">
+                                <a class="nav-link" href="<%=request.getContextPath()%>/views/user/mentorSuggest.jsp">SUGGEST MENTOR</a>
+                            </li>
+                        </c:if>
+                        <c:if test="${sessionScope.Account != null}">
+                            <li class="nav-item dropdown view">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                                   aria-haspopup="true" aria-expanded="false">
+                                    Options
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="left:-50px">
+                                    <c:if test="${sessionScope.Account.getRoleID() == 2}">
+                                        <a class="dropdown-item" href="<%=request.getContextPath()%>/views/user/updateMenteeProfile.jsp">Update Profile</a>
+                                        <a class="dropdown-item" href="<%=request.getContextPath()%>/sendRequest">Create Request</a> 
+                                        <a class="dropdown-item" href="<%=request.getContextPath()%>/viewAllRequest">Sent Request</a>
+                                        <a class="dropdown-item" href="<%=request.getContextPath()%>/sendInvitation">Create Invitation</a>      
+                                        <a class="dropdown-item" href="<%=request.getContextPath()%>/viewAllInvite">Sent invitation</a> 
+                                        <a class="dropdown-item" href="<%=request.getContextPath()%>/views/viewUser.jsp">Rate mentor</a> 
+                                    </c:if>
+                                    <c:if test="${sessionScope.Account.getRoleID() == 3}">
+                                        <a class="dropdown-item" href="<%=request.getContextPath()%>/viewAllRequest">Requests</a>
+                                        <a class="dropdown-item" href="<%=request.getContextPath()%>/viewAllInvite">Invitations</a> 
+                                    </c:if>
+                                </div>                           
+                            </li>
+                        </c:if>
                         <li class="nav-item">
                             <a class="nav-link" href="<%=request.getContextPath()%>/views/user/contact.jsp">CONTACT</a>
-                        </li>                 
-                        <li class="notiIcon dropdown view">
-                            <a onclick="Show()" class="nav-link " href="#" id="notification">
-                                <i class="ti ti-bell"></i><span id="amountNew" class="badge bg-danger" style="color: #fff">${sessionScope.NewNotification}</span>
-                            </a>
-                            <div id="someNotify" style="">
-                                
-                            </div>
-                            
-                        </li>
+                        </li>  
+                        <c:if test="${sessionScope.Account != null}">
+                            <li class="notiIcon dropdown view">
+                                <a onclick="Show()" class="nav-link " href="#" id="notification">
+                                    <i class="ti ti-bell"></i><span id="amountNew" class="badge bg-danger" style="color: #fff">${sessionScope.NewNotification}</span>
+                                </a>
+                                <div id="someNotify" style="">
 
+                                </div>
 
-
-
+                            </li>
+                        </c:if>
                         <li class="nav-item dropdown view ">
-                            <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown"
+                        <c:if test="${sessionScope.Account != null && sessionScope.Account.roleID != 4}">
+                            <a class="nav-link dropdown-toggle" id="navbarDropdown" style="padding: 28px 0 ;" role="button" data-toggle="dropdown"
                                aria-haspopup="true" aria-expanded="false">
-                                <i class="ti ti-user" aria-hidden="true"></i>
+                                <img src="<%=request.getContextPath()%>/img/avatar/p${Account.ID}.png" style="height:40px;
+                                     width:40px;
+                                     border-radius:50%;
+                                     vertical-align: middle;
+                                     object-fit: cover;"  
+                                     onerror="this.src='<%=request.getContextPath()%>/img/avatar/default.png';"/>
                             </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="left:-50px">
-
-                                <c:if test="${sessionScope.Account != null}">
-                                    <c:if test="${sessionScope.Account.getRoleID() == 2}">
-                                        <a class="dropdown-item" href="<%=request.getContextPath()%>/viewMenteeProfile">Profile</a>
-                                    </c:if>   
-                                    <c:if test="${sessionScope.Account.getRoleID() == 3}">
-                                        <a class="dropdown-item" href="<%=request.getContextPath()%>/viewCV?mentorID=${Account.ID}">Profile</a>
-                                    </c:if>   
-                                </c:if>  
-
-
-                                <c:if test="${sessionScope.Account != null}">
-                                    <a class="dropdown-item" href="<%=request.getContextPath()%>/views/user/changePassword.jsp">Change password</a>
-                                </c:if>  
+                        </c:if>
+                        <c:if test="${sessionScope.Account == null || sessionScope.Account.roleID == 4}">
+                            </li>                 
+                            <li class="nav-item dropdown view ">
+                                <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown"
+                                   aria-haspopup="true" aria-expanded="false">
+                                    <i class="ti ti-user" aria-hidden="true"></i>
+                                </a>
+                        </c:if>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="left:-50px">
+                            <c:if test="${sessionScope.Account != null}">
+                                <c:if test="${sessionScope.Account.getRoleID() == 2}">
+                                    <a class="dropdown-item" href="<%=request.getContextPath()%>/viewMenteeProfile">Profile</a>
+                                </c:if>   
+                                <c:if test="${sessionScope.Account.getRoleID() == 3}">
+                                    <a class="dropdown-item" href="<%=request.getContextPath()%>/views/user/profile.jsp">Profile</a>
+                                </c:if>   
+                            </c:if>  
+                            <c:if test="${sessionScope.Account != null}">
+                                <a class="dropdown-item" href="<%=request.getContextPath()%>/views/user/changePassword.jsp">Change password</a>
+                            </c:if>  
+                            <c:if test="${sessionScope.Account == null}">
+                                <a class="dropdown-item" href="<%=request.getContextPath()%>/views/user/login.jsp">Login</a>
                                 <a class="dropdown-item" href="<%=request.getContextPath()%>/views/user/signup.jsp">Register</a>
-
-                                <c:if test="${sessionScope.Account == null}">
-                                    <a class="dropdown-item" href="<%=request.getContextPath()%>/views/user/login.jsp">Login</a>
-                                </c:if>
-                                <c:if test="${sessionScope.Account != null}">
-                                    <a class="dropdown-item" href="<%=request.getContextPath()%>/logout">Logout</a>
-                                </c:if>
-
-
-                            </div>
+                            </c:if>
+                            <c:if test="${sessionScope.Account != null}">
+                                <a class="dropdown-item" href="<%=request.getContextPath()%>/logout">Logout</a>
+                            </c:if>
+                        </div>
                         </li>
                     </ul>
                 </div>
@@ -182,37 +195,37 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script>
 
-                                $(document).ready(function () {
-                                    $('#notification').click(function (e) {
-                                        e.preventDefault();
-                                        $.ajax({
-                                            url: '/Happy_Programming/subNotification',
-                                            type: 'GET',
+                                    $(document).ready(function () {
+                                        $('#notification').click(function (e) {
+                                            e.preventDefault();
+                                            $.ajax({
+                                                url: '/Happy_Programming/subNotification',
+                                                type: 'GET',
 
-                                            data: {
+                                                data: {
 
-                                            }
-                                        }).done(function (data) {
+                                                }
+                                            }).done(function (data) {
 
-                                            var row = document.getElementById("someNotify");
-                                            row.innerHTML = data;
+                                                var row = document.getElementById("someNotify");
+                                                row.innerHTML = data;
 
-                                            var row1 = document.getElementById("amountNew");
-                                            row1.innerHTML = 0;
+                                                var row1 = document.getElementById("amountNew");
+                                                row1.innerHTML = 0;
 
+
+                                            });
 
                                         });
-
                                     });
-                                });
 
-                                function Show() {
+                                    function Show() {
 
-                                    if (document.getElementById('someNotify').style.display === "block")
-                                        document.getElementById('someNotify').style.display = "none";
-                                    else
-                                        document.getElementById('someNotify').style.display = "block";
-                                }
+                                        if (document.getElementById('someNotify').style.display === "block")
+                                            document.getElementById('someNotify').style.display = "none";
+                                        else
+                                            document.getElementById('someNotify').style.display = "block";
+                                    }
 
 
 

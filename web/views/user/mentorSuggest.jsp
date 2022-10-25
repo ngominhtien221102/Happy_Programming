@@ -14,9 +14,12 @@
         .card-img-top{
             height: 300px;
             object-fit: cover;
+            border-top-left-radius:10px;
+            border-top-right-radius:10px;
         }
         .card{
-            height: 581px;
+            height: 570px;
+            border-radius:10px;
         }
         .card-body{
             height: 100%;
@@ -24,6 +27,7 @@
         .checked {
             color: orange;
         }
+        
     </style>
     <body>
         <!-- header -->
@@ -60,9 +64,9 @@
                         <div class="row justify-content-center">
                             <c:forEach items="${ids}" var="id">
                                 <!-- course item -->
-                            <div class="col-lg-4 col-sm-6 mb-5">
-                                <div class="card p-0 border-primary rounded-0 hover-shadow">
-                                    <img class="card-img-top rounded-0" src="<%=request.getContextPath()%>/img/avatar/p${id}.png" alt="">
+                            <div class="suggest col-lg-4 col-sm-6 mb-5">
+                                <div class="card p-0 border-primary hover-shadow">
+                                    <div><img class="card-img-top" src="<%=request.getContextPath()%>/img/avatar/p${id}.png" alt=""></div>
                                     <div class="card-body">
                                         <ul class="list-inline mb-2">
                                             <li class="list-inline-item"><i class="ti-calendar mr-1 text-color"></i>${pfs.get(id).dob}</li>

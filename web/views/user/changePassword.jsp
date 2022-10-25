@@ -10,7 +10,12 @@
         <!-- /header -->
 
         <div id="content" class="row" style="padding-top: 50px">
-            <%@include file="sidebar.jsp" %>
+            <c:if test="${Account.roleID == 3}">
+                <%@include file="../mentors/mentorSidebar.jsp" %>
+            </c:if>
+            <c:if test="${Account.roleID == 2}">
+                <%@include file="../user/sidebar.jsp" %>
+            </c:if>
 
             <div class="col-10">
                 <section class="section">
@@ -36,7 +41,7 @@
             </div>
         </div>
 
-        <%@include file="footer.jsp" %>
+
         <!-- /footer -->
 
         <!-- jQuery -->

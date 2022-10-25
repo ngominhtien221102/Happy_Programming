@@ -47,4 +47,5 @@ public interface IInvitationService {
 
     List<Integer> getTotalClosedPerMonth();
 
+    List<Invitation> getInvitationByMentorId(int mentorId, List<Invitation> list);
 }

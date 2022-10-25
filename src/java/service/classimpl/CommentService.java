@@ -59,11 +59,9 @@ public class CommentService implements ICommentService {
         Comment cmt = getCommentById(u.getID(), list);
         cmt.setMentorID(u.getMentorID());
         cmt.setMenteeID(u.getMenteeID());
-        cmt.setSkillID(u.getSkillID());
         cmt.setCreatedAt(u.getCreatedAt());
         cmt.setContent(u.getContent());
         return "OK";
-
 
     }
 
@@ -74,7 +72,14 @@ public class CommentService implements ICommentService {
         return "OK";
     }
 
-    
-
-
 }
+
+//class Main{
+//    public static void main(String[] args) {
+//        ICommentService ser = new CommentService();
+//        List<Comment> listCmt = ser.getList();
+//        for (Comment comment : listCmt) {
+//            System.out.println("comment" + comment.getCreatedAt());
+//        }
+//    }
+//}
