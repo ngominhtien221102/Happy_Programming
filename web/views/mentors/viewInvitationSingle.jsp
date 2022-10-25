@@ -120,7 +120,7 @@
     </div>
 </div>
 <!-- footer -->
-<%@include file="footer.jsp" %>
+
 <!-- /footer -->
 <!-- jQuery -->
 <%@include file="../user/scriptJS.jsp" %> 

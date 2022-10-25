@@ -67,7 +67,7 @@ public class SubNotificationController extends HttpServlet {
             throws ServletException, IOException {
         PrintWriter out = response.getWriter();
         HttpSession ses = request.getSession();
-        String href;
+        String href, content;
         User u = (User) ses.getAttribute("Account");
         int num = 0;
 
@@ -101,15 +101,19 @@ public class SubNotificationController extends HttpServlet {
             switch (n.getItems().get(i).getType()) {
                 case "request":
                     href = "/singleRequest?requestId=";
+                    content = " sent " + n.getItems().get(i).getType() + " to you <br><br>";
                     break;
                 case "response":
                     href = "/singleRequest?requestId=";
+                    content = " sent " + n.getItems().get(i).getType() + " to you <br><br>";
                     break;
-                case "invite":
-                    href = "";
-                    break;    
+                case "invitation":
+                    href = "/invSingle?id=";
+                    content = " sent " + n.getItems().get(i).getType() + " to you <br><br>";
+                    break;
                 default:
-                    href = "";
+                    href = "/singleInvite?invitationId=";
+                    content = " has " + n.getItems().get(i).getType() + " your invitation <br><br>";
                     break;
             }
             String classStr = count < num ? "unread" : "";
@@ -119,10 +123,9 @@ public class SubNotificationController extends HttpServlet {
                     + "<div><img class='senderAvar rounded-circle mr-2' "
                     + "src='" + request.getContextPath()
                     + "/img/avatar/" + profile.getAvatar() + "'"
-                    + "onerror=\"this.src='"+request.getContextPath()+"/img/avatar/default.png'\"/></div><div>"
+                    + "onerror=\"this.src='" + request.getContextPath() + "/img/avatar/default.png'\"/></div><div>"
                     + profile.getFirstName() + " " + profile.getLastName()
-                    + " sent " + n.getItems().get(i).getType() + " to you <br><br>"
-                    + n.getItems().get(i).getCreateAt() + "</div></div></a>");
+                    + content + n.getItems().get(i).getCreateAt() + "</div></div></a>");
             count++;
         }
 

@@ -65,13 +65,18 @@
                                         <c:forEach items = "${sessionScope.listUserProfile}" var="u">
                                             <c:if test="${u.ID==n.senderID}">
                                                 <td>
-                                                    <a  href="<c:if test="${n.type.equals('request')||n.type.equals('response')}"><%=request.getContextPath()%>/singleRequest?requestId=${n.ID}</c:if><c:if test="${n.type.equals('invite')}"><%=request.getContextPath()%>/</c:if>">
+                                                    <a  href="<c:if test="${n.type.equals('request')||n.type.equals('response')}"><%=request.getContextPath()%>/singleRequest?requestId=${n.ID}</c:if><c:if test="${n.type.equals('invite')}"><%=request.getContextPath()%>/invSingle?id=${n.ID}</c:if><c:if test="${n.type.equals('accepted')||n.type.equals('rejected')||n.type.equals('closed')}"><%=request.getContextPath()%>/singleInvite?invitationId=${n.ID}</c:if>">
                                                             <div class="noti-detail ">
                                                                 <div>
                                                                         <img src="<%=request.getContextPath()%>/img/avatar/${u.avatar}" 
                                                                      onerror="this.src='<%=request.getContextPath()%>/img/avatar/default.png'" 
                                                                      class="rounded-circle mr-2 avatar"/>
-                                                                ${u.firstName} ${u.lastName} sent ${n.type} to you
+                                                                <c:if  test="${n.type!='invitation'&&n.type!='request'&&n.type!='response'}">
+                                                                    ${u.firstName} ${u.lastName} has ${n.type} your invitation
+                                                                </c:if>
+                                                                <c:if  test="${n.type=='invitation' || n.type=='request'||n.type=='response'}">
+                                                                    ${u.firstName} ${u.lastName} sent ${n.type} to you
+                                                                </c:if>
                                                             </div>
                                                             <div class="createAt unread-table">
                                                                 ${n.createAt}
@@ -90,13 +95,18 @@
                                         <c:forEach items = "${sessionScope.listUserProfile}" var="u">
                                             <c:if test="${u.ID==n.senderID}">
                                                 <td>
-                                                    <a  href="<c:if test="${n.type.equals('request')||n.type.equals('response')}"><%=request.getContextPath()%>/singleRequest?requestId=${n.ID}</c:if><c:if test="${n.type.equals('invite')}"><%=request.getContextPath()%>/</c:if>">
+                                                    <a  href="<c:if test="${n.type.equals('request')||n.type.equals('response')}"><%=request.getContextPath()%>/singleRequest?requestId=${n.ID}</c:if><c:if test="${n.type.equals('invite')}"><%=request.getContextPath()%>/invSingle?id=${n.ID}</c:if><c:if test="${n.type.equals('accepted')||n.type.equals('rejected')||n.type.equals('closed')}"><%=request.getContextPath()%>/singleInvite?invitationId=${n.ID}</c:if>">
                                                             <div class="noti-detail">
                                                                 <div>
                                                                         <img src="<%=request.getContextPath()%>/img/avatar/${u.avatar}" 
                                                                      onerror="this.src='<%=request.getContextPath()%>/img/avatar/default.png'" 
                                                                      class="rounded-circle mr-2 avatar"/>
-                                                                ${u.firstName} ${u.lastName} sent ${n.type} to you
+                                                                <c:if  test="${n.type!='invitation'&&n.type!='request'&&n.type!='response'}">
+                                                                    ${u.firstName} ${u.lastName} has ${n.type} your invitation
+                                                                </c:if>
+                                                                <c:if  test="${n.type=='invitation' || n.type=='request'||n.type=='response'}">
+                                                                    ${u.firstName} ${u.lastName} sent ${n.type} to you
+                                                                </c:if>
                                                             </div>
 
                                                             <div class="createAt">
@@ -118,13 +128,18 @@
                                         <c:forEach items = "${sessionScope.listUserProfile}" var="u">
                                             <c:if test="${u.ID==n.senderID}">
                                                 <td>
-                                                    <a  href="<c:if test="${n.type.equals('request')||n.type.equals('response')}"><%=request.getContextPath()%>/singleRequest?requestId=${n.ID}</c:if><c:if test="${n.type.equals('invite')}"><%=request.getContextPath()%>/</c:if>">
+                                                    <a  href="<c:if test="${n.type.equals('request')||n.type.equals('response')}"><%=request.getContextPath()%>/singleRequest?requestId=${n.ID}</c:if><c:if test="${n.type.equals('invitation')}"><%=request.getContextPath()%>/invSingle?id=${n.ID}</c:if><c:if test="${n.type.equals('accepted')||n.type.equals('rejected')||n.type.equals('closed')}"><%=request.getContextPath()%>/singleInvite?invitationId=${n.ID}</c:if>">
                                                             <div class="noti-detail">
                                                                 <div>
                                                                         <img src="<%=request.getContextPath()%>/img/avatar/${u.avatar}" 
                                                                      onerror="this.src='<%=request.getContextPath()%>/img/avatar/default.png'" 
                                                                      class="rounded-circle mr-2 avatar"/>
-                                                                ${u.firstName} ${u.lastName} sent ${n.type} to you
+                                                                <c:if  test="${n.type!='invitation'&&n.type!='request'&&n.type!='response'}">
+                                                                    ${u.firstName} ${u.lastName} has ${n.type} your invitation
+                                                                </c:if>
+                                                                <c:if  test="${n.type=='invitation' || n.type=='request'||n.type=='response'}">
+                                                                    ${u.firstName} ${u.lastName} sent ${n.type} to you
+                                                                </c:if>
                                                             </div>
                                                             <div class="createAt">
                                                                 ${n.createAt}
@@ -140,8 +155,8 @@
 
                                 </c:forEach>
                             </c:if>
-                                    <c:if test="${listNotify.size()==0}"><tr><td class="">You don't have any notifications</td></tr></c:if>
-                                    </tbody>
+                            <c:if test="${listNotify.size()==0}"><tr><td class="">You don't have any notifications</td></tr></c:if>
+                                </tbody>
                             </table>
                         </div>
                     </section>

@@ -8,10 +8,12 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.time.LocalDate;
 
 import java.util.List;
 import model.Invitation;
@@ -78,7 +80,7 @@ public class UpdateStatusController extends HttpServlet {
         int nrpp;
         if (getNrpp != null || "".equals(getNrpp)) {
             nrpp = Integer.parseInt(getNrpp);
-        }else{
+        } else {
             nrpp = 3;
         }
 
@@ -87,41 +89,111 @@ public class UpdateStatusController extends HttpServlet {
                 invID = Integer.parseInt(invIdRaw.trim());
                 //lay invitation de update
                 Invitation inv = in.getInvitationById(invID, inlist);
+                // luu thong tin len cookie
+                Cookie[] arr = request.getCookies();
+                int menteeID = inv.getMenteeID();
+                int mentorID = inv.getMentorID();
+                LocalDate createAt = LocalDate.now();
+                String txt = "";
+                String num = "0";
+                String cookieNotifyName = "notification" + menteeID;
+                String cookieNewNotifyName = "newNotification" + menteeID;
+
+                // xu ly cookie newNotify
+                if (arr != null) {
+                    for (Cookie o : arr) {
+                        if (o.getName().equals(cookieNewNotifyName)) {
+                            num = o.getValue();
+                            o.setMaxAge(0);
+                            response.addCookie(o);
+                        }
+                    }
+                }
+                int numNewNotify = Integer.parseInt(num) + 1;
+                Cookie c1 = new Cookie(cookieNewNotifyName, numNewNotify + "");
+                c1.setMaxAge(60 * 60 * 24 * 2);
+                response.addCookie(c1);
+                // lay du lieu notification vao txt
+
+                if (arr != null) {
+                    for (Cookie o : arr) {
+                        if (o.getName().equals(cookieNotifyName)) {
+                            txt += o.getValue();
+                            o.setMaxAge(0);
+                            response.addCookie(o);
+                        }
+                    }
+                }
+
                 if (type.equals("0")) {
+                    //Reject
                     inv.setStatusID(4);
                     in.update(inv, inlist);
                     session.setAttribute("listInv", inlist);
-                    if (page != null ) {
+                    if (txt.isEmpty()) {
+                        txt = invID + ":" + "rejected" + ":" + mentorID + ":" + createAt;
+                    } else {
+                        txt = txt + "/" + invID + ":" + "rejected" + ":" + mentorID + ":" + createAt;
+                    }
+                    Cookie c = new Cookie(cookieNotifyName, txt);
+                    c.setMaxAge(60 * 60 * 24 * 2);
+                    response.addCookie(c);
+                    if (page != null) {
                         response.sendRedirect(request.getContextPath() + "/invSingle?id=" + invID);
-                    }else{
+                    } else {
                         response.sendRedirect(request.getContextPath() + "/invitationMentor?nrpp=" + nrpp);
                     }
                 }
                 if (type.equals("1")) {
+                    //accept
                     inv.setStatusID(1);
                     in.update(inv, inlist);
                     session.setAttribute("listInv", inlist);
-                    if (page != null ) {
+                    //set cookie
+                    if (txt.isEmpty()) {
+                        txt = invID + ":" + "accepted" + ":" + mentorID + ":" + createAt;
+                    } else {
+                        txt = txt + "/" + invID + ":" + "accepted" + ":" + mentorID + ":" + createAt;
+                    }
+                    Cookie c = new Cookie(cookieNotifyName, txt);
+                    c.setMaxAge(60 * 60 * 24 * 2);
+                    response.addCookie(c);
+                    if (page != null) {
                         response.sendRedirect(request.getContextPath() + "/invSingle?id=" + invID);
-                    }else{
+                    } else {
                         response.sendRedirect(request.getContextPath() + "/invitationMentor?nrpp=" + nrpp);
                     }
                 }
                 if (type.equals("2")) {
+                    //close
                     inv.setStatusID(5);
                     in.update(inv, inlist);
                     session.setAttribute("listInv", inlist);
-                    if (page != null ) {
+                    //set cookie
+                    if (txt.isEmpty()) {
+                        txt = invID + ":" + "closed" + ":" + mentorID + ":" + createAt;
+                    } else {
+                        txt = txt + "/" + invID + ":" + "closed" + ":" + mentorID + ":" + createAt;
+                    }
+                    Cookie c = new Cookie(cookieNotifyName, txt);
+                    c.setMaxAge(60 * 60 * 24 * 2);
+                    response.addCookie(c);
+                    if (page != null) {
                         response.sendRedirect(request.getContextPath() + "/invSingle?id=" + invID);
-                    }else{
+                    } else {
                         response.sendRedirect(request.getContextPath() + "/invitationMentor?nrpp=" + nrpp);
                     }
                 }
-            } catch (Exception e) {
+            } catch (IOException | NumberFormatException e) {
             }
         } else {
             response.sendRedirect(request.getContextPath() + "/invitationMentor");
         }
+    }
+
+    // ham luu thong tin cookie
+    private void setNotification() {
+
     }
 
     /**

@@ -325,7 +325,7 @@
             </section>
 
             <!-- footer -->
-            <%@include file="../user/footer.jsp" %>
+            
             <!-- /footer -->
 
             <!-- jQuery -->
