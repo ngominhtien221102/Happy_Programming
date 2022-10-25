@@ -79,8 +79,8 @@
                                     <c:if test="${sessionScope.Account.getRoleID() == 2}">
                                         <a class="dropdown-item" href="<%=request.getContextPath()%>/viewMenteeProfile">Profile</a>
                                     </c:if>   
-                                    <c:if test="${sessionScope.Account.getRoleID() == 3}">
-                                        <a class="dropdown-item" href="<%=request.getContextPath()%>/viewCV?mentorID=${Account.ID}">Profile</a>
+                                   <c:if test="${sessionScope.Account.roleID == 3}">
+                                        <a class="dropdown-item" href="<%=request.getContextPath()%>/mentorViewCV">Profile</a>
                                     </c:if>   
                                 </c:if>  
 

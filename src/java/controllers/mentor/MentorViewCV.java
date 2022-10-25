@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controllers.common;
+package controllers.mentor;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -15,7 +15,6 @@ import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
 import model.Address;
 import model.Invitation;
 import model.MentorCV;
@@ -36,10 +35,10 @@ import service.classimpl.UserProfileService;
 
 /**
  *
- * @author Admin
+ * @author ADMIN
  */
-@WebServlet(name = "ViewCVController", urlPatterns = {"/viewCV"})
-public class ViewCVController extends HttpServlet {
+@WebServlet(name = "ViewCV", urlPatterns = {"/mentorViewCV"})
+public class MentorViewCV extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -58,10 +57,10 @@ public class ViewCVController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet ViewCVController</title>");
+            out.println("<title>Servlet ViewCV</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet ViewCVController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ViewCV at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -76,41 +75,26 @@ public class ViewCVController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    
     IRateService ra = new RateService();
-
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession ses = request.getSession();
-        List<Skill> listSkill = (List<Skill>) ses.getAttribute("listSkill");
+       HttpSession ses = request.getSession();
         List<MentorCV> listCV = (List<MentorCV>) ses.getAttribute("listMentorCV");
         List<UserProfile> profiles = (List<UserProfile>) ses.getAttribute("listUserProfile");
         List<Address> addList = (List<Address>) ses.getAttribute("listAddress");
         List<Rate> rateList = (List<Rate>) ses.getAttribute("listRate");
         List<Invitation> invList = (List<Invitation>) ses.getAttribute("listInv");
 
-        ISkillService skillSer = new SkillService();
         IMentorService mentorSer = new MentorService();
-        IUserProfileService pfSer = new UserProfileService();
         IUserProfileService uSer = new UserProfileService();
         IAddressService ia = new AddressService();
 
-        String id_raw = request.getParameter("mentorID");
         User u = (User) ses.getAttribute("Account");
 
         try {
-            int id = Integer.parseInt(id_raw);
-
-            if (u != null) {
-                int menteeId = u.getID();
-                List<Invitation> invListAcept = new ArrayList<>();
-                for (Invitation invitation : invList) {
-                    if (invitation.getStatusID() == 1 && invitation.getMentorID() == id && invitation.getMenteeID() == menteeId) {
-                        invListAcept.add(invitation);
-                    }
-                }
-                request.setAttribute("invListAcept", invListAcept);
-            }
+            int id = u.getID();
 
             UserProfile mentorProfile = uSer.getUserProfileById(id, profiles);
             MentorCV mentorCV = mentorSer.getCVById(id, listCV);
@@ -145,6 +129,13 @@ public class ViewCVController extends HttpServlet {
                 request.setAttribute("one", 0);
             }
 
+            if(rateTotal==0){
+                request.setAttribute("five", 0);
+                request.setAttribute("four", 0);
+                request.setAttribute("three", 0);
+                request.setAttribute("two", 0);
+                request.setAttribute("one", 0);
+            }
             request.setAttribute("rateHm", rateHm);
             request.setAttribute("five", five * 100 / rateTotal);
             request.setAttribute("four", four * 100 / rateTotal);
@@ -152,12 +143,13 @@ public class ViewCVController extends HttpServlet {
             request.setAttribute("two", two * 100 / rateTotal);
             request.setAttribute("one", one * 100 / rateTotal);
 
-            request.getRequestDispatcher("views/common/viewMentorCV.jsp").forward(request, response);
+            request.getRequestDispatcher("views/mentors/viewMentorCV.jsp").forward(request, response);
 
         } catch (Exception e) { //id mentor truyền vào không hợp lệ => home
             response.sendRedirect("views/user/index.jsp");
         }
     }
+    
 
     /**
      * Handles the HTTP <code>POST</code> method.
@@ -170,7 +162,7 @@ public class ViewCVController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        processRequest(request, response);
     }
 
     /**

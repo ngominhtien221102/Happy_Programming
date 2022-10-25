@@ -20,7 +20,7 @@
 
         <!-- Nav Item - Add product -->
         <li class="nav-item">
-            <a class="nav-link collapsed" href="<%=request.getContextPath()%>/viewCV?mentorID=${Account.ID}" >
+            <a class="nav-link collapsed" href="<%=request.getContextPath()%>/mentorViewCV" >
                 <span>Profile</span>
             </a>
         </li>
