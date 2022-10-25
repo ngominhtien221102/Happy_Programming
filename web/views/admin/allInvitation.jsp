@@ -6,7 +6,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
-    <%@include file="headCSS2.jsp" %>
+    <%@include file="../user/headCSS2.jsp" %>
     <style>
         .card-title,.list-inline-item{
             white-space: nowrap;
@@ -98,6 +98,55 @@
         .pagination{
             margin: 30px 0;
             float: right;
+        }
+
+        .pagination a{
+            border: #ced4da solid 1px;
+            padding: 10px;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+        .pagination .nrpp{
+            color: #ffbc3b;
+            background: #f3f3f3;
+            border: #ced4da solid 1px;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            height: 40px;
+
+        }
+        .pagination a:hover, .pagination a.active{
+            background-color:#e9ecef;
+            color: #ffbc3b;
+        }
+        .pagination{
+            margin: 30px 0;
+            float: right;
+        }
+        #nrpp{
+            display: none;
+            flex-flow: column;
+            position: absolute;
+            top:40px;
+            background: #fff;
+            width: 100%;
+            border: 1px solid;
+        }
+        #nrpp a{
+            padding: 5px;
+            margin-right: 0;
+            border: 0;
+            border-radius: 0;
+        }
+        #nrpp a:hover, .selected{
+            background:hsl(214, 100%, 59%) ;
+            color: #fff ;
+        }
+        .select-nrpp{
+            display: flex;
+            flex-flow: column;
+            position: relative
         }
 
         .static-number{
