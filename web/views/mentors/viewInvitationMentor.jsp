@@ -54,7 +54,7 @@
 
     </style>
     <body>
-        <%@include file= "header.jsp" %>
+        <%@include file= "../user/header.jsp" %>
 
 
         <div id="content" class="row" style="padding-top: 50px;  min-height: 800px">
