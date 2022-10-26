@@ -278,7 +278,7 @@
                                         <c:if test="${pageIf.cp!=1 && pageIf.end!=null}">
                                             <a href="<%=request.getContextPath()%>/allMentee?page=1&nrpp=${nrpp}<c:if test="${status != null}">&sort=${status}</c:if><c:if test="${search != null}">&search=${search}</c:if>"><<</a>  
                                         </c:if>      
-                                        <c:forEach begin="${1}" end="${pageIf.np}" var="i">
+                                        <c:forEach begin="${pageIf.cp>2?pageIf.cp-2:1}" end="${pageIf.cp+2>pageIf.np?pageIf.np:pageIf.cp+2}" var="i">
                                             <a class="${i==pageIf.cp?"active":""}" href="<%=request.getContextPath()%>/allMentee?page=${i}&nrpp=${nrpp}<c:if test="${status != null}">&sort=${status}</c:if><c:if test="${search != null}">&search=${search}</c:if>">${i}</a>
                                         </c:forEach>
                                         <c:if test="${pageIf.cp!=pageIf.np && pageIf.end!=0}">

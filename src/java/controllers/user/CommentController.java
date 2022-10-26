@@ -75,6 +75,7 @@ public class CommentController extends HttpServlet {
         LocalDate curDate = LocalDate.now();
         String createAt = curDate.toString();
 
+
         try {
             int mentorId = Integer.parseInt(mentorId_raw);
             cmt.insert(new Comment(0, mentorId, menteeId, createAt, content), cmtList);
@@ -85,6 +86,7 @@ public class CommentController extends HttpServlet {
             request.getRequestDispatcher("views/common/viewMentorCV.jsp").forward(request, response);
            
         }
+
     }
 
     /**
