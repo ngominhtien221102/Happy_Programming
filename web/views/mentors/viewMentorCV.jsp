@@ -69,7 +69,7 @@
     </style>
     <body>
         <!-- header -->
-        <%@include file="../mentors/header.jsp" %>
+        <%@include file="../user/header.jsp" %>
         <!-- /header -->
         <div>
             <!-- teachers -->
@@ -83,11 +83,8 @@
                             <div class="row gutters-sm">
                                 <div class="col-md-4 mb-3">
                                     <div class="d-flex flex-column align-items-center text-center">
-                                        <img src="<%=request.getContextPath()%>/img/avatar/p${Account.ID}.png" onerror="this.src='<%=request.getContextPath()%>/img/avatar/default.png'"alt="Admin" width="300" height="290">
-                                        <div class="mt-3">
-                                            <h4>${mentorProfile.firstName} ${mentorProfile.lastName}</h4>
-                                        </div>
-
+                                        <img src="<%=request.getContextPath()%>/img/avatar/p${Account.ID}.png" onerror="this.src='<%=request.getContextPath()%>/img/avatar/default.png'"alt="Admin" width="300" height="335">
+                                        
                                         <a href="<%=request.getContextPath()%>/updateCV">
                                             <input type="submit" value="Update" class="btn btn-primary btn-user btn-block" style="padding: 10px 120px"/></a>
 
@@ -306,7 +303,7 @@
                                                         <c:forEach items="${listUserProfile}" var="user">
                                                             <c:if test="${user.ID == cmt.menteeID}">
                                                                 <p>
-                                                                    <a class="float-left"><strong>${user.lastName} ${user.firstName}</strong></a>
+                                                                    <a class="float-left"><strong>${user.firstName}${user.lastName} </strong></a>
                                                                 </p>
                                                             </c:if>
                                                         </c:forEach>
@@ -328,7 +325,7 @@
             </section>
 
             <!-- footer -->
-            <%@include file="../user/footer.jsp" %>
+            
             <!-- /footer -->
 
             <!-- jQuery -->

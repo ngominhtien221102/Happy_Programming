@@ -54,7 +54,7 @@
 
     </style>
     <body>
-        <%@include file= "header.jsp" %>
+        <%@include file= "../user/header.jsp" %>
 
 
         <div id="content" class="row" style="padding-top: 50px;  min-height: 800px">
@@ -62,7 +62,6 @@
 
             <div class="col-10">
                 <section class="section" >
-
                     <div class="container">
                         <h2>All Invitation</h2>
                         <div class="row">
@@ -154,7 +153,7 @@
 
 
         <!-- footer -->
-        <%@include file="footer.jsp" %>
+        
         <!-- /footer -->
 
         <!-- jQuery -->

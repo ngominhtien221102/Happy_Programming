@@ -35,7 +35,7 @@
     </style>
     <body>
         <!-- header -->
-        <%@include file="header.jsp" %>
+        <%@include file="../user/header.jsp" %>
         <!-- /header -->
         <div id="content" class="row" style="padding-top: 50px; ">
             <%@include file="mentorSidebar.jsp" %>
@@ -120,7 +120,7 @@
     </div>
 </div>
 <!-- footer -->
-<%@include file="footer.jsp" %>
+
 <!-- /footer -->
 <!-- jQuery -->
 <%@include file="../user/scriptJS.jsp" %> 

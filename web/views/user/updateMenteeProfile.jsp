@@ -35,17 +35,20 @@
                         <form class="user" action="<%=request.getContextPath()%>/updateProfile" method="POST" enctype="multipart/form-data">      
                             <!-- Full Name -->
                             <div class="form-group row" style="padding-bottom: 20px;" >
+                                <h5>Last Name:</h5>
                                 <input type="text" class="form-control form-control-user"
                                        placeholder="LastName" name="lastName"  value="${u.getLastName()}" required>
                             </div>
 
                             <div class="form-group row" style="padding-bottom: 20px;" >
+                                 <h5>First Name:</h5>
                                 <input type="text" class="form-control form-control-user"
                                        placeholder="FirstName" name="firstName" value="${u.getFirstName()}" required >
                             </div>
 
                             <!-- DOB -->
                             <div class="form-group row" style="padding-bottom: 20px;" >
+                                <h5>DOB:</h5>
                                 <input type="date" class="form-control form-control-user"
                                        placeholder="Date Of Birth" name="dob" value="${u.getDob()}" required>
                             </div>
@@ -70,6 +73,7 @@
                             <p style="color:red">${Error1}</p>   
                             <!--Adress-->
                             <div class="form-group row" style="padding-bottom: 20px;">
+                                
                                 <!--Province--> 
                                 <div class="input-group col-sm-4">
                                     <select id="province" name="province" class="form-control form-control-user" required="" style="height: 60px">

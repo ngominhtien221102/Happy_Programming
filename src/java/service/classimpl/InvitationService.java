@@ -47,7 +47,7 @@ public class InvitationService implements IInvitationService {
         // Neu la accepted,processing (1,2) thi ko cho send
         for (int i = list.size() - 1; i >= 0; i--) {
             if (list.get(i).getMenteeID() == u.getMenteeID() && list.get(i).getMentorID() == u.getMentorID() && list.get(i).getSkillID() == u.getSkillID()) {
-                if (list.get(i).getStatusID() == 3 || list.get(i).getStatusID() == 4) {
+                if (list.get(i).getStatusID() == 3 || list.get(i).getStatusID() == 4 || list.get(i).getStatusID() == 5) {
                     break;
                 } else {
                     if (list.get(i).getStatusID() == 1) {
@@ -224,7 +224,13 @@ public class InvitationService implements IInvitationService {
 
     @Override
     public List<Invitation> getInvitationByMentorId(int mentorId, List<Invitation> list) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+       List<Invitation> invList = new ArrayList<>();
+        for (Invitation invitation : list) {
+            if (invitation.getMentorID() == mentorId) {
+                invList.add(invitation);
+            }
+        }
+        return invList;
     }
     
     
