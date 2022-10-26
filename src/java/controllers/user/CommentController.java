@@ -75,16 +75,16 @@ public class CommentController extends HttpServlet {
         LocalDate curDate = LocalDate.now();
         String createAt = curDate.toString();
 
-        try {
-            int mentorId = Integer.parseInt(mentorId_raw);
-            cmt.insert(new Comment(0, mentorId, menteeId, 1, createAt, content), cmtList);
-            cmtList = cmt.getList();
-            ses.setAttribute("listComment", cmtList);
-            request.getRequestDispatcher("/viewCV?mentorID=" + mentorId).forward(request, response);
-        } catch (Exception e) {
-            request.getRequestDispatcher("views/common/viewMentorCV.jsp").forward(request, response);
-           
-        }
+//        try {
+//            int mentorId = Integer.parseInt(mentorId_raw);
+//            cmt.insert(new Comment(0, mentorId, menteeId, 1, createAt, content), cmtList);
+//            cmtList = cmt.getList();
+//            ses.setAttribute("listComment", cmtList);
+//            request.getRequestDispatcher("/viewCV?mentorID=" + mentorId).forward(request, response);
+//        } catch (Exception e) {
+//            request.getRequestDispatcher("views/common/viewMentorCV.jsp").forward(request, response);
+//           
+//        }
     }
 
     /**

@@ -20,14 +20,14 @@
             outline: none;
             padding: 0.8em 0;
             color: #A5A5A5;
-            width: 20%;
+            width: 60%;
             -moz-transition: width 0.5s ease-out;
             -webkit-transition: width 0.5s ease-out;
             transition: width 0.5s ease-out;
             flex-wrap: unset;
         }
         .search input[type="text"]:focus {
-            width: 25%;
+            width: 70%;
             -moz-transition: width 0.5s ease-out;
             -webkit-transition: width 0.5s ease-out;
             transition: width 0.5s ease-out;
@@ -45,7 +45,7 @@
             background-color: #ffbc3b;
             color: #fff;
         }
-                   .pagination a{
+        .pagination a{
             border: #ced4da solid 1px;
             padding: 10px;
             border-radius: 5px;
@@ -88,7 +88,11 @@
             color: #fff ;
         }
 
-
+        .select-nrpp{
+            display: flex;
+            flex-flow: column;
+            position: relative
+        }
 
     </style>
     <body>
@@ -97,78 +101,84 @@
         <!-- /header -->
         <!-- page title -->
         <div>
-        <section class="page-title-section overlay" data-background="images/backgrounds/page-title.jpg">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-8">
-                        <ul class="list-inline custom-breadcrumb">
-                            <li class="list-inline-item"><a class="h2 text-primary font-secondary" href="<%=request.getContextPath()%>/views/common/blog.jsp">Our Blog</a></li>
-                            <li class="list-inline-item text-white h3 font-secondary"></li>
-                        </ul>
-                        <p class="text-lighten">Our courses offer a good compromise between the continuous assessment favoured by some universities and the emphasis placed on final exams by others.</p>
+            <section class="page-title-section overlay" data-background="images/backgrounds/page-title.jpg">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <ul class="list-inline custom-breadcrumb">
+                                <li class="list-inline-item"><a class="h2 text-primary font-secondary" href="<%=request.getContextPath()%>/views/common/blog.jsp">Our Blog</a></li>
+                                <li class="list-inline-item text-white h3 font-secondary"></li>
+                            </ul>
+                            <p class="text-lighten">Our courses offer a good compromise between the continuous assessment favoured by some universities and the emphasis placed on final exams by others.</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </section>
-        <!-- /page title -->
+            </section>
+            <!-- /page title -->
 
-        <!-- blogs -->
-        <div  class="card-block" style="padding-top: 2%; display: flex">
-            <div class="search" style="margin-left:15%; min-width: 50%"> 
-                <form action="<%=request.getContextPath()%>/allPost" method="Get" class="row">
-                    <input  type="text" name="search" value="${search}" placeholder="Search Post">
-                    <button type="submit"><i class="ti ti-search" aria-hidden="true"></i></button>
-                </form> 
-            </div>
-            <span><select class="select"  style=" margin-top: 1.6%; margin-right: 15%; position: absolute; height: 30px; font-family: 'Open Sans', sans-serif ">
-                    <option >Default Sort</option>
-                    <option>Sort By Title</option>
-                    <option>Sort By Date</option>
-                </select></span>
-
-        </div>
-        <section class="section">
+            <!-- blogs -->
             <div class="container">
-                <div class="row">
-                    <c:forEach items="${postList}" var="i" begin="${pageIf.start}" end="${pageIf.end}">
-                        <article class="col-lg-4 col-sm-6 mb-5">
-                            <div class="card rounded-0 border-bottom border-primary border-top-0 border-left-0 border-right-0 hover-shadow">
-                                <div class="card-body">
+                <div  class="card-block" style="padding-top: 2%; display: flex">
+                <div style="width: 300px">
+                    <div class="search" style="margin-left:15%;"> 
+                    <form action="<%=request.getContextPath()%>/allPost" method="Get" class="row">
+                        <input  type="text" name="search" value="${search}" placeholder="Search Post">
+                        <button type="submit"><i class="ti ti-search" aria-hidden="true"></i></button>
+                    </form> 
+                </div>
+                </div>
+                
+                <span><select class="select"  style=" margin-top: 1.6%; margin-left: 80px; position: absolute; height: 30px; font-family: 'Open Sans', sans-serif ">
+                        <option >Default Sort</option>
+                        <option>Sort By Title</option>
+                        <option>Sort By Date</option>
+                    </select></span>
 
-                                    <a href="<%=request.getContextPath()%>/viewPost?postID=${i.getID()}">
-                                        <h4 style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis" class="card-title">${i.getTitle()}</h4>
-                                    </a>
-                                    <p style="-webkit-line-clamp: 3;-webkit-box-orient: vertical;overflow: hidden; display: -webkit-box;" class="card-text">${i.getContent()}</p>
-                                    <a href="<%=request.getContextPath()%>/viewPost?postID=${i.getID()}" class="btn btn-primary btn-sm">read more</a>
+            </div>
+            </div>
+            
+            <section class="section">
+                <div class="container">
+                    <div class="row">
+                        <c:forEach items="${postList}" var="i" begin="${pageIf.start}" end="${pageIf.end}">
+                            <article class="col-lg-4 col-sm-6 mb-5">
+                                <div class="card rounded-0 border-bottom border-primary border-top-0 border-left-0 border-right-0 hover-shadow">
+                                    <div class="card-body">
+
+                                        <a href="<%=request.getContextPath()%>/viewPost?postID=${i.getID()}">
+                                            <h4 style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis" class="card-title">${i.getTitle()}</h4>
+                                        </a>
+                                        <p style="-webkit-line-clamp: 3;-webkit-box-orient: vertical;overflow: hidden; display: -webkit-box;" class="card-text">${i.getContent()}</p>
+                                        <a href="<%=request.getContextPath()%>/viewPost?postID=${i.getID()}" class="btn btn-primary btn-sm">read more</a>
+                                    </div>
                                 </div>
-                            </div>
-                        </article>
-                    </c:forEach>
+                            </article>
+                        </c:forEach>
+                    </div>
                 </div>
-            </div>
-            <div class="pagination" >
-            <c:if test="${pageIf.cp!=1 && pageIf.end!=null}">
-                <a href="<%=request.getContextPath()%>/allPost?page=1&nrpp=${nrpp}<c:if test="${search != null}">&search=${search}</c:if>"><<</a>  
-            </c:if>      
-            <c:forEach begin="${1}" end="${pageIf.np}" var="i">
-                <a class="${i==pageIf.cp?"active":""}" href="<%=request.getContextPath()%>/allPost?page=${i}&nrpp=${nrpp}<c:if test="${search != null}">&search=${search}</c:if>">${i}</a>
-            </c:forEach>
-            <c:if test="${pageIf.cp!=pageIf.np && pageIf.end!=0}">
-                <a href="<%=request.getContextPath()%>/allPost?page=${pageIf.np}&nrpp=${nrpp}<c:if test="${search != null}">&search=${search}</c:if>">>></a>  
-            </c:if>  
-            <div class="select-nrpp" style="">
-                <div class="nrpp" onclick="showNrpp()">${nrpp}<i class="ti ti-angle-down ml-1"></i></div>
-                <div id="nrpp">
-                    <c:forEach items="${pageIf.arrNrpp1}" var="i">
-                        <a class="<c:if test="${nrpp==i}">selected</c:if>" href="<%=request.getContextPath()%>/allPost?nrpp=${i}<c:if test="${search!=null}">&search=${search}</c:if>">${i}</a>
+                <div class="pagination" >
+                    <c:if test="${pageIf.cp!=1 && pageIf.end!=null}">
+                        <a href="<%=request.getContextPath()%>/allPost?page=1&nrpp=${nrpp}<c:if test="${search != null}">&search=${search}</c:if>"><<</a>  
+                    </c:if>      
+                    <c:forEach begin="${1}" end="${pageIf.np}" var="i">
+                        <a class="${i==pageIf.cp?"active":""}" href="<%=request.getContextPath()%>/allPost?page=${i}&nrpp=${nrpp}<c:if test="${search != null}">&search=${search}</c:if>">${i}</a>
                     </c:forEach>
+                    <c:if test="${pageIf.cp!=pageIf.np && pageIf.end!=0}">
+                        <a href="<%=request.getContextPath()%>/allPost?page=${pageIf.np}&nrpp=${nrpp}<c:if test="${search != null}">&search=${search}</c:if>">>></a>  
+                    </c:if>  
+                    <div class="select-nrpp" style="">
+                        <div class="nrpp" onclick="showNrpp()">${nrpp}<i class="ti ti-angle-down ml-1"></i></div>
+                        <div id="nrpp">
+                            <c:forEach items="${pageIf.arrNrpp1}" var="i">
+                                <a class="<c:if test="${nrpp==i}">selected</c:if>" href="<%=request.getContextPath()%>/allPost?nrpp=${i}<c:if test="${search!=null}">&search=${search}</c:if>">${i}</a>
+                            </c:forEach>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-        </section>
+            </section>
 
-        
-    </div>
+
+        </div>
         <script>
             function showNrpp() {
                 if (document.getElementById('nrpp').style.display === "flex")

@@ -40,7 +40,7 @@ public class LogoutController extends HttpServlet {
 
             ses.removeAttribute("Notification");
             ses.removeAttribute("NewNotification");
-            response.sendRedirect("views/user/index.jsp");
+            response.sendRedirect("views/user/login.jsp");
 
         }
     }
