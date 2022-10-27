@@ -36,7 +36,21 @@
         .title{
             color: #ffbc3b;
         }
-
+        .cv:hover{
+            background-color:#e9ecef;
+            color: #ffbc3b;
+        }
+        input,select,textarea,.cv{
+            margin: 16px 0px;
+            border-radius: 5px;
+        }
+        .cv{
+            color: black;
+            border-color: #ced4da;
+            background-color: #fff;
+            padding: 10px;
+        }
+        
     </style>
     <body>
         <!-- header -->
@@ -46,7 +60,9 @@
             <%@include file="sidebar.jsp" %>
             <div class="col-10">
                 <section class="section" >
-                    <div class="container" style="display: flex">
+                    <div class="container" style="display: flex; flex-flow: column">
+                        <div style="margin-bottom: 20px;margin-top: -10px"><button style="margin-right: 10px" class="cv"><a href="<%=request.getContextPath()%>/viewAllInvite"><i class="ti-arrow-left"></i></a></button> <a class="text-color" href="<%=request.getContextPath()%>/viewAllInvite">Back to VIEW ALL INVITATIONS</a></div>
+                        
                         <div class="invite" style="margin:30px auto;">
                             <h2 class="title text-align-center">${Invitation.title} </h2><br>
                             <div class="ml-5" style="">
@@ -64,7 +80,7 @@
                                 <fmt:formatDate value="${Date}" var="Date2" pattern="dd/MM/yyyy"/>        
                                 <span class="font-weight-bold mr-2">Deadline:</span> ${Date2}
                                 <br><br>
-                                
+
                                 <span class="font-weight-bold mr-2">Skill: </span>${HmSkill[Invitation.skillID]}
                                 <br><br>
 
@@ -77,10 +93,10 @@
                                 <a class="signup__link " href="<%=request.getContextPath()%>/editInvitation?type=1&id=${Invitation.ID}">Update</a>
                                 <a class="signup__link " href="<%=request.getContextPath()%>/editInvitation?type=2&id=${Invitation.ID}">Cancel</a>
                                 <c:if test="${requestScope.success!=null}">
-                                  <br><br><br><h5 style="color: green">${success}</h5>
+                                    <br><br><br><h5 style="color: green">${success}</h5>
                                 </c:if>
                                 <c:if test="${requestScope.failed!=null}">
-                                   <br><br><br><h5 style="color: red">${failed}</h5>
+                                    <br><br><br><h5 style="color: red">${failed}</h5>
                                 </c:if>
                             </div>
 
@@ -96,7 +112,7 @@
     </div>
 </div>
 <!-- footer -->
-<%@include file="footer.jsp" %>
+
 <!-- /footer -->
 <!-- jQuery -->
 <%@include file="scriptJS.jsp" %> 
