@@ -368,11 +368,13 @@
                                     <div class="pagination">
                                         <c:if test="${pageIf.cp!=1 && pageIf.end!=null}">
                                             <a href="<%=request.getContextPath()%>/allMentor?page=1&nrpp=${nrpp}<c:if test="${statusName != null}">&sortName=${statusName}</c:if><c:if test="${statusRate != null}">&sortRate=${statusRate}</c:if><c:if test="${search != null}">&search=${search}</c:if>"><<</a>  
+                                            <a href="<%=request.getContextPath()%>/allMentor?page=${pageIf.cp-1}&nrpp=${nrpp}<c:if test="${statusName != null}">&sortName=${statusName}</c:if><c:if test="${statusRate != null}">&sortRate=${statusRate}</c:if><c:if test="${search != null}">&search=${search}</c:if>"><</a> 
                                         </c:if>      
                                         <c:forEach begin="${pageIf.cp>2?pageIf.cp-2:1}" end="${pageIf.cp+2>pageIf.np?pageIf.np:pageIf.cp+2}" var="i">
                                             <a class="${i==pageIf.cp?"active":""}" href="<%=request.getContextPath()%>/allMentor?page=${i}&nrpp=${nrpp}<c:if test="${statusName != null}">&sortName=${statusName}</c:if><c:if test="${statusRate != null}">&sortRate=${statusRate}</c:if><c:if test="${search != null}">&search=${search}</c:if>">${i}</a>
                                         </c:forEach>
                                         <c:if test="${pageIf.cp!=pageIf.np && pageIf.end!=0}">
+                                         <a href="<%=request.getContextPath()%>/allMentor?page=${pageIf.cp+1}&nrpp=${nrpp}<c:if test="${statusName != null}">&sortName=${statusName}</c:if><c:if test="${statusRate != null}">&sortRate=${statusRate}</c:if><c:if test="${search != null}">&search=${search}</c:if>">></a> 
                                             <a href="<%=request.getContextPath()%>/allMentor?page=${pageIf.np}&nrpp=${nrpp}<c:if test="${statusName != null}">&sortName=${statusName}</c:if><c:if test="${statusRate != null}">&sortRate=${statusRate}</c:if><c:if test="${search != null}">&search=${search}</c:if>">>></a>  
                                         </c:if>  
                                         <div class="select-nrpp" style="">
