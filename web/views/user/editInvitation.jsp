@@ -38,7 +38,7 @@
             <div class="col-10">
                 <section class="section" >
                     <div class="container">
-                        <div style="margin-bottom: 20px;margin-top: -10px"><button style="margin-right: 10px" class="cv"><a href="<%=request.getContextPath()%>/views/user/viewInvitationMentee.jsp"><i class="ti-arrow-left"></i></a></button> <a class="text-color" href="<%=request.getContextPath()%>/views/user/viewInvitationMentee.jsp">Back to VIEW INVITATIONS</a></div>
+                        <div style="margin-bottom: 20px;margin-top: -10px"><button style="margin-right: 10px" class="cv"><a href="<%=request.getContextPath()%>/singleInvite?invitationId=${invitation.ID}"><i class="ti-arrow-left"></i></a></button> <a class="text-color" href="<%=request.getContextPath()%>/singleInvite?invitationId=${invitation.ID}">Back to VIEW INVITATION</a></div>
                         <h2 style="margin-bottom:30px">Edit invitation</h2>
                         <c:if test="${requestScope.success!=null}">
                             <br><h3 style="color: green">${success}</h3>
@@ -46,7 +46,7 @@
                         <c:if test="${requestScope.failed!=null}">
                             <br><h3 style="color: red">${failed}</h3>
                         </c:if>
-                        <form action="<%=request.getContextPath()%>/editInvitation" method="POST">
+                            <form action="<%=request.getContextPath()%>/editInvitation" method="POST" >
                             Mentor's name:
                             <input type="text" class="form-control" id="" name="mentorName" readonly="" value="${mentorName}">
                             <button class="cv" style=""><a href="<%=request.getContextPath()%>/viewCV?mentorID=${invitation.mentorID}">View mentor's CV</a></button>
@@ -59,11 +59,10 @@
                             <label style="margin-bottom: 16px" for="">Content:</label><textarea id="editor" class="form-control" required="" name="content" rows="4" cols="50">
                                 ${invitation.content}
                             </textarea>
-                            <button type="submit" style="float:right; margin-top: 16px;" class="btn btn-primary">UPDATE</button>
+                            <button type="submit" style="float:right; margin-top: 16px;" class="btn btn-primary mb-90">UPDATE</button>
 
                         </form>
                     </div>
-
                 </section>
 
             </div>
@@ -73,7 +72,7 @@
 
 
         <!-- footer -->
-        <%@include file="footer.jsp" %>
+
         <!-- /footer -->
 
         <!-- jQuery -->
