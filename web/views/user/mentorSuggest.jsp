@@ -75,16 +75,21 @@
                                         <h4 class="card-title">${pfs.get(id).firstName} ${pfs.get(id).lastName}</h4>
                                         <p class="card-text">Gender: ${pfs.get(id).gender}</p>
                                         <p class="card-text">Skill: 
-                                            <c:forEach items="${CVs.get(id).skillList}" var="s">
-                                                ${s.name} 
+                                            <c:forEach items="${CVs.get(id).skillList}" var="s" varStatus="loop">
+                                                <c:if test="${loop.index<4}">
+                                                    ${s.name} 
+                                                </c:if>
+                                                
                                             </c:forEach>
                                         </p>
                                         <div style="margin-bottom: 20px">Rate: ${rates.get(id)}
-                                            <span style="margin-left: 10px" class="fa fa-star checked"></span>
-                                            <span class="fa fa-star checked"></span>
-                                            <span class="fa fa-star checked"></span>
-                                            <span class="fa fa-star"></span>
-                                            <span class="fa fa-star"></span></div>
+                                            <c:forEach begin="${1}" end="${rates.get(id)}" step="${1}">
+                                                <span class="fa fa-star checked"></span>
+                                            </c:forEach>
+                                                <c:forEach begin="${rates.get(id) +1}" end="${5}" step="${1}">
+                                                <span class="fa fa-star"></span>
+                                            </c:forEach>
+                                        </div>
                                         <a href="" class="btn btn-primary btn-sm">Invite now</a>
                                     </div>
                                 </div>

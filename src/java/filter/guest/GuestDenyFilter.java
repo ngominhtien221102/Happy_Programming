@@ -23,7 +23,7 @@ import jakarta.servlet.http.HttpSession;
  *
  * @author Admin
  */
-@WebFilter(filterName = "GuestDenyFilter", urlPatterns = {"/changepass", "/views/user/changePassword.jsp"})
+@WebFilter(filterName = "GuestDenyFilter", urlPatterns = {"/changePass", "/views/user/changePassword.jsp"})
 public class GuestDenyFilter implements Filter {
 
     private static final boolean debug = true;
@@ -109,7 +109,7 @@ public class GuestDenyFilter implements Filter {
         if (roleId == 1) {
             res.sendRedirect(req.getContextPath() + "/views/user/index.jsp");
         } else {
-            //view all mentor page
+            
             if (url.endsWith("changepass")) {
                 res.sendRedirect(req.getContextPath() + "/views/user/changePassword.jsp");
             }

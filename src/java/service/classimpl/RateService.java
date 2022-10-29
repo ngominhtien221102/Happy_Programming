@@ -85,8 +85,7 @@ public class RateService implements IRateService {
                         }
                     }
                     if (idMentorsSuggest.size() > 9) {
-                        int id = idMentorsSuggest.get(idMentorsSuggest.size() - 1);
-                        idMentorsSuggest.remove(id);
+                        idMentorsSuggest.remove(idMentorsSuggest.size()-1);
                         checkAddM.put(cv.getID(), false);
                     }
 

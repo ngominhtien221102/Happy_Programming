@@ -46,7 +46,6 @@ public class RateDAO extends DBContext {
             }
         } catch (Exception e) {
             System.out.println("Error get average rate " + e.getMessage());
-
         }
         return avgRateHm;
         
