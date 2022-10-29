@@ -28,7 +28,7 @@ import service.classimpl.MentorService;
  *
  * @author Admin
  */
-//@WebFilter(filterName = "CVFilter", urlPatterns = {"/views/mentors/createMentorCV.jsp", "/views/mentors/updateMentorCV.jsp", "/createCV", "/updateCV"})
+@WebFilter(filterName = "CVFilter", urlPatterns = {"/views/mentors/createMentorCV.jsp", "/views/mentors/updateMentorCV.jsp", "/createCV", "/updateCV"})
 public class CVFilter implements Filter {
 
     private static final boolean debug = true;
