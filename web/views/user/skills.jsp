@@ -90,7 +90,7 @@
                                                 <div class="skill-des">
                                                     <p class="card-text mb-4">${lst.description}</p>
                                                 </div>
-                                                <a href="course-single.jsp" class="btn btn-primary btn-sm">Apply now</a>
+                                                <a href="<%=request.getContextPath()%>/sendInvitation?search=${lst.name}" class="btn btn-primary btn-sm">Apply now</a>
                                             </div>
                                         </div>
                                     </div>

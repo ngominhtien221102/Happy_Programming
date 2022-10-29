@@ -30,14 +30,14 @@
             <!-- Nav Item - Add product -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="<%=request.getContextPath()%>/allMentor" >
-                    <span>Mentor</span>
+                    <span>Statistic Mentor</span>
                 </a>
             </li>
 
             <!-- Nav Item - Update product -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="<%=request.getContextPath()%>/allMentee" >
-                    <span>Mentee</span>
+                    <span>Statistic Mentee</span>
                 </a>
             </li>
 
@@ -61,13 +61,13 @@
 
             <!-- Heading -->
             <div class="sidebar-heading">
-                Invitation
+                 Invitation 
             </div>
 
             <!-- Nav Item - All Admin -->
             <li class="nav-item">
                 <a class="nav-link collapsed" href="<%=request.getContextPath()%>/allInvitation" >
-                    <span>View Invitation</span>
+                    <span>Statistic Invitation</span>
                 </a>
             </li>
 
