@@ -23,7 +23,7 @@ import jakarta.servlet.http.HttpSession;
  *
  * @author Admin
  */
-@WebFilter(filterName = "AdminFilter", urlPatterns = {"/editSkill", "/createSkill", "/views/admin/allSkill.jsp", "/allMentee", "/views/admin/allMentee.jsp", "/allInvitation", "/views/admin/allInvitation.jsp", "/allMentor", "/views/admin/allMentor.jsp"})
+//@WebFilter(filterName = "AdminFilter", urlPatterns = {"/editSkill", "/createSkill", "/views/admin/allSkill.jsp", "/allMentee", "/views/admin/allMentee.jsp", "/allInvitation", "/views/admin/allInvitation.jsp", "/allMentor", "/views/admin/allMentor.jsp"})
 public class AdminFilter implements Filter {
     
     private static final boolean debug = true;

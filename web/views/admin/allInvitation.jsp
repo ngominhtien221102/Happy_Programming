@@ -254,15 +254,28 @@
 
 
                         </div>
+                                            
+                                            <!-- Bar Chart -->
+                        <div class="card shadow mb-4" style="margin-top: 50px">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold ">Total invitations in the year</h6>
+                            </div>
+                            <div class="card-body">
+                                <div class="chart-area">
+                                    <canvas id="myBarChart" style="height: 400px"></canvas>
+                                </div>
+                                <hr>
+                            </div>
+                        </div>
 
                         <!-- Area Chart -->
                         <div class="card shadow mb-4" style="margin-top: 50px">
                             <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold ">Number of mentors registered in the year</h6>
+                                <h6 class="m-0 font-weight-bold ">Number of invitations in the year</h6>
                             </div>
                             <div class="card-body">
                                 <div class="chart-area">
-                                    <canvas id="myAreaChart"></canvas>
+                                    <canvas id="myAreaChart" style="height: 400px"></canvas>
                                 </div>
                                 <hr>
                             </div>

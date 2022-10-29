@@ -45,8 +45,11 @@
 
 
                             <div class="form-group row" style="padding-bottom: 20px;" >
-                                <input type="text" class="form-control form-control-user"
-                                       placeholder="Achivements" name="achivements" required>
+                                <!--                                <input type="text" class="form-control form-control-user"
+                                                                       placeholder="Achivements" name="achivements" required>-->
+      
+                                <textarea class="editor"  name="achivements" id="editor1" cols="75" rows="10" placeholder="Achivements" required>
+                                </textarea>
                             </div>
 
                             <div class=" row checkbox-group required" style="padding-bottom: 20px;" >
@@ -62,7 +65,7 @@
                             <div class="form-group row flex-column" style="padding-bottom: 20px;">
                                 <div>Introduction</div>
                                 </br>
-                                <textarea class=""  name="introduction" id="editor" cols="75" rows="10" placeholder="introduction" required>
+                                <textarea class="editor"  name="introduction" id="editor" cols="75" rows="10" placeholder="Introduction" required>
                                 </textarea>
                             </div>
 
@@ -89,9 +92,20 @@
                                                     console.error(error);
                                                 });
 
-                                        const handleSubmit = () => {
-                                            document.getElementById('a').innerHTML = value.getData()
-                                        }
+
+        </script>
+        <script>
+            var value;
+            ClassicEditor
+                    .create(document.querySelector('#editor1'))
+                    .then(editor => {
+                        value = editor;
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    });
+
+
         </script>
         <script>
             function deRequireCb(elClass) {
