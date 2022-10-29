@@ -179,32 +179,23 @@ public class AllMenteeController extends HttpServlet {
         request.setAttribute("pageIf", pageIf);
         //Sort
         int sort = 1;
-        request.setAttribute("sort", sort);
         String getSort = request.getParameter("sort");
         int sortGet = 0;
         if (getSort != null) {
             try {
                 sortGet = Integer.parseInt(getSort);
-
             } catch (NumberFormatException e) {
             }
-
             if (sortGet == 1) {
                 sort = 2;
-                request.setAttribute("sort", sort);
                 request.setAttribute("listMentee", iS.sortName(listMentees));
-                int status = 1;
-                request.setAttribute("status", status);
-            }
-            if (sortGet == 2) {
+                request.setAttribute("status", 1);
+            } else if (sortGet == 2) {
                 request.setAttribute("listMentee", listMentees);
-                sort = 1;
-                request.setAttribute("sort", sort);
-                int status = 2;
-                request.setAttribute("status", status);
+                request.setAttribute("status", 2);
             }
         }
-
+        request.setAttribute("sort", sort);
         request.setAttribute("listMentee", listMentees);
         request.getRequestDispatcher("views/admin/allMentee.jsp").forward(request, response);
     }
