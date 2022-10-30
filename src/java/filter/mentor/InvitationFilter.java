@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Filter.java to edit this template
  */
-package filter.mentee;
+package filter.mentor;
 
 import java.io.IOException;
 import java.io.PrintStream;
@@ -19,31 +19,29 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
+
 /**
  *
  * @author Admin
  */
-@WebFilter(filterName = "MenteeAcceptFitlter", urlPatterns = {"/viewAllInvite", "/views/user/viewInvitationMentee.jsp", 
-    "/views/user/editInvitation.jsp", "/editInvitation", "/suggestMentor", 
-    "/views/user/mentorSuggest.jsp", "/rate", "/comment", "/views/user/createRequest.jsp", 
-    "/sendRequest", "/views/user/createMenteeProfile.jsp", "/createProfile", "/sendInvitation", 
-    "/views/user/sendInvitation.jsp", "/singleInvite", "/views/user/ViewInvitationSingle.jsp"})
-public class MenteeAcceptFitlter implements Filter {
-    
+@WebFilter(filterName = "InvitationFilter", urlPatterns = {"/views/user/viewInvitionMentor.jsp", 
+    "/invitationMentor", "/invSingle", "/views/mentors/viewInvitationSingle.jsp"})
+public class InvitationFilter implements Filter {
+
     private static final boolean debug = true;
 
     // The filter configuration object we are associated with.  If
     // this value is null, this filter instance is not currently
     // configured. 
     private FilterConfig filterConfig = null;
-    
-    public MenteeAcceptFitlter() {
-    }    
-    
+
+    public InvitationFilter() {
+    }
+
     private void doBeforeProcessing(ServletRequest request, ServletResponse response)
             throws IOException, ServletException {
         if (debug) {
-            log("MenteeAcceptFitlter:DoBeforeProcessing");
+            log("InvitationFilter:DoBeforeProcessing");
         }
 
         // Write code here to process the request and/or response before
@@ -66,12 +64,12 @@ public class MenteeAcceptFitlter implements Filter {
 	    log(buf.toString());
 	}
          */
-    }    
-    
+    }
+
     private void doAfterProcessing(ServletRequest request, ServletResponse response)
             throws IOException, ServletException {
         if (debug) {
-            log("MenteeAcceptFitlter:DoAfterProcessing");
+            log("InvitationFilter:DoAfterProcessing");
         }
 
         // Write code here to process the request and/or response after
@@ -105,38 +103,29 @@ public class MenteeAcceptFitlter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response,
             FilterChain chain)
             throws IOException, ServletException {
-        //1. Phải có role là mentee mới được truy cập vào trang jsp, servlet này, nếu không
+        //1. Phải có role là mentor mới được truy cập vào trang jsp, servlet này, nếu không
         //chuyển hướng về trang chủ
-        //2. Khi đã đăng nhập bằng tài khoản mentee, nếu gõ url tới trang jsp tự động nhảy tới
+        //2. Khi đã đăng nhập bằng tài khoản mentor, nếu gõ url tới trang jsp tự động nhảy tới
         //servlet để load dữ liệu
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
         HttpSession ses = req.getSession();
         String url = req.getServletPath();
-        int roleId = (int)ses.getAttribute("RoleID");
-        if (roleId != 2){
-            res.sendRedirect(req.getContextPath()+"/views/user/index.jsp");
+        int roleId = (int) ses.getAttribute("RoleID");
+        if (roleId != 3) {
+            res.sendRedirect(req.getContextPath() + "/views/user/index.jsp");
         } else {
-            //create request
-            if (url.endsWith("createRequest.jsp")){
-                res.sendRedirect(req.getContextPath() + "/sendRequest");
-            }
-            //mentor suggest
-            if (url.endsWith("mentorSuggest.jsp")){
-                res.sendRedirect(req.getContextPath() + "/suggestMentor");
-            }
-            
-            //view invitation
-            if (url.endsWith("viewInvitationMentee.jsp")){
-                res.sendRedirect(req.getContextPath() + "/viewAllInvite");
+            if (url.contains(".jsp")) {
+                res.sendRedirect(req.getContextPath() + "/invitationMentor");
             }
         }
+
         if (debug) {
-            log("MenteeAcceptFitlter:doFilter()");
+            log("InvitationFilter:doFilter()");
         }
-        
+
         doBeforeProcessing(request, response);
-        
+
         Throwable problem = null;
         try {
             chain.doFilter(request, response);
@@ -147,7 +136,7 @@ public class MenteeAcceptFitlter implements Filter {
             problem = t;
             t.printStackTrace();
         }
-        
+
         doAfterProcessing(request, response);
 
         // If there was a problem, we want to rethrow it if it is
@@ -182,17 +171,17 @@ public class MenteeAcceptFitlter implements Filter {
     /**
      * Destroy method for this filter
      */
-    public void destroy() {        
+    public void destroy() {
     }
 
     /**
      * Init method for this filter
      */
-    public void init(FilterConfig filterConfig) {        
+    public void init(FilterConfig filterConfig) {
         this.filterConfig = filterConfig;
         if (filterConfig != null) {
-            if (debug) {                
-                log("MenteeAcceptFitlter:Initializing filter");
+            if (debug) {
+                log("InvitationFilter:Initializing filter");
             }
         }
     }
@@ -203,27 +192,27 @@ public class MenteeAcceptFitlter implements Filter {
     @Override
     public String toString() {
         if (filterConfig == null) {
-            return ("MenteeAcceptFitlter()");
+            return ("InvitationFilter()");
         }
-        StringBuffer sb = new StringBuffer("MenteeAcceptFitlter(");
+        StringBuffer sb = new StringBuffer("InvitationFilter(");
         sb.append(filterConfig);
         sb.append(")");
         return (sb.toString());
     }
-    
+
     private void sendProcessingError(Throwable t, ServletResponse response) {
-        String stackTrace = getStackTrace(t);        
-        
+        String stackTrace = getStackTrace(t);
+
         if (stackTrace != null && !stackTrace.equals("")) {
             try {
                 response.setContentType("text/html");
                 PrintStream ps = new PrintStream(response.getOutputStream());
-                PrintWriter pw = new PrintWriter(ps);                
+                PrintWriter pw = new PrintWriter(ps);
                 pw.print("<html>\n<head>\n<title>Error</title>\n</head>\n<body>\n"); //NOI18N
 
                 // PENDING! Localize this for next official release
-                pw.print("<h1>The resource did not process correctly</h1>\n<pre>\n");                
-                pw.print(stackTrace);                
+                pw.print("<h1>The resource did not process correctly</h1>\n<pre>\n");
+                pw.print(stackTrace);
                 pw.print("</pre></body>\n</html>"); //NOI18N
                 pw.close();
                 ps.close();
@@ -240,7 +229,7 @@ public class MenteeAcceptFitlter implements Filter {
             }
         }
     }
-    
+
     public static String getStackTrace(Throwable t) {
         String stackTrace = null;
         try {
@@ -254,9 +243,9 @@ public class MenteeAcceptFitlter implements Filter {
         }
         return stackTrace;
     }
-    
+
     public void log(String msg) {
-        filterConfig.getServletContext().log(msg);        
+        filterConfig.getServletContext().log(msg);
     }
-    
+
 }
