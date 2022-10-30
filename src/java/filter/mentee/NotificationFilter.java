@@ -23,12 +23,8 @@ import jakarta.servlet.http.HttpSession;
  *
  * @author Admin
  */
-@WebFilter(filterName = "MenteeAcceptFitlter", urlPatterns = {"/viewAllInvite", "/views/user/viewInvitationMentee.jsp", 
-    "/views/user/editInvitation.jsp", "/editInvitation", "/suggestMentor", 
-    "/views/user/mentorSuggest.jsp", "/rate", "/comment", "/views/user/createRequest.jsp", 
-    "/sendRequest", "/views/user/createMenteeProfile.jsp", "/createProfile", "/sendInvitation", 
-    "/views/user/sendInvitation.jsp", "/singleInvite", "/views/user/ViewInvitationSingle.jsp"})
-public class MenteeAcceptFitlter implements Filter {
+@WebFilter(filterName = "NotificationFilter", urlPatterns = {"/views/user/notification.jsp", "/subNotification", "/notification"})
+public class NotificationFilter implements Filter {
     
     private static final boolean debug = true;
 
@@ -37,13 +33,13 @@ public class MenteeAcceptFitlter implements Filter {
     // configured. 
     private FilterConfig filterConfig = null;
     
-    public MenteeAcceptFitlter() {
+    public NotificationFilter() {
     }    
     
     private void doBeforeProcessing(ServletRequest request, ServletResponse response)
             throws IOException, ServletException {
         if (debug) {
-            log("MenteeAcceptFitlter:DoBeforeProcessing");
+            log("NotificationFilter:DoBeforeProcessing");
         }
 
         // Write code here to process the request and/or response before
@@ -71,7 +67,7 @@ public class MenteeAcceptFitlter implements Filter {
     private void doAfterProcessing(ServletRequest request, ServletResponse response)
             throws IOException, ServletException {
         if (debug) {
-            log("MenteeAcceptFitlter:DoAfterProcessing");
+            log("NotificationFilter:DoAfterProcessing");
         }
 
         // Write code here to process the request and/or response after
@@ -105,34 +101,16 @@ public class MenteeAcceptFitlter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response,
             FilterChain chain)
             throws IOException, ServletException {
-        //1. Phải có role là mentee mới được truy cập vào trang jsp, servlet này, nếu không
-        //chuyển hướng về trang chủ
-        //2. Khi đã đăng nhập bằng tài khoản mentee, nếu gõ url tới trang jsp tự động nhảy tới
-        //servlet để load dữ liệu
         HttpServletRequest req = (HttpServletRequest) request;
         HttpServletResponse res = (HttpServletResponse) response;
         HttpSession ses = req.getSession();
         String url = req.getServletPath();
         int roleId = (int)ses.getAttribute("RoleID");
-        if (roleId != 2){
+        if (roleId ==1 || roleId == 4){
             res.sendRedirect(req.getContextPath()+"/views/user/index.jsp");
-        } else {
-            //create request
-            if (url.endsWith("createRequest.jsp")){
-                res.sendRedirect(req.getContextPath() + "/sendRequest");
-            }
-            //mentor suggest
-            if (url.endsWith("mentorSuggest.jsp")){
-                res.sendRedirect(req.getContextPath() + "/suggestMentor");
-            }
-            
-            //view invitation
-            if (url.endsWith("viewInvitationMentee.jsp")){
-                res.sendRedirect(req.getContextPath() + "/viewAllInvite");
-            }
         }
         if (debug) {
-            log("MenteeAcceptFitlter:doFilter()");
+            log("NotificationFilter:doFilter()");
         }
         
         doBeforeProcessing(request, response);
@@ -192,7 +170,7 @@ public class MenteeAcceptFitlter implements Filter {
         this.filterConfig = filterConfig;
         if (filterConfig != null) {
             if (debug) {                
-                log("MenteeAcceptFitlter:Initializing filter");
+                log("NotificationFilter:Initializing filter");
             }
         }
     }
@@ -203,9 +181,9 @@ public class MenteeAcceptFitlter implements Filter {
     @Override
     public String toString() {
         if (filterConfig == null) {
-            return ("MenteeAcceptFitlter()");
+            return ("NotificationFilter()");
         }
-        StringBuffer sb = new StringBuffer("MenteeAcceptFitlter(");
+        StringBuffer sb = new StringBuffer("NotificationFilter(");
         sb.append(filterConfig);
         sb.append(")");
         return (sb.toString());
