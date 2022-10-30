@@ -117,7 +117,12 @@
                                         <h4 class="card-title">${i.getName()}</h4>
                                     </a>
                                     <p class="card-text mb-4"> Our skills offer a good compromise between the continuous assessment favoured by some universities and the emphasis placed on final exams by others.</p>
-                                    <a href="course-single.jsp" class="btn btn-primary btn-sm">Apply now</a>
+                                    <c:if test="${sessionScope.Account == null}" >
+                                        <a href="login.jsp" class="btn btn-secondary">Apply Now</a>
+                                    </c:if>
+                                    <c:if test="${sessionScope.Account != null}" >
+                                        <a href="<%=request.getContextPath()%>/sendInvitation?search=${i.name}" class="btn btn-primary btn-sm">Apply now</a>
+                                    </c:if>
                                 </div>
                             </div>
                         </div>
@@ -216,7 +221,7 @@
                         </div>
                     </section>
 
-                    
+
                     <!-- /blog -->
 
                     <!-- footer -->

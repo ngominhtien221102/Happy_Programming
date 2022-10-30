@@ -90,7 +90,7 @@
                                                 <span class="fa fa-star"></span>
                                             </c:forEach>
                                         </div>
-                                        <a href="" class="btn btn-primary btn-sm">Invite now</a>
+                                        <a href="<%=request.getContextPath()%>/sendInvitation?mentorID=${id}" class="btn btn-primary btn-sm">Invite now</a>
                                     </div>
                                 </div>
                             </div>
