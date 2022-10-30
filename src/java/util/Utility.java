@@ -23,18 +23,6 @@ public class Utility {
     public Utility() {
     }
 
-    public String getString(String message) {
-        return "";
-    }
-
-    public int getInt(String message) {
-        return 0;
-    }
-
-    public LocalDate getDate(String message) {
-        return null;
-    }
-
     public boolean checkPassword(String password) {//Minimum eight characters, at least one uppercase letter, one lowercase letter and one number
         Pattern p = Pattern.compile("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$");
         Matcher m = p.matcher(password);
