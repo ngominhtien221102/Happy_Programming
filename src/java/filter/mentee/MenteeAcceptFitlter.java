@@ -26,7 +26,7 @@ import jakarta.servlet.http.HttpSession;
 @WebFilter(filterName = "MenteeAcceptFitlter", urlPatterns = {"/viewAllInvite", "/views/user/viewInvitationMentee.jsp", 
     "/views/user/editInvitation.jsp", "/editInvitation", "/suggestMentor", 
     "/views/user/mentorSuggest.jsp", "/rate", "/comment", "/views/user/createRequest.jsp", 
-    "/sendRequest", "/views/user/createMenteeProfile.jsp", "/createProfile", "/sendInvitation", 
+    "/sendRequest", "/sendInvitation", 
     "/views/user/sendInvitation.jsp", "/singleInvite", "/views/user/ViewInvitationSingle.jsp"})
 public class MenteeAcceptFitlter implements Filter {
     

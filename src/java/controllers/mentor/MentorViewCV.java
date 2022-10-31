@@ -92,9 +92,9 @@ public class MentorViewCV extends HttpServlet {
         IAddressService ia = new AddressService();
 
         User u = (User) ses.getAttribute("Account");
-        int id = u.getID();
-        try {
 
+        try {
+            int id = u.getID();
             UserProfile mentorProfile = uSer.getUserProfileById(id, profiles);
             MentorCV mentorCV = mentorSer.getCVById(id, listCV);
 

@@ -10,12 +10,12 @@
 <html>
     <head>
 
-        <%@include file="../user/headCSS2.jsp" %>
+        <%@include file="headCSS2.jsp" %>
 
     </head>
     <body>
 
-        <%@include file="header.jsp" %>
+       <%@include file="../user/header.jsp" %>
 
         <!-- Main Content -->
 
@@ -98,7 +98,6 @@
 
             <!-- End of Main Content -->
         </div>
-        <%@include file="footer.jsp" %>
         <script src="https://cdn.ckeditor.com/ckeditor5/34.1.0/classic/ckeditor.js"></script>
         <script>
                                                var value;

@@ -83,6 +83,11 @@
                 <span>View Invitation</span>
             </a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="<%=request.getContextPath()%>/statisticInv" >
+                <span>Statistic Invitation</span>
+            </a>
+        </li>
 
         <!-- Divider -->
         <hr class="sidebar-divider">
