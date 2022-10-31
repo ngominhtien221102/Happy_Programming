@@ -126,7 +126,7 @@
                                     </c:if>
                                     <c:if test="${sessionScope.Account.getRoleID() == 3}">
                                         <a class="dropdown-item" href="<%=request.getContextPath()%>/viewAllRequest">Requests</a>
-                                        <a class="dropdown-item" href="<%=request.getContextPath()%>/viewAllInvite">Invitations</a> 
+                                        <a class="dropdown-item" href="<%=request.getContextPath()%>/invitationMentor">Invitations</a> 
                                     </c:if>
                                 </div>                           
                             </li>
