@@ -89,7 +89,7 @@
                                                     </li><br>
                                                     <!-- to -->
                                                     <li class="list-inline-item mr-3 ml-0">
-                                                        To: <c:forEach items="${listUserProfile}" var="user">
+                                                        From: <c:forEach items="${listUserProfile}" var="user">
                                                             <c:if test="${user.ID == inv.menteeID}">
                                                                 ${user.firstName} ${user.lastName}
                                                             </c:if>
