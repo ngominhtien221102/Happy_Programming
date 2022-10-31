@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package dal;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,14 +15,14 @@ import model.Address;
  * @author minhd
  */
 public class AddressDAO extends DBContext {
+
     private ArrayList<Address> addresslst;
+    private String status;
 
     public AddressDAO() {
 
     }
-    
-    
-    
+
     public void setAddresslst(ArrayList<Address> addresslst) {
         this.addresslst = addresslst;
     }
@@ -31,8 +32,7 @@ public class AddressDAO extends DBContext {
         return addresslst;
     }
 
-
-    public Address insert(Address  a) {
+    public Address insert(Address a) {
         String sql
                 = "INSERT INTO [Happy_Programming].[dbo].[Address]\n"
                 + "           ([Tinh]\n"
@@ -46,17 +46,17 @@ public class AddressDAO extends DBContext {
             ps.setString(2, a.getHuyen());
             ps.setString(3, a.getXa());
             ps.executeUpdate();
-            
+
             sql = "SELECT top(1) [Address_ID]\n"
                     + "  FROM [dbo].[Address]\n"
                     + "  order by Address_ID desc";
             ps = connection.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
-            if(rs.next()){
+            if (rs.next()) {
                 a.setID(rs.getInt(1));
             }
         } catch (SQLException e) {
-           
+            status = "insert error " + e.getMessage();
         }
         return a;
     }
@@ -75,7 +75,7 @@ public class AddressDAO extends DBContext {
             ps.setString(3, a.getXa());
             ps.execute();
         } catch (SQLException e) {
-            
+            status = "update error " + e.getMessage();
         }
     }
 
@@ -94,7 +94,7 @@ public class AddressDAO extends DBContext {
                 addresslst.add(address);
             }
         } catch (SQLException e) {
-            
+            status = "load error " + e.getMessage();
         }
 
     }
@@ -107,10 +107,10 @@ public class AddressDAO extends DBContext {
             ps.setInt(1, id);
             ps.execute();
         } catch (SQLException e) {
-            
+            status = "delete error " + e.getMessage();
         }
     }
-    
+
     public ArrayList<String> getProvinceList() {
         ArrayList<String> pList = new ArrayList<>();
         String sql = "SELECT distinct [Tinh]\n"
@@ -123,7 +123,7 @@ public class AddressDAO extends DBContext {
                 pList.add(rs.getString(1));
             }
         } catch (SQLException ex) {
-
+            status = "error " + ex.getMessage();
         }
         return pList;
     }
@@ -143,7 +143,7 @@ public class AddressDAO extends DBContext {
                 dList.add(rs.getString(1));
             }
         } catch (SQLException ex) {
-
+            status = "error " + ex.getMessage();
         }
         return dList;
     }
@@ -164,9 +164,14 @@ public class AddressDAO extends DBContext {
                 wList.add(rs.getString(1));
             }
         } catch (SQLException ex) {
-
+            status = "error " + ex.getMessage();
         }
         return wList;
     }
+
+    public String getStatus() {
+        return status;
+    }
+    
 
 }
