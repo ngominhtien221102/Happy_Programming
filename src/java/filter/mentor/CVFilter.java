@@ -21,14 +21,18 @@ import jakarta.servlet.http.HttpSession;
 import java.util.List;
 import model.MentorCV;
 import model.User;
+import model.UserProfile;
 import service.IMentorService;
+import service.IUserProfileService;
 import service.classimpl.MentorService;
+import service.classimpl.UserProfileService;
 
 /**
  *
  * @author Admin
  */
-@WebFilter(filterName = "CVFilter", urlPatterns = {"/views/mentors/createMentorCV.jsp", "/views/mentors/updateMentorCV.jsp", "/createCV", "/updateCV"})
+@WebFilter(filterName = "CVFilter", urlPatterns = {
+    "/views/mentors/updateMentorCV.jsp", "/createCV", "/updateCV", "/mentorViewCV", "/views/mentors/viewMentorCV.jsp"})
 public class CVFilter implements Filter {
 
     private static final boolean debug = true;
@@ -119,32 +123,26 @@ public class CVFilter implements Filter {
         if (roleId != 3) {
             res.sendRedirect(req.getContextPath() + "/views/user/index.jsp");
         } else {
+
             MentorCV mCV = (MentorCV) ses.getAttribute("CV");
             if (mCV == null) {
-                List<MentorCV> listCV = (List<MentorCV>) ses.getAttribute("listMentorCV");
-                IMentorService mentorSer = new MentorService();
                 User u = (User) ses.getAttribute("Account");
-                mCV = mentorSer.getCVById(u.getID(), listCV);
-                if (mCV == null) {
-                    res.sendRedirect(req.getContextPath() + "/views/mentors/createMentorCV.jsp");
+                IUserProfileService profileSer = new UserProfileService();
+                List<UserProfile> profiles = (List<UserProfile>) ses.getAttribute("listUserProfile");
+                if (profileSer.getUserProfileById(u.getID(), profiles) == null) {
+                    res.sendRedirect(req.getContextPath() + "/views/user/createMenteeProfile.jsp");
                 } else {
-                    ses.setAttribute("CV", mCV);
+                    res.sendRedirect(req.getContextPath() + "/views/mentors/createMentorCV.jsp");
+                    
                 }
 
-            }
-
-            if (url.contains("updateMentorCV.jsp")) {
-                res.sendRedirect(req.getContextPath() + "/updateCV");
-            }
-
-            if (url.contains("create")) {
-                if (mCV!=null){
+            } else {
+                if (url.contains("updateMentorCV.jsp")) {
+                    res.sendRedirect(req.getContextPath() + "/updateCV");
+                } 
+                else if (url.contains("create")) {
                     res.sendRedirect(req.getContextPath() + "/views/user/index.jsp");
                 }
-                if (url.endsWith("createCV") && mCV == null) {
-                    res.sendRedirect(req.getContextPath() + "/views/mentors/createMentorCV.jsp");
-                }
-                
             }
 
         }

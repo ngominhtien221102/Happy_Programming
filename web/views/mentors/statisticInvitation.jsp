@@ -95,7 +95,7 @@
     </style>
     <body>
         <!-- header -->
-        <%@include file="header.jsp" %>
+        <%@include file="../user/header.jsp" %>
         <c:set value="${requestScope}" var="rS"/>
         <!-- /header -->
         <div id="content" class="row" style="padding-top: 50px;  min-height: 800px">
@@ -233,7 +233,6 @@
             </div>
         </div>
         <!-- footer -->
-        <%@include file="footer.jsp" %>
         <!-- /footer -->
         <!-- jQuery -->
 

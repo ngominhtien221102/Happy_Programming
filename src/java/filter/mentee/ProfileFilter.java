@@ -28,7 +28,8 @@ import service.classimpl.UserProfileService;
  *
  * @author Admin
  */
-@WebFilter(filterName = "ProfileFilter", urlPatterns = {"/views/user/menteeProfile.jsp", "/viewMenteeProfile", "/views/user/updateMenteeProfile.jsp", "/updateProfile"})
+@WebFilter(filterName = "ProfileFilter", urlPatterns = {"/views/user/menteeProfile.jsp", 
+    "/viewMenteeProfile", "/views/user/updateMenteeProfile.jsp", "/updateProfile"})
 public class ProfileFilter implements Filter {
 
     private static final boolean debug = true;

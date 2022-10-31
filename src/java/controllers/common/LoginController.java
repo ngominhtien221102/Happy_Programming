@@ -14,9 +14,12 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.util.List;
+import model.MentorCV;
 import model.Notification;
 import model.User;
+import service.IMentorService;
 import service.IUserService;
+import service.classimpl.MentorService;
 import service.classimpl.UserService;
 
 /**
@@ -53,6 +56,12 @@ public class LoginController extends HttpServlet {
                 request.setAttribute("Alert", "Account is not exist please retype!");
                 request.getRequestDispatcher("views/user/login.jsp").forward(request, response);
             } else {
+                if (user.getRoleID()==3){
+                    List<MentorCV> listCV = (List<MentorCV>) ses.getAttribute("listMentorCV");
+                    IMentorService mentorSer = new MentorService();
+                    MentorCV mCV = mentorSer.getCVById(user.getID(), listCV);
+                    ses.setAttribute("CV", mCV);
+                }
                 ses.setAttribute("Account", user);
                 ses.setAttribute("RoleID", user.getRoleID());
                 ses.setMaxInactiveInterval(60000);

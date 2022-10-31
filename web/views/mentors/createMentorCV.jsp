@@ -11,7 +11,7 @@
     <%@include file="headCSS2.jsp" %>
     <body>
 
-        <%@include file="header.jsp" %>
+        <%@include file="../user/header.jsp" %>
 
         <!-- Main Content -->
         <div id="content" class="row" style="padding-top: 50px;  min-height: 800px">
@@ -44,19 +44,19 @@
                             </div>
 
 
-                            <div class="form-group row" style="padding-bottom: 20px;" >
-                                <!--                                <input type="text" class="form-control form-control-user"
-                                                                       placeholder="Achivements" name="achivements" required>-->
-      
+                            <div class="form-group row flex-column" style="padding-bottom: 20px;" >
                                 <textarea class="editor"  name="achivements" id="editor1" cols="75" rows="10" placeholder="Achivements" required>
                                 </textarea>
                             </div>
 
-                            <div class=" row checkbox-group required" style="padding-bottom: 20px;" >
+                            <div class=" row checkbox-group required flex-lg-row" style="padding-bottom: 20px;" >
 
                                 <c:forEach items="${sessionScope.listSkill}" var="s">
-                                    <input type="checkbox" class="skill" required=""  onclick="deRequireCb('skill')"
-                                           name="skill${s.ID}" style="height: 20px; width: 10%">${s.name}
+                                    <div style="height: 20px; width: 100px">
+                                        <input type="checkbox" class="skill" required=""  onclick="deRequireCb('skill')"
+                                               name="skill${s.ID}" >${s.name}
+                                    </div>
+
                                 </c:forEach>
 
                             </div>
@@ -68,8 +68,10 @@
                                 <textarea class="editor"  name="introduction" id="editor" cols="75" rows="10" placeholder="Introduction" required>
                                 </textarea>
                             </div>
+                            <div class="form-group row" style="padding-bottom: 20px;" >
+                                <input type="submit" value="Create" class="btn btn-primary btn-user btn-block" />
 
-                            <input type="submit" value="Create" class="btn btn-primary btn-user btn-block" />
+                            </div>
                         </form>
                     </div>
 
@@ -79,18 +81,17 @@
 
             <!-- End of Main Content -->
         </div>
-        <%@include file="footer.jsp" %>
         <script src="https://cdn.ckeditor.com/ckeditor5/34.1.0/classic/ckeditor.js"></script>
         <script>
-                                        var value;
-                                        ClassicEditor
-                                                .create(document.querySelector('#editor'))
-                                                .then(editor => {
-                                                    value = editor;
-                                                })
-                                                .catch(error => {
-                                                    console.error(error);
-                                                });
+                                            var value;
+                                            ClassicEditor
+                                                    .create(document.querySelector('#editor'))
+                                                    .then(editor => {
+                                                        value = editor;
+                                                    })
+                                                    .catch(error => {
+                                                        console.error(error);
+                                                    });
 
 
         </script>
