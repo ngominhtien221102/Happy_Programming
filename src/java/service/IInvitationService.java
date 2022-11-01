@@ -14,7 +14,7 @@ import model.Invitation;
 public interface IInvitationService {
 
     List<Invitation> getList();
-    
+
     List<Integer> getListIDSkill();
 
     Invitation getInvitationById(int id, List<Invitation> list);
@@ -28,13 +28,15 @@ public interface IInvitationService {
     int countInv(int staId, List<Invitation> list);
 
     List<Invitation> sortList(List<Invitation> list);
-    
-    List<Invitation> searchInv (String keyword, List<Invitation> invList);    
+
+    List<Invitation> searchInv(String keyword, List<Invitation> invList);
 
     String cancel(Invitation u, List<Invitation> list);
-    
+
+    String autoReject(Invitation u, List<Invitation> list);
+
     void totalInvPerMonth(List<Invitation> list);
-    
+
     List<Integer> getTotalPerMonth();
 
     List<Integer> getTotalProcessingPerMonth();

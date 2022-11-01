@@ -55,5 +55,14 @@ public class Utility {
         return date.after(today) || date.equals(today);
     }
     
+    public boolean checkDeadlineDate(String dateInString) throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate now = LocalDate.now();
+        Date today = sdf.parse(dtf.format(now));
+        Date date = sdf.parse(dateInString);
+        return date.before(today);
+    }
+
 
 }
