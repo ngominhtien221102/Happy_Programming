@@ -345,7 +345,7 @@
                                                 <!--sap xep theo tittle-->
                                                 <th>
                                                     Title
-                                                    <a style="float: right;color: #000" href="<%=request.getContextPath()%>/allInvitation?sort=${sort}&nrpp=${nrpp}<c:if test="${search != null}">&search=${search}</c:if>">
+                                                    <a style="float: right;color: #fff" href="<%=request.getContextPath()%>/allInvitation?sort=${sort}&nrpp=${nrpp}<c:if test="${search != null}">&search=${search}</c:if>">
                                                             <i class="ti-arrow-down" ></i><i class="ti-arrow-up"></i>
                                                         </a>
                                                     </th> 
