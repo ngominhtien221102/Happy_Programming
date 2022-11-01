@@ -95,6 +95,18 @@ public class InvitationService implements IInvitationService {
     }
     
     @Override
+    public String autoReject(Invitation u, List<Invitation> list) {
+        if (u.getStatusID() == 2) {
+            Invitation invitation = getInvitationById(u.getID(), list);
+            invitation.setStatusID(4);
+            InvitationDAO.update(invitation);
+            return "OK";
+        } else {
+            return "You can only cancel while the invitation is processing";
+        }
+    }
+    
+    @Override
     public String delete(int id, List<Invitation> list) {
         InvitationDAO.delete(id);
         list.remove(getInvitationById(id, list));

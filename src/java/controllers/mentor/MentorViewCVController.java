@@ -12,14 +12,12 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import model.Address;
 import model.Invitation;
 import model.MentorCV;
 import model.Rate;
-import model.Skill;
 import model.User;
 import model.UserProfile;
 import service.IAddressService;
@@ -38,7 +36,7 @@ import service.classimpl.UserProfileService;
  * @author ADMIN
  */
 @WebServlet(name = "ViewCV", urlPatterns = {"/mentorViewCV"})
-public class MentorViewCV extends HttpServlet {
+public class MentorViewCVController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

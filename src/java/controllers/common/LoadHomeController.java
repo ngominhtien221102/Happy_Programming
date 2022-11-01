@@ -4,6 +4,8 @@
  */
 package controllers.common;
 
+import com.oracle.wls.shaded.org.apache.bcel.generic.AALOAD;
+import filter.mentee.MenteeAcceptFitlter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -12,15 +14,19 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import model.Invitation;
 import model.MentorCV;
-import model.User;
 import model.UserProfile;
 
 import service.*;
 
 import service.classimpl.*;
+import util.Utility;
 
 /**
  *
@@ -101,14 +107,25 @@ public class LoadHomeController extends HttpServlet {
 
         ses.setAttribute("listPost", ips.getList());
 
-        
         List<UserProfile> uList;
         uList = (List<UserProfile>) ses.getAttribute("listUserProfile");
         List<MentorCV> mList;
         mList = (List<MentorCV>) ses.getAttribute("listMentorCV");
         List<UserProfile> listMentor = getProfileOfMentor(mList, uList);
         ses.setAttribute("listTeacher", listMentor);
-
+        Utility u = new Utility();
+        List<Invitation> iList = (List<Invitation>) ses.getAttribute("listInv");
+        for (Invitation i : iList) {
+            try {
+                if (u.checkDeadlineDate(i.getDeadlineDate())) {
+                    iS.autoReject(i, iList);
+                }
+            } catch (ParseException ex) {
+                Logger.getLogger(LoadHomeController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        ses.setAttribute("listInv", iList);
         response.sendRedirect("views/user/index.jsp");
     }
 
