@@ -20,7 +20,7 @@
         }
         .card-block{
             margin-top: 50px;
-            background-color: #f3f3f3;
+            background-color: rgba(0,0,0,.03);
             padding: 50px;
             border-radius: 5px;
         }
@@ -152,7 +152,9 @@
         .static-number{
             margin-top: 39px;
         }
-
+        .bgr-white{
+            background: #fff;
+        }
     </style>
     <body>
         <!-- header -->
@@ -343,7 +345,7 @@
                                                 <!--sap xep theo tittle-->
                                                 <th>
                                                     Title
-                                                    <a style="float: right;color: #000" href="<%=request.getContextPath()%>/allInvitation?sort=${sort}&nrpp=${nrpp}<c:if test="${search != null}">&search=${search}</c:if>">
+                                                    <a style="float: right;color: #fff" href="<%=request.getContextPath()%>/allInvitation?sort=${sort}&nrpp=${nrpp}<c:if test="${search != null}">&search=${search}</c:if>">
                                                             <i class="ti-arrow-down" ></i><i class="ti-arrow-up"></i>
                                                         </a>
                                                     </th> 
@@ -353,7 +355,7 @@
                                             </thead>
 
 
-                                            <tbody>
+                                            <tbody class="bgr-white">
                                             <c:forEach items="${invitationList}" var="inv" varStatus="loop" begin="${pageIf.start}" end="${pageIf.end}" >
                                                 <tr>
                                                     <td>${loop.index + 1}</td>
