@@ -80,6 +80,14 @@
                         <label for="passwordRepeat">Repeat Password</label>
                         <input class="form-control" type="password" name="passwordRepeat" id="passwordRepeat" placeholder="********" required />
                     </div>
+                    <div class="form-group">
+                        <p>Register as: </p>
+                        <input id="mentee" type="radio" name="role" value="2" required />
+                        <label  for="mentee">Mentee</label><br>
+                        
+                        <input id="mentor" type="radio" name="role" value="3" required />
+                        <label for="mentor">Mentor</label>
+                    </div>
                     <div class="m-t-lg">
                         <ul class="list-inline">
                             <li>
