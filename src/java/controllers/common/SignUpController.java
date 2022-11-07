@@ -70,6 +70,7 @@ public class SignUpController extends HttpServlet {
         String username = request.getParameter("username").trim();
         String password = request.getParameter("password").trim();
         String repassword = request.getParameter("passwordRepeat").trim();
+        int role = Integer.parseInt(request.getParameter("role"));
         HttpSession ses = request.getSession();
         Utility utility = new Utility();
         List<User> userlst = (List<User>) ses.getAttribute("listUser");
@@ -88,7 +89,7 @@ public class SignUpController extends HttpServlet {
             isSignUpAble = false;
         }
         if(isSignUpAble){// if true add account
-            User u = new User(0, 2, username, password, false);
+            User u = new User(0, role, username, password, false);
             service.insert(u, userlst);
             response.sendRedirect("views/user/index.jsp");
         }else{// return back to signup jsp
